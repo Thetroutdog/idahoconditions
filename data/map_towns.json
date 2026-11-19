@@ -1,0 +1,215 @@
+{
+ "_note": "Major towns always shown on region maps. Coordinates are approximate (from memory), check any you care about.",
+ "towns": [
+  {
+   "region_code": "PH",
+   "name": "Coeur d'Alene",
+   "lat": 47.677,
+   "lon": -116.78
+  },
+  {
+   "region_code": "PH",
+   "name": "Sandpoint",
+   "lat": 48.277,
+   "lon": -116.553
+  },
+  {
+   "region_code": "PH",
+   "name": "Post Falls",
+   "lat": 47.718,
+   "lon": -116.952
+  },
+  {
+   "region_code": "PH",
+   "name": "Bonners Ferry",
+   "lat": 48.691,
+   "lon": -116.316
+  },
+  {
+   "region_code": "PH",
+   "name": "Kellogg",
+   "lat": 47.538,
+   "lon": -116.119
+  },
+  {
+   "region_code": "CW",
+   "name": "Lewiston",
+   "lat": 46.417,
+   "lon": -117.018
+  },
+  {
+   "region_code": "CW",
+   "name": "Moscow",
+   "lat": 46.732,
+   "lon": -117.0
+  },
+  {
+   "region_code": "CW",
+   "name": "Orofino",
+   "lat": 46.479,
+   "lon": -116.256
+  },
+  {
+   "region_code": "CW",
+   "name": "Grangeville",
+   "lat": 45.927,
+   "lon": -116.122
+  },
+  {
+   "region_code": "CW",
+   "name": "Riggins",
+   "lat": 45.421,
+   "lon": -116.314
+  },
+  {
+   "region_code": "SW",
+   "name": "Boise",
+   "lat": 43.615,
+   "lon": -116.202
+  },
+  {
+   "region_code": "SW",
+   "name": "Nampa",
+   "lat": 43.541,
+   "lon": -116.563
+  },
+  {
+   "region_code": "SW",
+   "name": "Caldwell",
+   "lat": 43.663,
+   "lon": -116.687
+  },
+  {
+   "region_code": "SW",
+   "name": "Meridian",
+   "lat": 43.612,
+   "lon": -116.391
+  },
+  {
+   "region_code": "SW",
+   "name": "McCall",
+   "lat": 44.911,
+   "lon": -116.099
+  },
+  {
+   "region_code": "MV",
+   "name": "Mountain Home",
+   "lat": 43.133,
+   "lon": -115.691
+  },
+  {
+   "region_code": "SW",
+   "name": "Cascade",
+   "lat": 44.516,
+   "lon": -116.042
+  },
+  {
+   "region_code": "MV",
+   "name": "Twin Falls",
+   "lat": 42.563,
+   "lon": -114.461
+  },
+  {
+   "region_code": "MV",
+   "name": "Ketchum",
+   "lat": 43.681,
+   "lon": -114.364
+  },
+  {
+   "region_code": "MV",
+   "name": "Hailey",
+   "lat": 43.519,
+   "lon": -114.315
+  },
+  {
+   "region_code": "MV",
+   "name": "Jerome",
+   "lat": 42.724,
+   "lon": -114.519
+  },
+  {
+   "region_code": "MV",
+   "name": "Burley",
+   "lat": 42.536,
+   "lon": -113.793
+  },
+  {
+   "region_code": "SE",
+   "name": "Pocatello",
+   "lat": 42.871,
+   "lon": -112.446
+  },
+  {
+   "region_code": "SE",
+   "name": "Blackfoot",
+   "lat": 43.19,
+   "lon": -112.345
+  },
+  {
+   "region_code": "SE",
+   "name": "Montpelier",
+   "lat": 42.322,
+   "lon": -111.298
+  },
+  {
+   "region_code": "SE",
+   "name": "Soda Springs",
+   "lat": 42.654,
+   "lon": -111.605
+  },
+  {
+   "region_code": "SE",
+   "name": "Preston",
+   "lat": 42.096,
+   "lon": -111.877
+  },
+  {
+   "region_code": "US",
+   "name": "Idaho Falls",
+   "lat": 43.492,
+   "lon": -112.034
+  },
+  {
+   "region_code": "US",
+   "name": "Rexburg",
+   "lat": 43.826,
+   "lon": -111.79
+  },
+  {
+   "region_code": "US",
+   "name": "Ashton",
+   "lat": 44.072,
+   "lon": -111.449
+  },
+  {
+   "region_code": "US",
+   "name": "Driggs",
+   "lat": 43.723,
+   "lon": -111.111
+  },
+  {
+   "region_code": "US",
+   "name": "Island Park",
+   "lat": 44.419,
+   "lon": -111.371
+  },
+  {
+   "region_code": "SA",
+   "name": "Salmon",
+   "lat": 45.176,
+   "lon": -113.896
+  },
+  {
+   "region_code": "SA",
+   "name": "Challis",
+   "lat": 44.504,
+   "lon": -114.232
+  },
+  {
+   "region_code": "SA",
+   "name": "Stanley",
+   "lat": 44.216,
+   "lon": -114.936
+  }
+ ]
+}

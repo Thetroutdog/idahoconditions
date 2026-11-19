@@ -1,0 +1,1411 @@
+{
+ "generated": "2026-11-15",
+ "zones": {
+  "IDZ001": {
+   "type": "forecast",
+   "name": "Northern Panhandle",
+   "office": "OTX",
+   "primary": "Panhandle",
+   "regions": [
+    "Panhandle"
+   ],
+   "shares": {
+    "Panhandle": 1.0
+   }
+  },
+  "IDZ002": {
+   "type": "forecast",
+   "name": "Coeur d'Alene Area",
+   "office": "OTX",
+   "primary": "Panhandle",
+   "regions": [
+    "Panhandle"
+   ],
+   "shares": {
+    "Panhandle": 1.0
+   }
+  },
+  "IDZ003": {
+   "type": "forecast",
+   "name": "Idaho Palouse",
+   "office": "OTX",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater",
+    "Panhandle"
+   ],
+   "shares": {
+    "Clearwater": 0.64,
+    "Panhandle": 0.36
+   }
+  },
+  "IDZ004": {
+   "type": "forecast",
+   "name": "Central Panhandle Mountains",
+   "office": "OTX",
+   "primary": "Panhandle",
+   "regions": [
+    "Panhandle",
+    "Clearwater"
+   ],
+   "shares": {
+    "Clearwater": 0.28,
+    "Panhandle": 0.72
+   }
+  },
+  "IDZ005": {
+   "type": "forecast",
+   "name": "Northern Clearwater Mountains",
+   "office": "MSO",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater"
+   ],
+   "shares": {
+    "Clearwater": 1.0
+   }
+  },
+  "IDZ006": {
+   "type": "forecast",
+   "name": "Southern Clearwater Mountains",
+   "office": "MSO",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater",
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 0.26,
+    "Clearwater": 0.74
+   }
+  },
+  "IDZ007": {
+   "type": "forecast",
+   "name": "Orofino/Grangeville Region",
+   "office": "MSO",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater"
+   ],
+   "shares": {
+    "Clearwater": 1.0
+   }
+  },
+  "IDZ008": {
+   "type": "forecast",
+   "name": "Lower Hells Canyon/Salmon River Region",
+   "office": "MSO",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater"
+   ],
+   "shares": {
+    "Southwest": 0.12,
+    "Clearwater": 0.88
+   }
+  },
+  "IDZ009": {
+   "type": "forecast",
+   "name": "Western Lemhi County",
+   "office": "MSO",
+   "primary": "Salmon",
+   "regions": [
+    "Salmon"
+   ],
+   "shares": {
+    "Salmon": 1.0
+   }
+  },
+  "IDZ010": {
+   "type": "forecast",
+   "name": "Eastern Lemhi County",
+   "office": "MSO",
+   "primary": "Salmon",
+   "regions": [
+    "Salmon",
+    "Upper Snake"
+   ],
+   "shares": {
+    "Salmon": 0.84,
+    "Upper Snake": 0.16
+   }
+  },
+  "IDZ011": {
+   "type": "forecast",
+   "name": "West Central Mountains",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 0.87,
+    "outside": 0.03,
+    "Salmon": 0.1
+   }
+  },
+  "IDZ012": {
+   "type": "forecast",
+   "name": "Lower Treasure Valley",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDZ013": {
+   "type": "forecast",
+   "name": "Boise Mountains",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest",
+    "Magic Valley"
+   ],
+   "shares": {
+    "Southwest": 0.69,
+    "Magic Valley": 0.31
+   }
+  },
+  "IDZ014": {
+   "type": "forecast",
+   "name": "Upper Treasure Valley",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest",
+    "Magic Valley"
+   ],
+   "shares": {
+    "Southwest": 0.67,
+    "Magic Valley": 0.33
+   }
+  },
+  "IDZ015": {
+   "type": "forecast",
+   "name": "Southwest Highlands",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest",
+    "Magic Valley"
+   ],
+   "shares": {
+    "Southwest": 0.78,
+    "Magic Valley": 0.22
+   }
+  },
+  "IDZ016": {
+   "type": "forecast",
+   "name": "Western Magic Valley",
+   "office": "BOI",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDZ026": {
+   "type": "forecast",
+   "name": "Lewiston Area",
+   "office": "OTX",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater"
+   ],
+   "shares": {
+    "Clearwater": 1.0
+   }
+  },
+  "IDZ027": {
+   "type": "forecast",
+   "name": "Lewis and Southern Nez Perce Counties",
+   "office": "OTX",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater"
+   ],
+   "shares": {
+    "Clearwater": 1.0
+   }
+  },
+  "IDZ028": {
+   "type": "forecast",
+   "name": "Camas Prairie",
+   "office": "BOI",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDZ029": {
+   "type": "forecast",
+   "name": "Owyhee Mountains",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDZ030": {
+   "type": "forecast",
+   "name": "Southern Twin  Falls County",
+   "office": "BOI",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDZ033": {
+   "type": "forecast",
+   "name": "Upper Weiser River",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDZ051": {
+   "type": "forecast",
+   "name": "Shoshone/Lava Beds",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDZ052": {
+   "type": "forecast",
+   "name": "Arco/Mud Lake Desert",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 0.88,
+    "Southeast": 0.12
+   }
+  },
+  "IDZ053": {
+   "type": "forecast",
+   "name": "Upper Snake River Plain",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDZ054": {
+   "type": "forecast",
+   "name": "Lower Snake River Plain",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Southeast": 1.0
+   }
+  },
+  "IDZ055": {
+   "type": "forecast",
+   "name": "Eastern Magic Valley",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley",
+    "Southeast"
+   ],
+   "shares": {
+    "Magic Valley": 0.81,
+    "Southeast": 0.19
+   }
+  },
+  "IDZ056": {
+   "type": "forecast",
+   "name": "Southern Hills/Albion Mountains",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDZ057": {
+   "type": "forecast",
+   "name": "Raft River Region",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 0.94,
+    "Southeast": 0.06
+   }
+  },
+  "IDZ058": {
+   "type": "forecast",
+   "name": "Marsh and Arbon Highlands",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Southeast": 1.0
+   }
+  },
+  "IDZ059": {
+   "type": "forecast",
+   "name": "Franklin/Eastern Oneida Region",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Southeast": 1.0
+   }
+  },
+  "IDZ060": {
+   "type": "forecast",
+   "name": "Bear River Range",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Southeast": 1.0
+   }
+  },
+  "IDZ061": {
+   "type": "forecast",
+   "name": "Bear Lake Valley",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Southeast": 1.0
+   }
+  },
+  "IDZ062": {
+   "type": "forecast",
+   "name": "Blackfoot Mountains",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast",
+    "Upper Snake"
+   ],
+   "shares": {
+    "Southeast": 0.69,
+    "Upper Snake": 0.31
+   }
+  },
+  "IDZ063": {
+   "type": "forecast",
+   "name": "Caribou Range",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast",
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 0.47,
+    "Southeast": 0.53
+   }
+  },
+  "IDZ064": {
+   "type": "forecast",
+   "name": "Big Hole Mountains",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDZ065": {
+   "type": "forecast",
+   "name": "Teton Valley",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDZ066": {
+   "type": "forecast",
+   "name": "Centennial Mountains/Island Park",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDZ067": {
+   "type": "forecast",
+   "name": "Beaverhead/Lemhi Highlands",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDZ068": {
+   "type": "forecast",
+   "name": "Lost River Valleys",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDZ069": {
+   "type": "forecast",
+   "name": "Lost River Range",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake",
+    "Salmon"
+   ],
+   "shares": {
+    "Salmon": 0.44,
+    "Upper Snake": 0.56
+   }
+  },
+  "IDZ070": {
+   "type": "forecast",
+   "name": "Challis/Pahsimeroi Valleys",
+   "office": "PIH",
+   "primary": "Salmon",
+   "regions": [
+    "Salmon"
+   ],
+   "shares": {
+    "Salmon": 1.0
+   }
+  },
+  "IDZ071": {
+   "type": "forecast",
+   "name": "Frank Church Wilderness",
+   "office": "PIH",
+   "primary": "Salmon",
+   "regions": [
+    "Salmon"
+   ],
+   "shares": {
+    "Salmon": 1.0
+   }
+  },
+  "IDZ072": {
+   "type": "forecast",
+   "name": "Sawtooth/Stanley Basin",
+   "office": "PIH",
+   "primary": "Salmon",
+   "regions": [
+    "Salmon"
+   ],
+   "shares": {
+    "Salmon": 1.0
+   }
+  },
+  "IDZ073": {
+   "type": "forecast",
+   "name": "Sun Valley Region",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 0.86,
+    "Salmon": 0.07,
+    "Upper Snake": 0.07
+   }
+  },
+  "IDZ074": {
+   "type": "forecast",
+   "name": "Big Lost Highlands/Copper Basin",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake",
+    "Salmon"
+   ],
+   "shares": {
+    "Salmon": 0.21,
+    "Upper Snake": 0.68,
+    "Magic Valley": 0.11
+   }
+  },
+  "IDZ075": {
+   "type": "forecast",
+   "name": "Wood River Foothills",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDZ101": {
+   "type": "fire",
+   "name": "Northern and Central Idaho Panhandle",
+   "office": "OTX",
+   "primary": "Panhandle",
+   "regions": [
+    "Panhandle"
+   ],
+   "shares": {
+    "Panhandle": 1.0
+   }
+  },
+  "IDZ102": {
+   "type": "fire",
+   "name": "Palouse/Nezperce Reservation/Hells Canyon  Region",
+   "office": "MSO",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater"
+   ],
+   "shares": {
+    "Clearwater": 0.97,
+    "Panhandle": 0.03
+   }
+  },
+  "IDZ103": {
+   "type": "fire",
+   "name": "Clearwater/Nezperce National Forest",
+   "office": "MSO",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater"
+   ],
+   "shares": {
+    "Clearwater": 1.0
+   }
+  },
+  "IDZ400": {
+   "type": "fire",
+   "name": "Northern Boise BLM",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDZ401": {
+   "type": "fire",
+   "name": "Western Payette National Forest",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDZ402": {
+   "type": "fire",
+   "name": "Eastern Payette National Forest",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 0.89,
+    "Salmon": 0.11
+   }
+  },
+  "IDZ403": {
+   "type": "fire",
+   "name": "Northern Boise National Forest",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest",
+    "Salmon"
+   ],
+   "shares": {
+    "Southwest": 0.85,
+    "Salmon": 0.15
+   }
+  },
+  "IDZ410": {
+   "type": "fire",
+   "name": "Upper Snake River Valley/Idaho Falls BLM",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake",
+    "Southeast"
+   ],
+   "shares": {
+    "Upper Snake": 0.7,
+    "Southeast": 0.26,
+    "Magic Valley": 0.04
+   }
+  },
+  "IDZ411": {
+   "type": "fire",
+   "name": "Centennial Mountains and Snake River Range/Targhee NF",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 0.67,
+    "outside": 0.33
+   }
+  },
+  "IDZ413": {
+   "type": "fire",
+   "name": "Caribou Range/Caribou NF",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Magic Valley": 0.03,
+    "Southeast": 0.9,
+    "Upper Snake": 0.06
+   }
+  },
+  "IDZ420": {
+   "type": "fire",
+   "name": "Treasure Valley BLM",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDZ421": {
+   "type": "fire",
+   "name": "Southern Boise/Western Sawtooth NF, including the Camas Prairie",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest",
+    "Magic Valley"
+   ],
+   "shares": {
+    "Southwest": 0.59,
+    "Magic Valley": 0.41
+   }
+  },
+  "IDZ422": {
+   "type": "fire",
+   "name": "Sawtooth Range/Northern Sawtooth NF",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley",
+    "Salmon"
+   ],
+   "shares": {
+    "Southwest": 0.1,
+    "Salmon": 0.29,
+    "Magic Valley": 0.62
+   }
+  },
+  "IDZ423": {
+   "type": "fire",
+   "name": "Owyhee Mountains",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDZ424": {
+   "type": "fire",
+   "name": "Western Twin Falls BLM",
+   "office": "BOI",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley",
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 0.21,
+    "Magic Valley": 0.79
+   }
+  },
+  "IDZ425": {
+   "type": "fire",
+   "name": "Middle Snake River Valley/Twin Falls BLM north of the Snake River",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 0.89,
+    "Upper Snake": 0.04,
+    "Southeast": 0.07
+   }
+  },
+  "IDZ426": {
+   "type": "fire",
+   "name": "Southern Highlands",
+   "office": "BOI",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Southwest": 0.11,
+    "Magic Valley": 0.89
+   }
+  },
+  "IDZ427": {
+   "type": "fire",
+   "name": "Goose Creek and Raft River Valley/Southern Sawtooth NF/Twin Falls BLM south of the Snake River",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDZ475": {
+   "type": "fire",
+   "name": "East Salmon River Mountains/Salmon NF",
+   "office": "PIH",
+   "primary": "Salmon",
+   "regions": [
+    "Salmon"
+   ],
+   "shares": {
+    "Salmon": 0.92,
+    "Southwest": 0.08
+   }
+  },
+  "IDZ476": {
+   "type": "fire",
+   "name": "Lemhi and Lost River Range/Challis NF",
+   "office": "PIH",
+   "primary": "Salmon",
+   "regions": [
+    "Salmon",
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 0.37,
+    "Salmon": 0.63
+   }
+  },
+  "IDC001": {
+   "type": "county",
+   "name": "Ada",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDC003": {
+   "type": "county",
+   "name": "Adams",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDC005": {
+   "type": "county",
+   "name": "Bannock",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Southeast": 1.0
+   }
+  },
+  "IDC007": {
+   "type": "county",
+   "name": "Bear Lake",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Southeast": 1.0
+   }
+  },
+  "IDC009": {
+   "type": "county",
+   "name": "Benewah",
+   "office": "OTX",
+   "primary": "Panhandle",
+   "regions": [
+    "Panhandle"
+   ],
+   "shares": {
+    "Panhandle": 0.98,
+    "Clearwater": 0.02
+   }
+  },
+  "IDC011": {
+   "type": "county",
+   "name": "Bingham",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Southeast": 0.93,
+    "Upper Snake": 0.07
+   }
+  },
+  "IDC013": {
+   "type": "county",
+   "name": "Blaine",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Salmon": 0.08,
+    "Magic Valley": 0.92
+   }
+  },
+  "IDC015": {
+   "type": "county",
+   "name": "Boise",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDC017": {
+   "type": "county",
+   "name": "Bonner",
+   "office": "OTX",
+   "primary": "Panhandle",
+   "regions": [
+    "Panhandle"
+   ],
+   "shares": {
+    "Panhandle": 1.0
+   }
+  },
+  "IDC019": {
+   "type": "county",
+   "name": "Bonneville",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 0.87,
+    "Southeast": 0.13
+   }
+  },
+  "IDC021": {
+   "type": "county",
+   "name": "Boundary",
+   "office": "OTX",
+   "primary": "Panhandle",
+   "regions": [
+    "Panhandle"
+   ],
+   "shares": {
+    "Panhandle": 1.0
+   }
+  },
+  "IDC023": {
+   "type": "county",
+   "name": "Butte",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDC025": {
+   "type": "county",
+   "name": "Camas",
+   "office": "BOI",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDC027": {
+   "type": "county",
+   "name": "Canyon",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDC029": {
+   "type": "county",
+   "name": "Caribou",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Southeast": 1.0
+   }
+  },
+  "IDC031": {
+   "type": "county",
+   "name": "Cassia",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDC033": {
+   "type": "county",
+   "name": "Clark",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDC035": {
+   "type": "county",
+   "name": "Clearwater",
+   "office": "MSO",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater"
+   ],
+   "shares": {
+    "Clearwater": 1.0
+   }
+  },
+  "IDC037": {
+   "type": "county",
+   "name": "Custer",
+   "office": "PIH",
+   "primary": "Salmon",
+   "regions": [
+    "Salmon",
+    "Upper Snake"
+   ],
+   "shares": {
+    "Salmon": 0.72,
+    "Upper Snake": 0.28
+   }
+  },
+  "IDC039": {
+   "type": "county",
+   "name": "Elmore",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest",
+    "Magic Valley"
+   ],
+   "shares": {
+    "Southwest": 0.52,
+    "Magic Valley": 0.48
+   }
+  },
+  "IDC041": {
+   "type": "county",
+   "name": "Franklin",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Southeast": 1.0
+   }
+  },
+  "IDC043": {
+   "type": "county",
+   "name": "Fremont",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDC045": {
+   "type": "county",
+   "name": "Gem",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDC047": {
+   "type": "county",
+   "name": "Gooding",
+   "office": "BOI",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDC049": {
+   "type": "county",
+   "name": "Idaho",
+   "office": "MSO",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater",
+    "Southwest"
+   ],
+   "shares": {
+    "Clearwater": 0.79,
+    "Southwest": 0.21
+   }
+  },
+  "IDC051": {
+   "type": "county",
+   "name": "Jefferson",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDC053": {
+   "type": "county",
+   "name": "Jerome",
+   "office": "BOI",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDC055": {
+   "type": "county",
+   "name": "Kootenai",
+   "office": "OTX",
+   "primary": "Panhandle",
+   "regions": [
+    "Panhandle"
+   ],
+   "shares": {
+    "Panhandle": 1.0
+   }
+  },
+  "IDC057": {
+   "type": "county",
+   "name": "Latah",
+   "office": "OTX",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater"
+   ],
+   "shares": {
+    "Clearwater": 0.97,
+    "Panhandle": 0.03
+   }
+  },
+  "IDC059": {
+   "type": "county",
+   "name": "Lemhi",
+   "office": "MSO",
+   "primary": "Salmon",
+   "regions": [
+    "Salmon"
+   ],
+   "shares": {
+    "Salmon": 0.92,
+    "Upper Snake": 0.08
+   }
+  },
+  "IDC061": {
+   "type": "county",
+   "name": "Lewis",
+   "office": "OTX",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater"
+   ],
+   "shares": {
+    "Clearwater": 1.0
+   }
+  },
+  "IDC063": {
+   "type": "county",
+   "name": "Lincoln",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDC065": {
+   "type": "county",
+   "name": "Madison",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDC067": {
+   "type": "county",
+   "name": "Minidoka",
+   "office": "PIH",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDC069": {
+   "type": "county",
+   "name": "Nez Perce",
+   "office": "OTX",
+   "primary": "Clearwater",
+   "regions": [
+    "Clearwater"
+   ],
+   "shares": {
+    "Clearwater": 1.0
+   }
+  },
+  "IDC071": {
+   "type": "county",
+   "name": "Oneida",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast",
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 0.3,
+    "Southeast": 0.7
+   }
+  },
+  "IDC073": {
+   "type": "county",
+   "name": "Owyhee",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest",
+    "Magic Valley"
+   ],
+   "shares": {
+    "Southwest": 0.76,
+    "Magic Valley": 0.24
+   }
+  },
+  "IDC075": {
+   "type": "county",
+   "name": "Payette",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  },
+  "IDC077": {
+   "type": "county",
+   "name": "Power",
+   "office": "PIH",
+   "primary": "Southeast",
+   "regions": [
+    "Southeast"
+   ],
+   "shares": {
+    "Southeast": 0.86,
+    "Magic Valley": 0.14
+   }
+  },
+  "IDC079": {
+   "type": "county",
+   "name": "Shoshone",
+   "office": "OTX",
+   "primary": "Panhandle",
+   "regions": [
+    "Panhandle"
+   ],
+   "shares": {
+    "Panhandle": 0.96,
+    "Clearwater": 0.04
+   }
+  },
+  "IDC081": {
+   "type": "county",
+   "name": "Teton",
+   "office": "PIH",
+   "primary": "Upper Snake",
+   "regions": [
+    "Upper Snake"
+   ],
+   "shares": {
+    "Upper Snake": 1.0
+   }
+  },
+  "IDC083": {
+   "type": "county",
+   "name": "Twin Falls",
+   "office": "BOI",
+   "primary": "Magic Valley",
+   "regions": [
+    "Magic Valley"
+   ],
+   "shares": {
+    "Magic Valley": 1.0
+   }
+  },
+  "IDC085": {
+   "type": "county",
+   "name": "Valley",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 0.85,
+    "Salmon": 0.15
+   }
+  },
+  "IDC087": {
+   "type": "county",
+   "name": "Washington",
+   "office": "BOI",
+   "primary": "Southwest",
+   "regions": [
+    "Southwest"
+   ],
+   "shares": {
+    "Southwest": 1.0
+   }
+  }
+ }
+}

@@ -1,0 +1,20 @@
+---
+// Activity chips for a region, split into in-season / out-of-season groups. Used on the region hub and the activity tables.
+import { hubActivities, month, monthName } from '../lib/catalog.js';
+const { region, current = '' } = Astro.props;
+const all = hubActivities(region);
+const groups = [
+  { label: `In season · ${monthName}`, list: all.filter((a) => a.state !== 'low'), low: false },
+  { label: 'Out of season', list: all.filter((a) => a.state === 'low'), low: true },
+].filter((g) => g.list.length);
+---
+<div class="chip-groups" role="group" aria-label="Activities">
+  {groups.map((g) => (
+    <div class={`chip-group${g.low ? ' is-low' : ''}`}>
+      <span class="chip-group-label">{g.label}</span>
+      <div class="chips">
+        {g.list.map((a) => <a class={`chip-btn${a.slug === current ? ' is-on' : ''}`} href={`/${region}/${a.slug}/`} aria-current={a.slug === current ? 'page' : undefined} data-keep-scroll data-astro-prefetch>{a.name}<span class="cnt">{a.count}</span></a>)}
+      </div>
+    </div>
+  ))}
+</div>

@@ -1,0 +1,43 @@
+---
+// Detailed live readings for a region (the data behind the strip). Collapsed by default to keep the hub uncluttered.
+import { conditions, show, fmtTime } from '../lib/conditions.js';
+import AqiValue from './AqiValue.astro';
+const { id } = Astro.props;
+const r = conditions.regions[id];
+const tz = r.tz;
+---
+<details class="data-detail" id="readings">
+  <summary>Live readings for this region</summary>
+  {r.forecast.points.length > 0 && (<>
+    <h3>Forecast</h3>
+    <table class="data-table"><tbody>
+      {r.forecast.points.map((p) => <tr><th>{p.name}</th><td>{p.periods.map((x) => <div>{x.name}: {x.temp}°{x.unit}, {x.short} ({x.precipChance}%)</div>)}</td></tr>)}
+    </tbody></table>
+    <span class="note">National Weather Service, updated {fmtTime(r.forecast.updated, tz)}</span>
+  </>)}
+  {r.alerts.length > 0 && (<>
+    <h3>Alerts</h3>
+    <ul class="alert-list">{r.alerts.map((a) => <li data-ends={a.ends ?? undefined}><strong>{a.event}</strong> until {a.ends ? fmtTime(a.ends, tz) : 'further notice'}. <a href={a.url} target="_blank" rel="noopener noreferrer">Details</a></li>)}</ul>
+  </>)}
+  {r.snow.length > 0 && (<>
+    <h3>Snow (SNOTEL)</h3>
+    <table class="data-table">
+      <thead><tr><th>Station</th><th class="num">Depth</th><th class="num">24h</th><th class="num">Water</th><th class="num">% median</th></tr></thead>
+      <tbody>{r.snow.map((s) => { const d = show(s.depth, tz), c = show(s.depthChange24h, tz), w = show(s.swe, tz), m = show(s.pctOfMedian, tz);
+        return <tr><td>{s.name}<small>{s.area}</small></td><td class={`num ${d.cls}`}>{d.text}<small>{d.note}</small></td><td class={`num ${c.cls}`}>{c.text}</td><td class={`num ${w.cls}`}>{w.text}</td><td class={`num ${m.cls}`}>{m.text}</td></tr>; })}</tbody>
+    </table>
+  </>)}
+  {r.rivers.length > 0 && (<>
+    <h3>Rivers (USGS)</h3>
+    <table class="data-table">
+      <thead><tr><th>Gauge</th><th class="num">Flow</th><th>Trend</th></tr></thead>
+      <tbody>{r.rivers.map((g) => { const f = show(g.flow, tz); return <tr><td>{g.name}<small>{g.use.join(', ')}</small></td><td class={`num ${f.cls}`}>{f.text}<small>{f.note}</small></td><td>{g.trend ?? ''}</td></tr>; })}</tbody>
+    </table>
+  </>)}
+  <h3>Air quality</h3>
+  {r.air.note && <p class="missing">{r.air.note}</p>}
+  {r.air.points.map((p) => { const a = show(p.aqi, tz); return p.aqi.value === null ? <p>{p.name}: <span class="missing">no nearby air monitor</span></p> : <p>{p.name}: {a.cls === 'fresh' ? <AqiValue value={p.aqi.value} /> : <strong class={a.cls}>{a.text}</strong>} {p.category} ({p.pollutant}) <span class="note">{a.note}</span></p>; })}
+  <h3>Fire</h3>
+  {r.fire.wildfires.length === 0 ? <p>No reported wildfires.</p> : <ul>{r.fire.wildfires.map((f) => <li class={f.status}>{f.name}, {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}{f.status === 'stale' && ` (last update ${fmtTime(f.modifiedAt, tz)})`}</li>)}</ul>}
+  {r.fire.prescribed.length > 0 && <ul>{r.fire.prescribed.map((f) => <li class={f.status}>Prescribed burn: {f.name}, {f.acres ?? '?'} acres{f.status === 'stale' && ` (last update ${fmtTime(f.modifiedAt, tz)})`}</li>)}</ul>}
+</details>

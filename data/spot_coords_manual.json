@@ -1,0 +1,142 @@
+{
+ "clearwater-bald-mountain": {
+  "lat": 46.57,
+  "lon": -115.87,
+  "note": "ski area, 10 mi NW of Pierce (Wikipedia coordinates)"
+ },
+ "salmon-lost-trail-powder-mountain": {
+  "lat": 45.69,
+  "lon": -113.95,
+  "note": "Lost Trail Pass on the Idaho-Montana line (snow-forecast.com coordinates)"
+ },
+ "upper-snake-grand-targhee-wy-idaho-access": {
+  "lat": 43.787,
+  "lon": -110.958,
+  "note": "resort base at Alta WY, from memory; check"
+ },
+ "southwest-brundage-snowcat-adventures": {
+  "lat": 44.9298,
+  "lon": -116.1435,
+  "note": "Brundage Mountain (geocoded ski area)"
+ },
+ "southwest-banner-summit-hwy-21": {
+  "lat": 44.306,
+  "lon": -115.232,
+  "note": "Banner Summit (geocoder hit, checked)"
+ },
+ "magic-valley-galena-lodge-trails-bcrd": {
+  "lat": 43.872,
+  "lon": -114.707,
+  "note": "Galena Lodge, from memory; check"
+ },
+ "magic-valley-galena-summit-eastern-mountains": {
+  "lat": 43.864,
+  "lon": -114.715,
+  "note": "Galena Summit, from memory; check"
+ },
+ "clearwater-heavens-gate-overlook-seven-devils": {
+  "lat": 45.3688,
+  "lon": -116.4949,
+  "note": "Heavens Gate summit (USGS GNIS via TopoQuest)"
+ },
+ "clearwater-jerry-johnson-hot-springs": {
+  "lat": 46.4627,
+  "lon": -114.8729,
+  "note": "Jerry Johnson Hot Springs (USGS GNIS via TopoQuest)"
+ },
+ "clearwater-burgdorf-hot-springs": {
+  "lat": 45.276,
+  "lon": -115.9137,
+  "note": "Burgdorf Hot Springs (USGS GNIS via TopoZone)"
+ },
+ "clearwater-snake-river-hells-canyon": {
+  "lat": 45.2539,
+  "lon": -116.6931,
+  "note": "Hells Canyon Creek boat launch, put-in below Hells Canyon Dam (USFS)"
+ },
+ "clearwater-salmon-river-riggins-day-stretch": {
+  "lat": 45.4148,
+  "lon": -116.3018,
+  "note": "Riggins boat ramp (Idaho Parks and Recreation)"
+ },
+ "magic-valley-snake-river-murtaugh": {
+  "lat": 42.4993,
+  "lon": -114.1519,
+  "note": "Murtaugh Boating Access put-in (BLM)"
+ },
+ "upper-snake-craters-of-the-moon-nm-p": {
+  "lat": 43.4619,
+  "lon": -113.5632,
+  "note": "Monument entrance (NPS: 43 27.711 N, 113 33.791 W)"
+ },
+ "upper-snake-upper-lower-mesa-falls": {
+  "lat": 44.1877,
+  "lon": -111.3279,
+  "note": "Upper Mesa Falls visitor area (USGS National Map)"
+ },
+ "upper-snake-henry-s-fork-box-canyon-railroad-ranch-last-chance": {
+  "lat": 44.4145,
+  "lon": -111.392,
+  "note": "Box Canyon put-in (American Whitewater access data)"
+ },
+ "upper-snake-south-fork-snake-river": {
+  "lat": 43.4497,
+  "lon": -111.3986,
+  "note": "Conant Boat Access (BLM)"
+ },
+ "upper-snake-teton-lakes-winter-park": {
+  "lat": 43.84072,
+  "lon": -111.8171,
+  "note": "Nordic Pulse Directions coordinates"
+ },
+ "upper-snake-teton-reserve-nordic-trail": {
+  "lat": 43.63128,
+  "lon": -111.10024,
+  "note": "Nordic Pulse Directions coordinates"
+ },
+ "upper-snake-sherman-park-winter-trails": {
+  "lat": 43.59911,
+  "lon": -111.10482,
+  "note": "Nordic Pulse Directions coordinates"
+ },
+ "upper-snake-southern-valley-nordic-trails": {
+  "lat": 43.55838,
+  "lon": -111.0691,
+  "note": "Nordic Pulse Directions coordinates"
+ },
+ "upper-snake-driggs-winter-trails": {
+  "lat": 43.73405,
+  "lon": -111.09035,
+  "note": "Nordic Pulse Directions coordinates"
+ },
+ "upper-snake-horseshoe-canyon": {
+  "lat": 43.71894,
+  "lon": -111.30351,
+  "note": "Nordic Pulse Directions coordinates"
+ },
+ "upper-snake-centennial-pathway": {
+  "lat": 43.56247,
+  "lon": -111.0675,
+  "note": "Nordic Pulse Directions coordinates"
+ },
+ "southwest-valley-county-pathways": {
+  "lat": 44.87183,
+  "lon": -116.11547,
+  "note": "Nordic Pulse Directions coordinates"
+ },
+ "southwest-tamarack-resort-nordic": {
+  "lat": 44.6731,
+  "lon": -116.1138,
+  "note": "Nordic Pulse Directions coordinates"
+ },
+ "panhandle-priest-lake-nordic-chipmunk-rapids": {
+  "lat": 48.44673,
+  "lon": -116.91161,
+  "note": "Nordic Pulse Directions coordinates"
+ },
+ "magic-valley-lake-creek-trails-bcrd": {
+  "lat": 43.72755,
+  "lon": -114.38257,
+  "note": "Nordic Pulse Directions coordinates"
+ }
+}

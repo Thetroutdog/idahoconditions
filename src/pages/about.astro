@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../lib/site.js';
+---
+<Base title="About — Idaho Conditions" description="What Idaho Conditions is, where its data comes from, and how to reach us.">
+  <main>
+    <div class="wrap">
+      <PageHero title="About." lede="Idaho Conditions pulls the public data that matters for a trip (roads, weather alerts, snow, rivers, air quality and fire) into one page for each of Idaho’s seven Fish and Game regions and for each activity." />
+      <div class="doc">
+        <h2>Why it exists</h2>
+        <p>The information is all public, but it lives on a dozen different sites. This puts the answer to “is the trip on?” in one place, with the source linked every time so you can check it yourself. Just conditions.</p>
+
+        <h2 id="data">Where the data comes from</h2>
+        <ul>
+          <li><strong>Weather, alerts and forecasts:</strong> <a href="https://www.weather.gov/" rel="noopener">National Weather Service</a> (weather.gov). Public weather and water data. Idaho Conditions is not affiliated with or endorsed by NOAA or the National Weather Service, and our pages are not official government material.</li>
+          <li><strong>Roads and passes:</strong> the Idaho Transportation Department’s <a href="https://511.idaho.gov/" rel="noopener">Idaho 511</a> service. We link to Idaho 511 for the live map and cameras and do not republish camera images. Not affiliated with ITD.</li>
+          <li><strong>Snow depth:</strong> USDA NRCS National Water and Climate Center, SNOTEL stations (Air and Water Database). Data may be revised.</li>
+          <li><strong>River flows:</strong> River flows courtesy of the <a href="https://waterdata.usgs.gov/" rel="noopener">U.S. Geological Survey</a>, plus <a href="https://water.noaa.gov/" rel="noopener">NOAA</a> water gauges at a few sites. Current readings are provisional and subject to revision (<a href="https://waterdata.usgs.gov/provisional-data-statement" rel="noopener">USGS provisional data statement</a>).</li>
+          <li><strong>Air quality:</strong> <a href="https://www.airnow.gov/" rel="noopener">AirNow</a>. The data are preliminary, not fully verified and not for regulatory use, courtesy of federal, state, local and tribal air quality agencies and the EPA AirNow program (<a href="https://www.airnow.gov/partners/" rel="noopener">partner agencies</a>). Official regulatory data are in EPA’s Air Quality System (AQS). The AQI colors are EPA’s official category colors.</li>
+          <li><strong>Wildfires and prescribed burns:</strong> incident points from the National Interagency Fire Center’s <a href="https://www.nifc.gov/" rel="noopener">Wildland Fire Interagency Geospatial Services (WFIGS)</a>. The data are dynamic, not legal documents, and provided without warranty.</li>
+        </ul>
+        <p>The site refreshes about every hour from 5 AM to 11 PM Mountain, and not overnight. If a source stops updating, the page says so instead of showing old conditions as current. The Thursday Brief uses the same sources and carries the same preliminary and provisional labels.</p>
+        <p>Region boundaries are the official Idaho Department of Fish and Game regions; we credit IDFG for the boundaries and remain independent and unaffiliated. River lines on the maps are generalized from Natural Earth (public domain).</p>
+
+        <h2>Before you go</h2>
+        <p>Idaho Conditions pulls public data together so you don’t need 12 open tabs. It isn’t safety guidance, and it can be late or wrong. The mountains don’t read this site either, so check the National Weather Service, Idaho 511, your avalanche center and the land agency before you go, then make your own call.</p>
+        <p>Idaho Conditions is an independent project. It is not affiliated with Idaho Fish and Game, the Idaho Transportation Department or any agency that publishes the data.</p>
+
+        <h2>Get in touch</h2>
+        <p>Corrections, missing spots and ideas are welcome: <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>. Or find us on <a href={SITE.x} target="_blank" rel="noopener noreferrer">X</a> and <a href={SITE.instagram} target="_blank" rel="noopener noreferrer">Instagram</a> (@idahoconditions).</p>
+
+        <h2>Keep it handy</h2>
+        <p>You can put Idaho Conditions on your home screen or dock so it opens like an app:</p>
+        <ul>
+          <li><strong>iPhone or iPad (Safari):</strong> tap the Share button, then “Add to Home Screen.”</li>
+          <li><strong>Mac (Safari):</strong> File menu, then “Add to Dock.”</li>
+          <li><strong>Chrome (computer or Android):</strong> use the install icon in the address bar, or the menu’s “Install” or “Add to Home screen.”</li>
+        </ul>
+
+        <h2>More</h2>
+        <p><a href="/whats-new/">What’s new</a> · <a href="/privacy/">Privacy</a></p>
+      </div>
+    </div>
+  </main>
+</Base>

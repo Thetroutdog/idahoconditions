@@ -1,0 +1,106 @@
+# Thursday Brief DRAFT. Draft-only: this workflow never sends, posts or emails anything.
+# It refreshes the data, compares with last week's snapshot, builds the draft, runs the pre-send check, and uploads the result.
+# Eric downloads the artifact (Actions run > Artifacts > brief-draft), reads STATUS.md, adds his two lines, and pastes into beehiiv himself.
+# Schedule: Thursday 12:17 UTC = 5:17 AM MST (6:17 AM in daylight time; GitHub cron can also start a few minutes late).
+# Manual test: Actions tab > Thursday Brief draft > Run workflow. Manual runs do NOT save a snapshot unless you tick the box.
+name: Thursday Brief draft
+
+on:
+  schedule:
+    - cron: "17 12 * * 4"
+  workflow_dispatch:
+    inputs:
+      eric_note:
+        description: "Eric's two lines for the From Eric section (type \\n between the lines). Empty = the check blocks."
+        required: false
+        default: ""
+      best_bet_override:
+        description: "Replaces the rules-based 'The numbers favor' pick. Empty = use the rules."
+        required: false
+        default: ""
+      save_snapshot:
+        description: "Save this run's data as a weekly snapshot (scheduled runs always do)."
+        type: boolean
+        default: false
+
+concurrency:
+  group: brief
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # only used to push the `snapshots` branch; nothing on main is changed by this workflow
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      IC_USER_AGENT: ${{ secrets.IC_USER_AGENT }}
+      AIRNOW_API_KEY: ${{ secrets.AIRNOW_API_KEY }}
+      USGS_API_KEY: ${{ secrets.USGS_API_KEY }}
+      IDAHO511_API_KEY: ${{ secrets.IDAHO511_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Same last-known data the refresh job keeps, so a source that fails right now still shows its last values.
+      - name: Restore last-known data
+        uses: actions/cache/restore@v4
+        with:
+          path: data/parts
+          key: parts-brief-${{ github.run_id }}
+          restore-keys: parts-
+
+      - name: Fetch data and build conditions.json
+        run: ./scripts/refresh_all.sh
+
+      # River medians change slowly: fetch once a month, reuse the rest of the month.
+      - name: Month key
+        id: month
+        run: echo "ym=$(date -u +%Y-%m)" >> "$GITHUB_OUTPUT"
+      - name: Restore river medians
+        id: med
+        uses: actions/cache@v4
+        with:
+          path: data/usgs_daily_median.json
+          key: usgs-median-${{ steps.month.outputs.ym }}
+      - name: Fetch river medians (about 4 minutes, once a month)
+        if: steps.med.outputs.cache-hit != 'true'
+        run: python3 scripts/brief/fetch_usgs_stats.py || echo "!! medians failed; the Brief skips the river comparison"
+
+      - name: Open snapshots branch
+        run: scripts/brief/snapshots_git.sh open
+
+      - name: Build the draft and run the pre-send check
+        env:
+          BRIEF_ERIC_NOTE: ${{ inputs.eric_note }}
+          BRIEF_BEST_BET_OVERRIDE: ${{ inputs.best_bet_override }}
+        run: python3 scripts/brief/run_brief.py
+
+      - name: Show the result
+        if: always()
+        run: |
+          if [ -f brief-out/STATUS.md ]; then cat brief-out/STATUS.md >> "$GITHUB_STEP_SUMMARY"; else echo "No STATUS.md: the build did not start. Read the step logs." >> "$GITHUB_STEP_SUMMARY"; fi
+
+      - name: Upload the draft
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brief-draft
+          path: brief-out/
+          retention-days: 14
+          if-no-files-found: ignore
+
+      # Save this week's data as next week's baseline, but never data that was stale or from failed sources.
+      - name: Save weekly snapshot
+        if: always() && (github.event_name == 'schedule' || inputs.save_snapshot)
+        run: |
+          if [ -f brief-out/status.json ] && [ "$(python3 -c "import json;print(json.load(open('brief-out/status.json')).get('dataOk'))")" = "True" ]; then
+            python3 scripts/brief/snapshot.py save
+            scripts/brief/snapshots_git.sh push
+          else
+            echo "::warning::Snapshot NOT saved: the data was stale or a source failed (see STATUS.md). Next week's Brief will have no baseline."
+          fi

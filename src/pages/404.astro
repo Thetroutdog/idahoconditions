@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../lib/site.js';
+---
+<Base title="Page not found — Idaho Conditions" description="That page doesn’t exist. Pick a region or activity to see current Idaho conditions.">
+  <main>
+    <div class="wrap">
+      <PageHero title="Page not found." lede="That address doesn’t lead anywhere. The link may be old or mistyped." />
+      <div class="doc">
+        <h2>Try one of these</h2>
+        <ul>
+          <li><a href="/">Idaho Conditions home</a>: the statewide picture, with all seven regions and every activity.</li>
+          <li><a href="/#snapshot">Find your region</a></li>
+          <li><a href="/about/">About</a> and <a href="/whats-new/">What’s new</a></li>
+        </ul>
+        <p>Still stuck? Tell us what you were looking for at <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+      </div>
+    </div>
+  </main>
+</Base>

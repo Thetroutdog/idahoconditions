@@ -1,0 +1,6 @@
+{
+ "_note": "Gauges read from the NOAA National Water Prediction Service (api.water.noaa.gov/nwps). lid = NWS gauge id. Used where USGS no longer publishes the gauge.",
+ "gauges": [
+  {"lid": "hcdi1", "name": "Snake at Hells Canyon Dam", "region": "Clearwater", "use": "P (Hells Canyon)"}
+ ]
+}

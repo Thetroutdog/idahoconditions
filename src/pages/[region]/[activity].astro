@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import SpotTable from '../../components/SpotTable.astro';
+import ActivityChips from '../../components/ActivityChips.astro';
+import { conditions, fmtTime } from '../../lib/conditions.js';
+import { regionBar } from '../../lib/regionview.js';
+import { regions, regionById, activities, activityBySlug, activityTitle, activityCounts, spotsIn, spotView, rollup, seasonState, seasonLabel } from '../../lib/catalog.js';
+
+export function getStaticPaths() {
+  return regions.flatMap((r) => Object.keys(activityCounts(r.id)).map((activity) => ({ params: { region: r.id, activity } })));
+}
+const { region, activity } = Astro.params;
+const reg = regionById[region];
+const act = activityBySlug[activity];
+const tz = conditions.regions[region].tz;
+const list = spotsIn(region, activity);
+const rows = list.map((s) => spotView(s, tz));
+const counts = activityCounts(region);
+const chips = activities.filter((a) => counts[a.id]);
+const noun = activity === 'ski' ? 'areas' : 'spots';
+---
+<Base regionBar={regionBar(region)} title={`${reg.name} ${activityTitle(activity)} — Idaho Conditions`} description={`${reg.name} Region ${activityTitle(activity)}: ${list.length} ${noun} with season status, live readings where connected, and links to the official sources.`}>
+  <main>
+    <div class="wrap">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="/">Idaho</a><span aria-hidden="true"> / </span><a href={`/${region}/`}>{reg.name}</a><span aria-hidden="true"> / </span><strong style="color:var(--ink);font-weight:600">{act.name}</strong></nav>
+      <div>
+        <PageHero title={`${reg.name} ${activityTitle(activity)}.`} lede={`${list.length} ${noun} in the ${reg.name} Region catalog. Use the chips to switch activities without leaving the region.`} updated={fmtTime(conditions.generatedAt, tz)} meta={[`${reg.name} Region · ${seasonLabel[seasonState(activity)].toLowerCase()}`]} />
+        
+      </div>
+      <ActivityChips region={region} current={activity} />
+      <p class="verdict">{rollup(list, activity)}</p>
+      <SpotTable rows={rows} variant="activity" label={activity === 'ski' ? 'Area' : 'Spot'} />
+      <p style="margin:16px 0 0"><a href={`/${activity}/`} data-astro-prefetch>See all Idaho {activityTitle(activity)} →</a></p>
+    </div>
+  </main>
+</Base>

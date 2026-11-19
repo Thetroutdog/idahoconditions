@@ -1,0 +1,63 @@
+# Hourly from 5 AM to 11 PM Mountain standard time (12:00-06:00 UTC; an hour later in daylight time), at :07 past, off the busy top of the hour.
+# Overnight runs are skipped to stay near the 2,000 free Actions minutes on a private repo. If the repo goes public, this can go back to every hour or 30 minutes. fetch fresh data, rebuild the site, deploy to Cloudflare Pages.
+# Also runs on every push to main (live site) or dev (private preview link) and can be started by hand (Actions tab > Refresh and deploy > Run workflow).
+name: Refresh and deploy
+
+on:
+  schedule:
+    - cron: "7 12-23,0-6 * * *"
+  push:
+    branches: [main, dev]
+  workflow_dispatch:
+
+concurrency:
+  group: refresh-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      IC_USER_AGENT: ${{ secrets.IC_USER_AGENT }}
+      AIRNOW_API_KEY: ${{ secrets.AIRNOW_API_KEY }}
+      USGS_API_KEY: ${{ secrets.USGS_API_KEY }}
+      IDAHO511_API_KEY: ${{ secrets.IDAHO511_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Last-known data lives in data/parts between runs, so a failed source shows stale values instead of blank.
+      - name: Restore last-known data
+        uses: actions/cache@v4
+        with:
+          path: data/parts
+          key: parts-${{ github.run_id }}
+          restore-keys: parts-
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch data and build conditions.json
+        run: ./scripts/refresh_all.sh
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Build site
+        run: |
+          npm ci
+          npm run build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=idahoconditions --branch=${{ github.ref_name }}

@@ -1,0 +1,665 @@
+{
+ "fetchedAt": "2026-11-16T13:25:11",
+ "spots": {
+  "clearwater-bald-mountain": {
+   "status": "closed",
+   "confidence": "high",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "the process! Ski ya soon on the slopes! We are CLOSED for the season! A tough season with much warmer than normal",
+   "source": "resort page",
+   "url": "https://skibaldmountain.com/",
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-bogus-basin": {
+   "status": "closed",
+   "confidence": "low",
+   "opening": "Nov 21",
+   "openingISO": "2026-11-21",
+   "evidence": "Opening November 21st & 22nd \u2013 See you on the snow! \u2744\ufe0f We\u2019re hiring! Check out our careers page to learn more \ud83d\udc99 Stay in the know!",
+   "source": "resort page",
+   "url": "https://bogusbasin.org/your-mountain/trails-grooming/",
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-little-ski-hill": {
+   "status": "closed",
+   "confidence": "low",
+   "opening": "Dec 5",
+   "openingISO": "2026-12-05",
+   "evidence": "Open Snow Ball Gala - Dec. 5th at Shore Lodge Pause slideshow Play slideshow Home Little Ski Hill After School Program Bear Basi",
+   "source": "resort page",
+   "url": "https://payettelakesskiclub.org/pages/events",
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-sun-valley-bald-mountain-dollar": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": "Nov 16",
+   "openingISO": "2026-11-16",
+   "evidence": "erate 0 Difficult 0 Most Difficult Lifts Open 0 / 12 November 16, 2026 High 36\u00b0F Low 30\u00b0F Wind 4",
+   "source": "resort page",
+   "url": "https://www.sunvalley.com/the-mountain/mountain-report",
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-pomerelle": {
+   "status": "open",
+   "confidence": "high",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "-5555 LIFT & TRAIL STATUS 0/3 0/32 0/32 LIFTS OPEN OPEN TRAILS GROOMED TRAILS Pomerelle Mtn Resort (208) 673 -",
+   "source": "resort page",
+   "url": "https://www.pomerelle.com/conditions",
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-magic-mountain": {
+   "status": "closed",
+   "confidence": "low",
+   "opening": "Dec 28",
+   "openingISO": "2026-12-28",
+   "evidence": "OPEN DEC 28-JAN 5 TUBING SAT-SUN REGULAR HOURS: SUNDAY 9:00AM \u2013 4:00PM MONDAY CLOSED TUESDAY CLOSED WEDNESDAY By Appointment Only",
+   "source": "resort page",
+   "url": "https://magicmountainresort.com/",
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-rotarun": {
+   "status": "closed",
+   "confidence": "low",
+   "opening": "Dec 11",
+   "openingISO": "2026-12-11",
+   "evidence": "Opening Date Delayed December 11, 2025 Have You Heard? December 2, 2025 Hailey Homegrown All News Upcoming Events All Events Rotar",
+   "source": "resort page",
+   "url": "https://rotarun.org/",
+   "checkedAt": "2026-11-16"
+  },
+  "southeast-pebble-creek": {
+   "status": "closed",
+   "confidence": "low",
+   "opening": "Dec 12",
+   "openingISO": "2026-12-12",
+   "evidence": "Opening: Dec 12 Snow Report Snow Report Last updated Current Weather 24 HR 48 HR Base Depth Summit Depth Trails Open Tra",
+   "source": "resort page",
+   "url": "https://pebblecreekskiarea.com/snow-report/",
+   "checkedAt": "2026-11-16"
+  },
+  "upper-snake-grand-targhee-wy-idaho-access": {
+   "status": "opening-soon",
+   "confidence": "high",
+   "opening": "Nov 20",
+   "openingISO": "2026-11-20",
+   "evidence": "orized officer of GTR. Grand Targhee is currently closed for the fall off-season. We're aiming to kick off the 2026/",
+   "source": "resort page",
+   "url": "https://www.grandtarghee.com/policies/terms-conditions",
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-bear-basin-nordic-center": {
+   "status": "closed",
+   "confidence": "low",
+   "opening": "Dec 5",
+   "openingISO": "2026-12-05",
+   "evidence": "Open Snow Ball Gala - Dec. 5th at Shore Lodge Pause slideshow Play slideshow Home Little Ski Hill After School Program Bear Basi",
+   "source": "resort page",
+   "url": "https://payettelakesskiclub.org/pages/events",
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-galena-lodge-trails-bcrd": {
+   "status": "closed",
+   "confidence": "low",
+   "opening": "Dec 2",
+   "openingISO": "2026-12-02",
+   "evidence": "Opens Wednesday, December 2 at 5:30 pm More Info Nordic Pass Preseason Sale Ends Soon! More Info Ready, Set, Snow! Party at Quig",
+   "source": "resort page",
+   "url": "https://bcrd.org/terms-conditions/",
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-harriman-trail-north-valley-trails-bcrd": {
+   "status": "closed",
+   "confidence": "low",
+   "opening": "Dec 2",
+   "openingISO": "2026-12-02",
+   "evidence": "Opens Wednesday, December 2 at 5:30 pm More Info Nordic Pass Preseason Sale Ends Soon! More Info Ready, Set, Snow! Party at Quig",
+   "source": "resort page",
+   "url": "https://bcrd.org/terms-conditions/",
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-quigley-nordic-bcrd": {
+   "status": "closed",
+   "confidence": "low",
+   "opening": "Dec 2",
+   "openingISO": "2026-12-02",
+   "evidence": "Opens Wednesday, December 2 at 5:30 pm More Info Nordic Pass Preseason Sale Ends Soon! More Info Ready, Set, Snow! Party at Quig",
+   "source": "resort page",
+   "url": "https://bcrd.org/terms-conditions/",
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-wood-river-trail-winter-grooming": {
+   "status": "closed",
+   "confidence": "low",
+   "opening": "Dec 2",
+   "openingISO": "2026-12-02",
+   "evidence": "Opens Wednesday, December 2 at 5:30 pm More Info Nordic Pass Preseason Sale Ends Soon! More Info Ready, Set, Snow! Party at Quig",
+   "source": "resort page",
+   "url": "https://bcrd.org/terms-conditions/",
+   "checkedAt": "2026-11-16"
+  },
+  "upper-snake-harriman-state-park": {
+   "status": "open",
+   "confidence": "high",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "s. The Nordic Park N' Ski Trail area is open daily. More InformationHill's Resort (208) 443-2551 Priest Lake",
+   "source": "resort page",
+   "url": "https://parksandrecreation.idaho.gov/park-activity/snowshoeing/",
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-schweitzer": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-silver-mountain": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-lookout-pass": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "clearwater-cottonwood-butte": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "clearwater-snowhaven": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-brundage-mountain": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-tamarack-resort": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-soldier-mountain": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "upper-snake-kelly-canyon": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "salmon-lost-trail-powder-mountain": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-fourth-of-july-pass-park-n-ski": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-priest-lake-golf-course-park-n-ski": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-hanna-flats-park-n-ski": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-priest-lake-state-park-indian-creek": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "clearwater-palouse-divide-park-n-ski": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "clearwater-fish-creek-meadows-park-n-ski": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-ponderosa-state-park": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-jug-mountain-ranch": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-idaho-city-park-n-ski-yurts-banner-ridge-gold-fork": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-bogus-basin-nordic": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-alturas-lake-ski-trails": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southeast-mink-creek-park-n-ski": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "upper-snake-brimstone-buffalo-river-park-n-ski": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "upper-snake-bear-gulch-mesa-falls-park-n-ski": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "upper-snake-fall-river-ridge-park-n-ski": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "salmon-park-creek-ski-trails": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-priest-lake-nordman-priest-lake": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-wallace-silver-valley": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-coeur-d-alene-kootenai-county": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-avery-st-joe": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "panhandle-sandpoint-bonners-ferry": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "clearwater-bovill-elk-river-latah-county": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "clearwater-orofino-pierce": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "clearwater-grangeville-fish-creek": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "clearwater-elk-city-red-river-dixie": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-mccall-valley-county": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-smiths-ferry-wellington-snow-park": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-pine-featherville": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southwest-idaho-city": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-diamondfield-jack-south-hills": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-fairfield-camas-county": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "magic-valley-blaine-county-baker-creek-wood-river": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southeast-bear-lake-valley": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southeast-bannock-county-scout-mtn-mink-creek-inman-pebble-toponce": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "southeast-southeast-idaho-caribou-nf": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "upper-snake-island-park": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "upper-snake-ashton": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "upper-snake-bonneville-bingham-bone-road": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "upper-snake-madison-jefferson-teton-counties": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "salmon-stanley": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  },
+  "salmon-salmon-lemhi-county": {
+   "status": "unknown",
+   "confidence": "low",
+   "opening": null,
+   "openingISO": null,
+   "evidence": "",
+   "source": null,
+   "url": null,
+   "checkedAt": "2026-11-16"
+  }
+ }
+}

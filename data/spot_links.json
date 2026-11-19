@@ -1,0 +1,1095 @@
+{
+ "_note": "Link edits per spot id. Find ids with: python3 scripts/spot_links.py find <text>. Keys starting with _ are ignored.",
+ "_example": {
+  "southwest-brundage-mountain": {
+   "add": [
+    {
+     "label": "Brundage",
+     "url": "https://www.brundage.com/"
+    }
+   ],
+   "remove": [
+    "skiidaho.us"
+   ],
+   "links": "OPTIONAL. A full list that REPLACES all links (use instead of add/remove): [{\"label\": \"Brundage\", \"url\": \"https://www.brundage.com/\"}]"
+  }
+ },
+ "panhandle-schweitzer": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://www.schweitzer.com/mountain-info/mountain-report"
+   }
+  ]
+ },
+ "panhandle-silver-mountain": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://silvermt.com/snow-report/"
+   }
+  ]
+ },
+ "panhandle-lookout-pass": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://skilookout.com/snow-report"
+   }
+  ]
+ },
+ "clearwater-bald-mountain": {
+  "add": [
+   {
+    "label": "Official site",
+    "url": "https://skibaldmountain.com/"
+   }
+  ]
+ },
+ "clearwater-cottonwood-butte": {
+  "add": [
+   {
+    "label": "Official site",
+    "url": "https://www.cottonwoodbutte.org/"
+   }
+  ]
+ },
+ "clearwater-snowhaven": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://grangeville.us/snowhaven-facebook2/"
+   }
+  ]
+ },
+ "southwest-bogus-basin": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://bogusbasin.org/your-mountain/trails-grooming/"
+   }
+  ]
+ },
+ "southwest-brundage-mountain": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://brundage.com/on-the-mountain/snow-report/"
+   }
+  ]
+ },
+ "southwest-tamarack-resort": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://tamarackidaho.com/the-mountain/snow-report"
+   }
+  ]
+ },
+ "southwest-little-ski-hill": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://payettelakesskiclub.org/pages/events"
+   }
+  ]
+ },
+ "magic-valley-sun-valley-bald-mountain-dollar": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://www.sunvalley.com/the-mountain/mountain-report"
+   }
+  ]
+ },
+ "magic-valley-pomerelle": {
+  "add": [
+   {
+    "label": "Official site",
+    "url": "https://www.pomerelle.com/"
+   },
+   {
+    "label": "Conditions / status",
+    "url": "https://www.pomerelle.com/conditions"
+   }
+  ]
+ },
+ "magic-valley-soldier-mountain": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://snocountry.com/snow-report/idaho/soldier-mountain-ski-area/"
+   }
+  ]
+ },
+ "magic-valley-magic-mountain": {
+  "add": [
+   {
+    "label": "Official site",
+    "url": "https://magicmountainresort.com/"
+   }
+  ]
+ },
+ "magic-valley-rotarun": {
+  "add": [
+   {
+    "label": "Official site",
+    "url": "https://rotarun.org/"
+   }
+  ]
+ },
+ "southeast-pebble-creek": {
+  "add": [
+   {
+    "label": "Official site",
+    "url": "https://pebblecreekskiarea.com/"
+   }
+  ]
+ },
+ "upper-snake-kelly-canyon": {
+  "add": [
+   {
+    "label": "Official site",
+    "url": "https://kellycanyonresort.com/"
+   },
+   {
+    "label": "Conditions / status",
+    "url": "https://kellycanyonresort.com/#snow-report"
+   }
+  ]
+ },
+ "upper-snake-grand-targhee-wy-idaho-access": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://www.grandtarghee.com/the-mountain/cams-conditions/mountain-report"
+   }
+  ]
+ },
+ "salmon-lost-trail-powder-mountain": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://losttrail.com/snow-report/"
+   }
+  ]
+ },
+ "southwest-bear-basin-nordic-center": {
+  "links": [
+   {
+    "label": "Official site",
+    "url": "https://payettelakesskiclub.org/pages/bear-basin-nordic-center"
+   },
+   {
+    "label": "Conditions / status",
+    "url": "https://nordic-pulse.com/ski-areas/US/ID/Bear-Basin-Nordic-Center"
+   }
+  ]
+ },
+ "southwest-ponderosa-state-park": {
+  "links": [
+   {
+    "label": "Conditions / status",
+    "url": "https://nordic-pulse.com/ski-areas/US/ID/Ponderosa-State-Park"
+   }
+  ]
+ },
+ "southwest-jug-mountain-ranch": {
+  "links": [
+   {
+    "label": "Conditions / status",
+    "url": "https://www.inidaho.com/xc/McCall_xcreport.asp"
+   }
+  ]
+ },
+ "magic-valley-galena-lodge-trails-bcrd": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://bcrd.org/wintertrailink/"
+   }
+  ]
+ },
+ "magic-valley-harriman-trail-north-valley-trails-bcrd": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://bcrd.org/wintertrailink/"
+   }
+  ]
+ },
+ "magic-valley-quigley-nordic-bcrd": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://bcrd.org/wintertrailink/"
+   }
+  ]
+ },
+ "magic-valley-wood-river-trail-winter-grooming": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://bcrd.org/wintertrailink/"
+   }
+  ]
+ },
+ "magic-valley-alturas-lake-ski-trails": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://nordic-pulse.com/ski-areas/US/ID/Alturas-Lake"
+   }
+  ],
+  "remove": [
+   "wikipedia.org"
+  ]
+ },
+ "salmon-park-creek-ski-trails": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://nordic-pulse.com/ski-areas/US/ID/Park-Creek-Ski-Trails"
+   }
+  ],
+  "remove": [
+   "stanleycc.org"
+  ]
+ },
+ "panhandle-priest-lake-nordman-priest-lake": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://priestlake.org/snow-update/"
+   },
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ],
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ]
+ },
+ "southwest-mccall-valley-county": {
+  "add": [
+   {
+    "label": "Official site",
+    "url": "https://snowmobilemccall.net/"
+   },
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ],
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ]
+ },
+ "southeast-bear-lake-valley": {
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ],
+  "remove": [
+   "bearlake.org/cat/snow-skiing/",
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ]
+ },
+ "southeast-southeast-idaho-caribou-nf": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://idahohighcountry.org/cat/snowmobile-trails/"
+   }
+  ]
+ },
+ "panhandle-hanna-flats-park-n-ski": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://nordic-pulse.com/ski-areas/US/ID/Priest-Lake-Hanna-Flats"
+   }
+  ]
+ },
+ "panhandle-priest-lake-golf-course-park-n-ski": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://nordic-pulse.com/ski-areas/US/ID/Priest-Lake-Golf-Course"
+   }
+  ]
+ },
+ "southeast-mink-creek-park-n-ski": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://nordic-pulse.com/ski-areas/US/ID/East-Mink-Creek"
+   }
+  ]
+ },
+ "southwest-bogus-basin-nordic": {
+  "add": [
+   {
+    "label": "Conditions / status",
+    "url": "https://nordic-pulse.com/ski-areas/US/ID/Bogus-Basin"
+   }
+  ]
+ },
+ "panhandle-selkirk-mountains": {
+  "links": [
+   {
+    "url": "https://www.idahopanhandleavalanche.org/forecasts/#/all",
+    "label": "Idaho Panhandle Avalanche Center"
+   }
+  ]
+ },
+ "panhandle-silver-valley-bitterroot-mountains": {
+  "links": [
+   {
+    "url": "https://www.idahopanhandleavalanche.org/forecasts/#/all",
+    "label": "Idaho Panhandle Avalanche Center"
+   }
+  ]
+ },
+ "panhandle-west-east-cabinet-mountains": {
+  "links": [
+   {
+    "url": "https://www.idahopanhandleavalanche.org/forecasts/#/all",
+    "label": "Idaho Panhandle Avalanche Center"
+   }
+  ]
+ },
+ "southwest-west-mountains-payette-avalanche-center": {
+  "links": [
+   {
+    "url": "https://payetteavalanche.org/forecasts/avalanche#/all",
+    "label": "Payette Avalanche Center"
+   }
+  ]
+ },
+ "southwest-salmon-river-mountains-zone-pac": {
+  "links": [
+   {
+    "url": "https://payetteavalanche.org/forecasts/avalanche#/all",
+    "label": "Payette Avalanche Center"
+   }
+  ]
+ },
+ "southwest-banner-summit-hwy-21": {
+  "links": [
+   {
+    "label": "Sawtooth Avalanche Center",
+    "url": "https://www.sawtoothavalanche.com/"
+   },
+   {
+    "url": "https://en.wikipedia.org/wiki/Banner_Summit",
+    "label": "County check"
+   }
+  ]
+ },
+ "magic-valley-galena-summit-eastern-mountains": {
+  "links": [
+   {
+    "label": "Sawtooth Avalanche Center",
+    "url": "https://www.sawtoothavalanche.com/"
+   }
+  ]
+ },
+ "magic-valley-soldier-wood-river-valley-mountains": {
+  "links": [
+   {
+    "label": "Sawtooth Avalanche Center",
+    "url": "https://www.sawtoothavalanche.com/"
+   }
+  ]
+ },
+ "salmon-sawtooth-western-smoky-mountains": {
+  "links": [
+   {
+    "label": "Sawtooth Avalanche Center",
+    "url": "https://www.sawtoothavalanche.com/"
+   },
+   {
+    "url": "https://stanleycc.org/do/skiing/",
+    "label": "Stanley Chamber"
+   }
+  ]
+ },
+ "magic-valley-sun-valley-huts": {
+  "links": [
+   {
+    "url": "https://svtrek.com/",
+    "label": "Sun Valley Huts"
+   },
+   {
+    "label": "Sawtooth Avalanche Center",
+    "url": "https://www.sawtoothavalanche.com/"
+   }
+  ]
+ },
+ "magic-valley-sun-valley-heli-ski": {
+  "links": [
+   {
+    "url": "https://www.sunvalleyheliski.com/",
+    "label": "Sun Valley Heli Ski"
+   },
+   {
+    "label": "Sawtooth Avalanche Center",
+    "url": "https://www.sawtoothavalanche.com/"
+   }
+  ]
+ },
+ "southwest-black-cliffs": {
+  "remove": [
+   "www.visitsouthwestidaho.org/6-climbing-spots-in-southwest-idaho/"
+  ]
+ },
+ "magic-valley-almo-city-of-rocks-national-reserve": {
+  "remove": [
+   "www.mountainproject.com/area/105739322/city-of-rocks",
+   "www.visitsouthwestidaho.org/6-climbing-spots-in-southwest-idaho/"
+  ]
+ },
+ "magic-valley-castle-rocks-state-park": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/climbing/"
+  ]
+ },
+ "southwest-boise-river-through-boise": {
+  "remove": [
+   "idahoangler.com/blogs/fishing-report"
+  ]
+ },
+ "magic-valley-big-wood-river": {
+  "remove": [
+   "silver-creek.com/fishing-forecast/"
+  ]
+ },
+ "upper-snake-upper-lower-mesa-falls": {
+  "remove": [
+   "visitidaho.org/things-to-do/natural-attractions/mesa-falls/"
+  ]
+ },
+ "clearwater-jerry-johnson-hot-springs": {
+  "remove": [
+   "idahohotsprings.com/north-central/jerry-johnson-hot-springs/"
+  ]
+ },
+ "clearwater-burgdorf-hot-springs": {
+  "remove": [
+   "idahohotsprings.com/west-central/burgdorf-hot-springs/"
+  ]
+ },
+ "southwest-kirkham-hot-springs": {
+  "remove": [
+   "idahohotsprings.com/south-central/kirkham-hot-springs/"
+  ]
+ },
+ "southwest-pine-flats-hot-springs": {
+  "remove": [
+   "idahohotsprings.com/south-central/pine-flats-hot-springs/"
+  ],
+  "add": [
+   {
+    "label": "US Forest Service",
+    "url": "https://www.fs.usda.gov/r04/boise/recreation/pine-flats-campground"
+   }
+  ]
+ },
+ "magic-valley-miracle-hot-springs-banbury": {
+  "remove": [
+   "idahohotsprings.com/south-central/miracle-hot-springs-banbury-hot-springs/"
+  ]
+ },
+ "southeast-downata-hot-springs": {
+  "remove": [
+   "idahohotsprings.com/south-east/downata-hot-springs/"
+  ],
+  "add": [
+   {
+    "label": "Downata Hot Springs",
+    "url": "https://www.downatahotsprings.com/"
+   }
+  ]
+ },
+ "upper-snake-heise-hot-springs": {
+  "remove": [
+   "idahohotsprings.com/south-east/heise-hot-springs/"
+  ],
+  "add": [
+   {
+    "label": "Heise Hot Springs",
+    "url": "https://heiseresort.com/hot-springs/"
+   }
+  ]
+ },
+ "salmon-goldbug-hot-springs": {
+  "remove": [
+   "idahohotsprings.com/east-central/goldbug-hot-springs/"
+  ]
+ },
+ "salmon-sharkey-hot-springs": {
+  "remove": [
+   "idahohotsprings.com/east-central/sharkey-hot-springs/"
+  ],
+  "add": [
+   {
+    "label": "BLM",
+    "url": "https://www.blm.gov/visit/sharkey-hot-springs"
+   }
+  ]
+ },
+ "panhandle-canfield-mountain-trail-system": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "panhandle-fourth-of-july-pass-atv-trail-800": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "clearwater-sheep-mountain-camp-60-ohv-loop": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "clearwater-deception-atv-loop": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "clearwater-whitebird-to-pittsburg-landing-fs-rd-493": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "clearwater-milner-centennial-atv-trails": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "southwest-owyhee-front-hemingway-butte-fossil-creek-rabbit-creek": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ]
+ },
+ "southwest-danskin-mountains-ohv-area": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "US Forest Service",
+    "url": "https://www.fs.usda.gov/r04/boise/recreation/three-point-mountain-trailhead"
+   }
+  ]
+ },
+ "southwest-kirkham-ridge-trail": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "southwest-boise-ridge-atv-loop": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "magic-valley-rock-creek-atv-loop-south-hills": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "southeast-mecham-hollow-sherman-peak-loop": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "southeast-paris-canyon-highline-trail-loop": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "upper-snake-railroad-grade-atv-trail": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "upper-snake-big-southern-butte-route": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "upper-snake-leaning-fir-stinking-springs-loop": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "salmon-custer-motorway": {
+  "remove": [
+   "challischamber.com/activities/atv/",
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "salmon-lombard-trail-bayhorse-loops": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "salmon-lewis-clark-backcountry-byway": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "salmon-discovery-hill-ohv-trails": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "salmon-mackay-mine-hill-tour": {
+  "remove": [
+   "stayontrails.com/where-to-ride/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "panhandle-silver-mountain-bike-park": {
+  "remove": [
+   "www.mtbproject.com/directory/8015611/kellogg"
+  ],
+  "add": [
+   {
+    "label": "Silver Mountain",
+    "url": "https://silvermt.com/bike-park/"
+   }
+  ]
+ },
+ "panhandle-farragut-state-park-bernard-peak": {
+  "remove": [
+   "www.mtbproject.com/directory/8008059/farragut-state-park"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec",
+    "url": "https://parksandrecreation.idaho.gov/state-park/farragut-state-park/"
+   }
+  ]
+ },
+ "clearwater-hells-gate-state-park-area": {
+  "remove": [
+   "www.mtbproject.com/directory/8012597/lewiston"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec",
+    "url": "https://parksandrecreation.idaho.gov/state-park/hells-gate-state-park/"
+   }
+  ]
+ },
+ "southwest-boise-foothills-ridge-to-rivers-system": {
+  "remove": [
+   "www.mtbproject.com/directory/8008076/boise-eagle-meridian",
+   "ridgetorivers.org/trails/trail-areas/table-rock-area"
+  ],
+  "add": [
+   {
+    "label": "Ridge to Rivers",
+    "url": "https://ridgetorivers.org/trails/"
+   },
+   {
+    "label": "MTB Project",
+    "url": "https://www.mtbproject.com/directory/8008076/boise-eagle-meridian#sub-areas"
+   }
+  ]
+ },
+ "southwest-bogus-basin-shafer-butte-trails": {
+  "remove": [
+   "www.mtbproject.com/directory/8008076/boise-eagle-meridian"
+  ],
+  "add": [
+   {
+    "label": "Ridge to Rivers",
+    "url": "https://ridgetorivers.org/trails/"
+   },
+   {
+    "label": "MTB Project",
+    "url": "https://www.mtbproject.com/trail/5787459/around-the-mountain"
+   },
+   {
+    "label": "Bogus Basin",
+    "url": "https://bogusbasin.org/your-mountain/things-to-do/summer-activities/mountain-biking/the-basin-gravity-park/"
+   }
+  ]
+ },
+ "clearwater-latah-trail": {
+  "remove": [
+   "ridewithgps.com/routes/37340352"
+  ]
+ },
+ "southwest-boise-river-greenbelt-to-lucky-peak": {
+  "remove": [
+   "ridewithgps.com/routes/31678693"
+  ]
+ },
+ "magic-valley-snake-river-canyon-rim-trail": {
+  "remove": [
+   "ridewithgps.com/routes/47739991"
+  ]
+ },
+ "upper-snake-mesa-falls-scenic-byway": {
+  "remove": [
+   "ridewithgps.com/routes/41581885"
+  ]
+ },
+ "panhandle-wallace-silver-valley": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "panhandle-coeur-d-alene-kootenai-county": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "panhandle-avery-st-joe": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "panhandle-sandpoint-bonners-ferry": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "clearwater-bovill-elk-river-latah-county": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "clearwater-orofino-pierce": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "clearwater-grangeville-fish-creek": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "clearwater-elk-city-red-river-dixie": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "southwest-smiths-ferry-wellington-snow-park": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "southwest-pine-featherville": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "southwest-idaho-city": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "magic-valley-diamondfield-jack-south-hills": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "magic-valley-fairfield-camas-county": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "magic-valley-blaine-county-baker-creek-wood-river": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "southeast-bannock-county-scout-mtn-mink-creek-inman-pebble-toponce": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "upper-snake-island-park": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "upper-snake-ashton": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "upper-snake-bonneville-bingham-bone-road": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "upper-snake-madison-jefferson-teton-counties": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "salmon-stanley": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "salmon-salmon-lemhi-county": {
+  "remove": [
+   "parksandrecreation.idaho.gov/park-activity/snowmobiling/"
+  ],
+  "add": [
+   {
+    "label": "Idaho Parks & Rec (motorized trails)",
+    "url": "https://parksandrecreation.idaho.gov/motorized-trails/"
+   }
+  ]
+ },
+ "salmon-upper-salmon-sunbeam-stretch": {
+  "remove": [
+   "visitsunvalley.com/searching-for-sun-valley/guide-to-white-water-rafting-near-sun-valley/"
+  ]
+ }
+}

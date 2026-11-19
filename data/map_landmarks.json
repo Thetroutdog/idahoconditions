@@ -1,0 +1,6 @@
+{"_note": "National parks, monuments and reserves shown as fixed markers on region maps. Coordinates from NPS / Recreation.gov pages (2026-11-17); region checked against the IDFG polygons.",
+ "landmarks": [
+  {"region_code": "US", "name": "Craters of the Moon NM", "lat": 43.4619, "lon": -113.5632, "source": "NPS entrance (same as spot_coords_manual)"},
+  {"region_code": "MV", "name": "Hagerman Fossil Beds NM", "lat": 42.7907, "lon": -114.9443, "source": "USGS GNIS / Recreation.gov (Thousand Springs visitor center area)"},
+  {"region_code": "MV", "name": "City of Rocks NR", "lat": 42.0699, "lon": -113.7124, "source": "NPS / Recreation.gov"}
+ ]}

@@ -1,0 +1,33 @@
+---
+import PageHero from './PageHero.astro';
+import SpotTable from './SpotTable.astro';
+import { conditions, fmtTime } from '../lib/conditions.js';
+import { regions, activityBySlug, activityTitle, spotsFor, spotView, rollup, seasonState, seasonLabel } from '../lib/catalog.js';
+const { slug } = Astro.props;
+const act = activityBySlug[slug];
+const all = spotsFor(slug);
+const groups = regions.map((r) => ({ region: r, rows: all.filter((s) => s.region === r.id).map((s) => spotView(s)) })).filter((g) => g.rows.length);
+const updated = fmtTime(conditions.generatedAt, 'America/Boise');
+const noun = slug === 'ski' ? 'areas' : 'spots';
+---
+<main>
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="/">Idaho</a><span aria-hidden="true"> / </span><strong style="color:var(--ink);font-weight:600">{act.name}</strong></nav>
+    <PageHero title={`Idaho ${activityTitle(slug)}.`} lede={`All ${all.length} ${noun} in the catalog, grouped by region. Filter with the chips, or open a region for its own table.`} updated={updated} meta={[`Statewide · ${seasonLabel[seasonState(slug)].toLowerCase()}`]} />
+    <div class="chips-row">
+      <div class="chips" role="group" aria-label="Filter by region" data-region-chips>
+        <a class="chip-btn is-on" href={`/${slug}/`} data-region-chip="" data-keep-scroll data-astro-prefetch aria-current="page">All<span class="cnt">{all.length}</span></a>
+        {groups.map((g) => <a class="chip-btn" href={`/${slug}/?region=${g.region.id}`} data-region-chip={g.region.id} data-keep-scroll data-astro-prefetch>{g.region.name}<span class="cnt">{g.rows.length}</span></a>)}
+      </div>
+    </div>
+    <p class="verdict">{rollup(all, slug, ` across ${groups.length} regions`)}</p>
+    <div data-statewide>
+      {groups.map((g) => (
+        <section class="region-group" data-region={g.region.id}>
+          <div class="group-h">{g.region.name} <a href={`/${g.region.id}/${slug}/`}>View in {g.region.name} →</a></div>
+          <SpotTable rows={g.rows} variant="statewide" label={act.name === 'Ski' ? 'Area' : 'Spot'} />
+        </section>
+      ))}
+    </div>
+  </div>
+</main>

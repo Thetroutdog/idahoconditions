@@ -1,0 +1,21 @@
+---
+// One table for activity-in-region and statewide pages. rows come from spotView() in lib/catalog.js.
+import { conditions, fmtTime } from '../lib/conditions.js';
+const { rows, variant = 'activity', label = 'Spot' } = Astro.props;
+// The reading column only appears once at least one row in the table has a live reading.
+const hasMetric = rows.some((r) => r.metric);
+---
+<div class={`list-card cols-${variant}${hasMetric ? '' : ' no-metric'}`}>
+  <div class="list-head"><div>{label}</div><div>Status</div>{hasMetric && <div>Reading / trend</div>}<div>Verdict</div><div>Links</div></div>
+  {rows.map((s) => (
+    <div class="spot-row" id={`spot-${s.id}`}>
+      <div><span class="spot-name">{s.name}</span><span class="spot-desc">{s.desc}{s.town ? ` · ${s.town}` : ''}</span></div>
+      <div><span class={`pill ${s.pill.cls}`}>{s.pill.text}</span></div>
+      {hasMetric && <div class="metric-cell">{s.metric ? <>{s.metric.text}<span class="tr">{s.metric.trend}{s.metric.stale ? ' · ' + fmtTime(s.metric.observedAt, conditions.regions[s.region].tz) : ''}</span></> : <>—</>}</div>}
+      <div class="spot-verdict">{s.chips?.length > 0 && <div class="spot-chips">{s.chips.map((c) => <span class={`pill ${c.cls}`} title={c.why}>{c.text}</span>)}</div>}{s.verdict}{s.more && <details class="more"><summary>Full forecast</summary><p>{s.more}</p></details>}</div>
+      <div class="spot-actions">
+        <div class="spot-links">{s.sources.map((l) => <a href={l.url} target="_blank" rel="noopener noreferrer">{l.label}<span class="vh"> (opens in a new tab)</span></a>)}</div>
+      </div>
+    </div>
+  ))}
+</div>

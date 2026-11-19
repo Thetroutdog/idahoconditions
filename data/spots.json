@@ -1,0 +1,5114 @@
+{
+ "meta": {
+  "source": "/workspace/idoutdoor data*.py (alldata.py + data1–data6)",
+  "exported": "2026-11-15",
+  "note": "Spot catalog seed. Readings, status, and verdicts are not included; those are live/sample data at runtime.",
+  "counts": {
+   "spots": 268,
+   "regions": 7,
+   "activities": 13
+  }
+ },
+ "regions": [
+  {
+   "id": "panhandle",
+   "code": "PH",
+   "name": "Panhandle",
+   "office": "Coeur d'Alene"
+  },
+  {
+   "id": "clearwater",
+   "code": "CW",
+   "name": "Clearwater",
+   "office": "Lewiston"
+  },
+  {
+   "id": "southwest",
+   "code": "SW",
+   "name": "Southwest",
+   "office": "Nampa (McCall subregion office)"
+  },
+  {
+   "id": "magic-valley",
+   "code": "MV",
+   "name": "Magic Valley",
+   "office": "Jerome"
+  },
+  {
+   "id": "southeast",
+   "code": "SE",
+   "name": "Southeast",
+   "office": "Pocatello"
+  },
+  {
+   "id": "upper-snake",
+   "code": "US",
+   "name": "Upper Snake",
+   "office": "Idaho Falls"
+  },
+  {
+   "id": "salmon",
+   "code": "SA",
+   "name": "Salmon",
+   "office": "Salmon"
+  }
+ ],
+ "activities": [
+  {
+   "id": "ski",
+   "name": "Ski",
+   "catalog": "Downhill Skiing",
+   "spot_count": 19
+  },
+  {
+   "id": "nordic",
+   "name": "Nordic",
+   "catalog": "Cross-Country / Nordic Skiing",
+   "spot_count": 22
+  },
+  {
+   "id": "backcountry",
+   "name": "Backcountry",
+   "catalog": "Backcountry Skiing",
+   "spot_count": 15
+  },
+  {
+   "id": "snowmobile",
+   "name": "Snowmobile",
+   "catalog": "Snowmobiling",
+   "spot_count": 25
+  },
+  {
+   "id": "whitewater",
+   "name": "Whitewater",
+   "catalog": "Whitewater Rafting / Kayaking",
+   "spot_count": 22
+  },
+  {
+   "id": "fishing",
+   "name": "Fishing",
+   "catalog": "Fishing",
+   "spot_count": 39
+  },
+  {
+   "id": "hike",
+   "name": "Hike",
+   "catalog": "Hiking",
+   "spot_count": 25
+  },
+  {
+   "id": "backpacking",
+   "name": "Backpacking",
+   "catalog": "Backpacking / Wilderness",
+   "spot_count": 5
+  },
+  {
+   "id": "mtb",
+   "name": "MTB",
+   "catalog": "Mountain Biking",
+   "spot_count": 26
+  },
+  {
+   "id": "moto-bdr",
+   "name": "Moto / BDR",
+   "catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "spot_count": 32
+  },
+  {
+   "id": "hot-springs",
+   "name": "Hot springs",
+   "catalog": "Hot Springs",
+   "spot_count": 19
+  },
+  {
+   "id": "climbing",
+   "name": "Climbing",
+   "catalog": "Rock Climbing",
+   "spot_count": 8
+  },
+  {
+   "id": "paddle",
+   "name": "Paddle",
+   "catalog": "Paddleboarding / Flatwater",
+   "spot_count": 11
+  }
+ ],
+ "spots": [
+  {
+   "id": "panhandle-schweitzer",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Schweitzer",
+   "desc": "Idaho's largest by acreage: 2,900 acres, 2,400' vertical, 92 runs, 10 lifts, ~300\" snowfall",
+   "town": "Sandpoint",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-silver-mountain",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Silver Mountain",
+   "desc": "1,620 acres, 2,200' vertical, 82 runs, 7 lifts, ~340\" snowfall",
+   "town": "Kellogg",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-lookout-pass",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Lookout Pass",
+   "desc": "1,023 acres, 1,650' vertical, 33 runs, 5 lifts, ~450\" snowfall (on I-90 at the MT line)",
+   "town": "Mullan",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-bald-mountain",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Bald Mountain",
+   "desc": "140 acres, 684' vertical, 21 runs, 2 lifts; small community hill on the Gold Rush Historic Byway",
+   "town": "Pierce",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-cottonwood-butte",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Cottonwood Butte",
+   "desc": "260 acres, 845' vertical, 6 runs, 2 lifts",
+   "town": "Cottonwood",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-snowhaven",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Snowhaven",
+   "desc": "60 acres, 400' vertical, 9 runs, 2 lifts; small family hill",
+   "town": "Grangeville",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "southwest-bogus-basin",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Bogus Basin",
+   "desc": "2,600 acres, 1,800' vertical, 10 lifts (4 high-speed quads); big night-skiing program 16 mi from downtown Boise",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/resorts/bogus-basin",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "southwest-brundage-mountain",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Brundage Mountain",
+   "desc": "1,920 acres, 1,921' vertical, 70 runs, 6 lifts, ~320\" snowfall",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "southwest-tamarack-resort",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Tamarack Resort",
+   "desc": "1,610 acres, 2,800' vertical, 59 runs, 7 lifts",
+   "town": "Donnelly",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "southwest-little-ski-hill",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Little Ski Hill",
+   "desc": "50 acres, 405' vertical, 1 lift; run by Payette Lakes Ski Club",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-sun-valley-bald-mountain-dollar",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Sun Valley (Bald Mountain & Dollar)",
+   "desc": "Idaho's biggest vertical: 3,400', 2,533 acres, 121 runs, 17 lifts",
+   "town": "Ketchum / Sun Valley",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-pomerelle",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Pomerelle",
+   "desc": "500 acres, 1,002' vertical, 32 runs, 3 lifts, ~500\" snowfall",
+   "town": "Albion",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-soldier-mountain",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Soldier Mountain",
+   "desc": "1,150 acres, 1,425' vertical, 35 runs, 3 lifts",
+   "town": "Fairfield",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-magic-mountain",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Magic Mountain",
+   "desc": "120 acres, 740' vertical, 22 runs, 4 lifts",
+   "town": "Twin Falls area",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-rotarun",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Rotarun",
+   "desc": "15 acres, 441' vertical, 7 runs, 2 lifts; community hill",
+   "town": "Hailey",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "southeast-pebble-creek",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Pebble Creek",
+   "desc": "1,100 acres, 2,200' vertical, 51 runs, 4 lifts",
+   "town": "Inkom / Pocatello",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-kelly-canyon",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Kelly Canyon",
+   "desc": "778 acres, 1,000' vertical, 51 runs, 5 lifts, 4 terrain parks",
+   "town": "Ririe",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-grand-targhee-wy-idaho-access",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Grand Targhee (WY, Idaho access)",
+   "desc": "Resort is in Alta, WY but reached only via Driggs, ID: 2,602 acres, 2,270' vertical, ~500\" snowfall",
+   "town": "Driggs",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "salmon-lost-trail-powder-mountain",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "ski",
+   "activity_name": "Ski",
+   "activity_catalog": "Downhill Skiing",
+   "name": "Lost Trail Powder Mountain",
+   "desc": "On the ID/MT line at Lost Trail Pass: 1,800 acres, 1,800' vertical, 69 runs, 8 lifts",
+   "town": "Sula, MT / North Fork, ID",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/compare",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-fourth-of-july-pass-park-n-ski",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Fourth of July Pass Park N' Ski",
+   "desc": "7.8 mi; groomed with 10-ft skate lane + classic track; warming hut (I-90 exit 28)",
+   "town": "Coeur d'Alene",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/cross-country-xc-skiing/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-priest-lake-golf-course-park-n-ski",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Priest Lake Golf Course Park N' Ski",
+   "desc": "9.1 mi ski + 2.8 mi snowshoe; set track for classic",
+   "town": "Priest River / Nordman",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/cross-country-xc-skiing/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-hanna-flats-park-n-ski",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Hanna Flats Park N' Ski",
+   "desc": "5 mi ski + 2.2 mi snowshoe; gentle meadow/cedar loops, airstrip for skating",
+   "town": "Priest River",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/cross-country-xc-skiing/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-priest-lake-state-park-indian-creek",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Priest Lake State Park (Indian Creek)",
+   "desc": "5.4 mi groomed ski + 1.5 mi snowshoe; winter cabins available",
+   "town": "Coolin",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/cross-country-xc-skiing/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-palouse-divide-park-n-ski",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Palouse Divide Park N' Ski",
+   "desc": "18 mi (29 km) set-track classic trails off Hwy 6",
+   "town": "Moscow / Potlatch",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/cross-country-xc-skiing/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-fish-creek-meadows-park-n-ski",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Fish Creek Meadows Park N' Ski",
+   "desc": "12 mi (19.3 km) groomed; warming hut; 8 mi south of town on FS Rd 221",
+   "town": "Grangeville",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/cross-country-xc-skiing/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "southwest-bear-basin-nordic-center",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Bear Basin Nordic Center",
+   "desc": "Payette Lakes Ski Club area: 25-30 km groomed classic + skate, yurt at trailhead, dog-friendly",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://payettelakesskiclub.org/pages/bear-basin-nordic-center",
+     "label": "Payette Lakes Ski Club"
+    },
+    {
+     "url": "https://www.mccallnordic.com/nordic-areas/",
+     "label": "McCall Nordic"
+    }
+   ]
+  },
+  {
+   "id": "southwest-ponderosa-state-park",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Ponderosa State Park",
+   "desc": "12 mi (19.3 km) groomed recreation-to-race trails + 3.4 mi snowshoe on Payette Lake peninsula",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://www.mccallnordic.com/nordic-areas/",
+     "label": "McCall Nordic"
+    }
+   ]
+  },
+  {
+   "id": "southwest-jug-mountain-ranch",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Jug Mountain Ranch",
+   "desc": "Groomed ski + fat-bike trails, dedicated snowshoe routes up toward Upper Jug Reservoir",
+   "town": "Lake Fork / McCall",
+   "sources": [
+    {
+     "url": "https://www.mccallnordic.com/nordic-areas/",
+     "label": "McCall Nordic"
+    }
+   ]
+  },
+  {
+   "id": "southwest-idaho-city-park-n-ski-yurts-banner-ridge-gold-fork",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Idaho City Park N' Ski & Yurts (Banner Ridge / Gold Fork)",
+   "desc": "Banner Ridge 22 mi groomed (Banner Ridge & Elkhorn yurts); Gold Fork 21.4 mi (Whispering Pine & Skyline yurts); 7 rentable backcountry yurts",
+   "town": "Idaho City",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/cross-country-xc-skiing/",
+     "label": "Idaho Parks & Rec"
+    },
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/yurts/",
+     "label": "IDPR Yurts"
+    }
+   ]
+  },
+  {
+   "id": "southwest-bogus-basin-nordic",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Bogus Basin Nordic",
+   "desc": "37+ km of Nordic trails at the ski area above Boise",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://www.skiidaho.us/resorts/bogus-basin",
+     "label": "Ski Idaho"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-galena-lodge-trails-bcrd",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Galena Lodge Trails (BCRD)",
+   "desc": "50+ km groomed Nordic + 25+ km snowshoe at historic lodge below Galena Summit",
+   "town": "Ketchum",
+   "sources": [
+    {
+     "url": "https://bcrd.org/winter-trails/our-winter-trails/",
+     "label": "BCRD"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-harriman-trail-north-valley-trails-bcrd",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Harriman Trail & North Valley Trails (BCRD)",
+   "desc": "32-km groomed Harriman Trail plus Lake Creek, North Fork, Billy's Bridge (dog-friendly 8 km), Prairie Creek",
+   "town": "Ketchum",
+   "sources": [
+    {
+     "url": "https://bcrd.org/winter-trails/our-winter-trails/north-valley-trails/",
+     "label": "BCRD"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-quigley-nordic-bcrd",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Quigley Nordic (BCRD)",
+   "desc": "20+ km groomed in Quigley Canyon minutes from downtown",
+   "town": "Hailey",
+   "sources": [
+    {
+     "url": "https://bcrd.org/winter-trails/our-winter-trails/",
+     "label": "BCRD"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-wood-river-trail-winter-grooming",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Wood River Trail (winter grooming)",
+   "desc": "32-km groomed path linking Bellevue, Hailey, Ketchum and Sun Valley",
+   "town": "Hailey / Ketchum",
+   "sources": [
+    {
+     "url": "https://bcrd.org/winter-trails/our-winter-trails/",
+     "label": "BCRD"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-alturas-lake-ski-trails",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Alturas Lake Ski Trails",
+   "desc": "Sawtooth Ski Club grooms skate + classic several days/week; ~20 mi south of Stanley (Blaine County)",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://sawtoothskiclub.com/",
+     "label": "Sawtooth Ski Club"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Alturas_Lake",
+     "label": "County check"
+    }
+   ]
+  },
+  {
+   "id": "southeast-mink-creek-park-n-ski",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Mink Creek Park N' Ski",
+   "desc": "18 mi (29 km); limited grooming with set track; beginner-expert, off Bannock Hwy",
+   "town": "Pocatello",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/cross-country-xc-skiing/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-harriman-state-park",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Harriman State Park",
+   "desc": "33+ mi groomed Nordic trails, snowshoe and fat-bike; rentable yurts",
+   "town": "Island Park",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/harriman-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-brimstone-buffalo-river-park-n-ski",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Brimstone / Buffalo River Park N' Ski",
+   "desc": "17.9 mi (28.8 km) set track, beginner-expert, 26 mi north of Ashton on US-20",
+   "town": "Island Park / Ashton",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/cross-country-xc-skiing/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-bear-gulch-mesa-falls-park-n-ski",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Bear Gulch / Mesa Falls Park N' Ski",
+   "desc": "9.1 mi (14.7 km), intermediate-advanced, 12 mi east of Ashton on Mesa Falls Hwy",
+   "town": "Ashton",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/cross-country-xc-skiing/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-fall-river-ridge-park-n-ski",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Fall River Ridge Park N' Ski",
+   "desc": "7.1 mi (11.4 km), 10-ft skate lane + classic track off Cave Falls Rd",
+   "town": "Ashton",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/cross-country-xc-skiing/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "salmon-park-creek-ski-trails",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Park Creek Ski Trails",
+   "desc": "Sawtooth Ski Club trails 7.5 mi west of Stanley on Hwy 21; skate + classic; Stanley's two systems total ~32 km",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://sawtoothskiclub.com/winters-wildflowers/",
+     "label": "Sawtooth Ski Club"
+    },
+    {
+     "url": "https://stanleycc.org/do/skiing/",
+     "label": "Stanley Chamber"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-st-joe-river-gold-creek-day-run",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "St. Joe River (Gold Creek day run)",
+   "desc": "Class I-III full-day commercial trip from Gold Creek Campground; Wild & Scenic upper river",
+   "town": "Avery",
+   "sources": [
+    {
+     "url": "https://www.rowadventurecenter.com/st-joe-river-rafting",
+     "label": "ROW Adventure Center"
+    },
+    {
+     "url": "https://raftidaho.org/trips/st-joe",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-st-joe-river-skookum-canyon",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "St. Joe River - Skookum Canyon",
+   "desc": "Class III+, 4.6 mi from Bird Creek / Turner Flat into Skookum Canyon",
+   "town": "Avery",
+   "sources": [
+    {
+     "url": "https://www.americanwhitewater.org/content/River/view/river-detail/639/main",
+     "label": "American Whitewater"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-moyie-river",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Moyie River",
+   "desc": "Class I-III spring run near the Canadian border; full-day trips",
+   "town": "Moyie Springs / Bonners Ferry",
+   "sources": [
+    {
+     "url": "https://www.rowadventurecenter.com/moyie-rafting",
+     "label": "ROW Adventure Center"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-lochsa-river",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Lochsa River",
+   "desc": "Class III-IV spring big-water day run along US-12; season May-Sept",
+   "town": "Lowell / Kooskia",
+   "sources": [
+    {
+     "url": "https://raftidaho.org/trips/lochsa-river",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-selway-river",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Selway River",
+   "desc": "Class III-IV, 5-day wilderness trip; one launch per day (permit), mid-May-July",
+   "town": "Lowell",
+   "sources": [
+    {
+     "url": "https://raftidaho.org/trips/selway-river",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-salmon-river-riggins-day-stretch",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Salmon River - Riggins day stretch",
+   "desc": "Class III-IV half/full-day trips; big water May-June, warm splashy summer flows",
+   "town": "Riggins",
+   "sources": [
+    {
+     "url": "https://www.adventureidahorafting.com/riggins-daily",
+     "label": "Adventure Idaho"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-lower-salmon-river-canyons",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Lower Salmon River canyons",
+   "desc": "Class III, 3-5 day trips; huge white-sand beaches, warm summer water",
+   "town": "White Bird / Riggins",
+   "sources": [
+    {
+     "url": "https://raftidaho.org/trips/lower-salmon",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-snake-river-hells-canyon",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Snake River - Hells Canyon",
+   "desc": "Class III-IV, 3-5 days through North America's deepest canyon (ID/OR line)",
+   "town": "Riggins / Lewiston",
+   "sources": [
+    {
+     "url": "https://raftidaho.org/trips/hells-canyon",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "southwest-north-fork-payette-cabarton",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "North Fork Payette - Cabarton",
+   "desc": "Class II-III, ~10-11 mi Cabarton Bridge to Smiths Ferry; warm water off Lake Cascade; Trestle, Francois, Howard's Plunge",
+   "town": "Cascade / Smiths Ferry",
+   "sources": [
+    {
+     "url": "https://www.americanwhitewater.org/content/River/view/river-detail/591/main",
+     "label": "American Whitewater"
+    },
+    {
+     "url": "https://www.cascaderaft.com/activity/north-fork-paytette-river-rafting-carbarton",
+     "label": "Cascade Raft & Kayak"
+    }
+   ]
+  },
+  {
+   "id": "southwest-main-payette",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Main Payette",
+   "desc": "Class II-III, 8-mi half-day from Banks; family run ~45 min from Boise",
+   "town": "Banks / Horseshoe Bend",
+   "sources": [
+    {
+     "url": "https://www.cascaderaft.com/main-vs-south-fork",
+     "label": "Cascade Raft & Kayak"
+    },
+    {
+     "url": "https://raftidaho.org/trips/main-payette",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "southwest-south-fork-payette-staircase-lower",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "South Fork Payette - Staircase (lower)",
+   "desc": "Class III-IV, 8-mi half-day Confluence-Banks; Bronco Billy, Staircase, Slalom",
+   "town": "Garden Valley / Banks",
+   "sources": [
+    {
+     "url": "https://www.cascaderaft.com/activity/south-fork-payette-river-rafting-half-day",
+     "label": "Cascade Raft & Kayak"
+    }
+   ]
+  },
+  {
+   "id": "southwest-south-fork-payette-canyon",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "South Fork Payette - Canyon",
+   "desc": "Class III-IV (IV), 13 mi Deadwood CG-Danskin; portage Big Falls",
+   "town": "Garden Valley / Lowman",
+   "sources": [
+    {
+     "url": "https://www.cascaderaft.com/activity/south-fork-payette-river-rafting-full-day",
+     "label": "Cascade Raft & Kayak"
+    },
+    {
+     "url": "https://raftidaho.org/trips/south-fork-payette-canyon",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "southwest-north-fork-payette-smiths-ferry-to-banks",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "North Fork Payette - Smiths Ferry to Banks",
+   "desc": "Expert Class V, ~16 mi at ~110 ft/mi (Top/Middle/Lower Five)",
+   "town": "Smiths Ferry / Banks",
+   "sources": [
+    {
+     "url": "https://www.americanwhitewater.org/content/River/view/river-detail/592/main",
+     "label": "American Whitewater"
+    }
+   ]
+  },
+  {
+   "id": "southwest-owyhee-river-idaho-forks",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Owyhee River (Idaho forks)",
+   "desc": "Class III-IV desert canyon multi-day (4-7+ days), spring season Mar-Jul",
+   "town": "Grand View / Jordan Valley OR",
+   "sources": [
+    {
+     "url": "https://raftidaho.org/trips/owyhee-river",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "southwest-bruneau-river",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Bruneau River",
+   "desc": "Class II-IV, 40.6 mi desert canyon from Indian Hot Springs; BLM self-issue permit; Cave Rapid (III-IV)",
+   "town": "Bruneau",
+   "sources": [
+    {
+     "url": "https://www.americanwhitewater.org/content/River/view/river-detail/533/main",
+     "label": "American Whitewater"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-snake-river-murtaugh",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Snake River - Murtaugh",
+   "desc": "Class III-IV (big-water IV at high flows), Murtaugh Bridge to Twin Falls Reservoir; spring/irrigation-dependent",
+   "town": "Twin Falls / Murtaugh",
+   "sources": [
+    {
+     "url": "https://www.americanwhitewater.org/content/River/view/river-detail/631/main",
+     "label": "American Whitewater"
+    },
+    {
+     "url": "https://raftidaho.org/trips/murtaugh",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-snake-river-hagerman",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Snake River - Hagerman",
+   "desc": "Class III full-day through Hagerman Canyon; May-Sept",
+   "town": "Hagerman",
+   "sources": [
+    {
+     "url": "https://raftidaho.org/trips/hagerman",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "southeast-bear-river-oneida-narrows",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Bear River - Oneida Narrows",
+   "desc": "Class I-II, 4.5 mi canyon run with river-access camping; longest continuous public access on the Bear River",
+   "town": "Preston",
+   "sources": [
+    {
+     "url": "https://www.americanwhitewater.org/content/River/view/river-detail/1832/main",
+     "label": "American Whitewater"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-teton-river-canyon",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Teton River Canyon",
+   "desc": "Expert Class IV-V, 8.4 mi upper canyon; read-and-run IV with four Class V drops and a hike-out takeout",
+   "town": "Tetonia / Driggs",
+   "sources": [
+    {
+     "url": "https://www.americanwhitewater.org/content/River/view/river-detail/650/main",
+     "label": "American Whitewater"
+    }
+   ]
+  },
+  {
+   "id": "salmon-middle-fork-salmon",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Middle Fork Salmon",
+   "desc": "Class III-IV, ~100 mi, 6-day permit trip Boundary Creek to main Salmon; Frank Church Wilderness",
+   "town": "Stanley / Salmon",
+   "sources": [
+    {
+     "url": "https://raftidaho.org/trips/middle-fork-salmon",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "salmon-main-salmon-river-of-no-return",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Main Salmon (River of No Return)",
+   "desc": "Class III-IV, 5-6 day wilderness trips from Corn Creek; big beaches",
+   "town": "Salmon / North Fork",
+   "sources": [
+    {
+     "url": "https://raftidaho.org/trips/main-salmon",
+     "label": "IOGA"
+    }
+   ]
+  },
+  {
+   "id": "salmon-upper-salmon-sunbeam-stretch",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "whitewater",
+   "activity_name": "Whitewater",
+   "activity_catalog": "Whitewater Rafting / Kayaking",
+   "name": "Upper Salmon - Sunbeam stretch",
+   "desc": "Class II-III half-day runs; Class IV 'Shotgun' & Sunbeam Dam in high water",
+   "town": "Stanley / Sunbeam",
+   "sources": [
+    {
+     "url": "https://www.whiteotter.com/river-trips.php",
+     "label": "White Otter"
+    },
+    {
+     "url": "https://visitsunvalley.com/searching-for-sun-valley/guide-to-white-water-rafting-near-sun-valley/",
+     "label": "Visit Sun Valley"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-lake-pend-oreille",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Lake Pend Oreille",
+   "desc": "Idaho's largest lake (92,764 ac, 1,170+ ft deep): trophy rainbow, lake trout, kokanee, bass, pike, walleye",
+   "town": "Sandpoint / Bayview",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1163468481594",
+     "label": "IDFG Fishing Planner"
+    },
+    {
+     "url": "https://idfg.idaho.gov/LPO",
+     "label": "IDFG LPO Fisheries"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-coeur-d-alene-lake",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Coeur d'Alene Lake",
+   "desc": "27,911 ac: Chinook salmon, kokanee, northern pike, bass, cutthroat",
+   "town": "Coeur d'Alene",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1168011475514",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-priest-lake",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Priest Lake",
+   "desc": "23,335 ac: lake trout (mackinaw), kokanee, cutthroat, smallmouth",
+   "town": "Coolin / Nordman",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1168767485579",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-st-joe-river",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "St. Joe River",
+   "desc": "145-mi river; native westslope cutthroat catch-and-release water, whitefish",
+   "town": "St. Maries / Avery",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1168011474569",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-north-fork-coeur-d-alene-river",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "North Fork Coeur d'Alene River",
+   "desc": "77-mi freestone river: westslope cutthroat, whitefish",
+   "town": "Enaville / Prichard",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1162568475573",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-kootenai-river",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Kootenai River",
+   "desc": "Big river: rainbow, cutthroat, whitefish, bass",
+   "town": "Bonners Ferry",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1165027489999",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-clearwater-river",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Clearwater River",
+   "desc": "75-mi mainstem: famous steelhead, Chinook & coho salmon, smallmouth, trout",
+   "town": "Orofino / Lewiston",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1170397464258",
+     "label": "IDFG Fishing Planner"
+    },
+    {
+     "url": "https://fishstotts.com/fishing/clearwater-river/",
+     "label": "Stott's Fishing Adventures"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-dworshak-reservoir",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Dworshak Reservoir",
+   "desc": "16,485 ac: kokanee, smallmouth bass, rainbow, cutthroat, crappie",
+   "town": "Orofino / Ahsahka",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1162552466241",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-lowell-powell-lochsa-river",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Lochsa River",
+   "desc": "69-mi roadside river: westslope cutthroat, rainbow, whitefish; steelhead/Chinook",
+   "town": "Lowell / Powell",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1155987461400",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-lowell-selway-river",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Selway River",
+   "desc": "100-mi wild river: cutthroat, rainbow, whitefish, bull trout (protected)",
+   "town": "Lowell",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1155987461401",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southwest-boise-river-through-boise",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Boise River (through Boise)",
+   "desc": "IDFG Family Fishing Water; 'one of the finest urban trout rivers in the country' - wild + stocked rainbow/brown",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/72029",
+     "label": "IDFG Fishing Planner"
+    },
+    {
+     "url": "https://idahoangler.com/blogs/fishing-report",
+     "label": "Idaho Angler reports"
+    }
+   ]
+  },
+  {
+   "id": "southwest-south-fork-boise-river",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "South Fork Boise River",
+   "desc": "~102 mi; tailwater below Anderson Ranch Dam: rainbow/redband, whitefish, kokanee, bull trout",
+   "town": "Mountain Home / Featherville",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1157355435501",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southwest-lake-cascade",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Lake Cascade",
+   "desc": "27,152 ac: yellow perch, kokanee, coho, rainbow, smallmouth",
+   "town": "Cascade / Donnelly",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1161050445603",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southwest-payette-lake",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Payette Lake",
+   "desc": "4,987 ac: lake trout, kokanee, rainbow, cutthroat",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1160983449367",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southwest-c-j-strike-reservoir",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "C.J. Strike Reservoir",
+   "desc": "6,760 ac: 'one of the most popular fishing reservoirs in the state' - panfish, bass, trout, sturgeon",
+   "town": "Grand View / Bruneau",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1158134429738",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southwest-brownlee-reservoir",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Brownlee Reservoir",
+   "desc": "~50-mi Snake River reservoir on ID/OR line: crappie, perch, smallmouth, catfish",
+   "town": "Cambridge / Weiser",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1171180446154",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-silver-creek",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Silver Creek",
+   "desc": "25.7-mi spring creek, 'world-class trout stream' at the base of the Picabo Hills: brown, rainbow, brook trout",
+   "town": "Picabo",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1140111432006",
+     "label": "IDFG Fishing Planner"
+    },
+    {
+     "url": "https://silver-creek.com/fishing-forecast/",
+     "label": "Silver Creek Outfitters"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-big-wood-river",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Big Wood River",
+   "desc": "137-mi freestone: rainbow/redband, brown, brook trout, whitefish",
+   "town": "Ketchum / Hailey",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1149052428631",
+     "label": "IDFG Fishing Planner"
+    },
+    {
+     "url": "https://silver-creek.com/fishing-forecast/",
+     "label": "Silver Creek Outfitters"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-magic-reservoir",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Magic Reservoir",
+   "desc": "3,580 ac Family Fishing Water: perch, brown & rainbow trout, smallmouth",
+   "town": "Shoshone / Fairfield",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1143740432752",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-little-wood-river",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Little Wood River",
+   "desc": "130-mi river: brown, rainbow, brook trout, whitefish",
+   "town": "Carey",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1147951429450",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-lake-walcott",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Lake Walcott",
+   "desc": "8,248 ac Snake River reservoir: perch, bass, rainbow",
+   "town": "Rupert",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1133831426835",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southeast-american-falls-reservoir",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "American Falls Reservoir",
+   "desc": "55,291 ac: rainbow, brown & cutthroat trout, perch, bass",
+   "town": "American Falls",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1127315429370",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southeast-snake-river-below-american-falls-dam",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Snake River below American Falls Dam",
+   "desc": "Trout tailwater: rainbow, cutthroat, brown, cutbow, smallmouth (IDFG surveys)",
+   "town": "American Falls",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/72018",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southeast-blackfoot-reservoir",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Blackfoot Reservoir",
+   "desc": "16,888 ac: cutthroat, rainbow, smallmouth",
+   "town": "Soda Springs / Blackfoot",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1115975428895",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southeast-bear-lake",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Bear Lake",
+   "desc": "~70,000-ac turquoise lake split with Utah: lake trout, Bear Lake cutthroat, rainbow",
+   "town": "St. Charles / Montpelier",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1113174420681",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southeast-portneuf-river",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Portneuf River",
+   "desc": "117-mi river: brown, cutthroat, rainbow trout",
+   "town": "Pocatello / Lava Hot Springs",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1125703429640",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southeast-chesterfield-reservoir",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Chesterfield Reservoir",
+   "desc": "1,246 ac: big rainbow, brown, cutthroat trout",
+   "town": "Bancroft",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1119715429000",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-henry-s-fork-box-canyon-railroad-ranch-last-chance",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Henry's Fork (Box Canyon, Railroad Ranch, Last Chance)",
+   "desc": "112-mi river; dense trout upstream, very large trout downstream: rainbow, brown, cutthroat, brook",
+   "town": "Island Park / Ashton / St. Anthony",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1119497437574",
+     "label": "IDFG Fishing Planner"
+    },
+    {
+     "url": "https://henrysforkanglers.com/blogs/fishing-reports",
+     "label": "Henry's Fork Anglers"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-south-fork-snake-river",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "South Fork Snake River",
+   "desc": "'One of the finest trout rivers in the country' - native Yellowstone cutthroat, brown, rainbow (harvest rainbows)",
+   "town": "Swan Valley / Irwin",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1119497437575",
+     "label": "IDFG Fishing Planner"
+    },
+    {
+     "url": "https://tlapc.com/snake-river-fly-fishing/",
+     "label": "Lodge at Palisades Creek"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-henry-s-lake",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Henry's Lake",
+   "desc": "6,077 ac; 18\" trout common: Yellowstone cutthroat, cutbow hybrids, brook trout",
+   "town": "Island Park",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1114065446388",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-teton-river",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Teton River",
+   "desc": "81.5-mi river: cutthroat, cutbow, rainbow, brook trout, whitefish",
+   "town": "Driggs / Victor",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1118383438988",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-island-park-reservoir",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Island Park Reservoir",
+   "desc": "7,280 ac: stocked rainbow and kokanee; winter ice fishing near dam",
+   "town": "Island Park",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1115398443973",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-palisades-reservoir",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Palisades Reservoir",
+   "desc": "15,949 ac on the ID/WY line: cutthroat, brown, lake trout, kokanee",
+   "town": "Swan Valley / Alpine WY",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1110783432023",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "salmon-salmon-river-upper-middle",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Salmon River (upper & middle)",
+   "desc": "425-mi river: steelhead, Chinook, cutthroat, rainbow, bull trout",
+   "town": "Salmon / Challis / Stanley",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1167926458560",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "salmon-middle-fork-salmon-river",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Middle Fork Salmon River",
+   "desc": "106-mi wilderness river: westslope cutthroat, rainbow, whitefish, bull trout",
+   "town": "Stanley / Salmon",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1145914452972",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "salmon-big-lost-river",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Big Lost River",
+   "desc": "135-mi river (Custer & Butte Cos.): rainbow, cutthroat, brook trout; IDFG manages it from its Upper Snake Region",
+   "town": "Mackay",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1128381437946",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "salmon-mackay-reservoir",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Mackay Reservoir",
+   "desc": "1,139 ac Family Fishing Water: stocked rainbow, self-sustaining kokanee; ice fishing",
+   "town": "Mackay",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1137024439608",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "salmon-stanley-lake",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Stanley Lake",
+   "desc": "185.5-ac drive-to lake below the Sawtooths: kokanee, lake trout, rainbow",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1150576442440",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "salmon-lemhi-river",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "fishing",
+   "activity_name": "Fishing",
+   "activity_catalog": "Fishing",
+   "name": "Lemhi River",
+   "desc": "60.7-mi river: cutthroat, rainbow, brook, bull trout, whitefish",
+   "town": "Salmon / Leadore",
+   "sources": [
+    {
+     "url": "https://idfg.idaho.gov/ifwis/fishingPlanner/water/1138891451879",
+     "label": "IDFG Fishing Planner"
+    }
+   ]
+  },
+  {
+   "id": "southwest-idbdr-sec-1-jarbidge-nv-glenns-ferry",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "IDBDR Sec. 1: Jarbidge NV - Glenns Ferry",
+   "desc": "111 mi of Owyhee rangeland from the route's southern start; Three Island Crossing SP side trip",
+   "town": "Glenns Ferry",
+   "sources": [
+    {
+     "url": "https://ridebdr.com/idbdr/",
+     "label": "Ride BDR"
+    }
+   ]
+  },
+  {
+   "id": "southwest-idbdr-sec-2-glenns-ferry-lowman",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "IDBDR Sec. 2: Glenns Ferry - Lowman",
+   "desc": "156 mi via Anderson Ranch Reservoir, Pine/Featherville and Trinity Lakes (snow until ~mid-July)",
+   "town": "Pine / Lowman",
+   "sources": [
+    {
+     "url": "https://ridebdr.com/idbdr/",
+     "label": "Ride BDR"
+    }
+   ]
+  },
+  {
+   "id": "southwest-idbdr-sec-3-lowman-yellow-pine",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "IDBDR Sec. 3: Lowman - Yellow Pine",
+   "desc": "93 mi of backcountry dirt roads past Deadwood Reservoir and Warm Lake",
+   "town": "Lowman / Yellow Pine",
+   "sources": [
+    {
+     "url": "https://ridebdr.com/idbdr/",
+     "label": "Ride BDR"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-idbdr-sec-4-yellow-pine-elk-city",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "IDBDR Sec. 4: Yellow Pine - Elk City",
+   "desc": "205 mi via Warren, Burgdorf Hot Springs, French Creek Grade, Manning Bridge, Florence ghost town",
+   "town": "Elk City / Riggins",
+   "sources": [
+    {
+     "url": "https://ridebdr.com/idbdr/",
+     "label": "Ride BDR"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-idbdr-sec-5-elk-city-lolo-mt-magruder-corridor",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "IDBDR Sec. 5: Elk City - Lolo, MT (Magruder Corridor)",
+   "desc": "178 mi; Magruder Corridor Rd (NF-468) between two wildernesses, ~120 mi no services, open ~Jul-Sep",
+   "town": "Elk City",
+   "sources": [
+    {
+     "url": "https://ridebdr.com/idbdr/",
+     "label": "Ride BDR"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-idbdr-sec-6-lolo-mt-pierce-lolo-motorway",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "IDBDR Sec. 6: Lolo, MT - Pierce (Lolo Motorway)",
+   "desc": "150 mi; remote NF-500 Lolo Motorway on the Nez Perce / Lewis & Clark route",
+   "town": "Pierce",
+   "sources": [
+    {
+     "url": "https://ridebdr.com/idbdr/",
+     "label": "Ride BDR"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-idbdr-sec-7-pierce-wallace",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "IDBDR Sec. 7: Pierce - Wallace",
+   "desc": "127 mi via Dworshak's Grandad Bridge, Avery and St. Joe railroad-grade tunnels, Moon Pass",
+   "town": "Pierce / Avery",
+   "sources": [
+    {
+     "url": "https://ridebdr.com/idbdr/",
+     "label": "Ride BDR"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-idbdr-sec-8-wallace-clark-fork",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "IDBDR Sec. 8: Wallace - Clark Fork",
+   "desc": "106 mi of forest roads; Grizzly Mtn (5,971') summit side trip; grizzly country",
+   "town": "Wallace / Clark Fork",
+   "sources": [
+    {
+     "url": "https://ridebdr.com/idbdr/",
+     "label": "Ride BDR"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-idbdr-sec-9-clark-fork-canada-porthill",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "IDBDR Sec. 9: Clark Fork - Canada (Porthill)",
+   "desc": "102 mi via Lightning Creek, Char Falls, Lunch Peak; optional harder Roman Nose alt",
+   "town": "Sandpoint / Bonners Ferry",
+   "sources": [
+    {
+     "url": "https://ridebdr.com/idbdr/",
+     "label": "Ride BDR"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-canfield-mountain-trail-system",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Canfield Mountain trail system",
+   "desc": "Motorbike trail network just north of town; Trail #28 to Horse Haven Meadows is an 80-mi round-trip day ride",
+   "town": "Coeur d'Alene",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-fourth-of-july-pass-atv-trail-800",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Fourth of July Pass ATV Trail #800",
+   "desc": "35-mi wooded loop north of I-90; or 35 mi one-way to Harrison with a Beauty Bay side trip",
+   "town": "Coeur d'Alene / Harrison",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-silver-country-1-000-mile-trail-system",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Silver Country 1,000-mile trail system",
+   "desc": "OHVs allowed on Wallace streets with direct access to 1,000+ mi of interconnected ATV/snowmobile trails",
+   "town": "Wallace",
+   "sources": [
+    {
+     "url": "https://www.thewallaceinn.com/area/outdoor-adventures/",
+     "label": "Wallace Inn"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-sheep-mountain-camp-60-ohv-loop",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Sheep Mountain - Camp 60 OHV Loop",
+   "desc": "~55-mi signed loop for all abilities, maintained with the PLAY OHV club",
+   "town": "Orofino",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-deception-atv-loop",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Deception ATV Loop",
+   "desc": "Challenging 28-mi ATV/motorcycle loop off French Mountain Rd #250",
+   "town": "Pierce",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-whitebird-to-pittsburg-landing-fs-rd-493",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Whitebird to Pittsburg Landing (FS Rd 493)",
+   "desc": "Climbs 3,000+ ft and drops 3,200 ft to Hells Canyon's Pittsburg Landing; also the Kirkwood Ranch ride",
+   "town": "White Bird",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-milner-centennial-atv-trails",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Milner & Centennial ATV Trails",
+   "desc": "41 mi one-way from Grangeville to the Bullion Mine above the Salmon River canyon",
+   "town": "Grangeville",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "southwest-owyhee-front-hemingway-butte-fossil-creek-rabbit-creek",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Owyhee Front (Hemingway Butte / Fossil Creek / Rabbit Creek)",
+   "desc": "BLM high-desert single-track and ATV network; 200-ac open play area at Hemingway Butte TH; TVTMA spring Fun Run",
+   "town": "Murphy / Nampa",
+   "sources": [
+    {
+     "url": "https://www.blm.gov/visit/hemingway-butte-ohv-trailhead",
+     "label": "BLM"
+    },
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "southwest-danskin-mountains-ohv-area",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Danskin Mountains OHV Area",
+   "desc": "60,000 ac with 150+ mi of motorcycle and ATV (<=50\") trails off Blacks Creek Rd",
+   "town": "Mountain Home",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "southwest-kirkham-ridge-trail",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Kirkham Ridge Trail",
+   "desc": "35-mi premier OHV trail on the Lowman Ranger District starting off Hwy 21",
+   "town": "Lowman",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "southwest-boise-ridge-atv-loop",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Boise Ridge ATV loop",
+   "desc": "26.5-mi Foothills-to-Boise Ridge loop from the N. 8th St motorized parking area",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-rock-creek-atv-loop-south-hills",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Rock Creek ATV Loop (South Hills)",
+   "desc": "11-mi loop in upper Rock Creek trail system from Diamondfield Jack CG",
+   "town": "Kimberly / Twin Falls",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "southeast-mecham-hollow-sherman-peak-loop",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Mecham Hollow - Sherman Peak Loop",
+   "desc": "25-mi ATV/motorbike loop in a large single-track network NW of Montpelier",
+   "town": "Montpelier",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "southeast-paris-canyon-highline-trail-loop",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Paris Canyon - Highline Trail Loop",
+   "desc": "22-mi loop in the Bear River Range with Bear Lake views, Paris Ice Caves, Bloomington Lake",
+   "town": "Paris / Montpelier",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-st-anthony-sand-dunes",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "St. Anthony Sand Dunes",
+   "desc": "10,600 ac of white quartz dunes up to 400 ft high; very popular OHV area (BLM)",
+   "town": "St. Anthony",
+   "sources": [
+    {
+     "url": "https://www.blm.gov/visit/st-anthony-sand-dunes",
+     "label": "BLM"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-railroad-grade-atv-trail",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Railroad Grade ATV Trail",
+   "desc": "~50 mi one-way rail-trail from near Ashton to West Yellowstone",
+   "town": "Ashton / Island Park",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-big-southern-butte-route",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Big Southern Butte route",
+   "desc": "68-mi BLM/Lost Valley ATV Club route from Arco to the 7,560-ft volcanic dome summit",
+   "town": "Arco",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-leaning-fir-stinking-springs-loop",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Leaning Fir - Stinking Springs Loop",
+   "desc": "15-mi tour of Kelly Mountain east of Idaho Falls",
+   "town": "Idaho Falls / Ririe",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "salmon-custer-motorway",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Custer Motorway",
+   "desc": "40-mi historic mining route Sunbeam-Challis with 17 interpretive sites (Yankee Fork, Custer, Bonanza)",
+   "town": "Challis / Stanley",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    },
+    {
+     "url": "https://challischamber.com/activities/atv/",
+     "label": "Challis Chamber"
+    }
+   ]
+  },
+  {
+   "id": "salmon-lombard-trail-bayhorse-loops",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Lombard Trail & Bayhorse loops",
+   "desc": "13.5-mi ATV trail from Challis over Blue Mountain to Bayhorse ghost town; 15-mi Pacific Mine loop",
+   "town": "Challis",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "salmon-lewis-clark-backcountry-byway",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Lewis & Clark Backcountry Byway",
+   "desc": "39-mi dirt loop climbing ~3,000 ft to the Continental Divide",
+   "town": "Tendoy / Salmon",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "salmon-discovery-hill-ohv-trails",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Discovery Hill OHV Trails",
+   "desc": "Most popular OHV trails close to town (BLM Salmon Field Office)",
+   "town": "Salmon",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "salmon-mackay-mine-hill-tour",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "moto-bdr",
+   "activity_name": "Moto / BDR",
+   "activity_catalog": "Motorcycle / Adventure Riding (Idaho BDR & OHV)",
+   "name": "Mackay Mine Hill Tour",
+   "desc": "Self-guided mine tour with high trestles; 20-24 mi loops",
+   "town": "Mackay",
+   "sources": [
+    {
+     "url": "https://stayontrails.com/where-to-ride/",
+     "label": "Stay on Trails (Idaho OHV)"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-selkirk-mountains",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Selkirk Mountains",
+   "desc": "IPAC forecast zone (Selkirk crest north of Sandpoint/Bonners Ferry)",
+   "town": "Sandpoint / Bonners Ferry",
+   "sources": [
+    {
+     "url": "https://www.idahopanhandleavalanche.org/about/",
+     "label": "Idaho Panhandle Avalanche Center"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-silver-valley-bitterroot-mountains",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Silver Valley & Bitterroot Mountains",
+   "desc": "IPAC forecast zone covering the Bitterroots above the Silver Valley (incl. St. Regis basins)",
+   "town": "Wallace / Mullan",
+   "sources": [
+    {
+     "url": "https://www.idahopanhandleavalanche.org/about/",
+     "label": "Idaho Panhandle Avalanche Center"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-west-east-cabinet-mountains",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "West & East Cabinet Mountains",
+   "desc": "IPAC forecast zones east of Lake Pend Oreille into NW Montana",
+   "town": "Clark Fork / Sandpoint",
+   "sources": [
+    {
+     "url": "https://www.idahopanhandleavalanche.org/about/",
+     "label": "Idaho Panhandle Avalanche Center"
+    }
+   ]
+  },
+  {
+   "id": "southwest-west-mountains-payette-avalanche-center",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "West Mountains (Payette Avalanche Center)",
+   "desc": "PAC forecast zone #1 of 2; PAC covers ~1,500 sq mi from its McCall base",
+   "town": "McCall / Cascade",
+   "sources": [
+    {
+     "url": "https://payetteavalanche.org/about/about-us",
+     "label": "Payette Avalanche Center"
+    }
+   ]
+  },
+  {
+   "id": "southwest-salmon-river-mountains-zone-pac",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Salmon River Mountains zone (PAC)",
+   "desc": "PAC forecast zone #2, with different topography/snow climate than the West Mountains",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://payetteavalanche.org/about/about-us",
+     "label": "Payette Avalanche Center"
+    }
+   ]
+  },
+  {
+   "id": "southwest-brundage-snowcat-adventures",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Brundage Snowcat Adventures",
+   "desc": "Guided cat skiing on 17,912 ac of Payette NF up to ~8,500'; runs 600-2,800 vert, 8,000-12,000'/day typical",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://brundage.com/snow-cat-adventures/",
+     "label": "Brundage Mountain"
+    }
+   ]
+  },
+  {
+   "id": "southwest-banner-summit-hwy-21",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Banner Summit (Hwy 21)",
+   "desc": "Sawtooth Avalanche Center forecast zone; pass sits on the Boise/Custer county line",
+   "town": "Lowman / Stanley",
+   "sources": [
+    {
+     "url": "https://visitsunvalley.com/searching-for-sun-valley/what-were-made-of-the-sawtooth-avalanche-center/",
+     "label": "Visit Sun Valley (SAC zones)"
+    },
+    {
+     "url": "https://en.wikipedia.org/wiki/Banner_Summit",
+     "label": "County check"
+    }
+   ]
+  },
+  {
+   "id": "southwest-idaho-city-yurts-cougar-trail",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Idaho City yurts - Cougar trail",
+   "desc": "Ungroomed Cougar trail near the yurts accesses a prime telemark/ski area",
+   "town": "Idaho City",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/yurts/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-galena-summit-eastern-mountains",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Galena Summit & Eastern Mountains",
+   "desc": "Sawtooth Avalanche Center forecast zone (SAC covers ~2 million acres)",
+   "town": "Ketchum",
+   "sources": [
+    {
+     "url": "https://visitsunvalley.com/searching-for-sun-valley/what-were-made-of-the-sawtooth-avalanche-center/",
+     "label": "Visit Sun Valley (SAC zones)"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-soldier-wood-river-valley-mountains",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Soldier & Wood River Valley Mountains",
+   "desc": "Sawtooth Avalanche Center forecast zone around Ketchum/Hailey and the Soldier Mtns",
+   "town": "Ketchum / Hailey / Fairfield",
+   "sources": [
+    {
+     "url": "https://visitsunvalley.com/searching-for-sun-valley/what-were-made-of-the-sawtooth-avalanche-center/",
+     "label": "Visit Sun Valley (SAC zones)"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-sun-valley-huts",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Sun Valley Huts",
+   "desc": "One of North America's oldest hut systems: 6 huts (Bench, Boulder, Coyote, Fishhook, Pioneer, Tornak) in three ranges",
+   "town": "Ketchum / Hailey",
+   "sources": [
+    {
+     "url": "https://svtrek.com/",
+     "label": "Sun Valley Huts"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-sun-valley-heli-ski",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Sun Valley Heli Ski",
+   "desc": "Guided heli-skiing out of Ketchum (SAC forecast partner)",
+   "town": "Ketchum",
+   "sources": [
+    {
+     "url": "https://www.sunvalleyheliski.com/",
+     "label": "Sun Valley Heli Ski"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-island-park-centennial-henry-s-lake-mtns",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Island Park (Centennial/Henry's Lake mtns)",
+   "desc": "Gallatin NF Avalanche Center publishes an Island Park trip-planning forecast",
+   "town": "Island Park",
+   "sources": [
+    {
+     "url": "https://www.mtavalanche.com/forecast/island-park",
+     "label": "Gallatin NF Avalanche Center"
+    }
+   ]
+  },
+  {
+   "id": "salmon-sawtooth-western-smoky-mountains",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Sawtooth & Western Smoky Mountains",
+   "desc": "Sawtooth Avalanche Center forecast zone covering the Stanley-side Sawtooths; couloir-riddled granite",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://visitsunvalley.com/searching-for-sun-valley/what-were-made-of-the-sawtooth-avalanche-center/",
+     "label": "Visit Sun Valley (SAC zones)"
+    },
+    {
+     "url": "https://stanleycc.org/do/skiing/",
+     "label": "Stanley Chamber"
+    }
+   ]
+  },
+  {
+   "id": "salmon-sawtooth-mountain-guides-williams-peak-yurt",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Sawtooth Mountain Guides / Williams Peak Yurt",
+   "desc": "Guided backcountry skiing and hut-based AIARE courses at the Williams Peak yurt",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://sawtoothguides.com/",
+     "label": "Sawtooth Mountain Guides"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-coeur-d-alene-area-canfield-mtn-mt-coeur-d-alene-q-emiln-post-falls",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Coeur d'Alene area (Canfield Mtn, Mt. Coeur d'Alene, Q'emiln/Post Falls)",
+   "desc": "~237 mi of trail; routes incl. Upper Caribou Loop (12.4 mi), Beauty Bay Loop (19.8 mi)",
+   "town": "Coeur d'Alene",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8008048/coeur-dalene",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-sandpoint-schweitzer-selkirk-rec-district-sherwood-forest",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Sandpoint (Schweitzer, Selkirk Rec. District, Sherwood Forest)",
+   "desc": "~67 mi; Schweitzer lift-served & XC trails",
+   "town": "Sandpoint",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8011471/sandpoint",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-silver-mountain-bike-park",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Silver Mountain Bike Park",
+   "desc": "Gondola-served bike park (24 trails on MTB Project)",
+   "town": "Kellogg",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8015611/kellogg",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-route-of-the-hiawatha",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Route of the Hiawatha",
+   "desc": "15 mi gently downhill on old Milwaukee Road grade: 10 tunnels, 7 trestles; seasonal ticketed trail",
+   "town": "Mullan / Wallace",
+   "sources": [
+    {
+     "url": "https://www.ridethehiawatha.com/",
+     "label": "Route of the Hiawatha"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-trail-of-the-coeur-d-alenes",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Trail of the Coeur d'Alenes",
+   "desc": "73-mi paved rail-trail, Mullan to Plummer",
+   "town": "Plummer / Kellogg / Wallace",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/trail-of-the-coeur-dalenes/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-farragut-state-park-bernard-peak",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Farragut State Park / Bernard Peak",
+   "desc": "~28 mi; Bernard Peak Loop 18.3 mi",
+   "town": "Athol",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8008059/farragut-state-park",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-moscow-mountain",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Moscow Mountain",
+   "desc": "~23 mi; 15 trails; Moscow Mountain Headwaters Tour 5.4 mi",
+   "town": "Moscow",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8017746/moscow",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-hells-gate-state-park-area",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Hells Gate State Park area",
+   "desc": "~31 mi near Lewiston, 22 trails at Hells Gate SP",
+   "town": "Lewiston",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8012597/lewiston",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "southwest-boise-foothills-ridge-to-rivers-system",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Boise Foothills (Ridge to Rivers system)",
+   "desc": "~376 mi: Hulls Gulch/Camel's Back, Military Reserve, Table Rock, Polecat; Around the Mountain, Hard Guy-Dry Creek",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8008076/boise-eagle-meridian",
+     "label": "MTB Project"
+    },
+    {
+     "url": "https://ridgetorivers.org/trails/trail-areas/table-rock-area/",
+     "label": "Ridge to Rivers"
+    }
+   ]
+  },
+  {
+   "id": "southwest-bogus-basin-shafer-butte-trails",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Bogus Basin / Shafer Butte trails",
+   "desc": "42 trails above Boise (MTB Project sub-area)",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8008076/boise-eagle-meridian",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "southwest-eagle-bike-park-avimor",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Eagle Bike Park & Avimor",
+   "desc": "Ada/Eagle Bike Park (40 trails) and Avimor (39 trails)",
+   "town": "Eagle",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8008076/boise-eagle-meridian",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "southwest-mccall-area-bear-basin-jug-mtn-ranch-brundage-tamarack",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "McCall area (Bear Basin, Jug Mtn Ranch, Brundage, Tamarack)",
+   "desc": "~347 mi; Payette Rim Loop, Bear Basin Tour, Brundage & Tamarack resort trails",
+   "town": "McCall / Donnelly",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8011467/mccall",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "southwest-crouch-garden-valley",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Crouch / Garden Valley",
+   "desc": "~42 mi; Wash Creek Ridge Loop, Jenny's Trail (26.9 mi)",
+   "town": "Crouch / Garden Valley",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8014440/crouchgarden-valley",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-sun-valley-ketchum-adams-gulch-bald-mtn-corral-creek",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Sun Valley & Ketchum (Adams Gulch, Bald Mtn, Corral Creek)",
+   "desc": "~132 mi; Bald Mountain Big Descent (13.6 mi), Adams Gulch loops",
+   "town": "Ketchum / Sun Valley",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8011464/sun-valley-and-ketchum",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-hailey-croy-creek-quigley-greenhorn",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Hailey (Croy Creek, Quigley, Greenhorn)",
+   "desc": "~60 mi; Croy Creek Loop, Greenhorn-Imperial Loop",
+   "town": "Hailey",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8011465/hailey",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-galena-lodge-trails-galena-grinder",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Galena Lodge trails / Galena Grinder",
+   "desc": "Galena sub-area (24 trails); Galena Grinder IMBA Epic 25.6 mi",
+   "town": "Ketchum",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8011473/sawtooth-national-recreation-area",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-auger-falls-snake-river-canyon",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Auger Falls (Snake River Canyon)",
+   "desc": "26 trails in the canyon at Twin Falls",
+   "town": "Twin Falls",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8008078/twin-falls",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-south-hills-single-track-system",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "South Hills Single Track System",
+   "desc": "~47 mi of single-track in the Sawtooth NF South Hills",
+   "town": "Twin Falls / Kimberly",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8019018/south-hills-single-track-system",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "southeast-pocatello-city-creek-gibson-jack-mink-creek",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Pocatello (City Creek, Gibson Jack, Mink Creek)",
+   "desc": "~111 mi; City Creek Mgmt Area (41 trails); Slate Mtn/Gibson Jack Loop, East Fork Crestline",
+   "town": "Pocatello",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8008063/pocatello",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-big-hole-mountains",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Big Hole Mountains",
+   "desc": "~112 mi; Horseshoe Area, Red Creek, Canyon Creek Loop (23.9 mi)",
+   "town": "Driggs / Rexburg",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8017873/big-hole-mountains",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-kelly-canyon-moody-creek",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Kelly Canyon / Moody Creek",
+   "desc": "35 trails; Best of Moody (18 mi), Stinking Springs-Wolverine Creek",
+   "town": "Idaho Falls / Rexburg / Ririe",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8008062/idaho-fallsrexburg",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-victor-mike-harris-trails",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Victor / Mike Harris trails",
+   "desc": "~23 mi; Mail Cabin Creek & Mike Harris loop (17.4 mi)",
+   "town": "Victor",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8013470/victor",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-island-park-harriman-state-park",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Harriman State Park",
+   "desc": "Harriman Loop 9.3 mi easy/intermediate (15 trails)",
+   "town": "Island Park",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8014837/island-park",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "salmon-stanley-sawtooth-nra-fisher-creek-elk-mtn-redfish",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Stanley / Sawtooth NRA (Fisher Creek, Elk Mtn, Redfish)",
+   "desc": "Fisher Creek Loop 17.7 mi, Elk Mountain Loop, Redfish Lake Loop, Little-Big Casino",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8011473/sawtooth-national-recreation-area",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "salmon-salmon-discovery-hill-williams-creek-twelvemile",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Salmon (Discovery Hill, Williams Creek, Twelvemile)",
+   "desc": "~114 mi; Discovery Hill system (16 trails), Enduro Loop, Rippey Spring Loop",
+   "town": "Salmon",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8011469/salmon",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "salmon-challis",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "mtb",
+   "activity_name": "MTB",
+   "activity_catalog": "Mountain Biking",
+   "name": "Challis",
+   "desc": "~25 mi; Birch Creek Loop 13.9 mi",
+   "town": "Challis",
+   "sources": [
+    {
+     "url": "https://www.mtbproject.com/directory/8023946/challis",
+     "label": "MTB Project"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-scotchman-peak-trail-65",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Scotchman Peak (Trail #65)",
+   "desc": "Highest point in Bonner County: 8 mi round trip, ~3,700' gain, rated hard; Lake Pend Oreille views, mountain goats",
+   "town": "Clark Fork",
+   "sources": [
+    {
+     "url": "https://www.scotchmanpeaks.org/hiking/self-styled-hikes/scotchman-peaks-trail-65/",
+     "label": "Friends of Scotchman Peaks"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-mineral-ridge-national-recreation-trail",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Mineral Ridge National Recreation Trail",
+   "desc": "3.3-mi National Recreation Trail on Lake Coeur d'Alene; Idaho's first BLM recreation site (1963); 200+ bald eagles visit Nov-Feb",
+   "town": "Coeur d'Alene",
+   "sources": [
+    {
+     "url": "https://www.blm.gov/visit/mineral-ridge-scenic-area-and-national-recreation-trail",
+     "label": "BLM"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-farragut-state-park",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Farragut State Park",
+   "desc": "Former WWII naval training station, 4,000 acres at the south tip of Lake Pend Oreille; 223 campsites",
+   "town": "Athol",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/farragut-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-heyburn-state-park",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Heyburn State Park",
+   "desc": "Created 1908, oldest park in the Pacific Northwest; trails and paddling on Chatcolet, Benewah & Hidden lakes",
+   "town": "Plummer / St. Maries",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/heyburn-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-heavens-gate-overlook-seven-devils",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Heavens Gate Overlook / Seven Devils",
+   "desc": "8,429' lookout 19 mi west of Riggins on FR 517; views into Hells Canyon; Seven Devils trail system starts at nearby Windy Saddle",
+   "town": "Riggins",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r01/nezperce-clearwater/recreation/heavens-gate-overlook",
+     "label": "USFS Nez Perce-Clearwater"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-hells-gate-state-park",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Hells Gate State Park",
+   "desc": "Snake River park at 733' elevation on the edge of Lewiston; river trails and the jet-boat gateway to Hells Canyon",
+   "town": "Lewiston",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/hells-gate-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-warm-springs-trail-to-jerry-johnson-hot-springs",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Warm Springs Trail to Jerry Johnson Hot Springs",
+   "desc": "Trailhead at MP 152 on US-12 (Lochsa); Selway-Bitterroot Wilderness access; hike to the springs is day-use only (6am-8pm)",
+   "town": "Lowell / Powell",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r01/nezperce-clearwater/recreation/warm-springs-trailhead",
+     "label": "USFS Nez Perce-Clearwater"
+    }
+   ]
+  },
+  {
+   "id": "southwest-table-rock-ridge-to-rivers",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Table Rock (Ridge to Rivers)",
+   "desc": "Boise's classic sunset hike/ride with views over the Treasure Valley, in the Ridge to Rivers foothills system; avoid when muddy",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://ridgetorivers.org/trails/trail-areas/table-rock-area/",
+     "label": "Ridge to Rivers"
+    }
+   ]
+  },
+  {
+   "id": "southwest-bruneau-dunes-state-park",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Bruneau Dunes State Park",
+   "desc": "Tallest single-structured sand dune in North America (470'); dune hikes, lakes, public observatory",
+   "town": "Bruneau / Mountain Home",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/bruneau-dunes-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "southwest-jump-creek-canyon",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Jump Creek Canyon",
+   "desc": "BLM rhyolite canyon with a waterfall; open 6am-9pm",
+   "town": "Marsing",
+   "sources": [
+    {
+     "url": "https://www.blm.gov/visit/jump-creek",
+     "label": "BLM"
+    }
+   ]
+  },
+  {
+   "id": "southwest-mccall-ponderosa-state-park",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Ponderosa State Park",
+   "desc": "Peninsula on Payette Lake with forest trails; canoe/kayak the North Fork Payette; groomed Nordic in winter",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/ponderosa-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-shoshone-falls",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Shoshone Falls",
+   "desc": "\"Niagara of the West\": 212' tall, 900' wide falls on the Snake; city park with overlooks and trails",
+   "town": "Twin Falls",
+   "sources": [
+    {
+     "url": "https://www.tfid.org/309/Shoshone-Falls",
+     "label": "City of Twin Falls"
+    },
+    {
+     "url": "https://www.nps.gov/places/shoshone-falls.htm",
+     "label": "NPS"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-pioneer-cabin",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Pioneer Cabin",
+   "desc": "1937 Union Pacific ski hut at 9,400' in the Pioneer Mtns; classic summer hike / spring ski destination",
+   "town": "Ketchum",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r04/sawtooth/recreation/pioneer-cabin",
+     "label": "USFS Sawtooth"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-city-of-rocks-national-reserve",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "City of Rocks National Reserve",
+   "desc": "Granite formations on the historic California Trail; ~23 mi of trails",
+   "town": "Almo",
+   "sources": [
+    {
+     "url": "https://www.nps.gov/articles/000/ciro.htm",
+     "label": "NPS"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-thousand-springs-state-park-box-canyon-malad-gorge",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Thousand Springs State Park (Box Canyon, Malad Gorge)",
+   "desc": "Box Canyon Springs flows ~180,000 gal/min with a 20' waterfall and primitive trail; Malad Gorge overlooks",
+   "town": "Hagerman / Wendell",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/thousand-springs-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "southeast-minnetonka-cave",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Minnetonka Cave",
+   "desc": "Guided tours of a limestone cave in the Bear River Range: 888 stairs, ~40°F inside, 40,000+ visitors/yr",
+   "town": "St. Charles",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r04/caribou-targhee/recreation/minnetonka-cave",
+     "label": "USFS Caribou-Targhee"
+    }
+   ]
+  },
+  {
+   "id": "southeast-massacre-rocks-state-park",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Massacre Rocks State Park",
+   "desc": "Oregon Trail history along the Snake; trails, disc golf, rock climbing",
+   "town": "American Falls",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/massacre-rocks-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "southeast-scout-mountain-mink-creek",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Scout Mountain (Mink Creek)",
+   "desc": "Campground with the 1-mile Scout Mountain Nature Trail in the Mink Creek area south of Pocatello",
+   "town": "Pocatello",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r04/caribou-targhee/recreation/scout-mountain-campground",
+     "label": "USFS Caribou-Targhee"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-upper-lower-mesa-falls",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Upper & Lower Mesa Falls",
+   "desc": "Upper Mesa is as tall as a 10-story building; last prominent Snake River-system falls unaffected by dams; walkway to viewpoints. ROAD CLOSED for construction, scheduled to reopen May 2027",
+   "town": "Ashton",
+   "sources": [
+    {
+     "url": "https://visitidaho.org/things-to-do/natural-attractions/mesa-falls/",
+     "label": "Visit Idaho"
+    },
+    {
+     "url": "https://www.fs.usda.gov/r04/caribou-targhee/recreation/mesa-falls-visitor-center",
+     "label": "USFS Caribou-Targhee"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-craters-of-the-moon-nm-p",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Craters of the Moon NM&P",
+   "desc": "Largest young lava field in the lower 48; lava tubes, Spatter Cone & Inferno Cone trails (Butte County unit near Arco)",
+   "town": "Arco",
+   "sources": [
+    {
+     "url": "https://www.nps.gov/crmo/index.htm",
+     "label": "NPS"
+    }
+   ]
+  },
+  {
+   "id": "salmon-sawtooth-lake",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Sawtooth Lake",
+   "desc": "Iron Creek TH: 10 mi round trip, ~1,800' gain; one of the Sawtooths' most popular hikes",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://discoversawtooth.org/sawtooth-lake",
+     "label": "Discover Sawtooth"
+    }
+   ]
+  },
+  {
+   "id": "salmon-bench-lakes",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Bench Lakes",
+   "desc": "From Redfish Lake: 8 mi round trip, ~1,200' gain",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://discoversawtooth.org/bench-lakes",
+     "label": "Discover Sawtooth"
+    }
+   ]
+  },
+  {
+   "id": "salmon-goat-lake",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Goat Lake",
+   "desc": "Iron Creek TH: 7.6 mi round trip, ~1,700' gain; unsigned, unmaintained final section requires route-finding and scrambling",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://discoversawtooth.org/goat-lake",
+     "label": "Discover Sawtooth"
+    }
+   ]
+  },
+  {
+   "id": "salmon-fishhook-creek",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Fishhook Creek",
+   "desc": "Easy 4.2 mi round trip, ~300' gain to a meadow and beaver ponds; Horstmann Peak views",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://discoversawtooth.org/fishhook-creek",
+     "label": "Discover Sawtooth"
+    }
+   ]
+  },
+  {
+   "id": "salmon-borah-peak",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "hike",
+   "activity_name": "Hike",
+   "activity_catalog": "Hiking",
+   "name": "Borah Peak",
+   "desc": "Idaho's highpoint (12,662'): 3.5 mi one way, ~5,262' gain incl. 'Chicken-Out Ridge' scramble",
+   "town": "Mackay",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r04/salmon-challis/recreation/epic-adventures/borah-peak",
+     "label": "USFS Salmon-Challis"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-selway-bitterroot-wilderness",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "backpacking",
+   "activity_name": "Backpacking",
+   "activity_catalog": "Backpacking / Wilderness",
+   "name": "Selway-Bitterroot Wilderness",
+   "desc": "1.2 million acres; Magruder Corridor road separates it from the Frank Church to the south",
+   "town": "Lowell / Elk City",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r01/nezperce-clearwater/recreation/selway-bitterroot-wilderness",
+     "label": "USFS Nez Perce-Clearwater"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-hells-canyon-wilderness-seven-devils",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "backpacking",
+   "activity_name": "Backpacking",
+   "activity_catalog": "Backpacking / Wilderness",
+   "name": "Hells Canyon Wilderness / Seven Devils",
+   "desc": "217,927 acres (est. 1975), split by the Snake into Oregon and a smaller Idaho portion; high lakes and peaks of the Seven Devils above the Snake",
+   "town": "Riggins",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r06/wallowa-whitman/recreation/hells-canyon-wilderness",
+     "label": "USFS Wallowa-Whitman"
+    },
+    {
+     "url": "https://www.fs.usda.gov/r01/nezperce-clearwater/recreation/heavens-gate-overlook",
+     "label": "USFS Nez Perce-Clearwater"
+    }
+   ]
+  },
+  {
+   "id": "salmon-frank-church-river-of-no-return-wilderness",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "backpacking",
+   "activity_name": "Backpacking",
+   "activity_catalog": "Backpacking / Wilderness",
+   "name": "Frank Church-River of No Return Wilderness",
+   "desc": "~2.37 million acres; largest contiguous federally managed wilderness outside Alaska (Idaho, Valley, Lemhi, Custer counties)",
+   "town": "Salmon / Challis / McCall",
+   "sources": [
+    {
+     "url": "https://en.wikipedia.org/wiki/Frank_Church%E2%80%93River_of_No_Return_Wilderness",
+     "label": "Wikipedia"
+    },
+    {
+     "url": "https://www.fs.usda.gov/r01/nezperce-clearwater/recreation/selway-bitterroot-wilderness",
+     "label": "USFS Nez Perce-Clearwater"
+    }
+   ]
+  },
+  {
+   "id": "salmon-sawtooth-wilderness",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "backpacking",
+   "activity_name": "Backpacking",
+   "activity_catalog": "Backpacking / Wilderness",
+   "name": "Sawtooth Wilderness",
+   "desc": "Created 1972: 50 peaks over 10,000', ~400 alpine lakes",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r04/sawtooth/recreation/sawtooth-wilderness",
+     "label": "USFS Sawtooth"
+    }
+   ]
+  },
+  {
+   "id": "salmon-cecil-d-andrus-white-clouds-wilderness",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "backpacking",
+   "activity_name": "Backpacking",
+   "activity_catalog": "Backpacking / Wilderness",
+   "name": "Cecil D. Andrus-White Clouds Wilderness",
+   "desc": "Many peaks over 10,000' (Castle Peak, Merriam, Blackman); dozens of high fishing lakes",
+   "town": "Stanley / Clayton",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r04/sawtooth/recreation/cecil-d-andrus-white-clouds-wilderness",
+     "label": "USFS Sawtooth"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-jerry-johnson-hot-springs",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Jerry Johnson Hot Springs",
+   "desc": "Three sources along a 1+ mi trail off US-12 (Warm Springs TH, MP 152); day-use only 6am-8pm",
+   "town": "Lowell / Powell",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/north-central/jerry-johnson-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    },
+    {
+     "url": "https://www.fs.usda.gov/r01/nezperce-clearwater/recreation/warm-springs-trailhead",
+     "label": "USFS"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-weir-creek-hot-springs",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Weir Creek Hot Springs",
+   "desc": "Clear forest pool ~105-108°F for 8-10 people; short steep hike from US-12 at MP 142.1",
+   "town": "Lowell / Powell",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/north-central/weir-creek-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-red-river-hot-springs",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Red River Hot Springs",
+   "desc": "Year-round resort east of Elk City: big outdoor pool, three tubs, lodge rooms; closed Tuesdays",
+   "town": "Elk City",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/north-central/red-river-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-burgdorf-hot-springs",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Burgdorf Hot Springs",
+   "desc": "Historic ghost-town resort (Idaho County), ~30 mi north of McCall; 113°F source; reservation-only; snowmobile-only Dec-Apr",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/west-central/burgdorf-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    },
+    {
+     "url": "https://www.burgdorfhotsprings.com/",
+     "label": "Burgdorf Hot Springs"
+    }
+   ]
+  },
+  {
+   "id": "southwest-kirkham-hot-springs",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Kirkham Hot Springs",
+   "desc": "Hot waterfalls over rock pools on the SF Payette, ~5 mi east of Lowman on ID-21; day use 7am-9pm",
+   "town": "Lowman",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r04/boise/recreation/kirkham-hot-springs",
+     "label": "USFS Boise NF"
+    },
+    {
+     "url": "https://idahohotsprings.com/south-central/kirkham-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "southwest-pine-flats-hot-springs",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Pine Flats Hot Springs",
+   "desc": "Riverside pools on the SF Payette, 0.25-0.75 mi walk from Pine Flats Campground; good winter soak",
+   "town": "Lowman",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/south-central/pine-flats-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "southwest-trail-creek-hot-springs",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Trail Creek Hot Springs",
+   "desc": "Two adjustable-temp mortared pools on a short steep hike off Warm Lake Road",
+   "town": "Cascade",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/west-central/trail-creek-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "southwest-gold-fork-hot-springs",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Gold Fork Hot Springs",
+   "desc": "Commercial: six natural mineral pools incl. a white-sand-bottom pool; road plowed year-round",
+   "town": "Donnelly",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/west-central/gold-fork-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "southwest-roystone-hot-springs",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Roystone Hot Springs",
+   "desc": "Private, reservation-only group soaks (pool + jetted tub) with RV park",
+   "town": "Sweet / Emmett",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/south-central/roystone-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-frenchman-s-bend-hot-springs",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Frenchman's Bend Hot Springs",
+   "desc": "Shallow rock pools along Warm Springs Creek in the Sawtooth NF; snowbound late fall into spring",
+   "town": "Ketchum",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/south-central/frenchmans-bend-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-miracle-hot-springs-banbury",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Miracle Hot Springs (& Banbury)",
+   "desc": "Developed geothermal pools on US-30: general pools, private adjustable pools, domes/RV sites; Banbury 1.5 mi away",
+   "town": "Buhl / Hagerman",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/south-central/miracle-hot-springs-banbury-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    },
+    {
+     "url": "https://www.miraclehotsprings.com/",
+     "label": "Miracle Hot Springs"
+    }
+   ]
+  },
+  {
+   "id": "southeast-lava-hot-springs",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Lava Hot Springs",
+   "desc": "Town's World Famous Hot Pools: springs ~102-112°F; plus summer swimming complex",
+   "town": "Lava Hot Springs",
+   "sources": [
+    {
+     "url": "https://lavahotsprings.com/hotpools/",
+     "label": "Lava Hot Springs Foundation"
+    }
+   ]
+  },
+  {
+   "id": "southeast-downata-hot-springs",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Downata Hot Springs",
+   "desc": "Family resort fed by Marshall Springs (~600 gal/min at 109°F): rec pool, slides, hot pools",
+   "town": "Downey",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/south-east/downata-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-heise-hot-springs",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Heise Hot Springs",
+   "desc": "Resort on the South Fork Snake; 1889 homestead spring feeds a 104°F pool; summer slide, golf, camping",
+   "town": "Ririe",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/south-east/heise-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-green-canyon-hot-springs",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Green Canyon Hot Springs",
+   "desc": "Family resort; 115°F spring, 96°F big pool, 105°F hot pool",
+   "town": "Newdale / Rexburg",
+   "sources": [
+    {
+     "url": "https://greencanyonhotsprings.com/",
+     "label": "Green Canyon Hot Springs"
+    }
+   ]
+  },
+  {
+   "id": "salmon-sunbeam-hot-springs",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Sunbeam Hot Springs",
+   "desc": "Roadside rock pools on the Salmon River below the historic bathhouse off ID-75; submerged in spring runoff",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/south-central/sunbeam-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "salmon-goldbug-hot-springs",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Goldbug Hot Springs",
+   "desc": "Hot waterfalls and rock pools; ~2 mi hike, ~1,359' gain; clothing-optional; 23 mi south of Salmon",
+   "town": "Salmon / Elk Bend",
+   "sources": [
+    {
+     "url": "https://www.blm.gov/visit/goldbug-hot-springs",
+     "label": "BLM"
+    },
+    {
+     "url": "https://idahohotsprings.com/east-central/goldbug-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "salmon-sharkey-hot-springs",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Sharkey Hot Springs",
+   "desc": "BLM roadside site with two concrete soakers, changing rooms, restrooms; pass required",
+   "town": "Tendoy / Salmon",
+   "sources": [
+    {
+     "url": "https://idahohotsprings.com/east-central/sharkey-hot-springs/",
+     "label": "IdahoHotSprings.com"
+    }
+   ]
+  },
+  {
+   "id": "salmon-challis-hot-springs",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "hot-springs",
+   "activity_name": "Hot springs",
+   "activity_catalog": "Hot Springs",
+   "name": "Challis Hot Springs",
+   "desc": "Now part of Land of the Yankee Fork State Park (winter hours Wed-Sun)",
+   "town": "Challis",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/land-of-the-yankee-fork-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-riggins-limestone",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "climbing",
+   "activity_name": "Climbing",
+   "activity_catalog": "Rock Climbing",
+   "name": "Riggins Limestone",
+   "desc": "Pale limestone sport crags below the Seven Devils: ~35 routes 5.9-5.13; May-Sept; at MM 9 on Seven Devils Rd (FR 517)",
+   "town": "Riggins",
+   "sources": [
+    {
+     "url": "https://www.visitsouthwestidaho.org/6-climbing-spots-in-southwest-idaho/",
+     "label": "Southwest Idaho Travel Assn."
+    }
+   ]
+  },
+  {
+   "id": "southwest-black-cliffs",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "climbing",
+   "activity_name": "Climbing",
+   "activity_catalog": "Rock Climbing",
+   "name": "Black Cliffs",
+   "desc": "Boise's #1 local crag: basalt, ~254 routes 5.6-5.12 (trad/sport/TR) on ID-21 past the Diversion Dam; year-round",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://www.visitsouthwestidaho.org/6-climbing-spots-in-southwest-idaho/",
+     "label": "Southwest Idaho Travel Assn."
+    },
+    {
+     "url": "https://www.mountainproject.com/area/106060666/black-cliffs",
+     "label": "Mountain Project"
+    }
+   ]
+  },
+  {
+   "id": "southwest-swan-falls",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "climbing",
+   "activity_name": "Climbing",
+   "activity_catalog": "Rock Climbing",
+   "name": "Swan Falls",
+   "desc": "Basalt bouldering on the Snake: ~72 problems V2-V11; year-round",
+   "town": "Kuna",
+   "sources": [
+    {
+     "url": "https://www.visitsouthwestidaho.org/6-climbing-spots-in-southwest-idaho/",
+     "label": "Southwest Idaho Travel Assn."
+    }
+   ]
+  },
+  {
+   "id": "southwest-gold-fork-pins-needles",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "climbing",
+   "activity_name": "Climbing",
+   "activity_catalog": "Rock Climbing",
+   "name": "Gold Fork Pins & Needles",
+   "desc": "Granite spires SE of Donnelly; ~21 routes 5.7-5.11; ~1 hr approach; May-Sept",
+   "town": "Donnelly",
+   "sources": [
+    {
+     "url": "https://www.visitsouthwestidaho.org/6-climbing-spots-in-southwest-idaho/",
+     "label": "Southwest Idaho Travel Assn."
+    }
+   ]
+  },
+  {
+   "id": "southwest-the-thinking-spot",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "climbing",
+   "activity_name": "Climbing",
+   "activity_catalog": "Rock Climbing",
+   "name": "The Thinking Spot",
+   "desc": "Granite formation N of Payette Lake; ~23 routes 5.7-5.12; May-Sept",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://www.visitsouthwestidaho.org/6-climbing-spots-in-southwest-idaho/",
+     "label": "Southwest Idaho Travel Assn."
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-almo-city-of-rocks-national-reserve",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "climbing",
+   "activity_name": "Climbing",
+   "activity_catalog": "Rock Climbing",
+   "name": "City of Rocks National Reserve",
+   "desc": "Idaho's premier climbing: pocketed granite towers, 600+ routes (trad/sport/TR/boulder); late Apr-early Nov",
+   "town": "Almo",
+   "sources": [
+    {
+     "url": "https://www.nps.gov/ciro/planyourvisit/climbing.htm",
+     "label": "NPS"
+    },
+    {
+     "url": "https://www.mountainproject.com/area/105739322/city-of-rocks",
+     "label": "Mountain Project"
+    },
+    {
+     "url": "https://www.visitsouthwestidaho.org/6-climbing-spots-in-southwest-idaho/",
+     "label": "Southwest Idaho Travel Assn."
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-castle-rocks-state-park",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "climbing",
+   "activity_name": "Climbing",
+   "activity_catalog": "Rock Climbing",
+   "name": "Castle Rocks State Park",
+   "desc": "Hundreds of routes; climbers from around the world; next to City of Rocks; highlining prohibited",
+   "town": "Almo",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/castle-rocks-state-park/",
+     "label": "Idaho Parks & Rec"
+    },
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/climbing/",
+     "label": "Idaho Parks & Rec climbing"
+    }
+   ]
+  },
+  {
+   "id": "southeast-american-falls-massacre-rocks-state-park",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "climbing",
+   "activity_name": "Climbing",
+   "activity_catalog": "Rock Climbing",
+   "name": "Massacre Rocks State Park",
+   "desc": "Numerous climbing routes plus Oregon Trail history along the Snake River",
+   "town": "American Falls",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/massacre-rocks-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-priest-lake-nordman-priest-lake",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Priest Lake",
+   "desc": "400+ mi groomed (Granite Pass system ~100 mi); 2,500-7,000'; Dec-Mar",
+   "town": "Priest Lake / Nordman",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    },
+    {
+     "url": "https://priestlake.org/activities/snowmobiling/",
+     "label": "Priest Lake Chamber"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-wallace-silver-valley",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Wallace / Silver Valley",
+   "desc": "\"Snowmobile City, USA\": open-streets riding from town; links CdA system to Avery & Montana (~1,000-mi trek)",
+   "town": "Wallace",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-coeur-d-alene-kootenai-county",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Coeur d'Alene / Kootenai County",
+   "desc": "350 mi incl. 4th of July (54 mi), Hayden Creek-Horse Heaven (43 mi), Bunco (60 mi)",
+   "town": "Coeur d'Alene",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-avery-st-joe",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Avery / St. Joe",
+   "desc": "~180 mi groomed from 4 trailheads; 2 warming huts",
+   "town": "Avery",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-sandpoint-bonners-ferry",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Sandpoint / Bonners Ferry",
+   "desc": "100+ mi; Spruce Lake, Roman Nose Lakes, Apache Ridge, Dodge Peak",
+   "town": "Sandpoint / Bonners Ferry",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-bovill-elk-river-latah-county",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Bovill / Elk River (Latah County)",
+   "desc": "300 mi in Latah County incl. 250-mi Bovill-Elk River network",
+   "town": "Elk River / Bovill",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-orofino-pierce",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Orofino / Pierce",
+   "desc": "200+ mi groomed; Bald Mountain Lookout survival cabin",
+   "town": "Pierce / Orofino",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-grangeville-fish-creek",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Grangeville / Fish Creek",
+   "desc": "150 mi from Fish Creek Rec Area toward Florence and the Salmon breaks",
+   "town": "Grangeville",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-elk-city-red-river-dixie",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Elk City / Red River / Dixie",
+   "desc": "~200 mi groomed; trailheads at Elk City, Newsome Creek, Trapper Creek, Dixie",
+   "town": "Elk City",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "southwest-mccall-valley-county",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "McCall / Valley County",
+   "desc": "544+ mi groomed; Lady Bug play area, Warren & Secesh, Railroad Pass to Warm Lake/Yellow Pine",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    },
+    {
+     "url": "https://snowmobilemccall.net/",
+     "label": "McCall Area Snowmobilers"
+    }
+   ]
+  },
+  {
+   "id": "southwest-smiths-ferry-wellington-snow-park",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Smiths Ferry / Wellington Snow Park",
+   "desc": "400 mi (250 groomed); Winter Wonderland Trail to McCall",
+   "town": "Smiths Ferry / Cascade",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "southwest-pine-featherville",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Pine / Featherville",
+   "desc": "380+ mi groomed up to ~10,000' in the Trinity Mtns; Malcomson warming hut",
+   "town": "Pine / Featherville",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "southwest-idaho-city",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Idaho City",
+   "desc": "220+ mi groomed; connects to Pine/Featherville",
+   "town": "Idaho City",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-diamondfield-jack-south-hills",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Diamondfield Jack (South Hills)",
+   "desc": "200+ mi groomed; 85-car lot, warming huts",
+   "town": "Twin Falls / Hansen",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-fairfield-camas-county",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Fairfield / Camas County",
+   "desc": "220 mi groomed; shelter north of Wells Summit",
+   "town": "Fairfield",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-blaine-county-baker-creek-wood-river",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Blaine County (Baker Creek, Wood River)",
+   "desc": "120 mi groomed north of Ketchum and west of Hailey",
+   "town": "Ketchum / Hailey",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "southeast-bear-lake-valley",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Bear Lake Valley",
+   "desc": "350 mi groomed; St. Charles/Fish Haven Loop; Trail Canyon warming hut",
+   "town": "Montpelier",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    },
+    {
+     "url": "https://bearlake.org/cat/snowmobiling/",
+     "label": "Bear Lake Valley CVB"
+    }
+   ]
+  },
+  {
+   "id": "southeast-bannock-county-scout-mtn-mink-creek-inman-pebble-toponce",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Bannock County (Scout Mtn-Mink Creek, Inman-Pebble-Toponce)",
+   "desc": "250 mi in Bannock, Power, Caribou counties; warming shelters",
+   "town": "Pocatello / Lava Hot Springs",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "southeast-southeast-idaho-caribou-nf",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Southeast Idaho / Caribou NF",
+   "desc": "600+ mi groomed on Caribou NF and BLM land",
+   "town": "Soda Springs / Preston",
+   "sources": [
+    {
+     "url": "https://idahohighcountry.org/cat/snowmobile-trails/",
+     "label": "Idaho High Country"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-island-park",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Island Park",
+   "desc": "500+ mi groomed linking to 800 more in West Yellowstone/WY; Two Top, Mesa Falls, Big Springs",
+   "town": "Island Park",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-ashton",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Ashton",
+   "desc": "400 mi groomed toward Mesa Falls, Cave Falls & Teton country",
+   "town": "Ashton",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-bonneville-bingham-bone-road",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Bonneville / Bingham (Bone Road)",
+   "desc": "400 mi groomed; Bone to Alpine, Skyline; 3 warming huts",
+   "town": "Idaho Falls",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-madison-jefferson-teton-counties",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Madison / Jefferson / Teton counties",
+   "desc": "280 mi groomed; Rexburg-Tetonia-Driggs, Packsaddle Basin",
+   "town": "Rexburg / Driggs",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "salmon-stanley",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Stanley",
+   "desc": "~200 mi groomed incl. Stanley-Lowman & Stanley-Deadwood; Bear Valley warming hut",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "salmon-salmon-lemhi-county",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "snowmobile",
+   "activity_name": "Snowmobile",
+   "activity_catalog": "Snowmobiling",
+   "name": "Salmon / Lemhi County",
+   "desc": "225 mi groomed; Old Stage Road to Leesburg ghost town, Warm Spring Loop",
+   "town": "Salmon",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/park-activity/snowmobiling/",
+     "label": "Idaho Parks & Rec snowmobiling"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-priest-lake-the-thoroughfare",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "paddle",
+   "activity_name": "Paddle",
+   "activity_catalog": "Paddleboarding / Flatwater",
+   "name": "Priest Lake & the Thoroughfare",
+   "desc": "19-mi lake; 2-mi thoroughfare to Upper Priest Lake (foot/bike/boat only); canoe & kayak rentals",
+   "town": "Coolin / Nordman",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/priest-lake-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-round-lake-state-park",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "paddle",
+   "activity_name": "Paddle",
+   "activity_catalog": "Paddleboarding / Flatwater",
+   "name": "Round Lake State Park",
+   "desc": "Small forested lake; canoe, kayak & SUP rentals",
+   "town": "Sagle / Sandpoint",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/round-lake-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-heyburn-state-park-lakes",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "paddle",
+   "activity_name": "Paddle",
+   "activity_catalog": "Paddleboarding / Flatwater",
+   "name": "Heyburn State Park lakes",
+   "desc": "Kayak/canoe/SUP rentals; Chatcolet, Benewah & Hidden lakes; St. Joe River",
+   "town": "Plummer",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/heyburn-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-orofino-ahsahka-dworshak-reservoir",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "paddle",
+   "activity_name": "Paddle",
+   "activity_catalog": "Paddleboarding / Flatwater",
+   "name": "Dworshak Reservoir",
+   "desc": "Big Eddy Marina: canoe, kayak & SUP rentals",
+   "town": "Orofino / Ahsahka",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/dworshak-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-winchester-lake",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "paddle",
+   "activity_name": "Paddle",
+   "activity_catalog": "Paddleboarding / Flatwater",
+   "name": "Winchester Lake",
+   "desc": "Small lake for canoeing; yurts; bass and tiger muskie",
+   "town": "Winchester",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/winchester-lake-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "southwest-payette-lake-ponderosa-sp",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "paddle",
+   "activity_name": "Paddle",
+   "activity_catalog": "Paddleboarding / Flatwater",
+   "name": "Payette Lake / Ponderosa SP",
+   "desc": "Canoe or kayak the North Fork Payette (rentals available)",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/ponderosa-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "southwest-cascade-lake-cascade",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "paddle",
+   "activity_name": "Paddle",
+   "activity_catalog": "Paddleboarding / Flatwater",
+   "name": "Lake Cascade",
+   "desc": "Kayak & SUP rental at Van Wyck boat ramp",
+   "town": "Cascade",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/lake-cascade-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "southwest-eagle-island-state-park",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "paddle",
+   "activity_name": "Paddle",
+   "activity_catalog": "Paddleboarding / Flatwater",
+   "name": "Eagle Island State Park",
+   "desc": "SUP, kayak & tube rentals (Paddleboard Idaho)",
+   "town": "Eagle",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/eagle-island-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "southwest-lucky-peak-discovery-unit-sandy-point",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "paddle",
+   "activity_name": "Paddle",
+   "activity_catalog": "Paddleboarding / Flatwater",
+   "name": "Lucky Peak (Discovery Unit / Sandy Point)",
+   "desc": "Flatwater Boise River stretch popular with canoeists & kayakers",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/lucky-peak-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "southeast-st-charles-montpelier-bear-lake",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "paddle",
+   "activity_name": "Paddle",
+   "activity_catalog": "Paddleboarding / Flatwater",
+   "name": "Bear Lake",
+   "desc": "\"Caribbean of the Rockies\": turquoise, 20 mi x 8 mi, half in Utah; huge shallow swim area",
+   "town": "St. Charles / Montpelier",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/bear-lake-state-park/",
+     "label": "Idaho Parks & Rec"
+    }
+   ]
+  },
+  {
+   "id": "salmon-redfish-lake",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "paddle",
+   "activity_name": "Paddle",
+   "activity_catalog": "Paddleboarding / Flatwater",
+   "name": "Redfish Lake",
+   "desc": "Sawtooth NRA rec complex with marina, campgrounds; Little Redfish Lake is non-motorized",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r04/sawtooth/recreation/redfish-lake-recreation-complex",
+     "label": "USFS Sawtooth"
+    }
+   ]
+  }
+ ]
+}

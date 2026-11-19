@@ -1,0 +1,20 @@
+{
+ "southwest-brundage-mountain": {
+  "conditions": "https://brundage.com/on-the-mountain/snow-report/"
+ },
+ "southwest-tamarack-resort": {
+  "conditions": "https://tamarackidaho.com/the-mountain/snow-report"
+ },
+ "magic-valley-pomerelle": {
+  "conditions": "https://www.pomerelle.com/conditions"
+ },
+ "magic-valley-soldier-mountain": {
+  "conditions": "https://snocountry.com/snow-report/idaho/soldier-mountain-ski-area/"
+ },
+ "upper-snake-kelly-canyon": {
+  "conditions": "https://kellycanyonresort.com/#snow-report"
+ },
+ "upper-snake-grand-targhee-wy-idaho-access": {
+  "conditions": "https://www.grandtarghee.com/the-mountain/cams-conditions/mountain-report"
+ }
+}

@@ -1,0 +1,47 @@
+---
+// Static region map: outline, major towns, ski areas, national parks/monuments and the main rivers. Nothing reacts to alerts or live data.
+import { mapFeatures } from '../lib/mappins.js';
+import map from '../data/idaho-map.json';
+const { id, regionName, regionCode } = Astro.props;
+const [x0, y0, x1, y1] = map.regions[id].bbox;
+const pad = 10;
+const viewBox = `${x0 - pad} ${y0 - pad} ${x1 - x0 + 2 * pad} ${y1 - y0 + 2 * pad}`;
+const { ski, towns, landmarks, rivers } = mapFeatures(id, regionCode, map.regions[id].bbox, pad);
+const clip = `rclip-${id}`;
+const diamond = ([x, y], r = 3) => `M${x} ${y - r}L${x + r} ${y}L${x} ${y + r}L${x - r} ${y}Z`;
+---
+<div class="map-box rmap">
+  <svg class="sw-map" viewBox={viewBox} role="img" aria-label={`${regionName} Region map: major towns, ski areas, national parks and monuments, and main rivers`}>
+    <defs><clipPath id={clip}><path d={map.regions[id].d} /></clipPath></defs>
+    {Object.entries(map.regions).filter(([k]) => k !== id).map(([k, v]) => <path class="neighbor" d={v.d} />)}
+    <path class="sw-fill" d={map.regions[id].d} />
+    <g class="river-faint">{rivers.map((r) => <path class="river" d={r.d} />)}</g>
+    <g clip-path={`url(#${clip})`}>{rivers.map((r) => <path class="river" d={r.d}><title>{r.name}</title></path>)}</g>
+    {rivers.map((r) => r.label && <text class="river-label" x={r.label.x} y={r.label.y} text-anchor={r.label.anchor}>{r.name}</text>)}
+    {towns.map((t) => (
+      <g class="pin town"><title>{t.name}</title>
+        <circle class="pin-dot" cx={t.xy[0]} cy={t.xy[1]} r="1.6" />
+        {t.label && <text class="map-sub" x={t.label.x} y={t.label.y} text-anchor={t.label.anchor}>{t.name}</text>}</g>
+    ))}
+    {landmarks.map((m) => (
+      <g class="pin landmark"><title>{m.name}</title>
+        <path class="pin-dot" d={diamond(m.xy, 3)} />
+        {m.label && <text class="map-sub spot-label" x={m.label.x} y={m.label.y} text-anchor={m.label.anchor}>{m.name}</text>}</g>
+    ))}
+    {ski.map((p) => (
+      <a href={p.href} aria-label={`${p.full}, ski area`}>
+        <g class="pin spot ski"><title>{p.full} · Ski area</title>
+          <circle class="hit" cx={p.xy[0]} cy={p.xy[1]} r="6" />
+          <circle class="pin-dot" cx={p.xy[0]} cy={p.xy[1]} r="3.4" />
+          {p.label && <text class="map-sub spot-label" x={p.label.x} y={p.label.y} text-anchor={p.label.anchor}>{p.name}</text>}</g>
+      </a>
+    ))}
+  </svg>
+  <ul class="rmap-key" aria-label="Map key">
+    <li><i class="k-ski"></i>Ski area</li>
+    {landmarks.length > 0 && <li><i class="k-park"></i>Park or monument</li>}
+    <li><i class="k-town"></i>Town</li>
+    {rivers.length > 0 && <li><i class="k-river"></i>River</li>}
+  </ul>
+  <p class="map-cap">Official IDFG boundary, simplified. A fixed overview, not live data. Ski areas link to their listing.</p>
+</div>

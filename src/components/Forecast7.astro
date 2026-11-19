@@ -1,0 +1,33 @@
+---
+// Seven-day regional forecast: one strip per forecast point (main city first). Hidden until the NWS fetch has stored `days`.
+import { conditions, fmtTime } from '../lib/conditions.js';
+const { id } = Astro.props;
+const r = conditions.regions[id];
+const pts = (r.forecast?.points ?? []).filter((p) => p.days?.length);
+const label = (d, i) => (i === 0 ? (d.hi == null ? 'Tonight' : 'Today') : new Date(`${d.date}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' }));
+const t0 = pts[0]?.days?.[0];
+// Closed-state glance so the collapsed row still tells you today at a glance.
+const glance = t0 ? ` · ${pts[0].name} ${t0.hi != null ? `${t0.hi}°` : `low ${t0.lo ?? '–'}°`}${t0.hi != null && t0.lo != null ? ` / ${t0.lo}°` : ''}, ${t0.short}` : '';
+---
+{pts.length > 0 && (
+  <details class="data-detail fc7-detail" id="forecast" aria-label="Seven-day forecast">
+    <summary>Seven-day forecast<span class="fc7-glance">{glance}</span></summary>
+    <p class="sub-cap">Valley and town forecasts, not the mountains. Higher terrain runs colder and wetter.</p>
+    {pts.map((p) => (
+      <div class="fc7-block">
+        <h3>{p.name}</h3>
+        <ol class="fc7-days">
+          {p.days.map((d, i) => (
+            <li class="fc7-day" title={d.detail ?? ''}>
+              <span class="fc7-name">{label(d, i)}</span>
+              <span class="fc7-temp">{d.hi != null ? `${d.hi}°` : `Low ${d.lo ?? '–'}°`}<small>{d.hi != null && d.lo != null ? ` / ${d.lo}°` : ''}</small></span>
+              <span class="fc7-short">{d.short}</span>
+              <span class="fc7-meta">{d.precipChance != null ? `${d.precipChance}% precip` : ''}{d.wind ? `${d.precipChance != null ? ' · ' : ''}${d.wind}` : ''}</span>
+            </li>
+          ))}
+        </ol>
+        <p class="fc7-src">National Weather Service{r.forecast.updated ? ` · ${fmtTime(r.forecast.updated, r.tz)}` : ''}{p.discussion && <> · <a href={p.discussion} target="_blank" rel="noopener noreferrer">Forecaster discussion<span class="vh"> (opens in a new tab)</span></a></>}</p>
+      </div>
+    ))}
+  </details>
+)}

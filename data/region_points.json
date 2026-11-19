@@ -1,0 +1,29 @@
+{
+ "_note": "Approximate coordinates from memory; scripts/check_points.py verifies them against NWS and IDFG polygons. Edit freely.",
+ "points": [
+  {"region": "Panhandle",    "id": "coeur-d-alene", "name": "Coeur d'Alene", "lat": 47.677, "lon": -116.780, "primary": true},
+  {"region": "Clearwater",   "id": "lewiston",      "name": "Lewiston",      "lat": 46.416, "lon": -117.018, "primary": true},
+  {"region": "Southwest",    "id": "boise",         "name": "Boise",         "lat": 43.615, "lon": -116.202, "primary": true},
+  {"region": "Southwest",    "id": "mccall",        "name": "McCall",        "lat": 44.911, "lon": -116.099, "primary": false},
+  {"region": "Magic Valley", "id": "twin-falls",    "name": "Twin Falls",    "lat": 42.563, "lon": -114.461, "primary": true},
+  {"region": "Magic Valley", "id": "ketchum",       "name": "Ketchum / Sun Valley", "lat": 43.680, "lon": -114.364, "primary": false},
+  {"region": "Southeast",    "id": "pocatello",     "name": "Pocatello",     "lat": 42.871, "lon": -112.446, "primary": true},
+  {"region": "Upper Snake",  "id": "idaho-falls",   "name": "Idaho Falls",   "lat": 43.492, "lon": -112.034, "primary": true},
+  {"region": "Upper Snake",  "id": "island-park",   "name": "Island Park",   "lat": 44.420, "lon": -111.370, "primary": false},
+  {"region": "Salmon",       "id": "salmon",        "name": "Salmon",        "lat": 45.176, "lon": -113.896, "primary": true}
+ ],
+ "ski_areas_approx": [
+  {"area": "Brundage (McCall)", "lat": 45.004, "lon": -116.150},
+  {"area": "Bogus Basin", "lat": 43.764, "lon": -116.102},
+  {"area": "Tamarack", "lat": 44.671, "lon": -116.123},
+  {"area": "Schweitzer", "lat": 48.368, "lon": -116.622},
+  {"area": "Silver Mountain / Lookout Pass", "lat": 47.480, "lon": -115.900},
+  {"area": "Bald Mountain (Pierce)", "lat": 46.490, "lon": -115.800},
+  {"area": "Sun Valley", "lat": 43.700, "lon": -114.351},
+  {"area": "Soldier Mountain", "lat": 43.484, "lon": -114.830},
+  {"area": "Magic Mountain", "lat": 42.182, "lon": -114.296},
+  {"area": "Pomerelle", "lat": 42.360, "lon": -113.580},
+  {"area": "Pebble Creek", "lat": 42.760, "lon": -112.120},
+  {"area": "Kelly Canyon", "lat": 43.620, "lon": -111.680}
+ ]
+}

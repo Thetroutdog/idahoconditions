@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../lib/site.js';
+---
+<Base title="Privacy — Idaho Conditions" description="What Idaho Conditions collects and why.">
+  <main>
+    <div class="wrap">
+      <PageHero title="Privacy." lede="Short version: we only ask for an email address, and only if you want the Thursday Brief." />
+      <div class="doc">
+        <h2>What we collect</h2>
+        <p>If you sign up for the Thursday Conditions Brief, we collect your email address so we can send it. Nothing else is required, and you don’t need an account to use the site.</p>
+
+        <h2>Who handles it</h2>
+        <p>The email list is run by beehiiv, which stores addresses and sends the emails. We don’t sell or share your address. Every email has an unsubscribe link, and you can also write to <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a> to be removed.</p>
+
+        <h2>The website</h2>
+        <p>The site itself doesn’t use accounts or advertising cookies. It is hosted on Cloudflare, which keeps ordinary server logs. Fonts are served from this site, so loading them sends nothing to Google or any other font service. Links to other sites (weather.gov, 511.idaho.gov and so on) are governed by those sites.</p>
+
+        <h2>Questions</h2>
+        <p>Write to <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p>
+      </div>
+    </div>
+  </main>
+</Base>

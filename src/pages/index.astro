@@ -1,0 +1,139 @@
+---
+import Base from '../layouts/Base.astro';
+import { conditions, regionIds, levelLabel, fmtTime } from '../lib/conditions.js';
+import { regionTemp, dotClass, IDAHO511 } from '../lib/regionview.js';
+import { statewide } from '../lib/statewide.js';
+import { activities, spotsFor } from '../lib/catalog.js';
+import map from '../data/idaho-map.json';
+import { stateRivers } from '../lib/mappins.js';
+import UnplacedItems from '../components/UnplacedItems.astro';
+import AqiValue from '../components/AqiValue.astro';
+import { SITE } from '../lib/site.js';
+const rivers = stateRivers();
+const regs = conditions.regions;
+const updated = fmtTime(conditions.generatedAt, 'America/Boise');
+const sw = statewide();
+---
+<Base title="Idaho Conditions — roads, snow, rivers, and air, by region">
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-row">
+          <div class="hero-text">
+            <h1>Idaho, right now.</h1>
+            <p class="lede">Roads, snow, rivers, air, and fire — pulled together by region and by activity, so you can decide if the trip is on. Just conditions.</p>
+            <div class="meta-line"><span class="dot-live">Updated {updated}</span><span>Updated hourly, 5 AM to 11 PM MT</span></div>
+          </div>
+          <nav class="jump-btns" aria-label="Jump to">
+            <a class="jump-btn" href="#regions">Find your region <span aria-hidden="true">↓</span></a>
+            <a class="jump-btn" href="#activities">Find an activity <span aria-hidden="true">↓</span></a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="snapshot" style="padding-bottom:8px">
+      <div class="wrap">
+        <div class="section-head sub-lead"><h2>Statewide snapshot</h2><p>The picture across Idaho</p></div>
+        <div class="statewide-grid">
+          <article class="state-card">
+            <h3>Weather &amp; NWS alerts <span class={`chip ${!sw.nws.fresh ? 'gray' : sw.alerts.length + sw.unplaced.weather.length ? 'amber' : 'green'}`}>{!sw.nws.fresh ? 'Out of date' : sw.alerts.length + sw.unplaced.weather.length ? `${sw.alerts.length + sw.unplaced.weather.length} active` : 'None active'}</span></h3>
+            {!sw.nws.fresh ? <p class="state-lead">Weather alerts are out of date (last checked {fmtTime(sw.nws.at, 'America/Boise')}). <a href="https://alerts.weather.gov/?area=ID" target="_blank" rel="noopener noreferrer">Check the NWS directly</a>.</p>
+              : sw.alerts.length ? <ul class="alert-items">{sw.alerts.slice(0, 4).map((a) => <li><a href={a.href} target="_blank" rel="noopener noreferrer">{a.event}</a><small>{a.areas}</small></li>)}</ul> : sw.unplaced.weather.length ? null : <p class="state-lead">No active NWS alerts in Idaho right now.</p>}
+            {sw.nws.fresh && <UnplacedItems items={sw.unplaced.weather} />}
+            {sw.nws.fresh && sw.alerts.length > 4 && <p class="state-more">+{sw.alerts.length - 4} more. Open a region for its full list.</p>}
+            <div class="src">National Weather Service</div>
+          </article>
+          <article class="state-card">
+            <h3>Roads &amp; passes <span class={`chip ${!sw.roads.live ? 'gray' : sw.roads.closures.length ? 'red' : sw.roads.winterRoads ? 'amber' : 'green'}`}>{!sw.roads.live ? 'Not connected' : sw.roads.closures.length ? `${sw.roads.closures.length} closed` : sw.roads.winterRoads ? 'Winter conditions' : 'No closures'}</span></h3>
+            {sw.roads.live ? (<>
+              {sw.roads.closures.length ? <ul class="alert-items">{sw.roads.closures.slice(0, 4).map((c) => <li><a href={`/${c.regionId}/#alerts`}>{c.name} closed</a><small>{c.regionName}{c.desc && 110 >= c.desc.length ? `: ${c.desc}` : ''}</small></li>)}</ul> : <p class="state-lead">No unplanned highway closures reported.</p>}
+              {sw.roads.closures.length > 4 && <p class="state-more">+{sw.roads.closures.length - 4} more. Open a region for its full list.</p>}
+              {sw.roads.winterRoads > 0 && <p class="state-more">{sw.roads.winterRoads} highways report snow, ice or slush.</p>}
+              {sw.roads.passMatched > 0 && <p class="state-more">Passes: {sw.roads.passBad} of {sw.roads.passMatched} with a report are snow-covered, packed or icy ({sw.roads.passTotal} tracked).</p>}
+            </>) : <p class="state-lead">Road data is not available right now.</p>}
+            <UnplacedItems items={sw.unplaced.roads} />
+            <p class="state-more"><a href={IDAHO511} target="_blank" rel="noopener noreferrer">Open Idaho 511</a> for the live map, cameras and pass reports.</p>
+            <div class="src">Idaho 511{sw.roads.stale ? ' · out of date' : ''}</div>
+          </article>
+          <article class="state-card">
+            <h3>Air quality &amp; smoke {sw.aqs.length ? <span class={`chip ${sw.aqs[0].v > 100 ? 'amber' : 'green'}`}>{sw.aqs[0].v > 100 ? 'Unhealthy pockets' : 'No unhealthy air'}</span> : <span class="chip gray">No readings</span>}</h3>
+            <p class="state-lead">{sw.aqs.length ? (<>Highest reading: {sw.aqs[0].name}, <AqiValue value={sw.aqs[0].v} />{sw.aqs[0].cat ? ` (${sw.aqs[0].cat})` : ''}.</>) : 'No fresh air-quality readings.'}</p>
+            <UnplacedItems items={sw.unplaced.air} />
+            <div class="src">AirNow (preliminary)</div>
+          </article>
+          <article class="state-card">
+            <h3>Fire activity <span class={`chip ${sw.fires.length ? 'amber' : 'green'}`}>{sw.fires.length ? `${sw.fires.length} reported` : 'None reported'}</span></h3>
+            <p class="state-lead">{sw.fires.length ? 'Wildfires are listed on each region page.' : 'No current wildfires reported in Idaho.'}</p>
+            {sw.burns.length > 0 && <p class="state-more">{sw.burns.length} prescribed burn{sw.burns.length === 1 ? '' : 's'} reported. Each region page lists them.</p>}
+            <UnplacedItems items={sw.unplaced.fire} />
+            <div class="src">NIFC</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="regions" style="padding-bottom:8px">
+      <div class="wrap map-grid">
+        <div>
+          <div class="section-head sub-lead"><h2>Idaho by region</h2><p>Seven Fish and Game regions. Colored by current alert level.</p></div>
+          <div class="map-panel">
+            <div class="map-legend" aria-hidden="true"><span><i class="g"></i> Clear</span><span><i class="a"></i> Caution</span><span><i class="r"></i> Hazards</span><span><i class="n"></i> No current data</span></div>
+            <svg class="idaho-map" viewBox={`0 0 ${map.width} ${map.height}`} role="img" aria-label="Idaho Fish and Game regions colored by current alert level">
+              {regionIds.map((id) => map.regions[id] && (
+                <a href={`/${id}/`} aria-label={`${regs[id].name} Region: ${levelLabel(regs[id].level, regs[id])}`}><path class={`region level-${regs[id].level}`} d={map.regions[id].d} /></a>
+              ))}
+              <defs><clipPath id="idaho-clip">{regionIds.map((id) => map.regions[id] && <path d={map.regions[id].d} />)}</clipPath></defs>
+              <g class="state-rivers" clip-path="url(#idaho-clip)" aria-hidden="true">{rivers.map((r) => <path class={`river${r.minor ? ' minor' : ''}`} d={r.d} />)}</g>
+              {regionIds.map((id) => map.regions[id] && <text class={`region-label lbl-${regs[id].level}`} x={map.regions[id].label[0]} y={map.regions[id].label[1]}>{regs[id].name}</text>)}
+              {map.cities.map((c) => (
+                <g><circle class="city-dot" cx={c.x} cy={c.y} r="2.4" /><text class="city-label" x={c.anchor === 'end' ? c.x - 8 : c.x + 8} y={c.y + 3} text-anchor={c.anchor}>{c.name}</text></g>
+              ))}
+            </svg>
+            <p class="map-caption"><span>Boundaries simplified from the official IDFG regions. Gray means a data source is out of date, so we can't confirm conditions.</span></p>
+          </div>
+        </div>
+        <div>
+          <div class="section-head sub-lead"><h2>Regions</h2><p>Open one for its activities</p></div>
+          <div class="region-rows">
+            {regionIds.map((id) => (
+              <a class="region-row" href={`/${id}/`} data-astro-prefetch>
+                <span class={`status-dot ${dotClass(regs[id].level)}`} aria-hidden="true"></span>
+                <span class="rr-name">{regs[id].name}</span>
+                <span class="rr-temp">{regionTemp(regs[id])}</span>
+                <span class="rr-sum">{regs[id].summary}</span>
+              </a>
+            ))}
+          </div>
+          <div id="activities" style="margin-top:22px">
+            <div class="section-head sub-lead" style="margin-bottom:8px"><h2>Statewide activities</h2><p>Statewide lists, grouped by region. Each region page has its own activities too.</p></div>
+            <div class="chips">
+              {activities.map((a) => {
+                const n = spotsFor(a.id).length;
+                return n ? <a class="chip-btn" href={`/${a.id}/`} data-astro-prefetch>{a.name}<span class="cnt">{n}</span></a> : <span class="chip-btn is-soon" title="Spots are being added">{a.name}<span class="cnt">soon</span></span>;
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="brief">
+      <div class="wrap">
+        <div class="brief-band">
+          <div><h2>The Thursday Conditions Brief</h2><p>A short email before the weekend: what’s open, what’s closed, and which rivers and road passes actually matter.</p></div>
+          {SITE.beehiivEmbed ? (
+            <iframe class="brief-embed" src={SITE.beehiivEmbed} title="Sign up for the Thursday Conditions Brief" loading="lazy" scrolling="no" frameborder="0"></iframe>
+          ) : (
+            <form class="brief-form" data-signup action="#" method="post">
+              <label for="email-brief" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Email address</label>
+              <input id="email-brief" type="email" name="email" placeholder="you@email.com" required />
+              <button class="btn" type="submit">Get the brief</button>
+              <span class="form-note"></span>
+            </form>
+          )}
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>

@@ -1,0 +1,89 @@
+---
+// Full alerts and conditions for one region: NWS alerts, roads (Idaho 511), air quality, wildfires, prescribed burns.
+// Every source gets a card so an empty one reads "none reported" instead of vanishing.
+import { conditions, fmtTime } from '../lib/conditions.js';
+import { alertHref, alertLink, roadInfo, IDAHO511 } from '../lib/regionview.js';
+import AqiValue from './AqiValue.astro';
+const { id, name } = Astro.props;
+const r = conditions.regions[id];
+const tz = r.tz;
+const nwsFresh = conditions.meta?.nwsFresh !== false; // the sample file has no flag
+const nwsAt = conditions.sources?.nws?.fetchedAt;
+const road = roadInfo(r);
+const aqs = r.air.points.filter((p) => p.aqi?.status === 'fresh' && p.aqi.value !== null).sort((a, b) => b.aqi.value - a.aqi.value);
+const badAir = aqs.filter((p) => p.aqi.value >= 101);
+const fires = r.fire.wildfires.filter((f) => f.status !== 'stale');
+const burns = r.fire.prescribed.filter((f) => f.status !== 'stale');
+const alerts = nwsFresh ? r.alerts : [];
+const noAlerts = nwsFresh && !alerts.length && road.live && !road.hwy.length && !badAir.length && !fires.length;
+const clean = (t, n = 190) => { const x = (t ?? '').replace(/\s+/g, ' ').trim(); return x.length <= n ? x : x.slice(0, n).replace(/\s+\S*$/, '') + '…'; };
+const wMore = Math.max(0, road.winter.length - 8);
+const until = (a) => (a.ends ? fmtTime(a.ends, tz) : 'further notice');
+const shownAlerts = alerts.slice(0, 5), moreAlerts = alerts.slice(5);
+const fireList = [...fires].sort((a, b) => (b.acres ?? 0) - (a.acres ?? 0));
+const shownFires = fireList.slice(0, 5), moreFires = fireList.slice(5);
+const shownHwy = road.hwy.slice(0, 6), moreHwy = road.hwy.slice(6);
+---
+<section class="alerts-sec" id="alerts" aria-label={`Alerts and conditions for the ${name} Region`}>
+  <div class="list-meta"><strong style="font-size:14px;color:var(--pine-deep)">Alerts &amp; conditions</strong><span class="quiet">{name} Region</span></div>
+  {noAlerts && (
+    <div class="all-clear"><strong>No active alerts in the {name} Region.</strong>
+      <span>Checked: NWS alerts, Idaho 511 closures, air quality and wildfires.{road.winter.length > 0 && ' Winter road conditions are listed below.'}</span></div>
+  )}
+
+  <article class="alert-card">
+    <h3>Weather alerts <span class={`chip ${!nwsFresh ? 'gray' : alerts.length ? 'amber' : 'green'}`}>{!nwsFresh ? 'Out of date' : alerts.length ? `${alerts.length} active` : 'None'}</span></h3>
+    {!nwsFresh ? <p>National Weather Service alerts are out of date (last checked {fmtTime(nwsAt, tz)}). <a href={alertLink(id)} target="_blank" rel="noopener noreferrer">Check the NWS directly</a>.</p>
+      : alerts.length ? (<>
+        <ul>{shownAlerts.map((a) => <li data-ends={a.ends ?? undefined}><strong>{a.event}</strong> until {until(a)}{a.countsTowardLevel === false && <span class="quiet"> · part of the region</span>} · <a href={alertHref(a, id)} target="_blank" rel="noopener noreferrer">Details</a></li>)}</ul>
+        {moreAlerts.length > 0 && <details><summary>Show {moreAlerts.length} more</summary><ul>{moreAlerts.map((a) => <li data-ends={a.ends ?? undefined}><strong>{a.event}</strong> until {until(a)}{a.countsTowardLevel === false && <span class="quiet"> · part of the region</span>} · <a href={alertHref(a, id)} target="_blank" rel="noopener noreferrer">Details</a></li>)}</ul></details>}
+      </>)
+      : <p class="quiet">No NWS alerts for this region.</p>}
+    <div class="src">National Weather Service{nwsAt ? ` · ${fmtTime(nwsAt, tz)}` : ''}</div>
+  </article>
+
+  <article class="alert-card">
+    <h3>Roads <span class={`chip ${!road.live ? 'gray' : road.hwy.some((c) => c.unplanned) ? 'red' : road.hwy.length || road.winter.some((g) => /snow|pack|cover|ice|icy|slick/i.test(g.condition)) ? 'amber' : road.winter.length ? 'neutral' : 'green'}`}>{!road.live ? 'Not connected' : road.hwy.length ? `${road.hwy.length} closure${road.hwy.length === 1 ? '' : 's'}` : road.winter.length ? 'Winter conditions' : 'No closures'}</span></h3>
+    {!road.live && <p class="quiet">Road data is not available right now.</p>}
+    {road.hwy.length > 0 && <ul>{shownHwy.map((c) => <li><strong>{c.name}</strong> <span class={`tag ${c.unplanned ? 'tag-red' : ''}`}>{c.unplanned ? 'Unplanned' : 'Planned'}</span><br /><span class="quiet">{clean(c.description)}</span>{c.updated && <small> Updated {fmtTime(c.updated, tz)}</small>}</li>)}</ul>}
+    {moreHwy.length > 0 && <details><summary>Show {moreHwy.length} more closure{moreHwy.length === 1 ? '' : 's'}</summary><ul>{moreHwy.map((c) => <li><strong>{c.name}</strong> <span class={`tag ${c.unplanned ? 'tag-red' : ''}`}>{c.unplanned ? 'Unplanned' : 'Planned'}</span><br /><span class="quiet">{clean(c.description)}</span>{c.updated && <small> Updated {fmtTime(c.updated, tz)}</small>}</li>)}</ul></details>}
+    {road.live && !road.hwy.length && <p class="quiet">No highway closures reported.</p>}
+    {road.live && road.passes.length > 0 && (<>
+      <h4>Mountain passes</h4>
+      <ul>{road.passes.map((p) => <li><strong>{p.name}</strong> <span class="quiet">{[p.highway, p.elevationFt ? `${p.elevationFt.toLocaleString('en-US')} ft` : ''].filter(Boolean).join(' · ')}</span>{p.cond ? <>: {p.cond}</> : <span class="quiet">: see Idaho 511</span>}</li>)}</ul>
+      <p class="quiet">A pass shows the reported condition of the highway segment that includes it. Idaho 511 does not publish a separate pass report, so passes we can’t match to a segment say “see Idaho 511.”</p>
+    </>)}
+    {road.winter.length > 0 && (<>
+      <h4>Winter road conditions</h4>
+      <ul>{road.winter.slice(0, 8).map((g) => <li><strong>{g.name}</strong>: {g.condition}{g.n > 1 && ` (${g.n} segments)`}{(g.weather.length > 0 || g.special.length > 0) && <small>{[...g.weather, ...g.special].join(' · ')}</small>}</li>)}</ul>
+      {wMore > 0 && <p class="quiet">+{wMore} more roads on Idaho 511.</p>}
+    </>)}
+    {road.local > 0 && <p class="quiet">{road.local} local-road closures and work zones are listed on Idaho 511.</p>}
+    <p><a href={IDAHO511} target="_blank" rel="noopener noreferrer">Open Idaho 511 for the live map and cameras</a></p>
+    <div class="src">Idaho 511{road.asOf ? ` · ${fmtTime(road.asOf, tz)}` : ''}{road.stale ? ' · out of date' : ''}</div>
+  </article>
+
+  <article class="alert-card">
+    <h3>Air quality <span class={`chip ${!aqs.length ? 'gray' : badAir.length ? 'amber' : 'green'}`}>{!aqs.length ? 'No readings' : badAir.length ? 'Unhealthy pockets' : 'No unhealthy air'}</span></h3>
+    {aqs.length ? <ul>{aqs.map((p) => <li>{p.name}: <AqiValue value={p.aqi.value} />{p.category && ` (${p.category})`}</li>)}</ul> : <p class="quiet">No fresh air-quality readings.</p>}
+    <div class="src">AirNow (preliminary)</div>
+  </article>
+
+  <article class="alert-card">
+    <h3>Wildfires <span class={`chip ${fires.length ? 'amber' : 'green'}`}>{fires.length ? `${fires.length} reported` : 'None reported'}</span></h3>
+    {fires.length ? (<>
+      <ul>{shownFires.map((f) => <li><strong>{f.name}</strong>{f.county && `, ${f.county} County`}: {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}</li>)}</ul>
+      {moreFires.length > 0 && <details><summary>Show {moreFires.length} more</summary><ul>{moreFires.map((f) => <li><strong>{f.name}</strong>{f.county && `, ${f.county} County`}: {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}</li>)}</ul></details>}
+    </>) : <p class="quiet">No wildfires reported in this region.</p>}
+    <div class="src">NIFC</div>
+  </article>
+
+  <article class="alert-card">
+    <h3>Prescribed burns <span class="chip neutral">{burns.length ? burns.length : 'None'}</span></h3>
+    {burns.length === 0 ? <p class="quiet">No prescribed burns reported.</p> : burns.length > 4
+      ? <details><summary>Show all {burns.length}</summary><ul>{burns.map((f) => <li>{f.name}: {f.acres ?? '?'} acres{f.county && `, ${f.county} County`}</li>)}</ul></details>
+      : <ul>{burns.map((f) => <li>{f.name}: {f.acres ?? '?'} acres{f.county && `, ${f.county} County`}</li>)}</ul>}
+    <div class="src">NIFC</div>
+  </article>
+  <p class="quiet">Conditions change fast and data can be late. Check <a href="https://www.weather.gov/" target="_blank" rel="noopener noreferrer">weather.gov</a> and <a href={IDAHO511} target="_blank" rel="noopener noreferrer">511.idaho.gov</a> before you go.</p>
+</section>

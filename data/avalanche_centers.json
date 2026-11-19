@@ -1,0 +1,30 @@
+{
+ "_note": "Which avalanche centers forecast for which Idaho region. Source: Grok's brief_config.json (Nov 18) and its cross-border check in GROK_LOG (Nov 19). Edit here, not in code. build_conditions.py copies this into conditions.json as regions[<id>].avalanche (links for a region) and avalanchePoints (overrides for a forecast point such as Island Park; a point without an entry uses its region's list).",
+ "centers": {
+  "sawtooth": {"name": "Sawtooth Avalanche Center", "url": "https://www.sawtoothavalanche.com/", "area": "Sawtooth, Wood River Valley and Galena area"},
+  "payette": {"name": "Payette Avalanche Center", "url": "https://payetteavalanche.org/", "area": "West Mountains and McCall area"},
+  "ipac": {"name": "Idaho Panhandle Avalanche Center", "url": "https://www.idahopanhandleavalanche.org/", "area": "Idaho Panhandle"},
+  "gnfac": {"name": "Gallatin National Forest Avalanche Center", "url": "https://www.mtavalanche.com/forecast/island-park", "area": "Island Park and the Centennials (Island Park zone)"},
+  "btac": {"name": "Bridger-Teton Avalanche Center", "url": "https://bridgertetonavalanchecenter.org/forecasts/", "area": "Teton Valley (Tetons zone) and the Palisades/Swan Valley side (Snake River Range zone)"},
+  "uac_logan": {"name": "Utah Avalanche Center, Logan", "url": "https://utahavalanchecenter.org/forecast/logan", "area": "Bear River Range, including southeastern Idaho (Logan Area Mountains)"},
+  "avalanche_org": {"name": "avalanche.org", "url": "https://avalanche.org/", "area": "National hub: use where no local center forecasts"}
+ },
+ "regions": {
+  "panhandle": ["ipac"],
+  "clearwater": ["avalanche_org"],
+  "southwest": ["payette", "avalanche_org"],
+  "magic-valley": ["sawtooth"],
+  "salmon": ["sawtooth", "avalanche_org"],
+  "upper-snake": ["gnfac", "btac"],
+  "southeast": ["uac_logan", "avalanche_org"]
+ },
+ "points": {
+  "coeur-d-alene": ["ipac"],
+  "boise": ["avalanche_org"],
+  "mccall": ["payette"],
+  "ketchum": ["sawtooth"],
+  "island-park": ["gnfac"],
+  "pocatello": ["avalanche_org"]
+ },
+ "verified": "2026-11-18: sawtooth + payette 200 via curl; ipac + avalanche.org 403 to curl (bot block) but load in a normal fetch. 2026-11-19 (Grok): gnfac, btac and uac_logan zones confirmed; nothing forecasts the Portneuf/Pocatello-area ranges, so Pocatello keeps the generic link; Big Holes is observation-only."
+}

@@ -1,0 +1,380 @@
+{
+ "rivers": [
+  {
+   "region": "Southwest",
+   "name": "NF Payette near Banks",
+   "usgs_id": "USGS-13246000",
+   "use": "P (whitewater)"
+  },
+  {
+   "region": "Southwest",
+   "name": "NF Payette at McCall",
+   "usgs_id": "USGS-13239000",
+   "use": "F / McCall local"
+  },
+  {
+   "region": "Southwest",
+   "name": "Payette near Horseshoe Bend",
+   "usgs_id": "USGS-13247500",
+   "use": "P, F"
+  },
+  {
+   "region": "Southwest",
+   "name": "Boise at Glenwood Bridge",
+   "usgs_id": "USGS-13206000",
+   "use": "P, F (lower Boise)"
+  },
+  {
+   "region": "Southwest",
+   "name": "SF Boise at Anderson Ranch Dam",
+   "usgs_id": "USGS-13190500",
+   "use": "F (tailwater)"
+  },
+  {
+   "region": "Clearwater",
+   "name": "Lochsa near Lowell",
+   "usgs_id": "USGS-13337000",
+   "use": "P"
+  },
+  {
+   "region": "Clearwater",
+   "name": "SF Clearwater at Stites",
+   "usgs_id": "USGS-13338500",
+   "use": "P, F"
+  },
+  {
+   "region": "Clearwater",
+   "name": "Salmon at White Bird",
+   "usgs_id": "USGS-13317000",
+   "use": "P (lower Salmon)"
+  },
+  {
+   "region": "Panhandle",
+   "name": "Kootenai below Moyie nr Bonners Ferry",
+   "usgs_id": "USGS-12308000",
+   "use": "F"
+  },
+  {
+   "region": "Panhandle",
+   "name": "Coeur d'Alene near Cataldo",
+   "usgs_id": "USGS-12413500",
+   "use": "F, P"
+  },
+  {
+   "region": "Panhandle",
+   "name": "Spokane near Post Falls",
+   "usgs_id": "USGS-12419000",
+   "use": "F, P"
+  },
+  {
+   "region": "Magic Valley",
+   "name": "Silver Creek near West Campground",
+   "usgs_id": "USGS-131504301",
+   "use": "F"
+  },
+  {
+   "region": "Magic Valley",
+   "name": "Big Wood at Hailey",
+   "usgs_id": "USGS-13139510",
+   "use": "F (shops quote this)"
+  },
+  {
+   "region": "Magic Valley",
+   "name": "SF Boise near Featherville",
+   "usgs_id": "USGS-13186000",
+   "use": "F, P"
+  },
+  {
+   "region": "Southeast",
+   "name": "Bear River at Pescadero",
+   "usgs_id": "USGS-10068500",
+   "use": "F"
+  },
+  {
+   "region": "Southeast",
+   "name": "Portneuf at Pocatello",
+   "usgs_id": "USGS-13075500",
+   "use": "F"
+  },
+  {
+   "region": "Southeast",
+   "name": "Blackfoot near Blackfoot",
+   "usgs_id": "USGS-13068500",
+   "use": "F"
+  },
+  {
+   "region": "Upper Snake",
+   "name": "Henrys Fork near Island Park",
+   "usgs_id": "USGS-13042500",
+   "use": "F"
+  },
+  {
+   "region": "Upper Snake",
+   "name": "Henrys Fork near Ashton",
+   "usgs_id": "USGS-13046000",
+   "use": "F"
+  },
+  {
+   "region": "Upper Snake",
+   "name": "Snake near Heise",
+   "usgs_id": "USGS-13037500",
+   "use": "P, F (South Fork Snake)"
+  },
+  {
+   "region": "Upper Snake",
+   "name": "Teton near St. Anthony",
+   "usgs_id": "USGS-13055000",
+   "use": "P, F"
+  },
+  {
+   "region": "Salmon",
+   "name": "Salmon at Salmon",
+   "usgs_id": "USGS-13302500",
+   "use": "P, F"
+  },
+  {
+   "region": "Salmon",
+   "name": "MF Salmon at MF Lodge",
+   "usgs_id": "USGS-13309220",
+   "use": "P (Middle Fork)"
+  },
+  {
+   "region": "Salmon",
+   "name": "Lemhi near Lemhi",
+   "usgs_id": "USGS-13305000",
+   "use": "F"
+  },
+  {
+   "region": "Salmon",
+   "name": "Valley Creek at Stanley",
+   "usgs_id": "USGS-13295000",
+   "use": "P, F (upper Salmon area)"
+  },
+  {
+   "region": "Panhandle",
+   "name": "St Joe at Calder",
+   "usgs_id": "USGS-12414500",
+   "use": "P (whitewater)"
+  },
+  {
+   "region": "Panhandle",
+   "name": "Moyie at Eastport",
+   "usgs_id": "USGS-12306500",
+   "use": "P (whitewater)"
+  },
+  {
+   "region": "Clearwater",
+   "name": "Selway nr Lowell",
+   "usgs_id": "USGS-13336500",
+   "use": "P (whitewater)"
+  },
+  {
+   "region": "Salmon",
+   "name": "Salmon bl Yankee Fork nr Clayton",
+   "usgs_id": "USGS-13296500",
+   "use": "P (Sunbeam)"
+  },
+  {
+   "region": "Southwest",
+   "name": "Bruneau nr Hot Spring",
+   "usgs_id": "USGS-13168500",
+   "use": "P (whitewater)"
+  },
+  {
+   "region": "Southwest",
+   "name": "Owyhee nr Rome OR",
+   "usgs_id": "USGS-13181000",
+   "use": "P (Owyhee reference)"
+  },
+  {
+   "region": "Southeast",
+   "name": "Bear at Idaho-Utah state line",
+   "usgs_id": "USGS-10092700",
+   "use": "P (Oneida Narrows)"
+  }
+ ],
+ "snow": [
+  {
+   "region": "Southwest",
+   "area": "Brundage (McCall)",
+   "snotel_text": "Brundage Reservoir (370)",
+   "note": "",
+   "snotel": {
+    "id": "370:ID:SNTL",
+    "name": "Brundage Reservoir",
+    "lat": 45.04315,
+    "lon": -116.13253
+   },
+   "usgs": null
+  },
+  {
+   "region": "Southwest",
+   "area": "Bogus Basin",
+   "snotel_text": "Bogus Basin (978)",
+   "note": "",
+   "snotel": {
+    "id": "978:ID:SNTL",
+    "name": "Bogus Basin",
+    "lat": 43.76377,
+    "lon": -116.09685
+   },
+   "usgs": null
+  },
+  {
+   "region": "Southwest",
+   "area": "Mores Creek",
+   "snotel_text": "Mores Creek Summit",
+   "note": "(backcountry skiing)",
+   "snotel": {
+    "id": "637:ID:SNTL",
+    "name": "Mores Creek Summit",
+    "lat": 43.932,
+    "lon": -115.66588
+   },
+   "usgs": null
+  },
+  {
+   "region": "Southwest",
+   "area": "Tamarack",
+   "snotel_text": "Puhi Flat",
+   "note": "",
+   "snotel": {
+    "id": "782:ID:SNTL",
+    "name": "Puhi Flat",
+    "lat": 44.77091,
+    "lon": -116.24805
+   },
+   "usgs": null
+  },
+  {
+   "region": "Southwest",
+   "area": "Bear Basin",
+   "snotel_text": "Bear Basin",
+   "note": "(cross country skiing)",
+   "snotel": {
+    "id": "319:ID:SNTL",
+    "name": "Bear Basin",
+    "lat": 44.95222,
+    "lon": -116.14293
+   },
+   "usgs": null
+  },
+  {
+   "region": "Panhandle",
+   "area": "Schweitzer",
+   "snotel_text": "Schweitzer Basin (738)",
+   "note": "",
+   "snotel": {
+    "id": "738:ID:SNTL",
+    "name": "Schweitzer Basin",
+    "lat": 48.37428,
+    "lon": -116.63917
+   },
+   "usgs": null
+  },
+  {
+   "region": "Panhandle",
+   "area": "Silver Mountain / Lookout Pass",
+   "snotel_text": "Lookout (594)",
+   "note": "",
+   "snotel": {
+    "id": "594:ID:SNTL",
+    "name": "Lookout",
+    "lat": 47.45749,
+    "lon": -115.70457
+   },
+   "usgs": null
+  },
+  {
+   "region": "Clearwater",
+   "area": "Bald Mountain (Pierce)",
+   "snotel_text": "Pierce R.S. (1142)",
+   "note": "",
+   "snotel": {
+    "id": "1142:ID:SNTL",
+    "name": "Pierce R.S.",
+    "lat": 46.49597,
+    "lon": -115.7957
+   },
+   "usgs": null
+  },
+  {
+   "region": "Magic Valley",
+   "area": "Sun Valley",
+   "snotel_text": "Hyndman",
+   "note": "",
+   "snotel": {
+    "id": "537:ID:SNTL",
+    "name": "Hyndman",
+    "lat": 43.71077,
+    "lon": -114.15894
+   },
+   "usgs": null
+  },
+  {
+   "region": "Magic Valley",
+   "area": "Soldier Mountain",
+   "snotel_text": "Soldier R.S. (769)",
+   "note": "",
+   "snotel": {
+    "id": "769:ID:SNTL",
+    "name": "Soldier R.S.",
+    "lat": 43.48407,
+    "lon": -114.82692
+   },
+   "usgs": null
+  },
+  {
+   "region": "Magic Valley",
+   "area": "Magic Mountain",
+   "snotel_text": "Magic Mountain (610)",
+   "note": "",
+   "snotel": {
+    "id": "610:ID:SNTL",
+    "name": "Magic Mountain",
+    "lat": 42.18071,
+    "lon": -114.28665
+   },
+   "usgs": null
+  },
+  {
+   "region": "Magic Valley",
+   "area": "Pomerelle",
+   "snotel_text": "Howell Canyon (534)",
+   "note": "",
+   "snotel": {
+    "id": "534:ID:SNTL",
+    "name": "Howell Canyon",
+    "lat": 42.32029,
+    "lon": -113.61587
+   },
+   "usgs": null
+  },
+  {
+   "region": "Southeast",
+   "area": "Pebble Creek",
+   "snotel_text": "Pebble Creek (1299)",
+   "note": "",
+   "snotel": {
+    "id": "1299:ID:SNTL",
+    "name": "Pebble Creek",
+    "lat": 42.7674,
+    "lon": -112.10648
+   },
+   "usgs": null
+  },
+  {
+   "region": "Salmon",
+   "area": "(no ski area)",
+   "snotel_text": "Morgan Creek (639)",
+   "note": "",
+   "snotel": {
+    "id": "639:ID:SNTL",
+    "name": "Morgan Creek",
+    "lat": 44.84237,
+    "lon": -114.26871
+   },
+   "usgs": null
+  }
+ ]
+}

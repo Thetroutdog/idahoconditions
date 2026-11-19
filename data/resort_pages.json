@@ -1,0 +1,419 @@
+{
+ "panhandle-schweitzer": {
+  "landing": "https://www.schweitzer.com/",
+  "conditions": "https://www.schweitzer.com/mountain-info/mountain-report",
+  "via": "link 'Mountain Report' on landing page",
+  "note": "",
+  "score": 10,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "panhandle-silver-mountain": {
+  "landing": "https://www.silvermt.com/",
+  "conditions": "https://silvermt.com/snow-report/",
+  "via": "link 'Conditions' on landing page",
+  "note": "",
+  "score": 8,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "panhandle-lookout-pass": {
+  "landing": "https://skilookout.com/",
+  "conditions": "https://skilookout.com/snow-report",
+  "via": "link 'VIEW SNOW REPORT' on landing page",
+  "note": "",
+  "score": 10,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "clearwater-bald-mountain": {
+  "landing": "https://skibaldmountain.com/",
+  "conditions": null,
+  "via": null,
+  "note": "",
+  "checkedAt": "2026-11-16"
+ },
+ "clearwater-cottonwood-butte": {
+  "landing": "https://www.cottonwoodbutte.org/",
+  "conditions": null,
+  "via": null,
+  "note": "",
+  "checkedAt": "2026-11-16"
+ },
+ "clearwater-snowhaven": {
+  "landing": "https://grangeville.us/snowhaven-facebook2/about-snowhaven-ski-tube-hill/",
+  "conditions": "https://grangeville.us/snowhaven-facebook2/",
+  "via": "link 'Snowhaven' one click in",
+  "note": "",
+  "score": 4,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "southwest-bogus-basin": {
+  "landing": "https://bogusbasin.org/",
+  "conditions": "https://bogusbasin.org/your-mountain/trails-grooming/",
+  "via": "link 'Trail Report' on landing page",
+  "note": "",
+  "score": 10,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "southwest-brundage-mountain": {
+  "landing": "https://brundage.com/",
+  "conditions": "https://brundage.com/on-the-mountain/snow-report/",
+  "via": "link 'View Grooming Report' on landing page",
+  "note": "conditions URL set by Eric 2026-11-18",
+  "score": 10,
+  "checkedAt": "2026-11-16"
+ },
+ "southwest-tamarack-resort": {
+  "landing": "https://tamarackidaho.com/",
+  "conditions": "https://tamarackidaho.com/the-mountain/snow-report",
+  "via": "link 'Snowfort 2027' one click in",
+  "note": "conditions URL set by Eric 2026-11-18",
+  "score": 4,
+  "checkedAt": "2026-11-16"
+ },
+ "southwest-little-ski-hill": {
+  "landing": "https://payettelakesskiclub.org/pages/little-ski-hill",
+  "conditions": "https://payettelakesskiclub.org/pages/events",
+  "via": "link 'Snow Ball Gala - Dec. 5th at Shore Lodge' one click in",
+  "note": "",
+  "score": 4,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "magic-valley-sun-valley-bald-mountain-dollar": {
+  "landing": "https://www.sunvalley.com/",
+  "conditions": "https://www.sunvalley.com/the-mountain/mountain-report",
+  "via": "link 'Trail Report' on landing page",
+  "note": "",
+  "score": 10,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "magic-valley-pomerelle": {
+  "landing": "https://www.pomerelle.com/",
+  "conditions": "https://www.pomerelle.com/conditions",
+  "via": "link '' on landing page",
+  "note": "conditions URL set by Eric 2026-11-18",
+  "score": 8,
+  "checkedAt": "2026-11-16"
+ },
+ "magic-valley-soldier-mountain": {
+  "landing": "https://soldiermountain.com/",
+  "conditions": "https://snocountry.com/snow-report/idaho/soldier-mountain-ski-area/",
+  "via": "link 'Terms and Conditions' one click in",
+  "note": "conditions URL set by Eric 2026-11-18",
+  "score": 8,
+  "checkedAt": "2026-11-16"
+ },
+ "magic-valley-magic-mountain": {
+  "landing": "https://magicmountainresort.com/",
+  "conditions": null,
+  "via": null,
+  "note": "",
+  "checkedAt": "2026-11-16"
+ },
+ "magic-valley-rotarun": {
+  "landing": "https://rotarun.org/",
+  "conditions": null,
+  "via": null,
+  "note": "",
+  "checkedAt": "2026-11-16"
+ },
+ "southeast-pebble-creek": {
+  "landing": "https://pebblecreekskiarea.com/",
+  "conditions": "https://pebblecreekskiarea.com/snow-report/",
+  "via": "link 'Snow Report' on landing page",
+  "note": "conditions link did not load: URLError: <urlopen error [Errno 54] Connection reset by peer>",
+  "score": 10,
+  "conditionsOk": false,
+  "checkedAt": "2026-11-16"
+ },
+ "upper-snake-kelly-canyon": {
+  "landing": "https://kellycanyonresort.com/",
+  "conditions": "https://kellycanyonresort.com/#snow-report",
+  "via": null,
+  "note": "conditions URL set by Eric 2026-11-18",
+  "checkedAt": "2026-11-16"
+ },
+ "upper-snake-grand-targhee-wy-idaho-access": {
+  "landing": "https://www.grandtarghee.com/",
+  "conditions": "https://www.grandtarghee.com/the-mountain/cams-conditions/mountain-report",
+  "via": "link 'Terms & Conditions' on landing page",
+  "note": "conditions URL set by Eric 2026-11-18",
+  "score": 8,
+  "checkedAt": "2026-11-16"
+ },
+ "salmon-lost-trail-powder-mountain": {
+  "landing": "https://losttrail.com/",
+  "conditions": "https://losttrail.com/snow-report/",
+  "via": "link '' one click in",
+  "note": "",
+  "score": 4,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "panhandle-fourth-of-july-pass-park-n-ski": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "panhandle-priest-lake-golf-course-park-n-ski": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "panhandle-hanna-flats-park-n-ski": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "panhandle-priest-lake-state-park-indian-creek": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "clearwater-palouse-divide-park-n-ski": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "clearwater-fish-creek-meadows-park-n-ski": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "southwest-bear-basin-nordic-center": {
+  "landing": "https://payettelakesskiclub.org/pages/bear-basin-nordic-center",
+  "conditions": "https://payettelakesskiclub.org/pages/events",
+  "via": "link 'Snow Ball Gala - Dec. 5th at Shore Lodge' one click in",
+  "note": "",
+  "score": 4,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "southwest-ponderosa-state-park": {
+  "landing": "https://www.mccallnordic.com/nordic-areas/",
+  "conditions": "https://www.mccallnordic.com/grooming-report/",
+  "via": "link 'Grooming Report' on landing page",
+  "note": "",
+  "score": 10,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "southwest-jug-mountain-ranch": {
+  "landing": "https://www.mccallnordic.com/nordic-areas/",
+  "conditions": "https://www.mccallnordic.com/grooming-report/",
+  "via": "link 'Grooming Report' on landing page",
+  "note": "",
+  "score": 10,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "southwest-idaho-city-park-n-ski-yurts-banner-ridge-gold-fork": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "southwest-bogus-basin-nordic": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "magic-valley-galena-lodge-trails-bcrd": {
+  "landing": "https://bcrd.org/winter-trails/our-winter-trails/",
+  "conditions": "https://bcrd.org/terms-conditions/",
+  "via": "link 'Terms & Conditions' on landing page",
+  "note": "",
+  "score": 8,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "magic-valley-harriman-trail-north-valley-trails-bcrd": {
+  "landing": "https://bcrd.org/winter-trails/our-winter-trails/north-valley-trails/",
+  "conditions": "https://bcrd.org/terms-conditions/",
+  "via": "link 'Terms & Conditions' on landing page",
+  "note": "",
+  "score": 8,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "magic-valley-quigley-nordic-bcrd": {
+  "landing": "https://bcrd.org/winter-trails/our-winter-trails/",
+  "conditions": "https://bcrd.org/terms-conditions/",
+  "via": "link 'Terms & Conditions' on landing page",
+  "note": "",
+  "score": 8,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "magic-valley-wood-river-trail-winter-grooming": {
+  "landing": "https://bcrd.org/winter-trails/our-winter-trails/",
+  "conditions": "https://bcrd.org/terms-conditions/",
+  "via": "link 'Terms & Conditions' on landing page",
+  "note": "",
+  "score": 8,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "magic-valley-alturas-lake-ski-trails": {
+  "landing": "https://sawtoothskiclub.com/",
+  "conditions": "https://sawtoothskiclub.com/new-by-the-minute-trail-grooming-report/",
+  "via": "link 'TRAIL GROOMING REPORT' on landing page",
+  "note": "",
+  "score": 10,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "southeast-mink-creek-park-n-ski": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "upper-snake-harriman-state-park": {
+  "landing": "https://parksandrecreation.idaho.gov/state-park/harriman-state-park/",
+  "conditions": "https://parksandrecreation.idaho.gov/park-activity/snowshoeing/",
+  "via": "link 'Snowshoeing' one click in",
+  "note": "",
+  "score": 4,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "upper-snake-brimstone-buffalo-river-park-n-ski": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "upper-snake-bear-gulch-mesa-falls-park-n-ski": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "upper-snake-fall-river-ridge-park-n-ski": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "salmon-park-creek-ski-trails": {
+  "landing": "https://sawtoothskiclub.com/winters-wildflowers/",
+  "conditions": "https://sawtoothskiclub.com/new-by-the-minute-trail-grooming-report/",
+  "via": "link 'TRAIL GROOMING REPORT' on landing page",
+  "note": "",
+  "score": 10,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "panhandle-priest-lake-nordman-priest-lake": {
+  "landing": "https://priestlake.org/activities/snowmobiling/",
+  "conditions": "https://priestlake.org/snow-update/",
+  "via": "link 'TRAIL GROOMING REPORT' on landing page",
+  "note": "",
+  "score": 10,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "panhandle-wallace-silver-valley": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "panhandle-coeur-d-alene-kootenai-county": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "panhandle-avery-st-joe": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "panhandle-sandpoint-bonners-ferry": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "clearwater-bovill-elk-river-latah-county": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "clearwater-orofino-pierce": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "clearwater-grangeville-fish-creek": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "clearwater-elk-city-red-river-dixie": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "southwest-mccall-valley-county": {
+  "landing": "https://snowmobilemccall.net/",
+  "conditions": "http://snowmobilemccall.net/wp-content/uploads/2025/02/snowmobilemap2022_V2.pdf",
+  "via": "link 'North Valley County Map' one click in",
+  "note": "conditions link did not load: not a web page (application/pdf)",
+  "score": 4,
+  "conditionsOk": false,
+  "checkedAt": "2026-11-16"
+ },
+ "southwest-smiths-ferry-wellington-snow-park": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "southwest-pine-featherville": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "southwest-idaho-city": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "magic-valley-diamondfield-jack-south-hills": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "magic-valley-fairfield-camas-county": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "magic-valley-blaine-county-baker-creek-wood-river": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "southeast-bear-lake-valley": {
+  "landing": "https://bearlake.org/cat/snowmobiling/",
+  "conditions": "https://bearlake.org/cat/snow-skiing/",
+  "via": "link 'Snow Skiing' one click in",
+  "note": "",
+  "score": 4,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ },
+ "southeast-bannock-county-scout-mtn-mink-creek-inman-pebble-toponce": {
+  "landing": null,
+  "conditions": null,
+  "note": "no website on file"
+ },
+ "southeast-southeast-idaho-caribou-nf": {
+  "landing": "https://idahohighcountry.org/cat/snowmobile-trails/",
+  "conditions": "https://idahohighcountry.org/cat/snowmobile-trails/",
+  "via": "link 'Snowmobile Trails' one click in",
+  "note": "",
+  "score": 4,
+  "conditionsOk": true,
+  "checkedAt": "2026-11-16"
+ }
+}

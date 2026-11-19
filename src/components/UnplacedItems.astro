@@ -1,0 +1,9 @@
+---
+// Items that belong to no single region, shown inside a statewide card: "Statewide <thing>" link plus a one-line note.
+const { items = [] } = Astro.props;
+---
+{items.length > 0 && (
+  <ul class="alert-items">
+    {items.map((x) => <li><a href={x.href} target="_blank" rel="noopener noreferrer">{x.title}</a><small>{x.desc}</small></li>)}
+  </ul>
+)}

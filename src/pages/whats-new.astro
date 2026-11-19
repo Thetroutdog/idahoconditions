@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../lib/site.js';
+---
+<Base title="What’s new — Idaho Conditions" description="A short, plain-English list of what has changed on Idaho Conditions.">
+  <main>
+    <div class="wrap">
+      <PageHero title="What’s new." lede="A short list of what has changed, newest first." />
+      <div class="doc">
+        <p class="whatsnew-date">November 2026</p>
+        <h2>Alerts and conditions on every region page</h2>
+        <p>Each region now has its own alert bar and a full “Alerts and conditions” section: weather alerts, highway closures and winter road conditions, air quality, wildfires and prescribed burns. When nothing is wrong, the bar says so.</p>
+        <h2>Live Idaho 511 road data</h2>
+        <p>Highway closures and snow or ice on roads now come from Idaho 511, with a link to 511 on every page that mentions a road.</p>
+        <h2>Region maps with rivers and parks</h2>
+        <p>A fixed map for each region shows towns, ski areas, the main rivers and national monuments. The statewide map now shows Idaho’s rivers too.</p>
+        <h2>Seven-day forecasts and mountain forecasts</h2>
+        <p>Every region has a seven-day forecast, and ski, Nordic, snowmobile and backcountry spots use a forecast for the mountain, not the valley town.</p>
+        <h2>River flows, snow and air quality</h2>
+        <p>River flows with trends, snow depth from SNOTEL stations, and air quality readings, all marked “out of date” when a source falls behind.</p>
+      </div>
+    </div>
+  </main>
+</Base>

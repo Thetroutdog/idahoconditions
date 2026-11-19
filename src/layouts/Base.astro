@@ -1,0 +1,159 @@
+---
+import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
+import WordmarkMark from '../components/WordmarkMark.astro';
+import SocialIcons from '../components/SocialIcons.astro';
+import { SITE } from '../lib/site.js';
+import { conditions, regionIds } from '../lib/conditions.js';
+const { title = 'Idaho Conditions', description = 'Live outdoor conditions for Idaho, organized by Fish and Game region.', regionBar = null } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://idahoconditions.com').href;
+// Footer source chips: a source whose last fetch failed is marked delayed. Sources never fetched (no fetchedAt) are not flagged.
+const delayed = (k) => { const s = conditions.sources?.[k]; return !!(s && s.fetchedAt && s.ok === false); };
+// [source key, official home, name, quality tag]. The tag and "delayed" show together, e.g. "USGS (provisional, delayed)".
+const FOOTER_SOURCES = [
+  ['nws', 'https://www.weather.gov/', 'National Weather Service', ''],
+  ['usgs', 'https://waterdata.usgs.gov/', 'USGS', 'provisional'],
+  ['noaa', 'https://water.noaa.gov/', 'NOAA water', 'selected gauges'],
+  ['snotel', 'https://www.nrcs.usda.gov/resources/data-and-reports/snow-and-climate-monitoring-predefined-reports-and-maps', 'USDA NRCS SNOTEL', ''],
+  ['idaho511', 'https://511.idaho.gov/', 'Idaho 511', 'ITD'],
+  ['airnow', 'https://www.airnow.gov/', 'AirNow', 'preliminary'],
+  ['nifc', 'https://www.nifc.gov/', 'NIFC', 'WFIGS'],
+];
+const srcLabel = (k, name, tag) => { const parts = [tag, delayed(k) ? 'delayed' : ''].filter(Boolean).join(', '); return parts ? `${name} (${parts})` : name; };
+// Region pages pass their own bar (always shown, green when clear); everything else shows the statewide bar.
+const bar = regionBar ?? conditions.alertBar;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:site_name" content="Idaho Conditions" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://idahoconditions.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Idaho Conditions: rivers, roads, snow, smoke and fire for Idaho" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://idahoconditions.com/og-image.jpg" />
+    <meta name="ic-generated" content={conditions.generatedAt} />
+    <meta name="ic-sample" content={conditions.meta?.sample ? '1' : '0'} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#10241c" />
+    <meta name="apple-mobile-web-app-title" content="Idaho Conditions" />
+    {import.meta.env.PUBLIC_ALLOW_INDEX !== 'true' && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="preload" href="/fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/fraunces-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body>
+    {conditions.meta?.sample && <div class="mockup-banner">Sample data — <strong>not real conditions</strong></div>}
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href="/" aria-label="Idaho Conditions home">
+          <WordmarkMark />
+          <span class="wordmark-text"><span class="mark-idaho">Idaho</span><span class="mark-conditions">Conditions</span></span>
+        </a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="/#regions">Regions</a>
+          <a href="/#activities">Activities</a>
+          <a href="/#brief">The Brief</a>
+          <a href="#sources">Sources</a>
+        </nav>
+        <div class="header-actions">
+          <SocialIcons />
+          <a class="btn" href="/#brief">Get the brief</a>
+        </div>
+      </div>
+    </header>
+    {bar && (
+      <div class={`alert-bar ${bar.level}`} role="status">
+        <div class="alert-bar-inner">
+          <span class="alert-kicker">{bar.kicker ?? 'Alert'}</span>
+          {regionBar && regionBar.level === 'green' ? <strong>{bar.text}</strong> : <a href={bar.href ?? '/#snapshot'}><strong>{bar.text}</strong>{bar.moreCount > 0 && ` (+${bar.moreCount} more)`}</a>}
+          {!(regionBar && regionBar.level === 'green') && <span class="alert-meta">Details below</span>}
+        </div>
+      </div>
+    )}
+    <slot />
+    <footer class="site-footer" id="sources">
+      <div class="wrap footer-grid">
+        <div>
+          <strong>Idaho Conditions</strong>
+          <p class="footer-links"><a href="/about/">About</a> · <a href="/whats-new/">What’s new</a> · <a href="/privacy/">Privacy</a> · <a href={`mailto:${SITE.contactEmail}`}>Contact</a></p>
+          <SocialIcons class="in-footer" />
+          <p>An independent conditions aggregator for trips across Idaho. Not affiliated with Idaho Fish and Game, the Idaho Transportation Department or the agencies that publish the source data. Informational only. The mountains don’t read this site, so check NWS, Idaho 511 and your avalanche center before you go.</p>
+        </div>
+        <div>
+          <p style="margin:0 0 10px"><strong>Data sources</strong></p>
+          <div class="sources">
+            {FOOTER_SOURCES.map(([k, href, name, tag]) => <a href={href} rel="noopener" class={delayed(k) ? 'delayed' : undefined}>{srcLabel(k, name, tag)}</a>)}
+          </div>
+          <p class="footer-note">Air quality data are preliminary, courtesy of federal, state, local and tribal air quality agencies and the EPA AirNow program (<a href="https://www.airnow.gov/partners/" rel="noopener">partner agencies</a>). AirNow observations are preliminary and subject to change. USGS and NOAA river readings are provisional and subject to revision. Fire locations from NIFC/WFIGS are dynamic and provided as is. Always check the official source before you travel. <a href="/about/#data">About the data</a>.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // Delegated handlers so they keep working after in-place page swaps.
+      document.addEventListener('submit', (e) => {
+        const f = (e.target as HTMLElement).closest('[data-signup]');
+        if (!f) return;
+        e.preventDefault();
+        const n = f.querySelector('.form-note');
+        if (n) { n.textContent = 'Signup opens soon.'; n.classList.add('is-on'); }
+      });
+      document.addEventListener('click', (e) => {
+        const t = e.target as HTMLElement;
+        if (t.closest('a[data-keep-scroll]')) (window as any).__keepY = window.scrollY;
+      });
+      // ?region= on statewide activity pages. Static HTML, applied in the browser.
+      function applyQuery() {
+        const q = new URLSearchParams(location.search);
+        const sw = document.querySelector('[data-statewide]');
+        if (sw) {
+          const r = q.get('region') || '';
+          sw.querySelectorAll('.region-group').forEach((g) => { (g as HTMLElement).hidden = !!r && g.getAttribute('data-region') !== r; });
+          document.querySelectorAll('[data-region-chip]').forEach((c) => {
+            const on = (c.getAttribute('data-region-chip') || '') === r;
+            c.classList.toggle('is-on', on);
+            if (on) c.setAttribute('aria-current', 'page'); else c.removeAttribute('aria-current');
+          });
+        }
+      }
+      // Pages are static, so a stopped refresh would leave old alerts looking current. Past 90 minutes: banner + hide the alert bar.
+      function checkStale() {
+        document.querySelectorAll('.stale-banner').forEach((n) => n.remove());
+        const gen = document.querySelector('meta[name="ic-generated"]')?.getAttribute('content');
+        const sample = document.querySelector('meta[name="ic-sample"]')?.getAttribute('content') === '1';
+        const bar = document.querySelector('.alert-bar') as HTMLElement | null;
+        if (bar) bar.hidden = false;
+        // An alert that ended after the page was built is hidden here (each alert line carries its end time in data-ends).
+        document.querySelectorAll('[data-ends]').forEach((n) => { const e = Date.parse(n.getAttribute('data-ends') || ''); if (Number.isFinite(e) && e < Date.now()) (n as HTMLElement).hidden = true; });
+        if (!gen || sample) return;
+        const t = Date.parse(gen);
+        if (!Number.isFinite(t) || (Date.now() - t) / 60000 <= 90) return;
+        const when = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Boise', weekday: 'short', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }).format(t);
+        const b = document.createElement('div');
+        b.className = 'stale-banner'; b.setAttribute('role', 'status');
+        b.textContent = `Data delayed. Last updated ${when}. The alert bar is hidden until the next refresh, and any alert past its end time is removed; check weather.gov and 511.idaho.gov for current warnings.`;
+        document.querySelector('.site-header')?.insertAdjacentElement('afterend', b);
+        if (bar) bar.hidden = true;
+      }
+      document.addEventListener('astro:page-load', () => { applyQuery(); checkStale(); });
+      document.addEventListener('astro:after-swap', () => {
+        const y = (window as any).__keepY;
+        if (typeof y === 'number') { window.scrollTo(0, y); (window as any).__keepY = null; }
+      });
+      applyQuery();
+      checkStale();
+    </script>
+  </body>
+</html>

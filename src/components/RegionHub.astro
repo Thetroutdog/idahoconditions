@@ -1,0 +1,74 @@
+---
+import PageHero from './PageHero.astro';
+import RegionData from './RegionData.astro';
+import ActivityChips from './ActivityChips.astro';
+import Forecast7 from './Forecast7.astro';
+import { conditions, fmtTime } from '../lib/conditions.js';
+import { regionById, hubActivities, spotsIn } from '../lib/catalog.js';
+import RegionMap from './RegionMap.astro';
+import RegionAlerts from './RegionAlerts.astro';
+import { statusStrip } from '../lib/regionview.js';
+
+const { id } = Astro.props;
+const reg = regionById[id];
+const r = conditions.regions[id];
+const tz = r.tz;
+const tiles = hubActivities(id);
+const total = spotsIn(id).length;
+const strip = statusStrip(id);
+const hasFc = (r.forecast?.points ?? []).some((p) => p.days?.length);
+const updated = fmtTime(conditions.generatedAt, tz);
+---
+<main>
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="/">Idaho</a><span aria-hidden="true"> / </span><strong style="color:var(--ink);font-weight:600">{reg.name} Region</strong></nav>
+    <div class="toolbar">
+      <PageHero title={`${reg.name} Region.`} lede="Pick an activity below for spots, sources and outbound links." updated={updated} meta={[`${tiles.length} activities · ${total} spots`]} />
+      <div class="jump-col">
+        <nav class="jump-btns" aria-label="Jump to">
+          <a class="jump-btn" href="#activities">Activities <span aria-hidden="true">↓</span></a>
+          <a class="jump-btn" href="#alerts">Alerts &amp; conditions <span aria-hidden="true">↓</span></a>
+        </nav>
+        <p class="jump-sub">
+          {hasFc && <a href="#forecast" data-open="forecast">Seven-day forecast <span aria-hidden="true">↓</span></a>}
+          <a href="#readings" data-open="readings">All live readings <span aria-hidden="true">↓</span></a>
+        </p>
+      </div>
+    </div>
+
+    <section class="status-strip" aria-label="Regional conditions">
+      {strip.map((c) => (
+        <article class="status-mini">
+          <h2>{c.title}</h2>
+          <p class="lead">{c.lead}</p>
+          {c.sub && <p class="sub">{c.sub}</p>}
+          {c.links && <p class="sub">{c.links.map((l, i) => <><a href={l.href} {...(l.href.startsWith('#') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}>{l.label}</a>{i < c.links.length - 1 ? ' · ' : ''}</>)}</p>}
+          <div class="src">{c.src}</div>
+        </article>
+      ))}
+    </section>
+
+    <div class="section-head sub-lead" id="activities" style="margin-bottom:10px"><h2>Activities</h2><p>Pick one for spots, sources and links.</p></div>
+    <ActivityChips region={id} />
+
+    <div class="hub" data-hub>
+      <div class="split">
+        <RegionMap id={id} regionName={reg.name} regionCode={reg.code} />
+        <RegionAlerts id={id} name={reg.name} />
+      </div>
+    </div>
+
+    <Forecast7 id={id} />
+    <RegionData id={id} />
+  </div>
+</main>
+
+<script>
+  // The two quiet links under the jump buttons open their collapsed section as they scroll to it.
+  document.addEventListener('click', (e) => {
+    const a = (e.target as Element | null)?.closest?.('a[data-open]');
+    if (!a) return;
+    const d = document.getElementById(a.getAttribute('data-open') ?? '');
+    if (d instanceof HTMLDetailsElement) d.open = true;
+  });
+</script>

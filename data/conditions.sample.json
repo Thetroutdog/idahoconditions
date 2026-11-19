@@ -1,0 +1,574 @@
+{
+ "schemaVersion": "0.1",
+ "meta": {
+  "sample": true
+ },
+ "generatedAt": "2026-11-15T19:30:00Z",
+ "sources": {
+  "nws": {
+   "fetchedAt": null,
+   "ok": false,
+   "error": "sample data"
+  },
+  "airnow": {
+   "fetchedAt": null,
+   "ok": false,
+   "error": "sample data"
+  },
+  "snotel": {
+   "fetchedAt": null,
+   "ok": false,
+   "error": "sample data"
+  },
+  "usgs": {
+   "fetchedAt": null,
+   "ok": false,
+   "error": "sample data"
+  },
+  "nifc": {
+   "fetchedAt": null,
+   "ok": false,
+   "error": "sample data"
+  },
+  "idaho511": {
+   "fetchedAt": null,
+   "ok": false,
+   "error": "sample data"
+  }
+ },
+ "alertBar": {
+  "level": "amber",
+  "text": "Winter Weather Advisory: Clearwater, Salmon (sample)",
+  "moreCount": 0,
+  "regionIds": [
+   "clearwater",
+   "salmon"
+  ]
+ },
+ "regions": {
+  "panhandle": {
+   "name": "Panhandle",
+   "tz": "America/Los_Angeles",
+   "level": "gray",
+   "levelReasons": [
+    {
+     "kind": "roads-missing",
+     "text": "Road data not connected yet, so we can't confirm clear"
+    }
+   ],
+   "summary": "No alerts. Road data unavailable.",
+   "alerts": [],
+   "forecast": {
+    "points": [],
+    "updated": null
+   },
+   "roads": {
+    "status": "missing",
+    "passes": [],
+    "closures": [],
+    "restrictions": []
+   },
+   "snow": [],
+   "rivers": [],
+   "air": {
+    "points": [],
+    "note": null
+   },
+   "fire": {
+    "wildfires": [],
+    "prescribed": []
+   },
+   "ski": []
+  },
+  "clearwater": {
+   "name": "Clearwater",
+   "tz": "America/Los_Angeles",
+   "level": "amber",
+   "levelReasons": [
+    {
+     "kind": "nws-advisory",
+     "text": "Winter Weather Advisory"
+    }
+   ],
+   "summary": "Winter Weather Advisory until Mon 11 PM.",
+   "alerts": [
+    {
+     "id": "clearwater-a1",
+     "event": "Winter Weather Advisory",
+     "severity": "Moderate",
+     "ends": "2026-11-16T23:00:00-07:00",
+     "headline": "SAMPLE: advisory text",
+     "zones": [],
+     "url": "https://www.weather.gov"
+    }
+   ],
+   "forecast": {
+    "points": [],
+    "updated": null
+   },
+   "roads": {
+    "status": "missing",
+    "passes": [],
+    "closures": [],
+    "restrictions": []
+   },
+   "snow": [],
+   "rivers": [],
+   "air": {
+    "points": [],
+    "note": null
+   },
+   "fire": {
+    "wildfires": [],
+    "prescribed": []
+   },
+   "ski": []
+  },
+  "southwest": {
+   "name": "Southwest",
+   "tz": "America/Boise",
+   "level": "gray",
+   "levelReasons": [
+    {
+     "kind": "roads-missing",
+     "text": "Road data not connected yet, so we can't confirm clear"
+    }
+   ],
+   "summary": "No alerts. Road data unavailable.",
+   "alerts": [],
+   "forecast": {
+    "updated": "2026-11-15T11:00:00-07:00",
+    "points": [
+     {
+      "id": "mccall",
+      "name": "McCall",
+      "office": "BOI",
+      "periods": [
+       {
+        "name": "Today",
+        "temp": 34,
+        "unit": "F",
+        "short": "Mostly cloudy",
+        "precipChance": 20
+       },
+       {
+        "name": "Tonight",
+        "temp": 22,
+        "unit": "F",
+        "short": "Snow likely",
+        "precipChance": 70
+       }
+      ]
+     },
+     {
+      "id": "boise",
+      "name": "Boise",
+      "office": "BOI",
+      "periods": [
+       {
+        "name": "Today",
+        "temp": 48,
+        "unit": "F",
+        "short": "Partly sunny",
+        "precipChance": 10
+       },
+       {
+        "name": "Tonight",
+        "temp": 33,
+        "unit": "F",
+        "short": "Chance rain",
+        "precipChance": 40
+       }
+      ]
+     }
+    ]
+   },
+   "roads": {
+    "status": "missing",
+    "passes": [],
+    "closures": [],
+    "restrictions": []
+   },
+   "snow": [
+    {
+     "id": "370:ID:SNTL",
+     "name": "Brundage Reservoir",
+     "area": "Brundage (McCall)",
+     "elevationFt": 6280,
+     "swe": {
+      "value": 2.1,
+      "unit": "in",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "fresh",
+      "provisional": false,
+      "source": "sample"
+     },
+     "depth": {
+      "value": 8,
+      "unit": "in",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "fresh",
+      "provisional": false,
+      "source": "sample"
+     },
+     "pctOfMedian": {
+      "value": 95,
+      "unit": "%",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "fresh",
+      "provisional": false,
+      "source": "sample"
+     },
+     "depthChange24h": {
+      "value": 0,
+      "unit": "in",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "fresh",
+      "provisional": false,
+      "source": "sample"
+     }
+    },
+    {
+     "id": "978:ID:SNTL",
+     "name": "Bogus Basin",
+     "area": "Bogus Basin",
+     "elevationFt": 6340,
+     "swe": {
+      "value": 0.8,
+      "unit": "in",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "fresh",
+      "provisional": false,
+      "source": "sample"
+     },
+     "depth": {
+      "value": 3,
+      "unit": "in",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "fresh",
+      "provisional": false,
+      "source": "sample"
+     },
+     "pctOfMedian": {
+      "value": 70,
+      "unit": "%",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "fresh",
+      "provisional": false,
+      "source": "sample"
+     },
+     "depthChange24h": {
+      "value": 0,
+      "unit": "in",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "fresh",
+      "provisional": false,
+      "source": "sample"
+     }
+    },
+    {
+     "id": "782:ID:SNTL",
+     "name": "Puhi Flat",
+     "area": "Tamarack",
+     "elevationFt": 5900,
+     "swe": {
+      "value": null,
+      "unit": "in",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "missing",
+      "provisional": false,
+      "source": "sample"
+     },
+     "depth": {
+      "value": null,
+      "unit": "in",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "missing",
+      "provisional": false,
+      "source": "sample"
+     },
+     "pctOfMedian": {
+      "value": null,
+      "unit": "%",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "missing",
+      "provisional": false,
+      "source": "sample"
+     },
+     "depthChange24h": {
+      "value": null,
+      "unit": "in",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "missing",
+      "provisional": false,
+      "source": "sample"
+     }
+    }
+   ],
+   "rivers": [
+    {
+     "id": "USGS-13246000",
+     "name": "NF Payette near Banks",
+     "use": [
+      "paddling"
+     ],
+     "flow": {
+      "value": 255,
+      "unit": "cfs",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "fresh",
+      "provisional": true,
+      "source": "sample"
+     },
+     "stage": {
+      "value": null,
+      "unit": "ft",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "missing",
+      "provisional": false,
+      "source": "sample"
+     },
+     "trend": "steady"
+    },
+    {
+     "id": "USGS-13206000",
+     "name": "Boise at Glenwood Bridge",
+     "use": [
+      "paddling",
+      "fishing"
+     ],
+     "flow": {
+      "value": 257,
+      "unit": "cfs",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "fresh",
+      "provisional": true,
+      "source": "sample"
+     },
+     "stage": {
+      "value": null,
+      "unit": "ft",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "missing",
+      "provisional": false,
+      "source": "sample"
+     },
+     "trend": "falling"
+    },
+    {
+     "id": "USGS-13239000",
+     "name": "NF Payette at McCall",
+     "use": [
+      "fishing"
+     ],
+     "flow": {
+      "value": 29,
+      "unit": "cfs",
+      "observedAt": "2026-11-13T09:00:00-07:00",
+      "status": "stale",
+      "provisional": true,
+      "source": "sample"
+     },
+     "stage": {
+      "value": null,
+      "unit": "ft",
+      "observedAt": "2026-11-15T11:30:00-07:00",
+      "status": "missing",
+      "provisional": false,
+      "source": "sample"
+     },
+     "trend": "steady"
+    }
+   ],
+   "air": {
+    "points": [
+     {
+      "id": "boise",
+      "name": "Boise",
+      "aqi": {
+       "value": 53,
+       "unit": "AQI",
+       "observedAt": "2026-11-15T11:30:00-07:00",
+       "status": "fresh",
+       "provisional": true,
+       "source": "sample"
+      },
+      "category": "Moderate",
+      "pollutant": "PM2.5"
+     }
+    ],
+    "note": null
+   },
+   "fire": {
+    "wildfires": [],
+    "prescribed": [
+     {
+      "name": "SAMPLE prescribed burn",
+      "acres": 30,
+      "modifiedAt": "2026-11-14T10:00:00-07:00"
+     }
+    ]
+   },
+   "ski": [
+    {
+     "name": "Brundage",
+     "status": "unknown",
+     "source": "manual",
+     "note": "Status coming soon"
+    },
+    {
+     "name": "Tamarack",
+     "status": "unknown",
+     "source": "manual",
+     "note": "Status coming soon"
+    }
+   ]
+  },
+  "magic-valley": {
+   "name": "Magic Valley",
+   "tz": "America/Boise",
+   "level": "gray",
+   "levelReasons": [
+    {
+     "kind": "roads-missing",
+     "text": "Road data not connected yet, so we can't confirm clear"
+    }
+   ],
+   "summary": "No alerts. Road data unavailable.",
+   "alerts": [],
+   "forecast": {
+    "points": [],
+    "updated": null
+   },
+   "roads": {
+    "status": "missing",
+    "passes": [],
+    "closures": [],
+    "restrictions": []
+   },
+   "snow": [],
+   "rivers": [],
+   "air": {
+    "points": [],
+    "note": null
+   },
+   "fire": {
+    "wildfires": [],
+    "prescribed": []
+   },
+   "ski": []
+  },
+  "southeast": {
+   "name": "Southeast",
+   "tz": "America/Boise",
+   "level": "gray",
+   "levelReasons": [
+    {
+     "kind": "roads-missing",
+     "text": "Road data not connected yet, so we can't confirm clear"
+    }
+   ],
+   "summary": "No alerts. Road data unavailable.",
+   "alerts": [],
+   "forecast": {
+    "points": [],
+    "updated": null
+   },
+   "roads": {
+    "status": "missing",
+    "passes": [],
+    "closures": [],
+    "restrictions": []
+   },
+   "snow": [],
+   "rivers": [],
+   "air": {
+    "points": [],
+    "note": null
+   },
+   "fire": {
+    "wildfires": [],
+    "prescribed": []
+   },
+   "ski": []
+  },
+  "upper-snake": {
+   "name": "Upper Snake",
+   "tz": "America/Boise",
+   "level": "gray",
+   "levelReasons": [
+    {
+     "kind": "roads-missing",
+     "text": "Road data not connected yet, so we can't confirm clear"
+    }
+   ],
+   "summary": "No alerts. Road data unavailable.",
+   "alerts": [],
+   "forecast": {
+    "points": [],
+    "updated": null
+   },
+   "roads": {
+    "status": "missing",
+    "passes": [],
+    "closures": [],
+    "restrictions": []
+   },
+   "snow": [],
+   "rivers": [],
+   "air": {
+    "points": [],
+    "note": null
+   },
+   "fire": {
+    "wildfires": [],
+    "prescribed": []
+   },
+   "ski": []
+  },
+  "salmon": {
+   "name": "Salmon",
+   "tz": "America/Boise",
+   "level": "amber",
+   "levelReasons": [
+    {
+     "kind": "nws-advisory",
+     "text": "Winter Weather Advisory"
+    }
+   ],
+   "summary": "Winter Weather Advisory until Mon 11 PM.",
+   "alerts": [
+    {
+     "id": "salmon-a1",
+     "event": "Winter Weather Advisory",
+     "severity": "Moderate",
+     "ends": "2026-11-16T23:00:00-07:00",
+     "headline": "SAMPLE: advisory text",
+     "zones": [],
+     "url": "https://www.weather.gov"
+    }
+   ],
+   "forecast": {
+    "points": [],
+    "updated": null
+   },
+   "roads": {
+    "status": "missing",
+    "passes": [],
+    "closures": [],
+    "restrictions": []
+   },
+   "snow": [],
+   "rivers": [],
+   "air": {
+    "points": [],
+    "note": null
+   },
+   "fire": {
+    "wildfires": [],
+    "prescribed": []
+   },
+   "ski": []
+  }
+ }
+}

@@ -1,0 +1,7 @@
+---
+// An AQI number shown on the official EPA AQI category color. The number and category name come from AirNow unchanged.
+import { aqiColors } from '../lib/regionview.js';
+const { value, label = true } = Astro.props;
+const c = aqiColors(value);
+---
+<span class="aqi-val" style={`background:${c.bg};color:${c.fg}`}>{label ? `AQI ${value}` : value}</span>

@@ -1,0 +1,24 @@
+{
+ "_note": "Official landing pages (and a known conditions page where I found one) for the ski areas. Seeds for scripts/crawl_resort_pages.py, which verifies them and looks for the conditions page. 'unverified' ones were written from memory: the crawler reports any that do not load.",
+ "sites": {
+  "panhandle-schweitzer": {"site": "https://www.schweitzer.com/", "unverified": true},
+  "panhandle-silver-mountain": {"site": "https://www.silvermt.com/", "unverified": true},
+  "panhandle-lookout-pass": {"site": "https://skilookout.com/", "unverified": true},
+  "clearwater-bald-mountain": {"site": "https://skibaldmountain.com/"},
+  "clearwater-cottonwood-butte": {"site": "https://cottonwoodbutte.org/"},
+  "clearwater-snowhaven": {"site": "https://grangeville.us/?p=583"},
+  "southwest-bogus-basin": {"site": "https://bogusbasin.org/", "unverified": true},
+  "southwest-brundage-mountain": {"site": "https://brundage.com/", "unverified": true},
+  "southwest-tamarack-resort": {"site": "https://tamarackidaho.com/", "unverified": true},
+  "southwest-little-ski-hill": {"site": "https://payettelakesskiclub.org/pages/little-ski-hill"},
+  "magic-valley-sun-valley-bald-mountain-dollar": {"site": "https://www.sunvalley.com/", "unverified": true},
+  "magic-valley-pomerelle": {"site": "https://www.pomerelle.com/"},
+  "magic-valley-soldier-mountain": {"site": "https://soldiermountain.com/"},
+  "magic-valley-magic-mountain": {"site": "https://www.magicmountainresort.com/"},
+  "magic-valley-rotarun": {"site": "https://rotarun.org/"},
+  "southeast-pebble-creek": {"site": "https://pebblecreekskiarea.com/"},
+  "upper-snake-kelly-canyon": {"site": "https://kellycanyonresort.com/"},
+  "upper-snake-grand-targhee-wy-idaho-access": {"site": "https://www.grandtarghee.com/", "conditions": "https://www.grandtarghee.com/the-mountain/cams-conditions/mountain-report"},
+  "salmon-lost-trail-powder-mountain": {"site": "https://www.losttrail.com/", "unverified": true}
+ }
+}

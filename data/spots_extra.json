@@ -1,0 +1,2162 @@
+{
+ "spots": [
+  {
+   "id": "panhandle-the-coeur-dalene-resort-golf-course",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "The Coeur d'Alene Resort Golf Course",
+   "desc": "Scott Miller design (1991), lake views from every hole, home of the world's only floating green",
+   "town": "Coeur d'Alene",
+   "sources": [
+    {
+     "url": "https://www.floatinggreen.com/",
+     "label": "Coeur d'Alene Resort Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-circling-raven-golf-club",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Circling Raven Golf Club",
+   "desc": "18 holes, 7,189 yds on 620 acres of wetland, woodland and Palouse grass",
+   "town": "Worley",
+   "sources": [
+    {
+     "url": "https://www.cdacasino.com/golf/circling-raven-golf-club-tour/",
+     "label": "Circling Raven Golf Club (Coeur d'Alene Casino)"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-gozzer-ranch-golf-and-lake-club",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Gozzer Ranch Golf & Lake Club",
+   "desc": "Private; 18 holes, Tom Fazio design on basalt bluffs above Lake Coeur d'Alene",
+   "town": "Harrison",
+   "sources": [
+    {
+     "url": "https://gozzerranchclub.com/experiences/golf",
+     "label": "Gozzer Ranch Golf & Lake Club"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-the-golf-club-at-black-rock",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "The Golf Club at Black Rock",
+   "desc": "Private; 18 holes on Lake Coeur d'Alene",
+   "town": "Coeur d'Alene",
+   "sources": [
+    {
+     "url": "https://www.blackrockidaho.com/golf",
+     "label": "The Golf Club at Black Rock"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-the-idaho-club-nicklaus-signature-course",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "The Idaho Club (Nicklaus Signature Course)",
+   "desc": "18 holes; Idaho's only Jack Nicklaus Signature course, along the Lower Pack River",
+   "town": "Sandpoint",
+   "sources": [
+    {
+     "url": "https://theidahoclub.com/nicklaus-signature-course/",
+     "label": "The Idaho Club"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-coeur-dalene-golf-club",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Coeur d'Alene Golf Club",
+   "desc": "Public; 18 holes, par 72; Kootenai County's first public course (1957)",
+   "town": "Coeur d'Alene",
+   "sources": [
+    {
+     "url": "https://cdagolfclub.com/",
+     "label": "Coeur d'Alene Golf Club"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-the-highlands-golf-course",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "The Highlands Golf Course",
+   "desc": "Public; 18 holes, 6,455 yds from the back tees; Jim Krause design (1990)",
+   "town": "Post Falls",
+   "sources": [
+    {
+     "url": "https://thehighlandsgc.com/",
+     "label": "The Highlands Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-the-links-golf-club",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "The Links Golf Club",
+   "desc": "Public; links-style 18 holes, open since 1999",
+   "town": "Post Falls",
+   "sources": [
+    {
+     "url": "https://www.thelinkspostfalls.com/",
+     "label": "The Links Golf Club"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-prairie-falls-golf-club",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Prairie Falls Golf Club",
+   "desc": "18 holes on a 100+ acre course",
+   "town": "Post Falls",
+   "sources": [
+    {
+     "url": "https://www.prairiefallsgolfclub.com/",
+     "label": "Prairie Falls Golf Club"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-avondale-golf-course",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Avondale Golf Course",
+   "desc": "18 holes; 6,768 yds from the black tees",
+   "town": "Hayden",
+   "sources": [
+    {
+     "url": "https://www.avondalegolf.com/the-course.html",
+     "label": "Avondale Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-hayden-lake-country-club",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Hayden Lake Country Club",
+   "desc": "Private member club",
+   "town": "Hayden Lake",
+   "sources": [
+    {
+     "url": "https://www.haydenlakecc.com/",
+     "label": "Hayden Lake Country Club"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-stoneridge-golf-course",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "StoneRidge Golf Course",
+   "desc": "19 holes, par 71, 7,008 yds",
+   "town": "Blanchard",
+   "sources": [
+    {
+     "url": "https://www.stoneridgeidaho.com/",
+     "label": "StoneRidge Golf and Recreational Community"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-priest-lake-golf-course",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Priest Lake Golf Course",
+   "desc": "18 holes, par 72, over 6,200 yds from the championship tees",
+   "town": "Priest Lake",
+   "sources": [
+    {
+     "url": "https://golfpriestlake.com/",
+     "label": "Priest Lake Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-mirror-lake-golf-course",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Mirror Lake Golf Course",
+   "desc": "9 holes (par 72 over 18), city-owned",
+   "town": "Bonners Ferry",
+   "sources": [
+    {
+     "url": "https://www.bonnersferry.id.gov/187/Mirror-Lake-Golf-Course",
+     "label": "City of Bonners Ferry"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-shoshone-golf-club",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Shoshone Golf Club",
+   "desc": "Public; 9 holes with about 145 ft of elevation change",
+   "town": "Kellogg",
+   "sources": [
+    {
+     "url": "https://shoshonegolf.com/",
+     "label": "Shoshone Golf Club"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-bryden-canyon-golf-course",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Bryden Canyon Golf Course",
+   "desc": "City-owned public 18-hole course",
+   "town": "Lewiston",
+   "sources": [
+    {
+     "url": "https://www.cityoflewiston.org/799/Bryden-Canyon-Golf-Course",
+     "label": "City of Lewiston"
+    },
+    {
+     "url": "https://www.playbrydencanyon.com/",
+     "label": "Bryden Canyon Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-lewiston-golf-and-country-club",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Lewiston Golf & Country Club",
+   "desc": "18 holes, 6,728 yds total, slope 125; Snake River views",
+   "town": "Lewiston",
+   "sources": [
+    {
+     "url": "https://www.golflgcc.com/course-information",
+     "label": "Lewiston Golf & Country Club"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-university-of-idaho-golf-course",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "University of Idaho Golf Course",
+   "desc": "18 holes on the Palouse; Francis L. James design (1936)",
+   "town": "Moscow",
+   "sources": [
+    {
+     "url": "https://vandalgolf.com/course-details/",
+     "label": "Vandal Golf Course (University of Idaho)"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-moscow-elks-golf-course",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Moscow Elks Golf Course",
+   "desc": "Private 9 holes, members and guests, May-October",
+   "town": "Moscow",
+   "sources": [
+    {
+     "url": "https://www.elks249.com/?page_id=16680",
+     "label": "Moscow Elks Lodge #249"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-orofino-golf-and-country-club",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Orofino Golf & Country Club",
+   "town": "Orofino",
+   "sources": [
+    {
+     "url": "https://www.orofinogolfcountryclub.com/",
+     "label": "Orofino Golf & Country Club"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-grangeville-golf-and-country-club",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Grangeville Golf & Country Club",
+   "desc": "9 holes just south of Grangeville on US 95",
+   "town": "Grangeville",
+   "sources": [
+    {
+     "url": "https://grangevillegolf.com/",
+     "label": "Grangeville Golf & Country Club"
+    }
+   ]
+  },
+  {
+   "id": "southwest-quail-hollow-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Quail Hollow Golf Course",
+   "desc": "City of Boise; 18 holes, par 70, 6,325 yds from the back tees, in the foothills",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://www.quailhollowboise.com/course/",
+     "label": "Quail Hollow Golf Course"
+    },
+    {
+     "url": "https://www.cityofboise.org/departments/parks-and-recreation/golf-courses/quail-hollow-golf-course/",
+     "label": "City of Boise Parks & Recreation"
+    }
+   ]
+  },
+  {
+   "id": "southwest-warm-springs-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Warm Springs Golf Course",
+   "desc": "City of Boise; 18-hole municipal course on the Boise River Greenbelt",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://www.cityofboise.org/departments/parks-and-recreation/golf-courses/warm-springs-golf-course/",
+     "label": "City of Boise Parks & Recreation"
+    }
+   ]
+  },
+  {
+   "id": "southwest-shadow-valley-golf-club",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Shadow Valley Golf Club",
+   "desc": "Public foothills course; front nine has a dozen elevation changes",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://www.shadowvalley.com/",
+     "label": "Shadow Valley Golf Club"
+    }
+   ]
+  },
+  {
+   "id": "southwest-banbury-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "BanBury Golf Course",
+   "desc": "Public; 18 holes, par 71, 6,908 yds; John Harbottle III design on the Boise River",
+   "town": "Eagle",
+   "sources": [
+    {
+     "url": "https://banburygolf.com/golf-course/",
+     "label": "BanBury Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "southwest-falcon-crest-championship-course-the-valor-club",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Falcon Crest Championship Course (The Valor Club)",
+   "desc": "Par 72, 6,914 yds; plus 9-hole Freedom (par 34) and Cadet (par 27) courses",
+   "town": "Kuna",
+   "sources": [
+    {
+     "url": "https://valorclubs.com/golf",
+     "label": "The Valor Club"
+    }
+   ]
+  },
+  {
+   "id": "southwest-boise-ranch-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Boise Ranch Golf Course",
+   "desc": "18 holes, par 71, 6,611 yds; eight lakes and ponds",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://www.boiseranchgc.com/-home",
+     "label": "Boise Ranch Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "southwest-crane-creek-country-club",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Crane Creek Country Club",
+   "desc": "Private; 18 holes, 7,071 yds from the tips, eight sets of tees",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://cranecreekcountryclub.com/golf",
+     "label": "Crane Creek Country Club"
+    }
+   ]
+  },
+  {
+   "id": "southwest-the-river-club-formerly-plantation-country-club",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "The River Club (formerly Plantation Country Club)",
+   "desc": "Private club founded 1917; course being rebuilt as an 18-hole, par-68 Brian Curley design",
+   "town": "Garden City",
+   "sources": [
+    {
+     "url": "https://www.riverclubboise.com/",
+     "label": "The River Club"
+    }
+   ]
+  },
+  {
+   "id": "southwest-the-club-at-spurwing-championship-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "The Club at Spurwing (Championship Course)",
+   "desc": "Private; about 7,300 yds from the tips, four sets of tees",
+   "town": "Meridian",
+   "sources": [
+    {
+     "url": "https://www.theclubatspurwing.com/championship-course",
+     "label": "The Club at Spurwing"
+    }
+   ]
+  },
+  {
+   "id": "southwest-lakeview-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Lakeview Golf Course",
+   "desc": "18 holes, 6,521 yds",
+   "town": "Meridian",
+   "sources": [
+    {
+     "url": "https://lakeview-golf.com/",
+     "label": "Lakeview Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "southwest-ridgecrest-golf-club",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Ridgecrest Golf Club",
+   "desc": "City of Nampa; 27 holes: links-style 18 (4,900-7,000 yds) plus executive Wee-9",
+   "town": "Nampa",
+   "sources": [
+    {
+     "url": "https://www.nampaparksandrecreation.org/280/Ridgecrest-Golf-Club",
+     "label": "Nampa Parks & Recreation"
+    }
+   ]
+  },
+  {
+   "id": "southwest-centennial-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Centennial Golf Course",
+   "desc": "City of Nampa course, opened 1987",
+   "town": "Nampa",
+   "sources": [
+    {
+     "url": "https://www.centennialgolf.net/-home",
+     "label": "Centennial Golf Course (City of Nampa)"
+    }
+   ]
+  },
+  {
+   "id": "southwest-purple-sage-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Purple Sage Golf Course",
+   "desc": "City of Caldwell; 18 holes, par 71; past Idaho State Open host",
+   "town": "Caldwell",
+   "sources": [
+    {
+     "url": "https://purplesagegolfcourse.com/",
+     "label": "Purple Sage Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "southwest-fairview-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Fairview Golf Course",
+   "desc": "City of Caldwell; 9 holes, par 35, downtown",
+   "town": "Caldwell",
+   "sources": [
+    {
+     "url": "https://purplesagegolfcourse.com/fairview-golf-course/",
+     "label": "Fairview Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "southwest-timberstone-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "TimberStone Golf Course",
+   "desc": "18 holes; John Stiedel design",
+   "town": "Caldwell",
+   "sources": [
+    {
+     "url": "https://playtimberstone.com/",
+     "label": "TimberStone Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "southwest-scotch-pines-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Scotch Pines Golf Course",
+   "desc": "Public; 18 holes, 6,600 yds from the blue tees; opened 1962",
+   "town": "Payette",
+   "sources": [
+    {
+     "url": "https://scotchpinesgolf.com/",
+     "label": "Scotch Pines Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "southwest-mccall-golf-club",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "McCall Golf Club",
+   "desc": "City-owned 27 holes: Aspen, Birch and Cedar nines",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://www.mccall.id.us/159/McCall-Municipal-Golf-Club",
+     "label": "McCall Municipal Golf Club"
+    }
+   ]
+  },
+  {
+   "id": "southwest-jug-mountain-ranch-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Jug Mountain Ranch Golf Course",
+   "desc": "Public mountain course by Don Knott; plus a six-hole par-3 course",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://jugmountainranch.com/golf/",
+     "label": "Jug Mountain Ranch"
+    }
+   ]
+  },
+  {
+   "id": "southwest-whitetail-club",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Whitetail Club",
+   "desc": "18 holes, par 72, 7,200 yds; Roger Packard and Andy North design",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://whitetailclub.com/club/golf-course/",
+     "label": "Whitetail Club"
+    }
+   ]
+  },
+  {
+   "id": "southwest-osprey-meadows-at-tamarack",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Osprey Meadows at Tamarack",
+   "desc": "18 holes; Robert Trent Jones II design",
+   "town": "Tamarack (Donnelly)",
+   "sources": [
+    {
+     "url": "https://tamarackidaho.com/golf-osprey-meadows",
+     "label": "Tamarack Resort"
+    }
+   ]
+  },
+  {
+   "id": "southwest-cascade-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Cascade Golf Course",
+   "desc": "9 holes with 4 sets of tees for 18; on Lake Cascade",
+   "town": "Cascade",
+   "sources": [
+    {
+     "url": "https://www.golfcascade.net/",
+     "label": "Cascade Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-trail-creek-golf-course-sun-valley-resort",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Trail Creek Golf Course (Sun Valley Resort)",
+   "desc": "18 holes, par 72, 6,974 yds",
+   "town": "Sun Valley",
+   "sources": [
+    {
+     "url": "https://www.sunvalley.com/things-to-do/Golf/Trail-Creek",
+     "label": "Sun Valley Resort"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-elkhorn-golf-course-sun-valley-resort",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Elkhorn Golf Course (Sun Valley Resort)",
+   "desc": "18 holes, par 72, 7,214 yds",
+   "town": "Sun Valley",
+   "sources": [
+    {
+     "url": "https://www.sunvalley.com/things-to-do/Golf/Elkhorn",
+     "label": "Sun Valley Resort"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-white-clouds-golf-course-sun-valley-resort",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "White Clouds Golf Course (Sun Valley Resort)",
+   "desc": "9 holes, par 36, 3,600 yds; mountaintop views of the Wood River Valley",
+   "town": "Sun Valley",
+   "sources": [
+    {
+     "url": "https://www.sunvalley.com/things-to-do/Golf/White-Clouds",
+     "label": "Sun Valley Resort"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-bigwood-golf-course",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Bigwood Golf Course",
+   "desc": "9 holes, par 36 (72 for 18), 3,272 yds from the black tees",
+   "town": "Ketchum",
+   "sources": [
+    {
+     "url": "https://bigwoodsv.com/course/",
+     "label": "Bigwood Golf"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-the-valley-club",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "The Valley Club",
+   "desc": "Private; 27 holes by Tom Fazio, Davis Love III and Beau Welling",
+   "town": "Hailey",
+   "sources": [
+    {
+     "url": "https://www.thevalleyclub.org/",
+     "label": "The Valley Club"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-blue-lakes-country-club",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Blue Lakes Country Club",
+   "desc": "Private club with 70+ years of history, on Blue Lakes Grade",
+   "town": "Jerome / Twin Falls",
+   "sources": [
+    {
+     "url": "https://www.bluelakescc.com/",
+     "label": "Blue Lakes Country Club"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-canyon-springs-golf-course",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Canyon Springs Golf Course",
+   "desc": "Public course in the Snake River Canyon",
+   "town": "Twin Falls",
+   "sources": [
+    {
+     "url": "https://www.canyonspringsgolf.com/",
+     "label": "Canyon Springs Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-twin-falls-golf-course-the-muni",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Twin Falls Golf Course (The Muni)",
+   "desc": "City-owned public course since 1931",
+   "town": "Twin Falls",
+   "sources": [
+    {
+     "url": "https://twinfallsgc.com/about/",
+     "label": "Twin Falls Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-jerome-country-club",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Jerome Country Club",
+   "desc": "Public 18-hole championship course, dating to 1926",
+   "town": "Jerome",
+   "sources": [
+    {
+     "url": "https://jeromecountryclub.com/",
+     "label": "Jerome Country Club"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-clear-lake-country-club",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Clear Lake Country Club",
+   "desc": "18 holes in rolling hills along the Snake River",
+   "town": "Buhl",
+   "sources": [
+    {
+     "url": "https://www.clearlakecc.org/",
+     "label": "Clear Lake Country Club"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-rupert-country-club",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Rupert Country Club",
+   "desc": "18 holes: tree-lined front nine, open back nine",
+   "town": "Rupert",
+   "sources": [
+    {
+     "url": "https://rupertcc.com/",
+     "label": "Rupert Country Club"
+    }
+   ]
+  },
+  {
+   "id": "southeast-juniper-hills-country-club",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Juniper Hills Country Club",
+   "desc": "18 holes, par 71, 6,268 yds (men); Billy Casper and Francis James design",
+   "town": "Pocatello",
+   "sources": [
+    {
+     "url": "https://www.jhcc.us/about",
+     "label": "Juniper Hills Country Club"
+    }
+   ]
+  },
+  {
+   "id": "southeast-highland-golf-course",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Highland Golf Course",
+   "desc": "City of Pocatello municipal; longer and hillier of the city's two courses",
+   "town": "Pocatello",
+   "sources": [
+    {
+     "url": "https://www.pocatellogolfcourses.com/-highland-description-and-location",
+     "label": "Pocatello Golf Courses"
+    },
+    {
+     "url": "https://pocatello.gov/344/Golf",
+     "label": "City of Pocatello"
+    }
+   ]
+  },
+  {
+   "id": "southeast-riverside-golf-course",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Riverside Golf Course",
+   "desc": "City of Pocatello municipal; older, walkable layout beside the Portneuf River",
+   "town": "Pocatello",
+   "sources": [
+    {
+     "url": "https://www.pocatellogolfcourses.com/-riverside-description-and-location",
+     "label": "Pocatello Golf Courses"
+    },
+    {
+     "url": "https://pocatello.gov/344/Golf",
+     "label": "City of Pocatello"
+    }
+   ]
+  },
+  {
+   "id": "southeast-preston-golf-and-country-club",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Preston Golf & Country Club",
+   "desc": "Semi-private 18 holes, open to the public daily; front nine 1960, back nine 1999",
+   "town": "Preston",
+   "sources": [
+    {
+     "url": "https://prestonidahogolf.com/",
+     "label": "Preston Golf & Country Club"
+    }
+   ]
+  },
+  {
+   "id": "southeast-montpelier-golf-course",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Montpelier Golf Course",
+   "desc": "City-owned 9 holes, par 36, 3,278 yds; Ernie Schneider Sr. design",
+   "town": "Montpelier",
+   "sources": [
+    {
+     "url": "https://montpelier.id.gov/departments-2/golf/",
+     "label": "City of Montpelier"
+    },
+    {
+     "url": "https://golfmontpelier.com/",
+     "label": "Montpelier Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "southeast-american-falls-golf-course",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "American Falls Golf Course",
+   "desc": "9 holes with multiple tees for an 18-hole round",
+   "town": "American Falls",
+   "sources": [
+    {
+     "url": "https://americanfallsgolf.com/",
+     "label": "American Falls Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "southeast-bear-lake-west-golf-course",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Bear Lake West Golf Course",
+   "town": "Fish Haven",
+   "sources": [
+    {
+     "url": "https://bearlakewestgolf.com/",
+     "label": "Bear Lake West Golf"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-sand-creek-golf-course",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Sand Creek Golf Course",
+   "desc": "City of Idaho Falls; 18-hole championship course plus a 6-hole par-3 short course",
+   "town": "Idaho Falls",
+   "sources": [
+    {
+     "url": "https://golfif.com/sandcreek-golf-course/",
+     "label": "Idaho Falls Golf (City of Idaho Falls)"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-pinecrest-golf-course",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Pinecrest Golf Course",
+   "desc": "City of Idaho Falls; 18 holes since 1938, host of the first Idaho Open (1941)",
+   "town": "Idaho Falls",
+   "sources": [
+    {
+     "url": "https://golfif.com/pinecrest-golf-course/",
+     "label": "Idaho Falls Golf (City of Idaho Falls)"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-sage-lakes-golf-course",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Sage Lakes Golf Course",
+   "desc": "City of Idaho Falls; Scottish links look, par 70, 5,000-6,800 yds",
+   "town": "Idaho Falls",
+   "sources": [
+    {
+     "url": "https://golfif.com/sage-lakes-golf-course/",
+     "label": "Idaho Falls Golf (City of Idaho Falls)"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-teton-lakes-golf-course",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Teton Lakes Golf Course",
+   "desc": "City of Rexburg course (with the Legacy course)",
+   "town": "Rexburg",
+   "sources": [
+    {
+     "url": "https://www.rexburg.org/o/golf",
+     "label": "Rexburg Golf (City of Rexburg)"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-jefferson-hills-golf-course",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Jefferson Hills Golf Course",
+   "desc": "Semi-private public course",
+   "town": "Rigby",
+   "sources": [
+    {
+     "url": "https://jeffersonhillsgolfcourse.com/",
+     "label": "Jefferson Hills Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-bronze-buffalo-championship-course-at-teton-springs",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Bronze Buffalo Championship Course at Teton Springs",
+   "desc": "18 holes shaped by Byron Nelson, plus a 9-hole Byron Nelson par-3 course",
+   "town": "Victor",
+   "sources": [
+    {
+     "url": "https://www.bronzebuffaloranch.com/golf-at-teton-springs/",
+     "label": "Bronze Buffalo Ranch at Teton Springs"
+    }
+   ]
+  },
+  {
+   "id": "salmon-salmon-valley-golf-course",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Salmon Valley Golf Course",
+   "desc": "Public 9 holes, par 36, 3,189 yds; founded 1976",
+   "town": "Salmon",
+   "sources": [
+    {
+     "url": "https://salmonvalleygc.com/",
+     "label": "Salmon Valley Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "salmon-challis-golf-course",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Challis Golf Course",
+   "desc": "9 regulation holes, 3,184 yds, 24-tee driving range",
+   "town": "Challis",
+   "sources": [
+    {
+     "url": "https://challisgolf.com/",
+     "label": "Challis Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-trail-of-the-coeur-dalenes",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Trail of the Coeur d'Alenes",
+   "desc": "73 mi paved rail-trail, Mullan to Plummer; gentle railroad grade",
+   "town": "Mullan / Plummer",
+   "sources": [
+    {
+     "url": "https://parksandrecreation.idaho.gov/state-park/trail-of-the-coeur-dalenes/",
+     "label": "Idaho Department of Parks and Recreation"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-north-idaho-centennial-trail",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "North Idaho Centennial Trail",
+   "desc": "23 mi paved path from the Idaho/Washington line to Higgins Point; connects to the Spokane River Centennial Trail",
+   "town": "Coeur d'Alene / Post Falls",
+   "sources": [
+    {
+     "url": "https://www.cdaid.org/government/departments/parks-and-recreation/park-facility-list/centennial-trail/",
+     "label": "City of Coeur d'Alene Parks and Recreation"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-hayden-lake-loop",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Hayden Lake Loop",
+   "desc": "26.4 mi loop, 2,110 ft climbing, paved",
+   "town": "Hayden",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/56563316",
+     "label": "RideWithGPS: Hayden Lake Loop"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-sandpoint-to-hope",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Sandpoint to Hope",
+   "desc": "37.9 mi out-and-back, 1,276 ft climbing, paved",
+   "town": "Sandpoint",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/2922640",
+     "label": "RideWithGPS: Sandpoint to Hope and back"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-old-spiral-highway",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Old Spiral Highway",
+   "desc": "7.2 mi one-way climb, 1,775 ft, paved",
+   "town": "Lewiston",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/32253432",
+     "label": "RideWithGPS: Old Spiral Highway"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-lewiston-levee-parkway",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Lewiston Levee Parkway",
+   "desc": "21.7 mi out-and-back, 595 ft climbing, ~1% unpaved; continues to the Clarkston, WA greenbelt",
+   "town": "Lewiston",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/51152550",
+     "label": "RideWithGPS: Lewiston Levee Parkway Trail to Greenbelt Trail, WA"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-latah-trail",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Latah Trail",
+   "desc": "15 mi paved rail-trail: 11 mi Moscow to Troy plus 4 mi to Bear Creek Canyon; 25.8 mi out-and-back to Troy, 979 ft climbing",
+   "town": "Moscow / Troy",
+   "sources": [
+    {
+     "url": "https://latahcountyid.gov/parks_rec/",
+     "label": "Latah County Parks and Recreation"
+    },
+    {
+     "url": "https://ridewithgps.com/routes/37340352",
+     "label": "RideWithGPS: Latah Trail to Troy"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-white-bird-grade",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "White Bird Grade",
+   "desc": "9.7 mi one-way climb, 2,263 ft, paved",
+   "town": "White Bird",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/32552406",
+     "label": "RideWithGPS: White Bird Grade"
+    }
+   ]
+  },
+  {
+   "id": "clearwater-kamiah-grangeville-loop",
+   "region": "clearwater",
+   "region_name": "Clearwater",
+   "region_code": "CW",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Kamiah-Grangeville Loop",
+   "desc": "67.5 mi loop, 4,094 ft climbing, paved",
+   "town": "Kamiah",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/30836555",
+     "label": "RideWithGPS: Kamiah Grangeville Kamiah"
+    }
+   ]
+  },
+  {
+   "id": "southwest-boise-river-greenbelt-to-lucky-peak",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Boise River Greenbelt to Lucky Peak",
+   "desc": "Paved riverside path (Boise maintains about 29 mi); Lucky Peak out-and-back 20.4 mi, 444 ft climbing",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://www.cityofboise.org/departments/parks-and-recreation/parks/boise-greenbelt/",
+     "label": "City of Boise Parks and Recreation"
+    },
+    {
+     "url": "https://ridewithgps.com/routes/31678693",
+     "label": "RideWithGPS: Lucky Peak Out and Back via Boise Greenbelt"
+    }
+   ]
+  },
+  {
+   "id": "southwest-bogus-basin-road-hill-climb",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Bogus Basin Road Hill Climb",
+   "desc": "18.5 mi one-way climb, 4,314 ft, paved",
+   "town": "Boise",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/42775731",
+     "label": "RideWithGPS: Bogus Basin Hill Climb Official"
+    }
+   ]
+  },
+  {
+   "id": "southwest-swan-falls-dam",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Swan Falls Dam",
+   "desc": "56.1 mi out-and-back, 2,098 ft climbing, paved",
+   "town": "Meridian / Kuna",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/21925732",
+     "label": "RideWithGPS: Swan Falls"
+    }
+   ]
+  },
+  {
+   "id": "southwest-payette-lake-loop",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Payette Lake Loop",
+   "desc": "18.9 mi loop, 670 ft climbing, ~23% unpaved",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/17442478",
+     "label": "RideWithGPS: McCall: Payette Lake Loop"
+    }
+   ]
+  },
+  {
+   "id": "southwest-idaho-city-to-stanley",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Idaho City to Stanley",
+   "desc": "92.1 mi one-way, 7,584 ft climbing, paved",
+   "town": "Idaho City / Stanley",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/55085916",
+     "label": "RideWithGPS: Idaho City to Stanley"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-wood-river-trail",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Wood River Trail",
+   "desc": "20+ mi paved, year-round non-motorized path, Bellevue to Ketchum",
+   "town": "Ketchum / Hailey / Bellevue",
+   "sources": [
+    {
+     "url": "https://bcrd.org/summer-trails/our-summer-trails/wood-river-trail/",
+     "label": "Blaine County Recreation District"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-galena-summit-from-ketchum",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Galena Summit from Ketchum",
+   "desc": "60.2 mi out-and-back, 3,209 ft climbing, paved",
+   "town": "Ketchum",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/6426991",
+     "label": "RideWithGPS: Ketchum to Galena Summit"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-trail-creek-summit",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Trail Creek Summit",
+   "desc": "28.6 mi out-and-back from Elkhorn, 2,707 ft climbing, paved",
+   "town": "Sun Valley",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/52156840",
+     "label": "RideWithGPS: Elkhorn to Trail Creek Summit"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-snake-river-canyon-rim-trail",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Snake River Canyon Rim Trail",
+   "desc": "7.6 mi paved trail on the canyon rim; Washington St. to Shoshone Falls out-and-back 11.4 mi, 874 ft",
+   "town": "Twin Falls",
+   "sources": [
+    {
+     "url": "https://www.tfid.org/182/Parks-and-Facilities",
+     "label": "City of Twin Falls Parks"
+    },
+    {
+     "url": "https://ridewithgps.com/routes/47739991",
+     "label": "RideWithGPS: Canyon Rim Trail, Washington St. to Shoshone Falls"
+    }
+   ]
+  },
+  {
+   "id": "southeast-portneuf-greenway",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Portneuf Greenway",
+   "desc": "Network of paved bike and pedestrian trails across Pocatello-Chubbuck",
+   "town": "Pocatello",
+   "sources": [
+    {
+     "url": "https://www.portneufgreenway.org/",
+     "label": "Portneuf Greenway Foundation"
+    }
+   ]
+  },
+  {
+   "id": "southeast-pocatello-looper-chinese-peak-via-inkom",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Pocatello Looper (Chinese Peak via Inkom)",
+   "desc": "34.3 mi loop, 2,533 ft climbing, paved",
+   "town": "Pocatello",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/56331205",
+     "label": "RideWithGPS: Pocatello Looper"
+    }
+   ]
+  },
+  {
+   "id": "southeast-mink-creek",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Mink Creek",
+   "desc": "60.6 mi out-and-back from Pocatello, 5,403 ft climbing, ~3% unpaved",
+   "town": "Pocatello",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/2854914",
+     "label": "RideWithGPS: Mink Creek"
+    }
+   ]
+  },
+  {
+   "id": "southeast-lava-hot-springs-out-and-back",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Lava Hot Springs Out-and-Back",
+   "desc": "40.0 mi out-and-back, 787 ft climbing, paved",
+   "town": "Lava Hot Springs",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/4512518",
+     "label": "RideWithGPS: Lava Hot Springs out and back"
+    }
+   ]
+  },
+  {
+   "id": "southeast-bear-lake-loop",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Bear Lake Loop",
+   "desc": "49.5 mi loop, 1,036 ft climbing, paved; crosses into Utah",
+   "town": "St. Charles / Garden City, UT",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/38794537",
+     "label": "RideWithGPS: Bear Lake Loop"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-mesa-falls-scenic-byway",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Mesa Falls Scenic Byway",
+   "desc": "24.2 mi out-and-back, 616 ft climbing, paved; Hwy 47 closes at first plowable snow, usually reopens mid-May",
+   "town": "Ashton",
+   "sources": [
+    {
+     "url": "https://www.fs.usda.gov/r04/caribou-targhee/recreation/mesa-falls-scenic-highway",
+     "label": "Caribou-Targhee National Forest"
+    },
+    {
+     "url": "https://ridewithgps.com/routes/41581885",
+     "label": "RideWithGPS: Mesa Falls Scenic Ride"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-harriman-state-park-to-mesa-falls",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Harriman State Park to Mesa Falls",
+   "desc": "34.3 mi out-and-back, 956 ft climbing, paved",
+   "town": "Island Park",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/57211601",
+     "label": "RideWithGPS: Harriman State Park to Mesa Falls"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-idaho-falls-river-walk-greenbelt",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Idaho Falls River Walk (Greenbelt)",
+   "desc": "12+ mi of paved paths on the Snake River, incl. a 12 mi Riverwalk loop",
+   "town": "Idaho Falls",
+   "sources": [
+    {
+     "url": "https://www.idahofallsidaho.gov/556/Multi-Use-Pathways",
+     "label": "City of Idaho Falls Parks and Recreation"
+    },
+    {
+     "url": "https://www.idahofallsidaho.gov/facilities/facility/details/River-Walk-69",
+     "label": "City of Idaho Falls: River Walk"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-teton-valley-loop",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Teton Valley Loop",
+   "desc": "31.0 mi loop, 685 ft climbing, ~8% unpaved",
+   "town": "Driggs / Victor",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/39118595",
+     "label": "RideWithGPS: Teton Valley Loop"
+    }
+   ]
+  },
+  {
+   "id": "salmon-sawtooth-scenic-byway-stanley-to-ketchum",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Sawtooth Scenic Byway: Stanley to Ketchum",
+   "desc": "62.4 mi one-way over Galena Summit, 2,939 ft climbing, paved",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/21934536",
+     "label": "RideWithGPS: Tour of Sun Valley - Sawtooth Scenic Byway"
+    }
+   ]
+  },
+  {
+   "id": "salmon-stanley-to-challis-hot-springs",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Stanley to Challis Hot Springs",
+   "desc": "67.8 mi one-way down the Salmon River, 1,654 ft climbing, paved",
+   "town": "Stanley / Challis",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/14970982",
+     "label": "RideWithGPS: Stanley to Challis Hot Springs"
+    }
+   ]
+  },
+  {
+   "id": "salmon-north-fork-to-salmon",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "North Fork to Salmon",
+   "desc": "21.0 mi one-way, 693 ft climbing, paved",
+   "town": "North Fork / Salmon",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/35079897",
+     "label": "RideWithGPS: North Fork - Salmon"
+    }
+   ]
+  },
+  {
+   "id": "salmon-challis-to-arco",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "road-biking",
+   "activity_name": "Road biking",
+   "activity_catalog": "Road Biking",
+   "name": "Challis to Arco",
+   "desc": "81.5 mi one-way, 3,077 ft climbing, paved",
+   "town": "Challis",
+   "sources": [
+    {
+     "url": "https://ridewithgps.com/routes/14971105",
+     "label": "RideWithGPS: Challis to Arco"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-idaho-falls-country-club",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Idaho Falls Country Club",
+   "desc": "Private club on 153 acres in the Taylor Mountain foothills, operating since 1964",
+   "town": "Idaho Falls",
+   "sources": [
+    {
+     "url": "https://ifcountryclub.com/",
+     "label": "Idaho Falls Country Club"
+    }
+   ]
+  },
+  {
+   "id": "salmon-river-park-golf-course",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "River Park Golf Course",
+   "desc": "Golf course and campground",
+   "town": "Mackay",
+   "sources": [
+    {
+     "url": "https://riverparkgolfcourse.com/",
+     "label": "River Park Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "southeast-blackfoot-municipal-golf-course",
+   "region": "southeast",
+   "region_name": "Southeast",
+   "region_code": "SE",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Blackfoot Municipal Golf Course",
+   "desc": "18 holes; front nine opened 1960, back nine completed 1980; George Von Elm oversaw construction",
+   "town": "Blackfoot",
+   "sources": [
+    {
+     "url": "https://blackfootgc.com/",
+     "label": "Blackfoot Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-island-park-village-golf-course",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Island Park Village Golf Course",
+   "desc": "9 holes; 10-station, 300-yd driving range; open May-October, weather permitting",
+   "town": "Island Park",
+   "sources": [
+    {
+     "url": "https://islandparkvillageresortid.com/golfInfo.html",
+     "label": "Island Park Village Resort Golf"
+    }
+   ]
+  },
+  {
+   "id": "southwest-desert-canyon-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Desert Canyon Golf Course",
+   "desc": "City of Mountain Home; public 18 holes (est. 1963, back nine added 1998); open year-round",
+   "town": "Mountain Home",
+   "sources": [
+    {
+     "url": "https://www.mountain-home.us/173/Golf-Course",
+     "label": "City of Mountain Home"
+    }
+   ]
+  },
+  {
+   "id": "southwest-rolling-hills-golf-course",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "golf",
+   "activity_name": "Golf",
+   "activity_catalog": "Golf",
+   "name": "Rolling Hills Golf Course",
+   "desc": "Public 9 holes, par 36",
+   "town": "Weiser",
+   "sources": [
+    {
+     "url": "https://rollinghillsgolfweiser.com/",
+     "label": "Rolling Hills Golf Course"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-teton-lakes-winter-park",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Teton Lakes Winter Park",
+   "desc": "Groomed winter trails near Rexburg",
+   "town": "Rexburg",
+   "sources": [
+    {
+     "label": "Conditions / status",
+     "url": "https://nordic-pulse.com/ski-areas/US/ID/Teton-Lakes-Winter-Park"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-teton-reserve-nordic-trail",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Teton Reserve Nordic Trail",
+   "desc": "Groomed nordic trail in Teton County",
+   "town": "Teton County",
+   "sources": [
+    {
+     "label": "Conditions / status",
+     "url": "https://nordic-pulse.com/ski-areas/US/ID/Teton-Reserve-Nordic"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-sherman-park-winter-trails",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Sherman Park Winter Trails",
+   "desc": "4 km groomed track in Sherman Park near downtown Victor; classic and skate",
+   "town": "Victor",
+   "sources": [
+    {
+     "label": "Conditions / status",
+     "url": "https://nordic-pulse.com/ski-areas/US/ID/Sherman-Park"
+    },
+    {
+     "label": "Teton Valley Trails & Pathways",
+     "url": "https://tvtap.org/"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-southern-valley-nordic-trails",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Southern Valley Nordic Trails",
+   "desc": "Groomed trails for nordic skiing, snowshoeing and fat biking; no dogs on groomed trails Dec 1 to Apr 15",
+   "town": "Victor",
+   "sources": [
+    {
+     "label": "Conditions / status",
+     "url": "https://nordic-pulse.com/ski-areas/US/ID/Southern-Valley-Nordic"
+    },
+    {
+     "label": "Teton Valley Trails & Pathways",
+     "url": "https://tvtap.org/"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-driggs-winter-trails",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Driggs Winter Trails",
+   "desc": "6 km of neighborhood loops, mostly flat; next to the Driggs sledding hill",
+   "town": "Driggs",
+   "sources": [
+    {
+     "label": "Conditions / status",
+     "url": "https://nordic-pulse.com/ski-areas/US/ID/Driggs"
+    },
+    {
+     "label": "Teton Valley Trails & Pathways",
+     "url": "https://tvtap.org/"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-horseshoe-canyon",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Horseshoe Canyon",
+   "desc": "About 12 km groomed with roughly 1,000 ft of gain and loss; 11 mi west of Driggs at the South Fork Horseshoe trailhead; shared with snowmachines at the start",
+   "town": "Driggs",
+   "sources": [
+    {
+     "label": "Conditions / status",
+     "url": "https://nordic-pulse.com/ski-areas/US/ID/Horseshoe-Canyon"
+    },
+    {
+     "label": "Teton Valley Trails & Pathways",
+     "url": "https://tvtap.org/"
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-centennial-pathway",
+   "region": "upper-snake",
+   "region_name": "Upper Snake",
+   "region_code": "US",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Centennial Pathway",
+   "desc": "Multi-use groomed track for skiing, snowshoeing and fat bikes; parking near Moose Creek on the old Jackson Pass road",
+   "town": "Victor",
+   "sources": [
+    {
+     "label": "Conditions / status",
+     "url": "https://nordic-pulse.com/ski-areas/US/ID/Centennial-Pathway"
+    },
+    {
+     "label": "Teton Valley Trails & Pathways",
+     "url": "https://tvtap.org/"
+    }
+   ]
+  },
+  {
+   "id": "southwest-valley-county-pathways",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Valley County Pathways (North Valley Rail Trail)",
+   "desc": "Free community trail system, over 10 km of gentle terrain; skiers, snowshoers, fat bikers and dogs welcome",
+   "town": "McCall",
+   "sources": [
+    {
+     "label": "Conditions / status",
+     "url": "https://nordic-pulse.com/ski-areas/US/ID/Valley-County-Pathways"
+    },
+    {
+     "label": "Valley County Pathways",
+     "url": "https://www.valleycountypathways.org/winter-trails/"
+    }
+   ]
+  },
+  {
+   "id": "southwest-tamarack-resort-nordic",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Tamarack Resort Nordic",
+   "desc": "Groomed nordic trails through meadows and pines at Tamarack Resort",
+   "town": "Donnelly",
+   "sources": [
+    {
+     "label": "Conditions / status",
+     "url": "https://nordic-pulse.com/ski-areas/US/ID/Tamarack-Resort"
+    },
+    {
+     "label": "Tamarack Resort",
+     "url": "https://tamarackidaho.com/"
+    }
+   ]
+  },
+  {
+   "id": "panhandle-priest-lake-nordic-chipmunk-rapids",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Priest Lake Nordic Chipmunk Rapids",
+   "desc": "About 11 km of groomed trails at Priest Lake",
+   "town": "Priest Lake",
+   "sources": [
+    {
+     "label": "Conditions / status",
+     "url": "https://nordic-pulse.com/ski-areas/US/ID/Priest-Lake-Chipmunk-Rapids"
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-lake-creek-trails-bcrd",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "nordic",
+   "activity_name": "Nordic",
+   "activity_catalog": "Cross-Country / Nordic Skiing",
+   "name": "Lake Creek Trails (BCRD)",
+   "desc": "About 10 km of trails north of Ketchum groomed by Blaine County Recreation District",
+   "town": "Ketchum",
+   "sources": [
+    {
+     "label": "BCRD",
+     "url": "https://bcrd.org/winter-trails/our-winter-trails/"
+    },
+    {
+     "label": "Conditions / status",
+     "url": "https://bcrd.org/wintertrailink/"
+    }
+   ]
+  }
+ ]
+}

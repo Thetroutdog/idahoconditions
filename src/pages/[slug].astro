@@ -1,0 +1,18 @@
+---
+// One route for both top-level URL kinds: /{region} (hub) and /{activity} (statewide list). The slug sets are disjoint.
+import Base from '../layouts/Base.astro';
+import RegionHub from '../components/RegionHub.astro';
+import StatewideActivity from '../components/StatewideActivity.astro';
+import { regionSlugs, activitySlugs, regionById, activityTitle, spotsFor } from '../lib/catalog.js';
+export function getStaticPaths() {
+  return [...regionSlugs.map((slug) => ({ params: { slug }, props: { kind: 'region' } })), ...activitySlugs.filter((a) => spotsFor(a).length).map((slug) => ({ params: { slug }, props: { kind: 'activity' } }))];
+}
+const { slug } = Astro.params;
+const { kind } = Astro.props;
+const desc = kind === 'region' ? `${regionById[slug].name} Region, Idaho: weather alerts, river flows, snow, air quality and fire status, plus activities by season.` : `Idaho ${activityTitle(slug)}: ${spotsFor(slug).length} ${slug === 'ski' ? 'areas' : 'spots'} across the seven Fish and Game regions, with season status and links.`;
+const title = kind === 'region' ? `${regionById[slug].name} Region conditions — Idaho Conditions` : `Idaho ${activityTitle(slug)} — Idaho Conditions`;
+import { regionBar } from '../lib/regionview.js';
+---
+<Base title={title} description={desc} regionBar={kind === 'region' ? regionBar(slug) : null}>
+  {kind === 'region' ? <RegionHub id={slug} /> : <StatewideActivity slug={slug} />}
+</Base>
