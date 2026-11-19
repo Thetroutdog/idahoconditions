@@ -1,11 +1,10 @@
-# Hourly from 5 AM to 11 PM Mountain standard time (12:00-06:00 UTC; an hour later in daylight time), at :07 past, off the busy top of the hour.
-# Overnight runs are skipped to stay near the 2,000 free Actions minutes on a private repo. If the repo goes public, this can go back to every hour or 30 minutes. fetch fresh data, rebuild the site, deploy to Cloudflare Pages.
+# Every 30 minutes, at :07 and :37, off the busy top of the hour. (The repo is public, so Actions minutes are unlimited.) fetch fresh data, rebuild the site, deploy to Cloudflare Pages.
 # Also runs on every push to main (live site) or dev (private preview link) and can be started by hand (Actions tab > Refresh and deploy > Run workflow).
 name: Refresh and deploy
 
 on:
   schedule:
-    - cron: "7 12-23,0-6 * * *"
+    - cron: "7,37 * * * *"
   push:
     branches: [main, dev]
   workflow_dispatch:
@@ -50,10 +49,20 @@ jobs:
           node-version: 22
           cache: npm
 
+      # node_modules is cached on the lockfile, so npm ci only runs when package-lock.json changes.
+      - name: Cache node_modules
+        id: nm
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: nm-${{ runner.os }}-node22-${{ hashFiles('package-lock.json') }}
+
+      - name: Install dependencies
+        if: steps.nm.outputs.cache-hit != 'true'
+        run: npm ci
+
       - name: Build site
-        run: |
-          npm ci
-          npm run build
+        run: npm run build
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3

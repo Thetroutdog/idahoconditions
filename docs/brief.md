@@ -2,8 +2,10 @@
 
 **Draft-only.** Nothing here sends, posts or emails. The workflow builds a draft and a PASS/BLOCKED report; Eric pastes the draft into beehiiv himself. (beehiiv's Free plan has no send API anyway.) There are no beehiiv keys in this repo or its workflows, and there should not be.
 
-## What runs
-`.github/workflows/brief.yml`, Thursdays 12:17 UTC (5:17 AM MST, 6:17 AM MDT; GitHub may start it a few minutes late). Steps:
+**Status (Nov 19):** the Thursday GitHub workflow (`brief.yml`) was removed when the repo went public, so nothing builds the Brief automatically. The scripts remain and run locally (see "Local use"). The sections below describe what that workflow did, in case it is brought back (it is in git history if it was ever committed); `snapshots_git.sh` is only needed by a workflow.
+
+## What the removed workflow did
+Thursdays 12:17 UTC (5:17 AM MST, 6:17 AM MDT). Steps:
 1. `scripts/refresh_all.sh` (fresh data, same secrets as the refresh job).
 2. River medians (`data/usgs_daily_median.json`, about 4 minutes, fetched once a month and cached). Missing = the "vs. normal" line skips rivers.
 3. Check out the `snapshots` branch into `./snapshots`.
@@ -33,8 +35,8 @@ Output goes to `brief-out/` (git-ignored). Human inputs for local runs: environm
 ## Keeping scheduled workflows alive
 GitHub turns off scheduled workflows on a **public** repo after 60 days without repository activity, and the refresh workflow never commits. `.github/workflows/keepalive.yml` commits one line to `.github/keepalive.txt` monthly, but only when the repo is public (it does nothing while private). Whether the weekly commits to the `snapshots` branch count as activity is not verified, so the keep-alive does not rely on them. If `main` is protected against pushes, allow github-actions[bot] to bypass or make a small commit yourself every six weeks.
 
-## If the repo is public
-The draft artifact, the run summary and the `snapshots` branch are then readable by anyone with a GitHub account (artifacts need sign-in, the others do not). They hold public data plus Eric's two lines, which would be visible before the send. Decide that with the public/private question.
+## Public repo
+The repo is public, so a workflow's run summary and a `snapshots` branch would be readable by anyone, and artifacts by any signed-in GitHub user. That includes Eric's two lines before the send. Another reason to build the draft locally.
 
 ## Files
 `scripts/brief/`: `run_brief.py` (orchestrator), `snapshot.py`, `snapshots_git.sh`, `diff_week.py`, `best_bet.py`, `build_brief.py`, `preflight.py`, `common.py` (email styles), `brief_config.json` (weights, sections, limits), `fetch_usgs_stats.py`, `selftest.py`, `assets/` (masthead and logo for the HTML). Ported from the Newsletter Writer's demo scripts (GROK_LOG, item 23).

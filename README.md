@@ -8,7 +8,7 @@ Live at https://idahoconditions.com. A short Thursday email, the Brief, goes wit
 1. **Fetchers** (`scripts/fetch_*.py`) pull public data: National Weather Service, Idaho 511, USGS and NOAA water gauges, NRCS SNOTEL, AirNow, NIFC.
 2. `scripts/build_conditions.py` merges them into `data/conditions.json`, applying the alert-level and freshness rules (see `docs/`).
 3. **Astro** (`src/`) builds a static site from that file. No server runs at request time.
-4. A **GitHub Actions** workflow (`.github/workflows/refresh.yml`) repeats steps 1-3 every hour from 5 AM to 11 PM Mountain and deploys to Cloudflare Pages.
+4. A **GitHub Actions** workflow (`.github/workflows/refresh.yml`) repeats steps 1-3 every 30 minutes and deploys to Cloudflare Pages.
 
 If a source fails, the last good data is kept and the pages say it is out of date.
 

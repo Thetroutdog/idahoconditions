@@ -9,7 +9,7 @@ ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 REGIONS = [("panhandle", "Panhandle", "America/Los_Angeles"), ("clearwater", "Clearwater", "America/Los_Angeles"),
            ("southwest", "Southwest", "America/Boise"), ("magic-valley", "Magic Valley", "America/Boise"),
            ("southeast", "Southeast", "America/Boise"), ("upper-snake", "Upper Snake", "America/Boise"), ("salmon", "Salmon", "America/Boise")]
-NWS_STALE_MIN = 90   # was 30 (rules-proposal.md). Raised with the hourly schedule: GitHub cron often starts 10-30 min late, and 90 still catches a run that really failed
+NWS_STALE_MIN = 60   # was 30 (rules-proposal.md). Runs are every 30 min; 60 leaves room for GitHub cron starting 10-30 min late and still catches a run that really failed
 ROADS_STALE_MIN = 120
 CLOSURE_FRESH_MIN = 48 * 60    # an unplanned closure not updated for 2 days is probably a forgotten record
 WINTER_FRESH_MIN = 36 * 60

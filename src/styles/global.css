@@ -176,6 +176,15 @@ input:focus-visible {
   letter-spacing: -0.03em;
   font-optical-sizing: auto;
 }
+.tm {
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.42em;
+  font-weight: 500;
+  letter-spacing: 0;
+  vertical-align: super;
+  margin-left: 0.15em;
+  opacity: 0.75;
+}
 .site-nav {
   display: flex;
   align-items: center;
