@@ -2,6 +2,7 @@
 import PageHero from './PageHero.astro';
 import SpotTable from './SpotTable.astro';
 import { conditions, fmtTime } from '../lib/conditions.js';
+import { NOTES } from '../lib/site.js';
 import { regions, activityBySlug, activityTitle, spotsFor, spotView, rollup, seasonState, seasonLabel } from '../lib/catalog.js';
 const { slug } = Astro.props;
 const act = activityBySlug[slug];
@@ -21,6 +22,7 @@ const noun = slug === 'ski' ? 'areas' : 'spots';
       </div>
     </div>
     <p class="verdict">{rollup(all, slug, ` across ${groups.length} regions`)}</p>
+    <p class="legal-line">{NOTES.general} <a href="/terms/">Terms</a></p>
     <div data-statewide>
       {groups.map((g) => (
         <section class="region-group" data-region={g.region.id}>

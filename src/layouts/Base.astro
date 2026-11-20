@@ -3,7 +3,7 @@ import '../styles/global.css';
 import { ClientRouter } from 'astro:transitions';
 import WordmarkMark from '../components/WordmarkMark.astro';
 import SocialIcons from '../components/SocialIcons.astro';
-import { SITE } from '../lib/site.js';
+import { SITE, ITD_CREDIT, ITD_URL } from '../lib/site.js';
 import { conditions, regionIds } from '../lib/conditions.js';
 const { title = 'Idaho Conditions', description = 'Live outdoor conditions for Idaho, organized by Fish and Game region.', regionBar = null } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://idahoconditions.com').href;
@@ -15,7 +15,7 @@ const FOOTER_SOURCES = [
   ['usgs', 'https://waterdata.usgs.gov/', 'USGS', 'provisional'],
   ['noaa', 'https://water.noaa.gov/', 'NOAA water', 'selected gauges'],
   ['snotel', 'https://www.nrcs.usda.gov/resources/data-and-reports/snow-and-climate-monitoring-predefined-reports-and-maps', 'USDA NRCS SNOTEL', ''],
-  ['idaho511', 'https://511.idaho.gov/', 'Idaho 511', 'ITD'],
+  ['idaho511', 'https://511.idaho.gov/', 'Idaho Transportation Department (ITD) / Idaho 511', ''],
   ['airnow', 'https://www.airnow.gov/', 'AirNow', 'preliminary'],
   ['nifc', 'https://www.nifc.gov/', 'NIFC', 'WFIGS'],
 ];
@@ -88,7 +88,7 @@ const bar = regionBar ?? conditions.alertBar;
       <div class="wrap footer-grid">
         <div>
           <strong>Idaho Conditions<sup class="tm">™</sup></strong>
-          <p class="footer-links"><a href="/about/">About</a> · <a href="/whats-new/">What’s new</a> · <a href="/privacy/">Privacy</a> · <a href={`mailto:${SITE.contactEmail}`}>Contact</a></p>
+          <p class="footer-links"><a href="/about/">About</a> · <a href="/whats-new/">What’s new</a> · <a href="/terms/">Terms</a> · <a href="/privacy/">Privacy</a> · <a href={`mailto:${SITE.contactEmail}`}>Contact</a></p>
           <SocialIcons class="in-footer" />
           <p class="footer-note">© 2026 Troutdog Adventures LLC</p>
           <p>An independent conditions aggregator for trips across Idaho. Not affiliated with Idaho Fish and Game, the Idaho Transportation Department or the agencies that publish the source data. Informational only. The mountains don’t read this site, so check NWS, Idaho 511 and your avalanche center before you go.</p>
@@ -98,7 +98,7 @@ const bar = regionBar ?? conditions.alertBar;
           <div class="sources">
             {FOOTER_SOURCES.map(([k, href, name, tag]) => <a href={href} rel="noopener" class={delayed(k) ? 'delayed' : undefined}>{srcLabel(k, name, tag)}</a>)}
           </div>
-          <p class="footer-note">Air quality data are preliminary, courtesy of federal, state, local and tribal air quality agencies and the EPA AirNow program (<a href="https://www.airnow.gov/partners/" rel="noopener">partner agencies</a>). AirNow observations are preliminary and subject to change. USGS and NOAA river readings are provisional and subject to revision. Fire locations from NIFC/WFIGS are dynamic and provided as is. Always check the official source before you travel. <a href="/about/#data">About the data</a>.</p>
+          <p class="footer-note">Air quality data are preliminary, courtesy of federal, state, local and tribal air quality agencies and the EPA AirNow program (<a href="https://www.airnow.gov/partners/" rel="noopener">partner agencies</a>). AirNow observations are preliminary and subject to change. USGS and NOAA river readings are provisional and subject to revision. Fire locations from NIFC/WFIGS are dynamic and provided as is. Road and pass information: <a href={ITD_URL} rel="noopener">{ITD_CREDIT}</a>. Always check the official source before you travel. <a href="/about/#data">About the data</a> · <a href="/terms/">Full terms</a>.</p>
         </div>
       </div>
     </footer>

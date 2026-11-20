@@ -5,6 +5,7 @@ import SpotTable from '../../components/SpotTable.astro';
 import ActivityChips from '../../components/ActivityChips.astro';
 import { conditions, fmtTime } from '../../lib/conditions.js';
 import { regionBar } from '../../lib/regionview.js';
+import { NOTES } from '../../lib/site.js';
 import { regions, regionById, activities, activityBySlug, activityTitle, activityCounts, spotsIn, spotView, rollup, seasonState, seasonLabel } from '../../lib/catalog.js';
 
 export function getStaticPaths() {
@@ -30,6 +31,7 @@ const noun = activity === 'ski' ? 'areas' : 'spots';
       </div>
       <ActivityChips region={region} current={activity} />
       <p class="verdict">{rollup(list, activity)}</p>
+      <p class="legal-line">{NOTES.general} <a href="/terms/">Terms</a></p>
       <SpotTable rows={rows} variant="activity" label={activity === 'ski' ? 'Area' : 'Spot'} />
       <p style="margin:16px 0 0"><a href={`/${activity}/`} data-astro-prefetch>See all Idaho {activityTitle(activity)} →</a></p>
     </div>

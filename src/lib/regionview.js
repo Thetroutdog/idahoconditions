@@ -1,5 +1,6 @@
 // Helpers that turn a region's live data into the small cards on region pages and the landing page.
 import { conditions, fmtTime } from './conditions.js';
+import { NOTES } from './site.js';
 import map from '../data/idaho-map.json';
 import points from '../../data/region_points.json';
 
@@ -65,6 +66,7 @@ export function statusStrip(id) {
     lead: !road.live ? 'Not connected yet' : road.hwy[0] ? `${road.hwy[0].name} ${road.hwy[0].unplanned ? 'closed' : 'closure'}` : nRoads ? `${nRoads} road${nRoads === 1 ? '' : 's'} with snow or ice` : 'No closures reported',
     sub: !road.live ? 'Road conditions arrive with the Idaho 511 connection.' : road.hwy.length > 1 ? `+${road.hwy.length - 1} more highway closure${road.hwy.length > 2 ? 's' : ''}.` : road.stale ? 'Road data is out of date.' : '',
     links: [{ href: '#alerts', label: 'Details' }, { href: IDAHO511, label: 'Idaho 511' }],
+    note: NOTES.roads,
     src: `Idaho 511${road.asOf ? ` · ${fmtTime(road.asOf, tz)}` : ''}`,
   };
   // Every monitored city in the region with a fresh reading, worst first. The card leads with the worst one and lists the rest below it.
@@ -77,6 +79,7 @@ export function statusStrip(id) {
     lead: aqAll.length ? aqLine(aqAll[0]) : 'No current air reading',
     sub: `${aqAll.length > 1 ? aqAll.slice(1).map(aqLine).join('. ') + '. ' : ''}${fires ? `${fires} wildfire${fires === 1 ? '' : 's'} reported` : 'No wildfires reported'}${burns ? `, ${burns} prescribed burn${burns === 1 ? '' : 's'}` : ''}.`,
     links: [{ href: '#alerts', label: 'Air, wildfire and burn details' }],
+    note: NOTES.fire,
     src: 'AirNow · NIFC',
   };
   const sn = r.snow.filter((s) => s.depth?.status === 'fresh' && s.depth.value !== null).sort((a, b) => b.depth.value - a.depth.value)[0];
@@ -84,6 +87,7 @@ export function statusStrip(id) {
     title: 'Snow & avalanche',
     lead: sn ? `${sn.name} ${sn.depth.value} in` : 'No fresh snow reading',
     sub: sn?.pctOfMedian?.value != null ? `Water content ${sn.pctOfMedian.value}% of median.` : 'SNOTEL stations in this region.',
+    note: NOTES.avalanche,
     src: 'NRCS SNOTEL',
     links: [id === 'southwest' ? { href: 'https://payetteavalanche.org/', label: 'Payette Avalanche Center' } : null, { href: 'https://avalanche.org/', label: 'avalanche.org' }].filter(Boolean),
   };

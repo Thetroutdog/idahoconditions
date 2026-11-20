@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE, LEGAL_UPDATED, ITD_CREDIT, ITD_URL } from '../lib/site.js';
+---
+<Base title="Terms and disclaimer — Idaho Conditions" description="Idaho Conditions is informational only. Read this before relying on anything on the site or in the Thursday Brief.">
+  <main>
+    <div class="wrap">
+      <PageHero title="Terms and disclaimer." lede="Short version: this is a convenience, not a safety system. Check the official sources and make your own call." />
+      <div class="doc">
+        <h2>Informational only</h2>
+        <p>Idaho Conditions gathers public data about roads, weather, snow, rivers, air quality, fire and ski areas for general information. It is not safety, emergency, navigation, avalanche, flood, fire or road advice, and it is not an official forecast, warning or closure notice. In an emergency, call 911.</p>
+
+        <h2>Data can be late, wrong or missing</h2>
+        <p>Everything comes from third-party sources and is refreshed automatically about every 30 minutes. It can be delayed, preliminary, provisional, revised or unavailable. When a source stops updating we try to say so, but we can’t promise we will catch every problem. Check the linked source before you rely on anything.</p>
+
+        <h2>Your risk, your call</h2>
+        <p>Driving, hiking, skiing, riding, fishing, boating and other outdoor activity in Idaho carry risk of injury or death, and conditions can change faster than any website. You are responsible for your own decisions and preparation. Check the National Weather Service, Idaho 511, your avalanche center and the land agency before you go.</p>
+
+        <h2>No warranty</h2>
+        <p>The site and the Thursday Conditions Brief are provided “as is” and “as available,” without warranties of any kind, express or implied, including accuracy, completeness, timeliness or fitness for a particular purpose.</p>
+
+        <h2>Limit of liability</h2>
+        <p>To the fullest extent the law allows, Troutdog Adventures LLC and the people who contribute to Idaho Conditions are not liable for any loss, injury, damage or cost that arises from using or relying on the site or the Brief. Nothing here limits liability that the law does not allow to be limited.</p>
+
+        <h2>Who we are, and independence</h2>
+        <p>Idaho Conditions is operated by Troutdog Adventures LLC, an Idaho limited liability company. It is an independent project, not affiliated with or endorsed by Idaho Fish and Game, the Idaho Transportation Department, NOAA or the National Weather Service, USGS, USDA NRCS, EPA or AirNow, NIFC, or any avalanche center.</p>
+        <p>Road and pass information: <a href={ITD_URL} rel="noopener">{ITD_CREDIT}</a>. We link to Idaho 511 for cameras and do not republish camera images.</p>
+        <p>Other sources and their notices are listed on the <a href="/about/#data">About page</a>.</p>
+
+        <h2>Links to other sites</h2>
+        <p>We link to government and other sites. We don’t control them and aren’t responsible for their content or terms.</p>
+
+        <h2>Names</h2>
+        <p>Idaho Conditions is a trademark of Troutdog Adventures LLC. Other names belong to their owners.</p>
+
+        <h2>Using the site</h2>
+        <p>The site is free for personal use. Please don’t interfere with it, for example with heavy automated requests. Link to us freely. The compiled pages and text are ours; ask before republishing them at scale. The underlying public data belongs to its sources.</p>
+
+        <h2>Changes</h2>
+        <p>We may update these terms. The date below shows the latest version.</p>
+
+        <h2>Governing law</h2>
+        <p>These terms are governed by Idaho law.</p>
+
+        <h2>Contact</h2>
+        <p><a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a></p>
+
+        <p class="footer-note"><em>Last updated: {LEGAL_UPDATED}.</em></p>
+      </div>
+    </div>
+  </main>
+</Base>

@@ -2087,3 +2087,7 @@ details.fc7-detail + details.data-detail { margin-top: 0; border-top: 0; padding
 @media (max-width: 720px) { .header-actions .btn { display: none; } .header-actions { margin-left: auto; } }
 
 .wrap > .page-hero:first-child { padding-top: 30px; }
+
+/* Short disclaimer reminders beside the data they apply to; the full text is on /terms/. */
+.status-mini .legal-note { margin: 6px 0 0; font-size: 11.5px; line-height: 1.4; color: var(--muted); }
+.legal-line { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--ink-soft); }

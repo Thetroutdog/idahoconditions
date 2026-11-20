@@ -8,7 +8,7 @@ import map from '../data/idaho-map.json';
 import { stateRivers } from '../lib/mappins.js';
 import UnplacedItems from '../components/UnplacedItems.astro';
 import AqiValue from '../components/AqiValue.astro';
-import { SITE } from '../lib/site.js';
+import { SITE, NOTES } from '../lib/site.js';
 const rivers = stateRivers();
 const regs = conditions.regions;
 const updated = fmtTime(conditions.generatedAt, 'America/Boise');
@@ -54,6 +54,7 @@ const sw = statewide();
             </>) : <p class="state-lead">Road data is not available right now.</p>}
             <UnplacedItems items={sw.unplaced.roads} />
             <p class="state-more"><a href={IDAHO511} target="_blank" rel="noopener noreferrer">Open Idaho 511</a> for the live map, cameras and pass reports.</p>
+            <p class="state-more">{NOTES.roads}</p>
             <div class="src">Idaho 511{sw.roads.stale ? ' · out of date' : ''}</div>
           </article>
           <article class="state-card">
@@ -67,9 +68,11 @@ const sw = statewide();
             <p class="state-lead">{sw.fires.length ? 'Wildfires are listed on each region page.' : 'No current wildfires reported in Idaho.'}</p>
             {sw.burns.length > 0 && <p class="state-more">{sw.burns.length} prescribed burn{sw.burns.length === 1 ? '' : 's'} reported. Each region page lists them.</p>}
             <UnplacedItems items={sw.unplaced.fire} />
+            <p class="state-more">{NOTES.fire}</p>
             <div class="src">NIFC</div>
           </article>
         </div>
+        <p class="legal-line">{NOTES.general} <a href="/terms/">Terms</a></p>
       </div>
     </section>
 

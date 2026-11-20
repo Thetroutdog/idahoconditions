@@ -142,6 +142,12 @@ touch=[c for i,c in enumerate(touch) if c not in touch[:i] and c!='avalanche_org
 if 'avalanche' in S['sections'] and touch:
     aval="Avalanche forecasts: "+", ".join(f"[{A['centers'][c]['name']}]({A['centers'][c]['url']})" for c in touch)+f"; everywhere else, [avalanche.org]({A['centers']['avalanche_org']['url']}). We don't restate danger. Read theirs."
 # ---------- links + footer ----------
+DISCLAIMER=("The Thursday Conditions Brief is informational only and is not safety guidance. Data can be late, preliminary or wrong, and conditions change quickly. "
+            "Check the National Weather Service, Idaho 511, your avalanche center and the land agency before you go. "
+            "Idaho Conditions is an independent project of Troutdog Adventures LLC and is not affiliated with any agency that publishes the data. "
+            "Source: Idaho Transportation Department (ITD) / Idaho 511. Terms: https://idahoconditions.com/terms/ Privacy: https://idahoconditions.com/privacy/")
+DISCLAIMER_MD=DISCLAIMER.replace("https://idahoconditions.com/terms/","[idahoconditions.com/terms](https://idahoconditions.com/terms/)").replace("https://idahoconditions.com/privacy/","[idahoconditions.com/privacy](https://idahoconditions.com/privacy/)")
+DISCLAIMER_HTML=html.escape(DISCLAIMER).replace("https://idahoconditions.com/terms/",'<a href="https://idahoconditions.com/terms/" style="color:#9fb3a8;">idahoconditions.com/terms</a>').replace("https://idahoconditions.com/privacy/",'<a href="https://idahoconditions.com/privacy/" style="color:#9fb3a8;">idahoconditions.com/privacy</a>')
 rl=" · ".join(f"[{r['name']}]({cfg['regionUrl'].format(id=rid)})" for rid,r in d['regions'].items())+("" if cfg['regionUrlConfirmed'] else " [CHECK: URL pattern]")
 src=d['sources']
 fc=[bt(r['forecast']['updated'],'%-I:%M %p') for r in d['regions'].values()]
@@ -190,6 +196,7 @@ h.append('</div>')
 h.append(f'''<div style="background:{PINE};padding:18px 20px;font-family:{MONO};font-size:12px;line-height:1.7;color:{CREAM};">
 <img src="ic-logo-112.png" width="44" height="44" alt="Idaho Conditions logo" style="display:block;border:0;border-radius:7px;margin:0 0 8px;">
 <a href="https://idahoconditions.com" style="color:{GOLD};text-decoration:none;">idahoconditions.com</a> · <a href="https://x.com/idahoconditions" style="color:{GOLD};text-decoration:none;">X</a> · <a href="https://www.instagram.com/idahoconditions/" style="color:{GOLD};text-decoration:none;">Instagram</a> · <a href="mailto:contact@idahoconditions.com" style="color:{GOLD};text-decoration:none;">contact@idahoconditions.com</a><br>
+<span style="display:block;margin:10px 0 8px;font-size:11px;line-height:1.55;color:#9fb3a8;">{DISCLAIMER_HTML}</span>
 <span style="color:#9fb3a8;">Reply and it reaches the Conditions Desk. <a href="#" style="color:#9fb3a8;">Unsubscribe</a></span></div>''')
 doc=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(SUBJECT)}</title>{FONTS}</head>
 <body style="margin:0;padding:0;background:{PINE};"><div style="display:none;max-height:0;overflow:hidden;opacity:0;">{html.escape(PRE)}</div>
@@ -207,7 +214,7 @@ for sec in S['sections']:
     else:
         for x in items: m+= [x+"  " if sec=='bottom' else x, "" if sec!='bottom' and sec!='weekend' else ""]
     m.append("")
-m+=["---","","[idahoconditions.com](https://idahoconditions.com) · [X](https://x.com/idahoconditions) · [Instagram](https://www.instagram.com/idahoconditions/) · contact@idahoconditions.com"]
+m+=["---","","[idahoconditions.com](https://idahoconditions.com) · [X](https://x.com/idahoconditions) · [Instagram](https://www.instagram.com/idahoconditions/) · contact@idahoconditions.com","",DISCLAIMER_MD]
 md='\n'.join(m); md=re.sub(r'\n{3,}','\n\n',md)+'\n'
 # weekend lines need hard breaks in markdown
 md=re.sub(r'(\*\*[^*\n]+:\*\* Sat [^\n]+)\n',r'\1  \n',md)
