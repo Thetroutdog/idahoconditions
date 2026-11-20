@@ -44,6 +44,13 @@ jobs:
       - name: Fetch data and build conditions.json
         run: ./scripts/refresh_all.sh
 
+      # Yellow warning per source that is down, with how long. Never stops the deploy: the site keeps showing last-known data
+      # with its stale labels. Exit 1 only when every source is down; that is turned into a failed run AFTER the deploy (last step).
+      - name: Source health
+        id: health
+        continue-on-error: true
+        run: python3 scripts/source_health.py
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -70,3 +77,10 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=idahoconditions --branch=${{ github.ref_name }}
+
+      # The deploy above already published the stale labels. Failing here sends GitHub's failure email only when the site really is stale.
+      - name: Fail the run if every source is down
+        if: steps.health.outcome == 'failure'
+        run: |
+          echo "Every data source is down (or conditions.json is unreadable). See the Source health step."
+          exit 1
