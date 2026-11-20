@@ -5,8 +5,8 @@ export const SITE = {
   contactEmail: 'contact@idahoconditions.com',
   x: 'https://x.com/idahoconditions',
   instagram: 'https://www.instagram.com/idahoconditions/',
-  // Paste the beehiiv subscribe-form embed URL (the iframe src from beehiiv's "Embed" tab) here when the publication exists.
+  // beehiiv subscribe form: the data-beehiiv-form id from beehiiv's "Embed" script (public, not a secret).
   // While empty, the Brief section shows "Signup opens soon" instead of a form.
-  beehiivEmbed: '',
+  beehiivFormId: '39bde035-482c-48e1-b046-4a5bf2cbe0b8',
   beehiivArchive: '',
 };
