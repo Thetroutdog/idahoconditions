@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Probe the Idaho Conditions data sources and save trimmed sample responses.
 
-Run on Eric's Mac (the cloud sandbox cannot reach these hosts). Standard library only.
+Run locally (the cloud sandbox cannot reach these hosts). Standard library only.
 
 Setup (Terminal):
-    cd "~/Library/Mobile Documents/com~apple~CloudDocs/Developer/Projects/Idahoconditions"
-    set -a; source ~/API/idahoconditions.env; set +a
+    cd <the repo folder>
+    set -a; source <your local env file>; set +a
     export IC_USER_AGENT="idahoconditions.com (your-contact@example.com)"   # NWS wants a contact
     python3 scripts/probe_sources.py            # all sources
     python3 scripts/probe_sources.py nws usgs   # just some

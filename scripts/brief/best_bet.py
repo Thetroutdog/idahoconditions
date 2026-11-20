@@ -1,5 +1,5 @@
 """Rules-based 'best bet this weekend'. Scores every NWS forecast point for Saturday and Sunday.
-Usage: python3 best_bet.py [conditions.json] > out/best_bet.json   (Eric then agrees or overrides.)"""
+Usage: python3 best_bet.py [conditions.json] > out/best_bet.json   (the editor then agrees or overrides.)"""
 import json, sys, re, datetime as dt
 from zoneinfo import ZoneInfo
 BOISE=ZoneInfo('America/Boise')

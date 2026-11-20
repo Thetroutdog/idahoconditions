@@ -9,8 +9,8 @@ def md2html(s, link_color=MOSS):
     s = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', lambda m: f'<a href="{m.group(2)}" style="color:{link_color};text-decoration:underline;">{m.group(1)}</a>', s)
     s = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', s)
     s = re.sub(r'`([^`]+)`', lambda m: f'<span style="font-family:{MONO};font-size:13px;">{m.group(1)}</span>', s)
-    s = s.replace('[CHECK', f'<span style="background:{GOLD};color:{PINE};font-family:{MONO};font-size:12px;padding:1px 4px;border-radius:3px;">[CHECK').replace('[ERIC', f'<span style="background:{GOLD};color:{PINE};font-family:{MONO};font-size:12px;padding:1px 4px;border-radius:3px;">[ERIC')
-    # close spans for CHECK/ERIC tags at the matching ']'
+    s = s.replace('[CHECK', f'<span style="background:{GOLD};color:{PINE};font-family:{MONO};font-size:12px;padding:1px 4px;border-radius:3px;">[CHECK').replace('[EDITOR', f'<span style="background:{GOLD};color:{PINE};font-family:{MONO};font-size:12px;padding:1px 4px;border-radius:3px;">[EDITOR')
+    # close spans for CHECK/EDITOR tags at the matching ']'
     out=[];i=0
     while True:
         j=s.find('border-radius:3px;">[',i)

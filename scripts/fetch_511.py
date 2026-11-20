@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Idaho 511 road data -> data/parts/idaho511.json (per region: winter road conditions, closures/incidents, mountain passes).
-Needs IDAHO511_API_KEY (set in ~/API/idahoconditions.env). The API allows 10 calls per 60 s; this makes 4, 7 s apart.
+Needs IDAHO511_API_KEY (set in your local env file, see secrets/.env.example). The API allows 10 calls per 60 s; this makes 4, 7 s apart.
 
 The exact field names of Idaho's responses are not confirmed until the first real run (docs/data-sources.md), so every
 normalizer reads several likely names and keeps a trimmed copy of the original scalar fields under "fields". Run

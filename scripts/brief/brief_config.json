@@ -35,7 +35,7 @@
       },
       "sections": [
         "bottom",
-        "eric",
+        "editor",
         "changed",
         "weekend",
         "normal",
@@ -89,7 +89,7 @@
       },
       "sections": [
         "bottom",
-        "eric",
+        "editor",
         "changed",
         "weekend",
         "normal",

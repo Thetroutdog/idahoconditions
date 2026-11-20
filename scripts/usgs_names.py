@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fetch ALL Idaho stream-site names from USGS (follows pagination), join them with the latest-continuous readings and
 the region assignment, and write docs/probes/<latest>/gauges_by_region.md (fresh gauges only, grouped by region).
-Run on Eric's Mac after probe_sources.py and region_tools.py assign. Standard library only."""
+Run locally after probe_sources.py and region_tools.py assign. Standard library only."""
 import json, os, glob, sys, urllib.request, datetime as dt
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))

@@ -62,7 +62,7 @@
   "landing": "https://brundage.com/",
   "conditions": "https://brundage.com/on-the-mountain/snow-report/",
   "via": "link 'View Grooming Report' on landing page",
-  "note": "conditions URL set by Eric 2026-11-18",
+  "note": "conditions URL set manually 2026-11-18",
   "score": 10,
   "checkedAt": "2026-11-16"
  },
@@ -70,7 +70,7 @@
   "landing": "https://tamarackidaho.com/",
   "conditions": "https://tamarackidaho.com/the-mountain/snow-report",
   "via": "link 'Snowfort 2027' one click in",
-  "note": "conditions URL set by Eric 2026-11-18",
+  "note": "conditions URL set manually 2026-11-18",
   "score": 4,
   "checkedAt": "2026-11-16"
  },
@@ -96,7 +96,7 @@
   "landing": "https://www.pomerelle.com/",
   "conditions": "https://www.pomerelle.com/conditions",
   "via": "link '' on landing page",
-  "note": "conditions URL set by Eric 2026-11-18",
+  "note": "conditions URL set manually 2026-11-18",
   "score": 8,
   "checkedAt": "2026-11-16"
  },
@@ -104,7 +104,7 @@
   "landing": "https://soldiermountain.com/",
   "conditions": "https://snocountry.com/snow-report/idaho/soldier-mountain-ski-area/",
   "via": "link 'Terms and Conditions' one click in",
-  "note": "conditions URL set by Eric 2026-11-18",
+  "note": "conditions URL set manually 2026-11-18",
   "score": 8,
   "checkedAt": "2026-11-16"
  },
@@ -135,14 +135,14 @@
   "landing": "https://kellycanyonresort.com/",
   "conditions": "https://kellycanyonresort.com/#snow-report",
   "via": null,
-  "note": "conditions URL set by Eric 2026-11-18",
+  "note": "conditions URL set manually 2026-11-18",
   "checkedAt": "2026-11-16"
  },
  "upper-snake-grand-targhee-wy-idaho-access": {
   "landing": "https://www.grandtarghee.com/",
   "conditions": "https://www.grandtarghee.com/the-mountain/cams-conditions/mountain-report",
   "via": "link 'Terms & Conditions' on landing page",
-  "note": "conditions URL set by Eric 2026-11-18",
+  "note": "conditions URL set manually 2026-11-18",
   "score": 8,
   "checkedAt": "2026-11-16"
  },

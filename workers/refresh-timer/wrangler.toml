@@ -1,0 +1,16 @@
+# The refresh timer. Every 30 minutes (at :07 and :37, UTC clock = same minutes everywhere) this Worker asks GitHub to run
+# .github/workflows/refresh.yml. It replaces the workflow's own `schedule:`, which GitHub ran unreliably.
+# There is deliberately no fetch handler, so the Worker has no public URL to call.
+name = "ic-refresh-timer"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+workers_dev = false          # no *.workers.dev address
+preview_urls = false
+
+[triggers]
+crons = ["7,37 * * * *"]     # to pause the timer: set this to [] and run `npx wrangler deploy`, or remove the cron in the dashboard
+
+[observability]
+enabled = true               # keeps the Worker's logs in the Cloudflare dashboard
+
+# Secret (never put it in this file): GH_DISPATCH_TOKEN, set with `npx wrangler secret put GH_DISPATCH_TOKEN`

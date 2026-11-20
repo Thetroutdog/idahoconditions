@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """One-time (rerun any time) crawl: for every ski area, Nordic area and snowmobile area, find the page where the operator posts
 snow / trail / mountain conditions -> data/resort_pages.json, plus a review list at data/resort_pages_review.txt.
-Run on your Mac:  python3 scripts/crawl_resort_pages.py           (about 10-15 minutes, polite: 1 request per host per 2 s, robots.txt obeyed)
+Run locally:  python3 scripts/crawl_resort_pages.py           (about 10-15 minutes, polite: 1 request per host per 2 s, robots.txt obeyed)
 Then look at the review list, fix anything wrong in data/resort_pages_manual.json ({spot_id: {"conditions": url}}), and apply:
                   python3 scripts/crawl_resort_pages.py --apply   (adds the links to data/spot_links.json; never removes or edits existing ones)
 Where no conditions page is found the area's main landing page is added instead, as asked. Standard library only."""

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Checks region_points.json: (1) IDFG region of each point (data/idfg_regions.geojson), (2) NWS grid/zone ids per point,
 (3) distance from each chosen SNOTEL to its ski area. Writes docs/probes/<latest>/points_check.md.
-Run on Eric's Mac: set IC_USER_AGENT first (NWS requires a contact in the User-Agent). Standard library only."""
+Run locally: set IC_USER_AGENT first (NWS requires a contact in the User-Agent). Standard library only."""
 import json, os, glob, math, time, urllib.request, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from region_tools import find_region  # noqa: E402

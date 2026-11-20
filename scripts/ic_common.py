@@ -5,7 +5,7 @@ import json, os, sys, time, urllib.request, urllib.parse, datetime as dt
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 PARTS = os.path.join(ROOT, "data", "parts")
-# NWS requires a contact (email or site) in the User-Agent. Set the real value in IC_USER_AGENT (~/API/idahoconditions.env, GitHub secret); this is only the fallback.
+# NWS requires a contact (email or site) in the User-Agent. Set the real value in IC_USER_AGENT (your local env file, see secrets/.env.example; GitHub secret in Actions); this is only the fallback.
 UA = os.environ.get("IC_USER_AGENT") or "idahoconditions.com (contact@idahoconditions.com)"  # "or": an unset Actions secret arrives as an empty string
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 

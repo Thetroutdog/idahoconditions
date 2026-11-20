@@ -27,3 +27,7 @@ __pycache__/
 # ---- Brief build output and the checked-out snapshots branch ----
 brief-out/
 snapshots/
+
+# ---- Cloudflare Worker local state and secrets ----
+.wrangler/
+.dev.vars

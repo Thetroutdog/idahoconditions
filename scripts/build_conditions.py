@@ -26,7 +26,7 @@ RANK = {None: 0, "amber": 1, "red": 2}
 SEVERITY = {"Extreme": 0, "Severe": 1, "Moderate": 2, "Minor": 3}   # sort order inside one color: worst first, then soonest end
 
 
-RESORT_STALE_DAYS = 8   # resort_status.json is crawled weekly on Eric's Mac; older than this is shown as stale, not as current
+RESORT_STALE_DAYS = 8   # resort_status.json is crawled weekly by hand; older than this is shown as stale, not as current
 
 
 def ski_by_region(now):

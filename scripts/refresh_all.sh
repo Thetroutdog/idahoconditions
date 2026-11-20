@@ -1,7 +1,7 @@
 #!/bin/bash
 # Run every fetcher IN PARALLEL (they are independent: each reads fixed inputs and writes its own data/parts/*.json),
 # then rebuild data/conditions.json. One failing fetcher does not stop the others. Each fetcher's output is shown as a block, in order.
-# Setup first (same Terminal window): set -a; source ~/API/idahoconditions.env; set +a; export IC_USER_AGENT="..."
+# Setup first (same Terminal window): set -a; source <your local env file>; set +a; export IC_USER_AGENT="..."
 cd "$(dirname "$0")/.." || exit 1
 [ -z "$IC_USER_AGENT" ] && echo "!! WARNING: IC_USER_AGENT is not set. NWS wants a contact in the User-Agent; alerts may be refused."
 LOGS=$(mktemp -d); trap 'rm -rf "$LOGS"' EXIT

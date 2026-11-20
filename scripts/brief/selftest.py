@@ -33,12 +33,12 @@ check('--strict exits 1 when blocked', r.returncode==1)
 # --- preflight catches markers, demo baselines and stale data
 os.makedirs(os.path.join(tmp,'pf'))
 base=os.path.join(tmp,'pf','brief-draft')
-body="## Bottom line\n\nAll fine.\n\n## From Eric\n\n[ERIC: two lines]\n\n## What changed\n\n- FAKE thing None {id}\n"
+body="## Bottom line\n\nAll fine.\n\n## From the Desk\n\n[EDITOR: two lines]\n\n## What changed\n\n- FAKE thing None {id}\n"
 for e in ('md','html','txt'): open(f'{base}.{e}','w').write(body)
 json.dump({'lastWeek':'2026-11-12T20:00:00+00:00','lastWeekIsFake':True},open(os.path.join(tmp,'pf','diff.json'),'w'))
 r=subprocess.run([sys.executable,os.path.join(HERE,'preflight.py'),base,'--data',SAMPLE,'--now','2026-11-19T12:00:00-07:00'],capture_output=True,text=True)
 o=r.stdout
-check('preflight fails and names [ERIC], FAKE, leaked template, FAKE baseline', r.returncode==1 and all(x in o for x in ('[ERIC]','FAKE','leaked template','baseline is flagged FAKE')))
+check('preflight fails and names [EDITOR], FAKE, leaked template, FAKE baseline', r.returncode==1 and all(x in o for x in ('[EDITOR]','FAKE','leaked template','baseline is flagged FAKE')))
 check('preflight flags stale data', 'generated' in o and 'h ago' in o)
 
 print('\nALL PASS' if all(ok) else '\nSOME FAILED'); sys.exit(0 if all(ok) else 1)

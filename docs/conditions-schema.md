@@ -51,15 +51,15 @@ Region ids: `panhandle`, `clearwater`, `southwest`, `magic-valley`, `southeast`,
 Notes:
 - `depthChange24h` is the change in SNOTEL snow depth since the previous day (can be negative as snow settles); it is not a snowfall total.
 - `snow`, `rivers` and `air.points` list only items chosen in `data/selected_stations.json` and `data/region_points.json`.
-- `fire.wildfires` and `fire.prescribed` are separate lists (Eric: show prescribed burns as their own line).
+- `fire.wildfires` and `fire.prescribed` are separate lists (design decision: show prescribed burns as their own line).
 - `avalanche` lists the avalanche centers whose forecasts cover the region (`id`, `name`, `url`, `area`), from `data/avalanche_centers.json` (static links, edited by hand; Grok confirmed the eastern Idaho cross-border centers). Top-level `avalanchePoints` maps a forecast point id (e.g. `island-park`) to center ids that override the region list for that town.
-- `ski` lists weekly open/closed/opening-soon results per region (ski, nordic and snowmobile areas) from `data/resort_status.json`, written by `scripts/fetch_resort_status.py` on the Mac. Each item: `id`, `name`, `status` (`open`, `closed`, `opening-soon`), `confidence`, `opening`/`openingISO`, `url`, `checkedAt`, `freshness` (`stale` when the crawl is more than 8 days old), `source`. Areas whose status is `unknown` are left out. The site does not display it yet; the Thursday Brief can read it.
+- `ski` lists weekly open/closed/opening-soon results per region (ski, nordic and snowmobile areas) from `data/resort_status.json`, written by `scripts/fetch_resort_status.py` locally. Each item: `id`, `name`, `status` (`open`, `closed`, `opening-soon`), `confidence`, `opening`/`openingISO`, `url`, `checkedAt`, `freshness` (`stale` when the crawl is more than 8 days old), `source`. Areas whose status is `unknown` are left out. The site does not display it yet; the Thursday Brief can read it.
 - Idaho 511 fills `roads` once the key arrives; until then `roads.status` is `missing` and the region cannot be green (rule: no green when we can't tell) so the page shows gray plus last-known.
 
 ## Still to decide (small)
 1. History for sparklines: separate `history.json` (last 7 days per station/gauge) so `conditions.json` stays small.
 2. Where "last-known" is stored between runs (Actions cache or a small JSON committed to a data branch).
-3. NWS zone to region mapping file `data/zone_region.json` (needs one run on the Mac; see tasks).
+3. NWS zone to region mapping file `data/zone_region.json` (needs one run locally; see tasks).
 
 ## Facts from the points check (2026-11-15) that shape the build
 - A region spans several NWS offices: Panhandle and Clearwater are OTX (Spokane); Southwest BOI; Magic Valley BOI and PIH (Ketchum is PIH); Southeast and Upper Snake PIH; Salmon MSO (Missoula). Fetchers must not assume one office per region.

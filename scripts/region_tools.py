@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Official Idaho Fish and Game region boundaries: download them and assign stations/gauges to regions.
 
-Run on Eric's Mac (cloud sandbox cannot reach these hosts). Standard library only.
+Run locally (cloud sandbox cannot reach these hosts). Standard library only.
     python3 scripts/region_tools.py fetch      # saves data/idfg_regions.geojson
     python3 scripts/region_tools.py assign     # reads latest docs/probes/<date>/*_digest.json, writes region_assignment.json
     python3 scripts/region_tools.py selftest   # offline check of the point-in-polygon code

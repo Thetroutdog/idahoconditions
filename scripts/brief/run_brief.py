@@ -3,10 +3,10 @@
   python3 scripts/brief/run_brief.py [--snapshots DIR] [--out DIR] [--last-week FILE] [--now ISO] [--strict]
 
 Steps: pick last week's snapshot -> diff_week -> best_bet -> build_brief -> pre-send check (preflight).
-Human inputs (environment): BRIEF_ERIC_NOTE, BRIEF_BEST_BET_OVERRIDE. Without Eric's note the check BLOCKS on purpose.
+Human inputs (environment): BRIEF_EDITOR_NOTE, BRIEF_BEST_BET_OVERRIDE. Without the editor's note the check BLOCKS on purpose.
 Output folder (default <repo>/brief-out): brief-draft.{html,md,txt}, diff.json, best_bet.json, STATUS.md, status.json.
 Exit code is 0 even when BLOCKED (the draft is still worth reading); --strict makes BLOCKED exit 1.
-Eric reads STATUS.md. PASS means the automatic checks found nothing, not that the Brief is right: read it before pasting."""
+Read STATUS.md. PASS means the automatic checks found nothing, not that the Brief is right: read it before pasting."""
 import os, sys, json, shutil, argparse, subprocess, datetime as dt
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.normpath(os.path.join(HERE,'..','..'))
 PY=sys.executable

@@ -2,7 +2,7 @@
 """Assign every NWS public forecast zone in Idaho to IDFG region(s), writing data/zone_region.json.
 Method: sample a 7x7 grid over each zone's bounding box, keep samples inside the zone, count which IDFG region each lands in.
 A zone gets `primary` (largest share) and `regions` (every region with at least 15% of samples) so alerts on border zones
-can appear on more than one region page. Run on Eric's Mac with IC_USER_AGENT set. Standard library only.
+can appear on more than one region page. Run locally with IC_USER_AGENT set. Standard library only.
     python3 scripts/zone_regions.py            # fetch zones + assign
     python3 scripts/zone_regions.py selftest   # offline check"""
 import json, os, sys, time, urllib.request

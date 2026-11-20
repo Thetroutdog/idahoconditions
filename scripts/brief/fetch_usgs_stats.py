@@ -1,5 +1,5 @@
 """Fetch USGS daily-statistics median discharge (p50) for each gauge's day-of-year.
-Cache: data/usgs_daily_median.json (run on Eric's Mac: python3 scripts/brief/fetch_usgs_stats.py)  {site: {"MM-DD": p50_cfs, ...}, "_meta": {...}}
+Cache: data/usgs_daily_median.json (run locally: python3 scripts/brief/fetch_usgs_stats.py)  {site: {"MM-DD": p50_cfs, ...}, "_meta": {...}}
 Run yearly or on gauge-list change; stats only change as new approved data lands."""
 import json, os, urllib.request, sys, datetime
 ROOT=os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),"..",".."))

@@ -11,7 +11,7 @@ def iso(ts): return dt.datetime.fromisoformat(ts.replace('Z','+00:00'))
 ap=argparse.ArgumentParser(); ap.add_argument('base',nargs='?',default=os.path.join(ROOT,'brief-out','brief-draft'))
 ap.add_argument('--max-age-hours',type=float,default=cfg.get('maxDataAgeHours',18)); ap.add_argument('--now')
 ap.add_argument('--data',default=os.path.join(ROOT,'data','conditions.json')); ap.add_argument('--diff'); a=ap.parse_args()
-MARKERS={'[CHECK]':r'\[CHECK','[ERIC]':r'\[ERIC','FAKE':r'\bFAKE\b','[DEMO]':r'\[DEMO',
+MARKERS={'[CHECK]':r'\[CHECK','[EDITOR]':r'\[EDITOR','FAKE':r'\bFAKE\b','[DEMO]':r'\[DEMO',
          'leaked template':r'\{id\}|\{[a-z_]+\}|\bNone\b|\bnan\b|\bundefined\b|Traceback'}
 now=iso(a.now) if a.now else dt.datetime.now(B)
 fails=[]

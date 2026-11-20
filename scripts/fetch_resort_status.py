@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Best-effort crawl for each ski, Nordic and snowmobile area's current status (open / closed / opening soon) and opening day
--> data/resort_status.json, plus a review table on screen. Run on your Mac, about weekly until the season is rolling, then weekly toward the end:
+-> data/resort_status.json, plus a review table on screen. Run locally, about weekly until the season is rolling, then weekly toward the end:
     python3 scripts/fetch_resort_status.py
 Two sources: (1) the Ski Idaho home page, one request that lists all 19 ski areas with an "Opening Day" or open label; (2) each area's own conditions
 or landing page (from data/resort_pages.json, made by crawl_resort_pages.py, else data/resort_sites.json). Plain text pattern matching, so it is a

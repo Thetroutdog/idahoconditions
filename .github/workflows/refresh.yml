@@ -1,10 +1,10 @@
-# Every 30 minutes, at :07 and :37, off the busy top of the hour. (The repo is public, so Actions minutes are unlimited.) fetch fresh data, rebuild the site, deploy to Cloudflare Pages.
+# Fetch fresh data, rebuild the site, deploy to Cloudflare Pages.
+# THE TIMER IS A CLOUDFLARE WORKER (workers/refresh-timer, cron 7,37 * * * *), not GitHub: it starts this workflow with workflow_dispatch
+# every 30 minutes. GitHub's own `schedule:` skipped most runs, so it was removed. Do not add a schedule here or runs will start twice.
 # Also runs on every push to main (live site) or dev (private preview link) and can be started by hand (Actions tab > Refresh and deploy > Run workflow).
 name: Refresh and deploy
 
 on:
-  schedule:
-    - cron: "7,37 * * * *"
   push:
     branches: [main, dev]
   workflow_dispatch:

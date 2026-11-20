@@ -1,6 +1,6 @@
 # Data sources and coverage
 
-Status: **probed live on 2026-11-15** (`scripts/probe_sources.py`, run on Eric's Mac; raw samples in `docs/probes/2026-11-15/`). Idaho 511's keyed endpoints are not probed yet (key pending). The cloud sandbox cannot reach these hosts (policy block), so probes run on the Mac.
+Status: **probed live on 2026-11-15** (`scripts/probe_sources.py`, run locally; raw samples in `docs/probes/2026-11-15/`). Idaho 511's keyed endpoints are not probed yet (key pending). The cloud sandbox cannot reach these hosts (policy block), so probes run locally.
 
 ## 1. Source summary
 

@@ -1,6 +1,6 @@
 """Thursday Brief draft: phone-first, no tables in the content, ~250 words. DRAFT ONLY: this writes files and never sends anything.
 Inputs: conditions.json, diff.json (diff_week.py), best_bet.json (best_bet.py), data/usgs_daily_median.json (optional),
-brief_config.json. Human inputs, as environment variables: BRIEF_ERIC_NOTE ("line one\\nline two"), BRIEF_BEST_BET_OVERRIDE.
+brief_config.json. Human inputs, as environment variables: BRIEF_EDITOR_NOTE ("line one\\nline two"), BRIEF_BEST_BET_OVERRIDE.
 Other environment: BRIEF_OUT (output folder, default <repo>/brief-out), BRIEF_CONDITIONS (default <repo>/data/conditions.json).
 Writes brief-draft.{html,md,txt} into the output folder. Run through run_brief.py."""
 import sys, os, json, re, shutil, datetime as dt, html
@@ -16,8 +16,8 @@ diff=json.load(open(os.path.join(OUTDIR,'diff.json'))); bb=json.load(open(os.pat
 RSF=os.path.join(ROOT,'data','resort_status.json')
 rs=json.load(open(RSF)) if os.path.exists(RSF) else {'spots':{}}
 MEDF=os.path.join(ROOT,'data','usgs_daily_median.json')
-med=json.load(open(MEDF)) if os.path.exists(MEDF) else {}   # run scripts/brief/fetch_usgs_stats.py on the Mac to create it
-ERIC_NOTE=(os.environ.get('BRIEF_ERIC_NOTE') or '').replace('\\n','\n').strip() or None   # two lines from Eric
+med=json.load(open(MEDF)) if os.path.exists(MEDF) else {}   # run scripts/brief/fetch_usgs_stats.py locally to create it
+EDITOR_NOTE=(os.environ.get('BRIEF_EDITOR_NOTE') or '').replace('\\n','\n').strip() or None   # two lines from the editor
 BEST_BET_OVERRIDE=(os.environ.get('BRIEF_BEST_BET_OVERRIDE') or '').strip() or None   # replaces the rules pick in the bottom line
 OUT=os.path.join(OUTDIR,'brief-draft')
 gen=dt.datetime.fromisoformat(d['generatedAt']).astimezone(B)
@@ -149,7 +149,7 @@ lastfake=bool(diff.get('lastWeekIsFake'))
 footer=(f"Times MST. Data {gen.strftime('%a %b %-d, %-I:%M %p')}: NWS forecasts {min(fc)}–{max(fc)}; Idaho 511 {bt(src['idaho511']['fetchedAt'],'%-I:%M %p')}; "
         f"USGS/NOAA gauges ~11:30 AM–1:15 PM, provisional (medians: USGS daily stats); SNOTEL daily; AirNow {bt(src['airnow']['fetchedAt'],'%-I %p').replace('1 PM','1 PM')}, preliminary; NIFC {bt(src['nifc']['fetchedAt'],'%-I:%M %p')}. "
         f"Last week: {bt(diff['lastWeek'],'%b %-d')} snapshot{' (FAKE, demo)' if lastfake else ''}. A conditions check, not a to-do list.")
-EN=ERIC_NOTE or "[ERIC: two lines. What you saw, drove or skied this week.]"
+EN=EDITOR_NOTE or "[EDITOR: two lines. What you saw, drove or skied this week.]"
 best_short=best['point'].split(' /')[0]
 subj_change="A quiet week" if QUIET else ((" and ".join(a['place'].split('/')[-1].replace(' Pass','') for a in top)+" went "+top[0]['to'].lower().split()[0]) if top[0]['type']=='pass' else biggest)
 SUBJECT=f"{subj_change[0].upper()+subj_change[1:]}; the numbers favor {best['day']} in {best_short}"
@@ -157,8 +157,8 @@ NUM={1:"One",2:"Two",3:"Three",4:"Four",5:"Five",6:"Six"}
 PRE=("A quiet week" if QUIET else f"{NUM.get(len(changed),len(changed))} changes that matter")+f", the weekend in {NUM.get(len(wk),len(wk)).lower()} lines, and what's coming up."
 DATELINE=f"THURSDAY BRIEF · {send.strftime('%b %-d, %Y').upper()} · DATA AS OF {gen.strftime('%a %-I:%M %p').upper()} MST"
 FAKE="DEMO: \"last week\" is a FAKE snapshot made up to show the weekly diff." if lastfake else None
-TITLES={"bottom":"Bottom line","eric":"From Eric","changed":"What changed","weekend":"The weekend","normal":"Vs. normal","coming":"Coming up","avalanche":"Avalanche","links":"By region","sources":"Sources"}
-CONTENT={"bottom":bottom,"eric":[EN],"changed":changed,"weekend":wk,"normal":[normal],"coming":coming,"avalanche":[aval] if aval else [],"links":[rl],"sources":[footer]}
+TITLES={"bottom":"Bottom line","editor":"From the Desk","changed":"What changed","weekend":"The weekend","normal":"Vs. normal","coming":"Coming up","avalanche":"Avalanche","links":"By region","sources":"Sources"}
+CONTENT={"bottom":bottom,"editor":[EN],"changed":changed,"weekend":wk,"normal":[normal],"coming":coming,"avalanche":[aval] if aval else [],"links":[rl],"sources":[footer]}
 LISTY={"changed","coming"}
 # ---------- HTML (fluid, single column) ----------
 def BOLD(t): return t.replace('<strong>','<strong style="color:'+PINE+';">')
@@ -178,8 +178,8 @@ for sec in S['sections']:
     if sec=='bottom':
         h.append(f'<div style="background:{PINE};border-left:5px solid {GOLD};border-radius:6px;padding:16px 18px 8px;margin:0 0 4px;"><p style="margin:0 0 8px;font-family:{MONO};font-size:11px;letter-spacing:0.1em;color:{GOLD};">BOTTOM LINE</p>'
                  + ''.join(P(x,16,CREAM,lc=GOLD).replace('<strong>',f'<strong style="color:{GOLD};">') for x in items)+'</div>')
-    elif sec=='eric':
-        h.append(f'<div style="margin:14px 0 0;padding:12px 14px;border:2px dashed {GOLD};border-radius:6px;"><p style="margin:0 0 4px;font-family:{MONO};font-size:11px;letter-spacing:0.1em;color:{MOSS};">FROM ERIC</p>{P(items[0],15,extra="margin:0;font-style:italic;")}</div>')
+    elif sec=='editor':
+        h.append(f'<div style="margin:14px 0 0;padding:12px 14px;border:2px dashed {GOLD};border-radius:6px;"><p style="margin:0 0 4px;font-family:{MONO};font-size:11px;letter-spacing:0.1em;color:{MOSS};">FROM THE DESK</p>{P(items[0],15,extra="margin:0;font-style:italic;")}</div>')
     elif sec=='sources':
         h.append(H(TITLES[sec])+f'<p style="margin:0 0 6px;font-family:{MONO};font-size:11px;line-height:1.55;color:#4a5a52;">{md2html(items[0])}</p>')
     elif sec in LISTY:
@@ -190,7 +190,7 @@ h.append('</div>')
 h.append(f'''<div style="background:{PINE};padding:18px 20px;font-family:{MONO};font-size:12px;line-height:1.7;color:{CREAM};">
 <img src="ic-logo-112.png" width="44" height="44" alt="Idaho Conditions logo" style="display:block;border:0;border-radius:7px;margin:0 0 8px;">
 <a href="https://idahoconditions.com" style="color:{GOLD};text-decoration:none;">idahoconditions.com</a> · <a href="https://x.com/idahoconditions" style="color:{GOLD};text-decoration:none;">X</a> · <a href="https://www.instagram.com/idahoconditions/" style="color:{GOLD};text-decoration:none;">Instagram</a> · <a href="mailto:contact@idahoconditions.com" style="color:{GOLD};text-decoration:none;">contact@idahoconditions.com</a><br>
-<span style="color:#9fb3a8;">Reply and it reaches Eric. <a href="#" style="color:#9fb3a8;">Unsubscribe</a></span></div>''')
+<span style="color:#9fb3a8;">Reply and it reaches the Conditions Desk. <a href="#" style="color:#9fb3a8;">Unsubscribe</a></span></div>''')
 doc=f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{html.escape(SUBJECT)}</title>{FONTS}</head>
 <body style="margin:0;padding:0;background:{PINE};"><div style="display:none;max-height:0;overflow:hidden;opacity:0;">{html.escape(PRE)}</div>
 <div style="padding:16px 8px;"><div style="max-width:600px;margin:0 auto;background:{CREAM};border-radius:6px;overflow:hidden;">

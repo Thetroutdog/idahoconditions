@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Find lat/lon for every catalog spot -> data/spot_coords.json. Run on your Mac (needs internet): python3 scripts/geocode_spots.py
+"""Find lat/lon for every catalog spot -> data/spot_coords.json. Run locally (needs internet): python3 scripts/geocode_spots.py
 Uses OpenStreetMap Nominatim (free; asks for 1 request/second and a contact in the User-Agent: set IC_USER_AGENT).
 Each spot tries, in order: "name, town, Idaho" then "name, Idaho" then the town alone. A hit only counts if it is inside Idaho
 and inside the spot's own IDFG region; otherwise the next query is tried. precision is "place" (found by name) or "town" (fallback).
