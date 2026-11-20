@@ -123,9 +123,11 @@ const sw = statewide();
         <div class="brief-band">
           <div><h2>The Thursday Conditions Brief</h2><p>A short email before the weekend: what’s open, what’s closed, and which rivers and road passes actually matter.</p></div>
           {SITE.beehiivFormId ? (
-            <div class="brief-embed">
+            <div class="brief-cta">
+              {/* The beehiiv form is a pop-up with the trigger "On click or DOM event" aimed at #brief-signup (set in beehiiv's form editor). It stays hidden until this button is clicked. */}
+              <button class="btn" type="button" id="brief-signup">Sign up for the Brief</button>
               <script is:inline async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form={SITE.beehiivFormId}></script>
-              <noscript><p>The signup form needs JavaScript. To get the Thursday Brief, email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p></noscript>
+              <noscript><p>The signup pop-up needs JavaScript. To get the Thursday Brief, email <a href={`mailto:${SITE.contactEmail}`}>{SITE.contactEmail}</a>.</p></noscript>
             </div>
           ) : (
             <form class="brief-form" data-signup action="#" method="post">
