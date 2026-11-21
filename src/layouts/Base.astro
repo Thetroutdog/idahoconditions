@@ -5,6 +5,7 @@ import WordmarkMark from '../components/WordmarkMark.astro';
 import SocialIcons from '../components/SocialIcons.astro';
 import { SITE, ITD_CREDIT, ITD_URL } from '../lib/site.js';
 import { conditions, regionIds } from '../lib/conditions.js';
+import { statewideBar } from '../lib/regionview.js';
 const { title = 'Idaho Conditions', description = 'Live outdoor conditions for Idaho, organized by Fish and Game region.', regionBar = null } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://idahoconditions.com').href;
 // Footer source chips: a source whose last fetch failed is marked delayed. Sources never fetched (no fetchedAt) are not flagged.
@@ -20,8 +21,8 @@ const FOOTER_SOURCES = [
   ['nifc', 'https://www.nifc.gov/', 'NIFC', 'WFIGS'],
 ];
 const srcLabel = (k, name, tag) => { const parts = [tag, delayed(k) ? 'delayed' : ''].filter(Boolean).join(', '); return parts ? `${name} (${parts})` : name; };
-// Region pages pass their own bar (always shown, green when clear); everything else shows the statewide bar.
-const bar = regionBar ?? conditions.alertBar;
+// Every page has a bar: region pages pass their own, everything else shows the statewide bar (worst region wins).
+const bar = regionBar ?? statewideBar();
 ---
 <!doctype html>
 <html lang="en">
@@ -77,9 +78,9 @@ const bar = regionBar ?? conditions.alertBar;
     {bar && (
       <div class={`alert-bar ${bar.level}`} role="status">
         <div class="alert-bar-inner">
-          <span class="alert-kicker">{bar.kicker ?? 'Alert'}</span>
-          {regionBar && regionBar.level === 'green' ? <strong>{bar.text}</strong> : <a href={bar.href ?? '/#snapshot'}><strong>{bar.text}</strong>{bar.moreCount > 0 && ` (+${bar.moreCount} more)`}</a>}
-          {!(regionBar && regionBar.level === 'green') && <span class="alert-meta">Details below</span>}
+          <span class="alert-kicker">{bar.kicker}</span>
+          {bar.href && bar.level !== 'green' ? <a href={bar.href}><strong>{bar.text}</strong>{bar.moreCount > 0 && ` (+${bar.moreCount} more)`}</a> : <strong>{bar.text}</strong>}
+          {bar.href && bar.level !== 'green' && <span class="alert-meta">Details below</span>}
         </div>
       </div>
     )}
@@ -129,9 +130,8 @@ const bar = regionBar ?? conditions.alertBar;
           });
         }
       }
-      // Pages are static, so a stopped refresh would leave old alerts looking current. Past 90 minutes: banner + hide the alert bar.
+      // Pages are static, so a stopped refresh would leave old alerts looking current. Past 90 minutes the alert bar switches to "No current data" so an old alert or an old all-clear is not shown as current (the page already shows its last-updated time).
       function checkStale() {
-        document.querySelectorAll('.stale-banner').forEach((n) => n.remove());
         const gen = document.querySelector('meta[name="ic-generated"]')?.getAttribute('content');
         const sample = document.querySelector('meta[name="ic-sample"]')?.getAttribute('content') === '1';
         const bar = document.querySelector('.alert-bar') as HTMLElement | null;
@@ -141,12 +141,7 @@ const bar = regionBar ?? conditions.alertBar;
         if (!gen || sample) return;
         const t = Date.parse(gen);
         if (!Number.isFinite(t) || (Date.now() - t) / 60000 <= 90) return;
-        const when = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Boise', weekday: 'short', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }).format(t);
-        const b = document.createElement('div');
-        b.className = 'stale-banner'; b.setAttribute('role', 'status');
-        b.textContent = `Data delayed. Last updated ${when}. The alert bar is hidden until the next refresh, and any alert past its end time is removed; check weather.gov and 511.idaho.gov for current warnings.`;
-        document.querySelector('.site-header')?.insertAdjacentElement('afterend', b);
-        if (bar) bar.hidden = true;
+        if (bar) { bar.className = 'alert-bar gray'; bar.innerHTML = '<div class="alert-bar-inner"><span class="alert-kicker">No current data</span><strong>Data delayed. Check weather.gov and 511.idaho.gov for current warnings.</strong></div>'; }
       }
       document.addEventListener('astro:page-load', () => { applyQuery(); checkStale(); });
       document.addEventListener('astro:after-swap', () => {

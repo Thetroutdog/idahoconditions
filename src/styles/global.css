@@ -699,8 +699,9 @@ a.region-card:hover,
 .brief-form .btn { padding: 11px 16px; font-size: 14px; }
 
 /* ——— Footer ——— */
+:root { --footer-pad: 36px; }
 .site-footer {
-  padding: 36px 0 48px;
+  padding: var(--footer-pad) 0 48px;
   color: var(--ink-soft);
   font-size: 13px;
 }
@@ -1932,8 +1933,7 @@ details.data-detail > summary { cursor: pointer; font-weight: 650; font-size: 14
 }
 
 /* ——— Stale data banner, delayed source chips, follow note ——— */
-.stale-banner { background: #f3e2b3; color: #4a3a0c; font-size: 14px; padding: 8px 0; text-align: center; border-bottom: 1px solid rgba(74,58,12,.2); }
-.stale-banner[hidden], .alert-bar[hidden] { display: none; }
+.alert-bar[hidden] { display: none; }
 .sources a.delayed { font-style: italic; opacity: .8; }
 .aqi-val { display: inline-block; padding: 1px 8px; border-radius: 4px; font-weight: 600; font-size: .95em; line-height: 1.5; border: 1px solid rgba(0, 0, 0, .18); }
 .footer-note { margin: 14px 0 0; font-size: 13px; line-height: 1.55; color: var(--ink-soft); }
@@ -2091,3 +2091,9 @@ details.fc7-detail + details.data-detail { margin-top: 0; border-top: 0; padding
 /* Short disclaimer reminders beside the data they apply to; the full text is on /terms/. */
 .status-mini .legal-note { margin: 6px 0 0; font-size: 11.5px; line-height: 1.4; color: var(--muted); }
 .legal-line { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--ink-soft); }
+
+/* Feedback line: a centered row laid out like the forecast and readings rows, with the same 12px above and below the text.
+   Its lower line is the footer's top border, so the footer's top padding is pulled back to meet it. */
+.feedback-line { text-align: center; margin: -8px 0 calc(-1 * var(--footer-pad)); padding: 12px 0; font-size: 15px; line-height: 1.5; color: var(--ink-soft); position: relative; z-index: 1; }
+/* On the home page nothing sits above it, so it gets its own top line. */
+.feedback-line.is-ruled { margin-top: 0; border-top: 1px solid var(--line); }

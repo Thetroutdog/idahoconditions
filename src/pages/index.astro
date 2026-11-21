@@ -8,7 +8,7 @@ import map from '../data/idaho-map.json';
 import { stateRivers } from '../lib/mappins.js';
 import UnplacedItems from '../components/UnplacedItems.astro';
 import AqiValue from '../components/AqiValue.astro';
-import { SITE, NOTES } from '../lib/site.js';
+import { SITE, NOTES, feedbackMailto } from '../lib/site.js';
 const rivers = stateRivers();
 const regs = conditions.regions;
 const updated = fmtTime(conditions.generatedAt, 'America/Boise');
@@ -143,5 +143,6 @@ const sw = statewide();
         </div>
       </div>
     </section>
+    <div class="wrap"><p class="feedback-line is-ruled">See something wrong, or have a better idea? <a href={feedbackMailto('')}>Tell the Desk.</a> The mountains won’t answer. We will.</p></div>
   </main>
 </Base>

@@ -1,5 +1,5 @@
 // Helpers that turn a region's live data into the small cards on region pages and the landing page.
-import { conditions, fmtTime } from './conditions.js';
+import { conditions, fmtTime, regionIds } from './conditions.js';
 import { NOTES } from './site.js';
 import map from '../data/idaho-map.json';
 import points from '../../data/region_points.json';
@@ -108,10 +108,32 @@ export function alertHref(a, regionId) {
 
 // Region alert bar: very short items from the region's own level reasons ("Winter Weather Advisory", "US-95 closed").
 // Green regions get a calm "No active alerts" bar; gray (stale or missing data) says so instead of implying all clear.
+// Same four words as the map legend. Every page has a bar: region pages show their region, all other pages show the statewide one.
+export const BAR_LABEL = { red: 'Hazards', amber: 'Caution', green: 'Clear', gray: 'No current data' };
+// One short phrase per reason: drop the "until <time>" tail and the "(N segments)" count.
+const shortReason = (t) => String(t).split(/ until /)[0].replace(/\s*\(\d+ segments?\)/, '').replace(/\s+/g, ' ').trim();
+
+// Statewide bar: the worst region level wins (red, then amber). Gray only when no region has current data.
+export function statewideBar() {
+  const regs = regionIds.map((id) => ({ id, ...conditions.regions[id] })).filter((r) => r.level);
+  const by = (lv) => regs.filter((r) => r.level === lv);
+  const why = (r) => `${r.name} (${shortReason(r.levelReasons?.[0]?.text ?? r.summary ?? '')})`;
+  const worst = by('red').length ? 'red' : by('amber').length ? 'amber' : null;
+  if (worst) {
+    const flagged = [...by('red'), ...by('amber')];
+    const shown = by(worst).slice(0, 2);
+    return { level: worst, kicker: BAR_LABEL[worst], text: shown.map(why).join(', '), moreCount: flagged.length - shown.length, href: '/#regions' };
+  }
+  const gray = by('gray');
+  if (!regs.length || gray.length === regs.length) return { level: 'gray', kicker: BAR_LABEL.gray, text: 'Some conditions data is out of date. Check weather.gov and 511.idaho.gov.', moreCount: 0, href: '/#snapshot' };
+  const note = gray.length ? `; no current data for ${gray.length <= 2 ? gray.map((r) => r.name).join(' and ') : `${gray.length} regions`}` : '';
+  return { level: 'green', kicker: BAR_LABEL.green, text: gray.length ? `Clear in ${regs.length - gray.length} regions${note}` : 'No active alerts in any region', moreCount: 0, href: null };
+}
+
 export function regionBar(id) {
   const r = conditions.regions[id];
   if (!r) return null;
-  const short = (t) => String(t).split(/ until |: /)[0].replace(/\s+/g, ' ').trim();
+  const short = shortReason;
   const seen = new Set();
   const items = [];
   for (const x of r.levelReasons ?? []) {
@@ -121,8 +143,8 @@ export function regionBar(id) {
   const href = `/${id}/#alerts`;
   if (r.level === 'red' || r.level === 'amber') {
     const shown = items.slice(0, 3);
-    return { level: r.level, kicker: 'Alert', text: shown.join(' · '), moreCount: items.length - shown.length, href };
+    return { level: r.level, kicker: BAR_LABEL[r.level], text: shown.join(' · '), moreCount: items.length - shown.length, href };
   }
-  if (r.level === 'green') return { level: 'green', kicker: 'Clear', text: 'No active alerts', moreCount: 0, href };
-  return { level: 'gray', kicker: 'Notice', text: items[0] ?? 'Some conditions data is out of date', moreCount: 0, href };
+  if (r.level === 'green') return { level: 'green', kicker: BAR_LABEL.green, text: 'No active alerts', moreCount: 0, href };
+  return { level: 'gray', kicker: BAR_LABEL.gray, text: items[0] ?? 'Some conditions data is out of date', moreCount: 0, href };
 }

@@ -8,7 +8,7 @@ import { regionById, hubActivities, spotsIn } from '../lib/catalog.js';
 import RegionMap from './RegionMap.astro';
 import RegionAlerts from './RegionAlerts.astro';
 import { statusStrip } from '../lib/regionview.js';
-import { NOTES } from '../lib/site.js';
+import { NOTES, feedbackMailto } from '../lib/site.js';
 
 const { id } = Astro.props;
 const reg = regionById[id];
@@ -63,6 +63,7 @@ const updated = fmtTime(conditions.generatedAt, tz);
 
     <Forecast7 id={id} />
     <RegionData id={id} />
+    <p class="feedback-line">See something wrong in the {reg.name} Region, or have a better idea? <a href={feedbackMailto(`${reg.name} Region`)}>Tell the Desk.</a> The mountains won’t answer. We will.</p>
   </div>
 </main>
 

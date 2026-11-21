@@ -26,3 +26,7 @@ export const NOTES = {
   avalanche: 'We link to avalanche center forecasts but do not publish or summarize danger ratings. Read your center\u2019s current forecast before entering avalanche terrain.',
   fire: 'Fire points are not evacuation or closure notices. Follow local officials.',
 };
+
+// Feedback line shown under the Brief signup on the home page and under the live readings on region pages.
+export const feedbackMailto = (topic) => `mailto:${SITE.contactEmail}?subject=${encodeURIComponent(topic ? `Idaho Conditions: ${topic}` : 'Idaho Conditions feedback')}`;
+
