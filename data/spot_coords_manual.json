@@ -177,6 +177,6 @@
  "southwest-bogus-basin-nordic": {
   "lat": 43.77063,
   "lon": -116.09089,
-  "note": "Bogus Basin base area (same point as the ski area, forecast cell about 6,540 ft); the geocoded point was Boise town"
+  "note": "Bogus Basin recreation area (mid-basin, about 7,300 ft terrain); same NWS forecast cell, about 6,540 ft, as the Nordic lodge at the base; the geocoded point was Boise town"
  }
 }

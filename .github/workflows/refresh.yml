@@ -68,7 +68,11 @@ jobs:
         if: steps.nm.outputs.cache-hit != 'true'
         run: npm ci
 
+      # Indexing is off until the repository variable PUBLIC_ALLOW_INDEX is set to true (Settings > Secrets and variables > Actions > Variables).
+      # Only builds of main can turn it on; the dev preview always stays noindex. Unset or any other value keeps noindex and Disallow: /.
       - name: Build site
+        env:
+          PUBLIC_ALLOW_INDEX: ${{ github.ref_name == 'main' && vars.PUBLIC_ALLOW_INDEX || '' }}
         run: npm run build
 
       - name: Deploy to Cloudflare Pages
