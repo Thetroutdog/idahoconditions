@@ -15,9 +15,9 @@
   "note": "resort base at Alta WY, from memory; check"
  },
  "southwest-brundage-snowcat-adventures": {
-  "lat": 44.9298,
-  "lon": -116.1435,
-  "note": "Brundage Mountain (geocoded ski area)"
+  "lat": 45.00656,
+  "lon": -116.13401,
+  "note": "Brundage summit point, picked so the NWS forecast cell reads about 6,830 ft (checked Nov 22); the geocoded point sat in the valley or base"
  },
  "southwest-banner-summit-hwy-21": {
   "lat": 44.306,
@@ -138,5 +138,45 @@
   "lat": 43.72755,
   "lon": -114.38257,
   "note": "Nordic Pulse Directions coordinates"
+ },
+ "panhandle-schweitzer": {
+  "lat": 48.37499,
+  "lon": -116.62945,
+  "note": "mid-mountain point, picked so the NWS forecast cell reads about 5,470 ft (checked Nov 22); the geocoded point sat in the valley or base"
+ },
+ "panhandle-silver-mountain": {
+  "lat": 47.48812,
+  "lon": -116.12855,
+  "note": "summit point, picked so the NWS forecast cell reads about 5,910 ft (checked Nov 22); the geocoded point sat in the valley or base"
+ },
+ "clearwater-cottonwood-butte": {
+  "lat": 46.07354,
+  "lon": -116.45634,
+  "note": "mid-mountain point, picked so the NWS forecast cell reads about 5,210 ft (checked Nov 22); the geocoded point sat in the valley or base"
+ },
+ "panhandle-lookout-pass": {
+  "lat": 47.45501,
+  "lon": -115.70216,
+  "note": "mid-mountain point, picked so the NWS forecast cell reads about 4,740 ft (checked Nov 22); the geocoded point sat in the valley or base"
+ },
+ "southwest-brundage-mountain": {
+  "lat": 45.00656,
+  "lon": -116.13401,
+  "note": "summit point, picked so the NWS forecast cell reads about 6,830 ft (checked Nov 22); the geocoded point sat in the valley or base"
+ },
+ "southwest-tamarack-resort": {
+  "lat": 44.68107,
+  "lon": -116.14528,
+  "note": "mid-mountain point, picked so the NWS forecast cell reads about 6,190 ft (checked Nov 22); the geocoded point sat in the valley or base"
+ },
+ "magic-valley-soldier-mountain": {
+  "lat": 43.48733,
+  "lon": -114.85363,
+  "note": "summit point, picked so the NWS forecast cell reads about 6,950 ft (checked Nov 22); the geocoded point sat in the valley or base"
+ },
+ "southwest-bogus-basin-nordic": {
+  "lat": 43.77063,
+  "lon": -116.09089,
+  "note": "Bogus Basin base area (same point as the ski area, forecast cell about 6,540 ft); the geocoded point was Boise town"
  }
 }
