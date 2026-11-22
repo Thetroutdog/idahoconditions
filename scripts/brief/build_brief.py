@@ -1,7 +1,7 @@
 """Thursday Brief draft: phone-first, no tables in the content, ~250 words. DRAFT ONLY: this writes files and never sends anything.
 Inputs: conditions.json, diff.json (diff_week.py), best_bet.json (best_bet.py), data/usgs_daily_median.json (optional),
 brief_config.json. Human inputs, as environment variables: BRIEF_EDITOR_NOTE ("line one\\nline two"), BRIEF_BEST_BET_OVERRIDE.
-Other environment: BRIEF_OUT (output folder, default <repo>/brief-out), BRIEF_CONDITIONS (default <repo>/data/conditions.json).
+Other environment: BRIEF_OUT (output folder; default see paths.py: $BRIEF_HOME/drafts/<send date> or <repo>/brief-out), BRIEF_CONDITIONS (default <repo>/data/conditions.json).
 Writes brief-draft.{html,md,txt} into the output folder. Run through run_brief.py."""
 import sys, os, json, re, shutil, datetime as dt, html
 from zoneinfo import ZoneInfo
@@ -9,7 +9,8 @@ HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.normpath(os.path.j
 sys.path.insert(0,HERE)
 from common import PINE,GOLD,CREAM,MOSS,INK,SERIF,SANS,MONO,FONTS,md2html
 B=ZoneInfo('America/Boise')
-OUTDIR=os.environ.get('BRIEF_OUT') or os.path.join(ROOT,'brief-out'); os.makedirs(OUTDIR,exist_ok=True)
+import paths
+OUTDIR=os.environ.get('BRIEF_OUT') or paths.out_dir(); os.makedirs(OUTDIR,exist_ok=True)
 cfg=json.load(open(os.path.join(HERE,'brief_config.json')))
 d=json.load(open(os.environ.get('BRIEF_CONDITIONS') or os.path.join(ROOT,'data','conditions.json')))
 diff=json.load(open(os.path.join(OUTDIR,'diff.json'))); bb=json.load(open(os.path.join(OUTDIR,'best_bet.json')))

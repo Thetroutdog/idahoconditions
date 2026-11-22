@@ -1,14 +1,15 @@
 """Hard pre-send check for the Thursday brief. Exit 0 = clear to paste; exit 1 = lists every reason.
 Usage: python3 scripts/brief/preflight.py [--max-age-hours N] [--now ISO] [--data FILE] [--diff FILE] [base]
-  base default: <repo>/brief-out/brief-draft ; data default: <repo>/data/conditions.json ; diff default: <base folder>/diff.json
+  base default: <output folder from paths.py>/brief-draft ; data default: <repo>/data/conditions.json ; diff default: <base folder>/diff.json
 Checks: placeholder/demo markers in .md/.html/.txt, empty or leaked-template text, empty sections, stale or failed sources,
 and that last week's baseline is a real snapshot 5-9 days old. This tool only reports; nothing in this repo sends email."""
 import os, sys, re, json, argparse, datetime as dt
+import paths
 from zoneinfo import ZoneInfo
 B=ZoneInfo('America/Boise'); HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.normpath(os.path.join(HERE,'..','..'))
 cfg=json.load(open(os.path.join(HERE,'brief_config.json')))
 def iso(ts): return dt.datetime.fromisoformat(ts.replace('Z','+00:00'))
-ap=argparse.ArgumentParser(); ap.add_argument('base',nargs='?',default=os.path.join(ROOT,'brief-out','brief-draft'))
+ap=argparse.ArgumentParser(); ap.add_argument('base',nargs='?',default=os.path.join(paths.out_dir(),'brief-draft'))
 ap.add_argument('--max-age-hours',type=float,default=cfg.get('maxDataAgeHours',18)); ap.add_argument('--now')
 ap.add_argument('--data',default=os.path.join(ROOT,'data','conditions.json')); ap.add_argument('--diff'); a=ap.parse_args()
 MARKERS={'[CHECK]':r'\[CHECK','[EDITOR]':r'\[EDITOR','FAKE':r'\bFAKE\b','[DEMO]':r'\[DEMO',

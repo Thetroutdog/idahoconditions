@@ -5,8 +5,9 @@
   python3 scripts/brief/snapshot.py pick [--dir DIR] [--now ISO]
       Prints the path of the snapshot closest to 7 days before --now (must be 5 to 9.5 days old). Exit 1 and no output if none.
 
-DIR is a checkout of the `snapshots` branch (see docs/brief.md). This script touches files only; the workflow does the git push."""
+DIR defaults to $BRIEF_HOME/snapshots when BRIEF_HOME is set (see paths.py), else <repo>/snapshots. This script touches files only; it never uses git."""
 import os, sys, re, json, glob, argparse, datetime as dt
+import paths
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.normpath(os.path.join(HERE,'..','..'))
 PAT=re.compile(r'conditions-(\d{4}-\d{2}-\d{2})\.json$')
 
@@ -45,8 +46,8 @@ def pick(dirpath,now):
 def main(argv=None):
     ap=argparse.ArgumentParser(); sub=ap.add_subparsers(dest='cmd',required=True)
     s=sub.add_parser('save'); s.add_argument('--src',default=os.path.join(ROOT,'data','conditions.json'))
-    s.add_argument('--dir',default=os.path.join(ROOT,'snapshots')); s.add_argument('--date'); s.add_argument('--keep',type=int,default=12)
-    p=sub.add_parser('pick'); p.add_argument('--dir',default=os.path.join(ROOT,'snapshots')); p.add_argument('--now')
+    s.add_argument('--dir',default=paths.snapshots_dir()); s.add_argument('--date'); s.add_argument('--keep',type=int,default=12)
+    p=sub.add_parser('pick'); p.add_argument('--dir',default=paths.snapshots_dir()); p.add_argument('--now')
     a=ap.parse_args(argv)
     if a.cmd=='save': print(save(a.src,a.dir,a.date,a.keep)); return 0
     now=iso(a.now) if a.now else dt.datetime.now(dt.timezone.utc)

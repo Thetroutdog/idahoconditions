@@ -20,17 +20,20 @@ Actions > *Thursday Brief draft* > latest run > read the summary. If it says BLO
 BLOCKED if any of these is true: a `[CHECK…]`, `[EDITOR…]`, `[DEMO…]` or `FAKE` marker is left in the md, html or txt; leaked template text (`{id}`, `None`, `nan`, `undefined`); an empty section; `conditions.json` or any source older than 18 hours (`maxDataAgeHours` in `brief_config.json`); a source that failed; or no real last-week snapshot 5 to 9 days old. The first week has no snapshot, so the first draft is BLOCKED by design.
 
 ## Weekly snapshots
-`scripts/brief/snapshot.py save` writes `conditions-YYYY-MM-DD.json` (forecasts removed, about 100 KB) to the `snapshots` branch and keeps the newest 12. The branch is separate, so it never touches the deployed site and the site workflow never sees it. `scripts/brief/snapshots_git.sh` does the git work.
+`scripts/brief/snapshot.py save` writes `conditions-YYYY-MM-DD.json` (forecasts removed, about 100 KB) into the snapshots folder and keeps the newest 12. The folder is outside the repo when `BRIEF_HOME` is set (see below), otherwise `snapshots/` in the repo (git-ignored). `snapshots_git.sh` only matters if a workflow ever keeps snapshots on a git branch again; local runs do not use it.
 
 ## Local use
 ```
 set -a; source <your local env file>; set +a; export IC_USER_AGENT="..."
 ./scripts/refresh_all.sh
 python3 scripts/brief/fetch_usgs_stats.py          # once, makes data/usgs_daily_median.json
-python3 scripts/brief/run_brief.py --last-week /path/to/older/conditions.json
+python3 scripts/brief/snapshot.py save              # once a week, after a refresh
+python3 scripts/brief/run_brief.py
 python3 scripts/brief/selftest.py                  # no network
 ```
-Output goes to `brief-out/` (git-ignored). Inputs for local runs: environment variables `BRIEF_EDITOR_NOTE` and `BRIEF_BEST_BET_OVERRIDE`.
+Where files go (`scripts/brief/paths.py`): set the environment variable `BRIEF_HOME` to a folder outside the repo (for example in your own notes folder; put the export in your shell profile). Then each draft is written to `$BRIEF_HOME/drafts/<send date>/` (the send date is the next Thursday, Boise time, so Wednesday and Thursday runs share a folder) and snapshots to `$BRIEF_HOME/snapshots/`. With `BRIEF_HOME` unset, drafts go to `brief-out/` and snapshots to `snapshots/` in the repo, both git-ignored. `--out`, `--snapshots` and `BRIEF_OUT` override either way. `run_brief.py` prints the output folder when it finishes.
+
+Inputs for local runs: environment variables `BRIEF_EDITOR_NOTE` and `BRIEF_BEST_BET_OVERRIDE`.
 
 ## Scheduling
 The site refresh is started by a Cloudflare Worker (`workers/refresh-timer/`), not by a GitHub `schedule:`, so GitHub's 60-day auto-disable of scheduled workflows does not apply and no keep-alive workflow is needed (it was removed in v0.14.0). If a Thursday Brief workflow is ever brought back, start it from that Worker too.
@@ -39,4 +42,4 @@ The site refresh is started by a Cloudflare Worker (`workers/refresh-timer/`), n
 The repo is public, so a workflow's run summary and a `snapshots` branch would be readable by anyone, and artifacts by any signed-in GitHub user. That includes the editor's two lines before the send. Another reason to build the draft locally.
 
 ## Files
-`scripts/brief/`: `run_brief.py` (orchestrator), `snapshot.py`, `snapshots_git.sh`, `diff_week.py`, `best_bet.py`, `build_brief.py`, `preflight.py`, `common.py` (email styles), `brief_config.json` (weights, sections, limits), `fetch_usgs_stats.py`, `selftest.py`, `assets/` (masthead and logo for the HTML). Ported from the Newsletter Writer's demo scripts (GROK_LOG, item 23).
+`scripts/brief/`: `run_brief.py` (orchestrator), `snapshot.py`, `snapshots_git.sh`, `diff_week.py`, `best_bet.py`, `build_brief.py`, `preflight.py`, `common.py` (email styles), `paths.py` (where drafts and snapshots live), `brief_config.json` (weights, sections, limits), `fetch_usgs_stats.py`, `selftest.py`, `assets/` (masthead and logo for the HTML). Ported from the Newsletter Writer's demo scripts (GROK_LOG, item 23).

@@ -41,4 +41,15 @@ o=r.stdout
 check('preflight fails and names [EDITOR], FAKE, leaked template, FAKE baseline', r.returncode==1 and all(x in o for x in ('[EDITOR]','FAKE','leaked template','baseline is flagged FAKE')))
 check('preflight flags stale data', 'generated' in o and 'h ago' in o)
 
+# --- BRIEF_HOME: drafts and snapshots live outside the repo when it is set
+import paths, datetime as _dt
+home=os.path.join(tmp,'home'); os.environ['BRIEF_HOME']=home
+wed=_dt.datetime(2026,12,2,12,0,tzinfo=_dt.timezone.utc); thu=_dt.datetime(2026,12,3,12,0,tzinfo=_dt.timezone.utc); fri=_dt.datetime(2026,12,4,12,0,tzinfo=_dt.timezone.utc)
+check('BRIEF_HOME: snapshots go to <home>/snapshots', paths.snapshots_dir()==os.path.join(home,'snapshots'))
+check('BRIEF_HOME: Wed and Thu drafts go to the Thursday folder, Fri to the next', [os.path.basename(paths.out_dir(x)) for x in (wed,thu,fri)]==['2026-12-03','2026-12-03','2026-12-10'] and os.path.dirname(paths.out_dir(wed))==os.path.join(home,'drafts'))
+r=subprocess.run([sys.executable,os.path.join(HERE,'run_brief.py'),'--snapshots',os.path.join(tmp,'none'),'--data',SAMPLE,'--now','2026-12-02T12:00:00+00:00'],capture_output=True,text=True,env=dict(os.environ))
+check('BRIEF_HOME: run_brief writes into <home>/drafts/<date> and nothing in the repo', os.path.exists(os.path.join(home,'drafts','2026-12-03','status.json')))
+del os.environ['BRIEF_HOME']
+check('BRIEF_HOME unset: falls back to git-ignored folders in the repo', paths.out_dir(wed).endswith('brief-out') and paths.snapshots_dir().endswith('snapshots') and paths.ROOT in paths.out_dir(wed))
+
 print('\nALL PASS' if all(ok) else '\nSOME FAILED'); sys.exit(0 if all(ok) else 1)

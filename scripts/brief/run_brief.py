@@ -4,10 +4,11 @@
 
 Steps: pick last week's snapshot -> diff_week -> best_bet -> build_brief -> pre-send check (preflight).
 Human inputs (environment): BRIEF_EDITOR_NOTE, BRIEF_BEST_BET_OVERRIDE. Without the editor's note the check BLOCKS on purpose.
-Output folder (default <repo>/brief-out): brief-draft.{html,md,txt}, diff.json, best_bet.json, STATUS.md, status.json.
+Output folder (default: see paths.py; $BRIEF_HOME/drafts/<send date>/ if BRIEF_HOME is set, else <repo>/brief-out): brief-draft.{html,md,txt}, diff.json, best_bet.json, STATUS.md, status.json.
 Exit code is 0 even when BLOCKED (the draft is still worth reading); --strict makes BLOCKED exit 1.
 Read STATUS.md. PASS means the automatic checks found nothing, not that the Brief is right: read it before pasting."""
 import os, sys, json, shutil, argparse, subprocess, datetime as dt
+import paths
 HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.normpath(os.path.join(HERE,'..','..'))
 PY=sys.executable
 
@@ -16,10 +17,11 @@ def run(cmd,env,stdout=None):
 
 def main(argv=None):
     ap=argparse.ArgumentParser()
-    ap.add_argument('--snapshots',default=os.path.join(ROOT,'snapshots')); ap.add_argument('--out',default=os.path.join(ROOT,'brief-out'))
+    ap.add_argument('--snapshots',default=paths.snapshots_dir()); ap.add_argument('--out')
     ap.add_argument('--last-week'); ap.add_argument('--now'); ap.add_argument('--strict',action='store_true')
     ap.add_argument('--data',default=os.path.join(ROOT,'data','conditions.json'))
     a=ap.parse_args(argv)
+    if not a.out: a.out=paths.out_dir(dt.datetime.fromisoformat(a.now.replace('Z','+00:00')) if a.now else None)
     os.makedirs(a.out,exist_ok=True)
     for f in os.listdir(a.out):
         p=os.path.join(a.out,f)
@@ -61,6 +63,7 @@ def main(argv=None):
     if built: md+=["Files: `brief-draft.html` (paste into beehiiv's HTML block), `brief-draft.md`, `brief-draft.txt`.",""]
     md+=["```",*[l for l in '\n'.join(log).splitlines()],"```",""]
     open(os.path.join(a.out,'STATUS.md'),'w').write('\n'.join(md))
+    print(f"output: {a.out}")
     print(f"{status}: "+('; '.join(reasons) if reasons else 'no problems'))
     return 1 if (a.strict and status!='PASS') else 0
 
