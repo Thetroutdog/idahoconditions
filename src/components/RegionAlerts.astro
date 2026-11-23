@@ -2,7 +2,7 @@
 // Full alerts and conditions for one region: NWS alerts, roads (Idaho 511), air quality, wildfires, prescribed burns.
 // Every source gets a card so an empty one reads "none reported" instead of vanishing.
 import { conditions, fmtTime } from '../lib/conditions.js';
-import { alertHref, alertLink, roadInfo, IDAHO511, BAR_LABEL, shortReason } from '../lib/regionview.js';
+import { alertHref, alertLink, roadInfo, IDAHO511, BAR_LABEL, shortReason, fireLinks, forestFireLinks } from '../lib/regionview.js';
 import AqiValue from './AqiValue.astro';
 const { id, name } = Astro.props;
 const r = conditions.regions[id];
@@ -20,6 +20,7 @@ const noAlerts = nwsFresh && !alerts.length && road.live && !road.hwy.length && 
 const flagged = r.level === 'amber' || r.level === 'red';
 const why = [...new Set((r.levelReasons ?? []).map((x) => shortReason(x.text)).filter(Boolean))];
 const whyShown = why.slice(0, 3), whyMore = why.length - whyShown.length;
+const moreFire = fireLinks(id), forestFire = forestFireLinks(id);
 const clean = (t, n = 190) => { const x = (t ?? '').replace(/\s+/g, ' ').trim(); return x.length <= n ? x : x.slice(0, n).replace(/\s+\S*$/, '') + '…'; };
 const wMore = Math.max(0, road.winter.length - 8);
 const until = (a) => (a.ends ? fmtTime(a.ends, tz) : 'further notice');
@@ -82,6 +83,7 @@ const shownHwy = road.hwy.slice(0, 6), moreHwy = road.hwy.slice(6);
       <ul>{shownFires.map((f) => <li><strong>{f.name}</strong>{f.county && `, ${f.county} County`}: {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}</li>)}</ul>
       {moreFires.length > 0 && <details><summary>Show {moreFires.length} more</summary><ul>{moreFires.map((f) => <li><strong>{f.name}</strong>{f.county && `, ${f.county} County`}: {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}</li>)}</ul></details>}
     </>) : <p class="quiet">No wildfires reported in this region.</p>}
+    <p class="quiet fire-links">More fire info: {moreFire.map((l, i) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{i < moreFire.length - 1 ? ' · ' : ''}</>)}</p>
     <div class="src">NIFC</div>
   </article>
 
@@ -90,6 +92,7 @@ const shownHwy = road.hwy.slice(0, 6), moreHwy = road.hwy.slice(6);
     {burns.length === 0 ? <p class="quiet">No prescribed burns reported.</p> : burns.length > 4
       ? <details><summary>Show all {burns.length}</summary><ul>{burns.map((f) => <li>{f.name}: {f.acres ?? '?'} acres{f.county && `, ${f.county} County`}</li>)}</ul></details>
       : <ul>{burns.map((f) => <li>{f.name}: {f.acres ?? '?'} acres{f.county && `, ${f.county} County`}</li>)}</ul>}
+    {forestFire.length > 0 && <p class="quiet fire-links">Burn plans and local fire info: {forestFire.map((l, k) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{k < forestFire.length - 1 ? ' · ' : ''}</>)}</p>}
     <div class="src">NIFC</div>
   </article>
   <p class="quiet">Conditions change fast and data can be late. Check <a href="https://www.weather.gov/" target="_blank" rel="noopener noreferrer">weather.gov</a> and <a href={IDAHO511} target="_blank" rel="noopener noreferrer">511.idaho.gov</a> before you go.</p>

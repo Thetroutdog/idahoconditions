@@ -1,0 +1,20 @@
+{
+  "_note": "Standing fire-info links (BACKLOG M26). The NIFC feed carries no incident link field, so per-fire links are not possible yet; these are one set per region. Every URL was opened or returned by a search before it was added.",
+  "statewide": [
+    {"label": "InciWeb", "href": "https://inciweb.wildfire.gov/"},
+    {"label": "Idaho Fish and Game fire map", "href": "https://idfg.idaho.gov/fire"},
+    {"label": "Idaho Department of Lands fire map", "href": "https://www.idl.idaho.gov/fire-management/idaho-fire-map/"}
+  ],
+  "regions": {
+    "panhandle": [{"label": "Idaho Panhandle National Forests fire info", "href": "https://www.fs.usda.gov/r01/idahopanhandle/fire/info"}],
+    "clearwater": [{"label": "Nez Perce-Clearwater National Forests fire info", "href": "https://www.fs.usda.gov/r01/nezperce-clearwater/fire/info"}],
+    "southwest": [
+      {"label": "Boise National Forest fire info", "href": "https://www.fs.usda.gov/r04/boise/fire/info"},
+      {"label": "Payette National Forest fire info", "href": "https://www.fs.usda.gov/r04/payette/fire/info"}
+    ],
+    "magic-valley": [{"label": "Sawtooth National Forest fire info", "href": "https://www.fs.usda.gov/r04/sawtooth/fire/info"}],
+    "southeast": [{"label": "Caribou-Targhee National Forest fire info", "href": "https://www.fs.usda.gov/r04/caribou-targhee/fire/info"}],
+    "upper-snake": [{"label": "Caribou-Targhee National Forest fire info", "href": "https://www.fs.usda.gov/r04/caribou-targhee/fire/info"}],
+    "salmon": [{"label": "Salmon-Challis National Forest fire info", "href": "https://www.fs.usda.gov/r04/salmon-challis/fire/info"}]
+  }
+}

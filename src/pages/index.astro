@@ -42,6 +42,7 @@ const sw = statewide();
               : sw.alerts.length ? <ul class="alert-items">{sw.alerts.slice(0, 4).map((a) => <li><a href={a.href} target="_blank" rel="noopener noreferrer">{a.event}</a><small>{a.areas}</small></li>)}</ul> : sw.unplaced.weather.length ? null : <p class="state-lead">No active NWS alerts in Idaho right now.</p>}
             {sw.nws.fresh && <UnplacedItems items={sw.unplaced.weather} />}
             {sw.nws.fresh && sw.alerts.length > 4 && <p class="state-more">+{sw.alerts.length - 4} more. Open a region for its full list.</p>}
+            <p class="state-more"><a href="/weather/">See all weather alerts →</a></p>
             <div class="src">National Weather Service</div>
           </article>
           <article class="state-card">
@@ -55,20 +56,23 @@ const sw = statewide();
             <UnplacedItems items={sw.unplaced.roads} />
             <p class="state-more"><a href={IDAHO511} target="_blank" rel="noopener noreferrer">Open Idaho 511</a> for the live map, cameras and pass reports.</p>
             <p class="state-more">{NOTES.roads}</p>
+            <p class="state-more"><a href="/roads/">See all road conditions →</a></p>
             <div class="src">Idaho 511{sw.roads.stale ? ' · out of date' : ''}</div>
           </article>
           <article class="state-card">
             <h3>Air quality &amp; smoke {sw.aqs.length ? <span class={`chip ${sw.aqs[0].v > 100 ? 'amber' : 'green'}`}>{sw.aqs[0].v > 100 ? 'Unhealthy pockets' : 'No unhealthy air'}</span> : <span class="chip gray">No readings</span>}</h3>
             <p class="state-lead">{sw.aqs.length ? (<>Highest reading: {sw.aqs[0].name}, <AqiValue value={sw.aqs[0].v} />{sw.aqs[0].cat ? ` (${sw.aqs[0].cat})` : ''}.</>) : 'No fresh air-quality readings.'}</p>
             <UnplacedItems items={sw.unplaced.air} />
+            <p class="state-more"><a href="/air/">See all air quality readings →</a></p>
             <div class="src">AirNow (preliminary)</div>
           </article>
           <article class="state-card">
             <h3>Fire activity <span class={`chip ${sw.fires.length ? 'amber' : 'green'}`}>{sw.fires.length ? `${sw.fires.length} reported` : 'None reported'}</span></h3>
-            <p class="state-lead">{sw.fires.length ? 'Wildfires are listed on each region page.' : 'No current wildfires reported in Idaho.'}</p>
-            {sw.burns.length > 0 && <p class="state-more">{sw.burns.length} prescribed burn{sw.burns.length === 1 ? '' : 's'} reported. Each region page lists them.</p>}
+            <p class="state-lead">{sw.fires.length ? 'Wildfires are listed on the fire page and each region page.' : 'No current wildfires reported in Idaho.'}</p>
+            {sw.burns.length > 0 && <p class="state-more">{sw.burns.length} prescribed burn{sw.burns.length === 1 ? '' : 's'} reported. The fire page and each region page list them.</p>}
             <UnplacedItems items={sw.unplaced.fire} />
             <p class="state-more">{NOTES.fire}</p>
+            <p class="state-more"><a href="/fire/">See all fire activity →</a></p>
             <div class="src">NIFC</div>
           </article>
         </div>

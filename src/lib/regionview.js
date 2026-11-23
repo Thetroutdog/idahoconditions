@@ -3,8 +3,12 @@ import { conditions, fmtTime, regionIds } from './conditions.js';
 import { NOTES } from './site.js';
 import map from '../data/idaho-map.json';
 import points from '../../data/region_points.json';
+import fireData from '../../data/fire_links.json';
 
 export const IDAHO511 = 'https://511.idaho.gov/';
+// Standing "More fire info" links: the region's national forest page first, then the statewide sources (data/fire_links.json).
+export const forestFireLinks = (id) => fireData.regions[id] ?? [];
+export const fireLinks = (id) => [...(fireData.regions[id] ?? []), ...fireData.statewide];
 
 // Official AQI category colors from EPA's AQI Technical Assistance Document (required by the AirNow data guidelines). Do not retune.
 const AQI_BANDS = [[50, '#00E400', '#000'], [100, '#FFFF00', '#000'], [150, '#FF7E00', '#000'], [200, '#FF0000', '#fff'], [300, '#8F3F97', '#fff'], [Infinity, '#7E0023', '#fff']];
@@ -36,8 +40,12 @@ export function roadInfo(r) {
 }
 
 export function regionTemp(r) {
-  const p = r.forecast?.points?.[0]?.periods?.[0];
-  return p ? `${p.temp}°` : '';
+  // Today's high / low from the 7-day days (a forecast, not a reading); falls back to the first NWS period.
+  const p = r.forecast?.points?.[0];
+  const d = p?.days?.[0];
+  if (d && (d.hi != null || d.lo != null)) return d.hi != null ? `${d.hi}°${d.lo != null ? ` / ${d.lo}°` : ''}` : `low ${d.lo}°`;
+  const q = p?.periods?.[0];
+  return q ? `${q.temp}°` : '';
 }
 export function dotClass(level) { return ['green', 'amber', 'red'].includes(level) ? level : 'gray'; }
 
@@ -52,11 +60,14 @@ export function statusStrip(id) {
   const pts = r.forecast.points.filter((p) => p.periods?.[0]);
   const nwsFresh = conditions.meta?.nwsFresh !== false;
   const alertCount = nwsFresh ? r.alerts.length : 0;
+  // High / low for today from the 7-day days, so it reads as a forecast; falls back to the first NWS period when days are missing.
+  const tempLine = (p) => { const d = p.days?.[0]; if (d && (d.hi != null || d.lo != null)) return d.hi != null ? `${p.name} ${d.hi}°${d.lo != null ? ` / ${d.lo}°` : ''}` : `${p.name} low ${d.lo}°`; return `${p.name} ${p.periods[0].temp}°`; };
+  const hasDays = r.forecast.points.some((p) => p.days?.length);
   const weather = {
     title: 'Weather',
-    lead: pts.length ? pts.slice(0, 2).map((p) => `${p.name} ${p.periods[0].temp}°`).join(' · ') : 'No forecast',
+    lead: pts.length ? pts.slice(0, 2).map(tempLine).join(' · ') : 'No forecast',
     sub: !nwsFresh ? 'Weather alerts are out of date.' : alertCount ? '' : pts[0] ? `${pts[0].periods[0].short}.` : 'Forecast unavailable.',
-    links: alertCount ? [{ href: alertHref(r.alerts[0], id), label: `${r.alerts[0].event}${alertCount > 1 ? ` (+${alertCount - 1} more)` : ''}: NWS details` }] : null,
+    links: ((l) => (l.length ? l : null))([alertCount ? { href: alertHref(r.alerts[0], id), label: `${r.alerts[0].event}${alertCount > 1 ? ` (+${alertCount - 1} more)` : ''}: NWS details` } : null, hasDays ? { href: '#forecast', label: 'Seven-day forecast', open: 'forecast' } : null].filter(Boolean)),
     src: `National Weather Service${r.forecast.updated ? ` · ${fmtTime(r.forecast.updated, tz)}` : ''}`,
   };
   const road = roadInfo(r);
