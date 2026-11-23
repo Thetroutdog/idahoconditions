@@ -6,3 +6,8 @@ https://:project.pages.dev/*
 
 https://:version.:project.pages.dev/*
   X-Robots-Tag: noindex
+
+# The monitoring copy of the data (written to dist/data by scripts/publish_monitor.py): not for search results, and fine to cache for a few minutes.
+/data/*
+  X-Robots-Tag: noindex
+  Cache-Control: public, max-age=300

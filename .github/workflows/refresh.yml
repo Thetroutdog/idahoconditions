@@ -75,6 +75,12 @@ jobs:
           PUBLIC_ALLOW_INDEX: ${{ github.ref_name == 'main' && vars.PUBLIC_ALLOW_INDEX || '' }}
         run: npm run build
 
+      # Serves the merged data at https://idahoconditions.com/data/conditions.json for monitoring (not linked from any page). The script refuses to publish
+      # anything that looks like a key or a local path. A failure here only skips the copy; the site still deploys.
+      - name: Publish conditions.json for monitoring
+        continue-on-error: true
+        run: python3 scripts/publish_monitor.py
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:

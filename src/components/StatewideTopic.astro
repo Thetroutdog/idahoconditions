@@ -71,7 +71,7 @@ const empty = { weather: 'No active National Weather Service alerts in any regio
                 {x.href ? <a href={x.href} target="_blank" rel="noopener noreferrer"><strong>{x.head}</strong></a> : <strong>{x.head}</strong>}
                 {x.aqi != null && <> <AqiValue value={x.aqi} /></>}
                 {x.tag && <> <span class={`tag ${x.tagCls ?? ''}`}>{x.tag}</span></>}
-                {x.tail}
+                {x.tag && /^[,:]/.test(x.tail ?? '') ? <>{x.tail}</> : x.tail}
               </li>
             ))}</ul>
           ) : !b.note && <p class="quiet">None reported.</p>}
