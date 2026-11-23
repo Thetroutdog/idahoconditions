@@ -9,6 +9,7 @@ import RegionMap from './RegionMap.astro';
 import RegionAlerts from './RegionAlerts.astro';
 import { statusStrip } from '../lib/regionview.js';
 import { NOTES, feedbackMailto } from '../lib/site.js';
+import { sunTimes } from '../lib/suntimes.js';
 
 const { id } = Astro.props;
 const reg = regionById[id];
@@ -19,6 +20,7 @@ const total = spotsIn(id).length;
 const strip = statusStrip(id);
 const hasFc = (r.forecast?.points ?? []).some((p) => p.days?.length);
 const updated = fmtTime(conditions.generatedAt, tz);
+const sun = sunTimes(reg.name, tz);
 ---
 <main>
   <div class="wrap">
@@ -36,6 +38,16 @@ const updated = fmtTime(conditions.generatedAt, tz);
         </p>
       </div>
     </div>
+
+    {sun && !sun.none && (
+      <p class="sun-line" title="Dusk is the end of civil twilight; full dark is the end of astronomical twilight. Flat-horizon estimates; mountains and canyons lose the sun earlier.">
+        <span>Sunrise {sun.sunrise}</span>
+        <span>Sunset {sun.sunset}</span>
+        {sun.dusk && <span>Dusk {sun.dusk}</span>}
+        <span>{sun.fullDark ? `Full dark ${sun.fullDark}` : 'No full dark tonight'}</span>
+        <span class="sun-tz">{sun.tzAbbr} <small>(near {sun.near})</small></span>
+      </p>
+    )}
 
     <section class="status-strip" aria-label="Regional conditions">
       {strip.map((c) => (
