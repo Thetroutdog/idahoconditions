@@ -16,7 +16,7 @@ const reg = regionById[region];
 const act = activityBySlug[activity];
 const tz = conditions.regions[region].tz;
 const list = spotsIn(region, activity);
-const rows = list.map((s) => spotView(s, tz));
+const rows = list.map((s) => spotView(s, tz)).sort((a, b) => a.name.localeCompare(b.name)); // alphabetical by area/spot name
 const counts = activityCounts(region);
 const chips = activities.filter((a) => counts[a.id]);
 const noun = activity === 'ski' ? 'areas' : 'spots';

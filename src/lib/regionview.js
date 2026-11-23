@@ -111,7 +111,7 @@ export function alertHref(a, regionId) {
 // Same four words as the map legend. Every page has a bar: region pages show their region, all other pages show the statewide one.
 export const BAR_LABEL = { red: 'Hazards', amber: 'Caution', green: 'Clear', gray: 'No current data' };
 // One short phrase per reason: drop the "until <time>" tail and the "(N segments)" count.
-const shortReason = (t) => String(t).split(/ until /)[0].replace(/\s*\(\d+ segments?\)/, '').replace(/\s+/g, ' ').trim();
+export const shortReason = (t) => String(t).split(/ until /)[0].replace(/\s*\(\d+ segments?\)/, '').replace(/\s+/g, ' ').trim();
 
 // Statewide bar: the worst region level wins (red, then amber). Gray only when no region has current data.
 export function statewideBar() {

@@ -2,7 +2,7 @@
 // Full alerts and conditions for one region: NWS alerts, roads (Idaho 511), air quality, wildfires, prescribed burns.
 // Every source gets a card so an empty one reads "none reported" instead of vanishing.
 import { conditions, fmtTime } from '../lib/conditions.js';
-import { alertHref, alertLink, roadInfo, IDAHO511 } from '../lib/regionview.js';
+import { alertHref, alertLink, roadInfo, IDAHO511, BAR_LABEL, shortReason } from '../lib/regionview.js';
 import AqiValue from './AqiValue.astro';
 const { id, name } = Astro.props;
 const r = conditions.regions[id];
@@ -16,6 +16,10 @@ const fires = r.fire.wildfires.filter((f) => f.status !== 'stale');
 const burns = r.fire.prescribed.filter((f) => f.status !== 'stale');
 const alerts = nwsFresh ? r.alerts : [];
 const noAlerts = nwsFresh && !alerts.length && road.live && !road.hwy.length && !badAir.length && !fires.length;
+// The box at the top follows the region's own level (the same one the map and header bar use), so it can't say "no active alerts" while the region is flagged.
+const flagged = r.level === 'amber' || r.level === 'red';
+const why = [...new Set((r.levelReasons ?? []).map((x) => shortReason(x.text)).filter(Boolean))];
+const whyShown = why.slice(0, 3), whyMore = why.length - whyShown.length;
 const clean = (t, n = 190) => { const x = (t ?? '').replace(/\s+/g, ' ').trim(); return x.length <= n ? x : x.slice(0, n).replace(/\s+\S*$/, '') + '…'; };
 const wMore = Math.max(0, road.winter.length - 8);
 const until = (a) => (a.ends ? fmtTime(a.ends, tz) : 'further notice');
@@ -26,7 +30,10 @@ const shownHwy = road.hwy.slice(0, 6), moreHwy = road.hwy.slice(6);
 ---
 <section class="alerts-sec" id="alerts" aria-label={`Alerts and conditions for the ${name} Region`}>
   <div class="list-meta"><strong style="font-size:14px;color:var(--pine-deep)">Alerts &amp; conditions</strong><span class="quiet">{name} Region</span></div>
-  {noAlerts && (
+  {flagged ? (
+    <div class={`all-clear ${r.level === 'red' ? 'hazard' : 'caution'}`}><strong>{BAR_LABEL[r.level]} in the {name} Region.</strong>
+      <span>{whyShown.length ? `Flagged for: ${whyShown.join(' · ')}${whyMore > 0 ? ` · +${whyMore} more` : ''}. ` : ''}Details below.</span></div>
+  ) : noAlerts && (
     <div class="all-clear"><strong>No active alerts in the {name} Region.</strong>
       <span>Checked: NWS alerts, Idaho 511 closures, air quality and wildfires.{road.winter.length > 0 && ' Winter road conditions are listed below.'}</span></div>
   )}

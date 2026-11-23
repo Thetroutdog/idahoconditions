@@ -7,7 +7,7 @@ import { regions, activityBySlug, activityTitle, spotsFor, spotView, rollup, sea
 const { slug } = Astro.props;
 const act = activityBySlug[slug];
 const all = spotsFor(slug);
-const groups = regions.map((r) => ({ region: r, rows: all.filter((s) => s.region === r.id).map((s) => spotView(s)) })).filter((g) => g.rows.length);
+const groups = regions.map((r) => ({ region: r, rows: all.filter((s) => s.region === r.id).map((s) => spotView(s)).sort((a, b) => a.name.localeCompare(b.name)) })).filter((g) => g.rows.length);
 const updated = fmtTime(conditions.generatedAt, 'America/Boise');
 const noun = slug === 'ski' ? 'areas' : 'spots';
 ---
