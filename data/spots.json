@@ -143,7 +143,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Schweitzer",
-   "desc": "Idaho's largest by acreage: 2,900 acres, 2,400' vertical, 92 runs, 10 lifts, ~300\" snowfall",
+   "desc": "Idaho's largest by acreage: 2,900 acres, 2,400' vertical, 92 runs, 10 lifts, avg season snowfall ~220\" (OnTheSnow)",
    "town": "Sandpoint",
    "sources": [
     {
@@ -161,7 +161,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Silver Mountain",
-   "desc": "1,620 acres, 2,200' vertical, 82 runs, 7 lifts, ~340\" snowfall",
+   "desc": "1,620 acres, 2,200' vertical, 82 runs, 7 lifts, avg season snowfall ~235\" (OnTheSnow)",
    "town": "Kellogg",
    "sources": [
     {
@@ -179,7 +179,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Lookout Pass",
-   "desc": "1,023 acres, 1,650' vertical, 33 runs, 5 lifts, ~450\" snowfall (on I-90 at the MT line)",
+   "desc": "1,023 acres, 1,650' vertical, 33 runs, 5 lifts, avg season snowfall ~370\" (OnTheSnow); on I-90 at the MT line",
    "town": "Mullan",
    "sources": [
     {
@@ -251,7 +251,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Bogus Basin",
-   "desc": "2,600 acres, 1,800' vertical, 10 lifts (4 high-speed quads); big night-skiing program 16 mi from downtown Boise",
+   "desc": "2,600 acres, 1,800' vertical, 10 lifts (4 high-speed quads), avg season snowfall ~155\" (OnTheSnow); big night-skiing program 16 mi from downtown Boise",
    "town": "Boise",
    "sources": [
     {
@@ -269,7 +269,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Brundage Mountain",
-   "desc": "1,920 acres, 1,921' vertical, 70 runs, 6 lifts, ~320\" snowfall",
+   "desc": "1,920 acres, 1,921' vertical, 70 runs, 6 lifts, avg season snowfall ~205\" (OnTheSnow)",
    "town": "McCall",
    "sources": [
     {
@@ -287,7 +287,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Tamarack Resort",
-   "desc": "1,610 acres, 2,800' vertical, 59 runs, 7 lifts",
+   "desc": "1,610 acres, 2,800' vertical, 59 runs, 7 lifts, avg season snowfall ~215\" (OnTheSnow)",
    "town": "Donnelly",
    "sources": [
     {
@@ -323,7 +323,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Sun Valley (Bald Mountain & Dollar)",
-   "desc": "Idaho's biggest vertical: 3,400', 2,533 acres, 121 runs, 17 lifts",
+   "desc": "Idaho's biggest vertical: 3,400', 2,533 acres, 121 runs, 17 lifts, avg season snowfall ~165\" (OnTheSnow)",
    "town": "Ketchum / Sun Valley",
    "sources": [
     {
@@ -341,7 +341,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Pomerelle",
-   "desc": "500 acres, 1,002' vertical, 32 runs, 3 lifts, ~500\" snowfall",
+   "desc": "500 acres, 1,002' vertical, 32 runs, 3 lifts, avg season snowfall ~195\" (OnTheSnow)",
    "town": "Albion",
    "sources": [
     {
@@ -359,7 +359,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Soldier Mountain",
-   "desc": "1,150 acres, 1,425' vertical, 35 runs, 3 lifts",
+   "desc": "1,150 acres, 1,425' vertical, 35 runs, 3 lifts, avg season snowfall ~80\" (OnTheSnow)",
    "town": "Fairfield",
    "sources": [
     {
@@ -377,7 +377,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Magic Mountain",
-   "desc": "120 acres, 740' vertical, 22 runs, 4 lifts",
+   "desc": "120 acres, 740' vertical, 22 runs, 4 lifts, avg season snowfall ~75\" (OnTheSnow)",
    "town": "Twin Falls area",
    "sources": [
     {
@@ -413,7 +413,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Pebble Creek",
-   "desc": "1,100 acres, 2,200' vertical, 51 runs, 4 lifts",
+   "desc": "1,100 acres, 2,200' vertical, 51 runs, 4 lifts, avg season snowfall ~140\" (OnTheSnow)",
    "town": "Inkom / Pocatello",
    "sources": [
     {
@@ -431,7 +431,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Kelly Canyon",
-   "desc": "778 acres, 1,000' vertical, 51 runs, 5 lifts, 4 terrain parks",
+   "desc": "778 acres, 1,000' vertical, 51 runs, 5 lifts, 4 terrain parks, avg season snowfall ~80\" (OnTheSnow)",
    "town": "Ririe",
    "sources": [
     {
@@ -449,7 +449,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Grand Targhee (WY, Idaho access)",
-   "desc": "Resort is in Alta, WY but reached only via Driggs, ID: 2,602 acres, 2,270' vertical, ~500\" snowfall",
+   "desc": "Resort is in Alta, WY but reached only via Driggs, ID: 2,602 acres, 2,270' vertical, avg season snowfall ~370\" (OnTheSnow)",
    "town": "Driggs",
    "sources": [
     {
@@ -467,7 +467,7 @@
    "activity_name": "Ski",
    "activity_catalog": "Downhill Skiing",
    "name": "Lost Trail Powder Mountain",
-   "desc": "On the ID/MT line at Lost Trail Pass: 1,800 acres, 1,800' vertical, 69 runs, 8 lifts",
+   "desc": "On the ID/MT line at Lost Trail Pass: 1,800 acres, 1,800' vertical, 69 runs, 8 lifts, avg season snowfall ~165\" (OnTheSnow)",
    "town": "Sula, MT / North Fork, ID",
    "sources": [
     {
