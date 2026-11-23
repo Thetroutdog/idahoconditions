@@ -1,0 +1,8 @@
+# Keep the Cloudflare Pages addresses out of search results once the site is indexable. The .com site is the one that should be indexed
+# (every page's canonical link points there). These two rules cover idahoconditions.pages.dev and the preview/branch addresses; the custom
+# domain is not matched. Cloudflare serves this file as headers and does not publish it.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex

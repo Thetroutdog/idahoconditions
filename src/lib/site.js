@@ -12,7 +12,7 @@ export const SITE = {
 };
 
 // Date shown at the bottom of the Terms and Privacy pages. Bump it whenever either page changes in substance.
-export const LEGAL_UPDATED = 'November 20, 2026';
+export const LEGAL_UPDATED = 'November 23, 2026';
 
 // Required credit wording from the Idaho Transportation Department (Idaho 511). Use it as written wherever 511 data is credited.
 export const ITD_CREDIT = 'Source: Idaho Transportation Department (ITD) / Idaho 511';
