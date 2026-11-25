@@ -2,7 +2,7 @@
 """Fetch NWS forecasts (per region point) and active alerts (statewide, mapped to regions by zone) -> data/parts/nws.json.
 Needs data/region_points.json and data/zone_region.json. Set IC_USER_AGENT (NWS requires a contact). Standard library only.
 On failure the previous part is kept and marked ok=false so the build shows last-known data as stale."""
-import json, os, sys, time, urllib.request, datetime as dt
+import json, os, sys, time, urllib.request, urllib.parse, datetime as dt
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 PART = os.path.join(ROOT, "data", "parts", "nws.json")
@@ -108,12 +108,21 @@ def zone_point(zurl):
     return pt
 
 
-def alert_url(zones):
-    for zurl in zones[:3]:
-        pt = zone_point(zurl)
-        if pt:
-            return f"https://forecast.weather.gov/MapClick.php?lat={pt[0]:.4f}&lon={pt[1]:.4f}"
-    return "https://alerts.weather.gov"
+ALERTS_PAGE = "https://alerts.weather.gov/?area=ID"
+
+
+def alert_url(p):
+    """A page that is about alerts, never a point forecast. NWS's own `web` field when it is a real page (not just the site root),
+    else the public Idaho alerts page. (A MapClick forecast page often shows no Special Weather Statement and never shows an expired one.)"""
+    web = (p.get("web") or "").strip()
+    if web.startswith("http") and "MapClick" not in web and urllib.parse.urlparse(web).path.strip("/"):
+        return web
+    return ALERTS_PAGE
+
+
+def clip(text, n):
+    t = " ".join((text or "").split())
+    return t if len(t) <= n else t[:n].rsplit(" ", 1)[0].rstrip(",;:") + "…"
 
 
 def alerts(zone_map):
@@ -124,6 +133,12 @@ def alerts(zone_map):
         p = f["properties"]
         if p.get("status") != "Actual" or p.get("messageType") == "Cancel":
             continue
+        end_s = p.get("ends") or p.get("expires")
+        try:
+            if end_s and dt.datetime.fromisoformat(end_s) < dt.datetime.now(dt.timezone.utc):
+                continue  # already over: a short statement can expire between the NWS list and this build
+        except ValueError:
+            pass
         if not p.get("id") or not p.get("event"):  # a malformed alert is skipped, not allowed to fail every alert
             print("alert skipped (no id or event):", str(p.get("headline"))[:80])
             continue
@@ -140,7 +155,8 @@ def alerts(zone_map):
             if prim != "outside":
                 regions[prim] = 1.0
         item = {"id": p["id"], "event": p["event"], "severity": p.get("severity"), "level": alert_level(p), "onset": p.get("onset") or p.get("effective"),
-                "ends": p.get("ends") or p.get("expires"), "headline": p.get("headline"), "url": alert_url(p.get("affectedZones", [])), "_zones": len(p.get("affectedZones", []))}
+                "ends": p.get("ends") or p.get("expires"), "headline": p.get("headline"), "gist": clip((p.get("parameters") or {}).get("NWSheadline", [None])[0], 160) or None,
+                "summary": clip(p.get("description"), 320) or None, "url": alert_url(p), "_zones": len(p.get("affectedZones", []))}
         if not regions:
             # No Idaho region claims this alert (its zones are unmapped or outside the IDFG regions): keep it for the statewide card
             # instead of dropping it silently. Stored under "_unplaced"; build_conditions turns it into conditions["unplaced"]["weather"].
@@ -165,6 +181,29 @@ def alerts(zone_map):
 
 
 WINTER = {"ski", "nordic", "backcountry", "snowmobile"}  # activities whose conditions depend on elevation: they need a verified point (see usable())
+BRIEF_CONFIG = os.path.join(ROOT, "scripts", "brief", "brief_config.json")
+BRIEF_DAYS = 7  # the Thursday Brief reaches Saturday and Sunday from a Wednesday or Thursday run
+
+
+def brief_spots():
+    """Spot ids the Thursday Brief reads (its winter ski-area lines), from scripts/brief/brief_config.json. Their grids keep a full week of days;
+    every other grid keeps two (the site rows only use today and tomorrow), so the data file stays small. Empty when the config is unreadable."""
+    try:
+        cfg = json.load(open(BRIEF_CONFIG))
+        return {pl["spot"] for se in cfg["seasons"].values() for pl in se.get("places", []) if pl.get("spot")}
+    except Exception:
+        return set()
+
+
+def spot_days(raw, full):
+    """Two full days for the site rows; for a Brief grid a week, with the long text kept for the first four days (the Brief reads forecast snow before the
+    weekend from it on a Tuesday to Thursday run) and dropped after that (date, name, hi, lo, short, rain chance, wind)."""
+    days = daily(raw)
+    if not full:
+        return days[:2]
+    return days[:4] + [{k: v for k, v in d.items() if k not in ("detail", "nightDetail")} for d in days[4:BRIEF_DAYS]]
+
+
 SPOT_MAX_AGE_MIN = 120  # a cell fetched less than this long ago is reused, which keeps a run to a few requests; NWS updates grid forecasts about hourly
 
 
@@ -200,6 +239,7 @@ def spot_forecasts():
     except Exception:
         pass
     now_dt = dt.datetime.now(dt.timezone.utc)
+    brief = brief_spots()
     gpath = os.path.join(ROOT, "data", "grid_cache.json")
     gcache = json.load(open(gpath)) if os.path.exists(gpath) else {}
     by_spot, grids, names = {}, {}, {}
@@ -213,8 +253,12 @@ def spot_forecasts():
                 time.sleep(0.7)
             g = gcache[key]
             gk = f"{g['office']}/{g['x']},{g['y']}"
-            if gk not in grids and gk in prev and prev[gk].get("fetchedAt") and (now_dt - dt.datetime.fromisoformat(prev[gk]["fetchedAt"])).total_seconds() < SPOT_MAX_AGE_MIN * 60:
+            full = sp["id"] in brief
+            enough = lambda x: not full or len(x.get("days", [])) >= BRIEF_DAYS  # a Brief spot needs the week, so a short cached or shared cell is refetched
+            if gk not in grids and gk in prev and prev[gk].get("fetchedAt") and enough(prev[gk]) and (now_dt - dt.datetime.fromisoformat(prev[gk]["fetchedAt"])).total_seconds() < SPOT_MAX_AGE_MIN * 60:
                 grids[gk] = prev[gk]
+            if gk in grids and not enough(grids[gk]):
+                del grids[gk]
             if gk not in grids:
                 fc = get(g["forecast"])["properties"]
                 el = (fc.get("elevation") or {}).get("value")  # meters
@@ -222,7 +266,7 @@ def spot_forecasts():
                 grids[gk] = {"office": g["office"], "elevationFt": round(el * 3.28084 / 10) * 10 if el is not None else None, "updated": fc.get("updateTime") or fc.get("generatedAt"), "fetchedAt": now_dt.isoformat(timespec="seconds"),
                              "periods": [{"name": p["name"], "temp": p["temperature"], "unit": p["temperatureUnit"], "short": p["shortForecast"],
                                           "precipChance": (p.get("probabilityOfPrecipitation") or {}).get("value")} for p in raw[:4]],
-                             "days": daily(raw)[:2], "discussion": afd_url(g["office"])}  # rows only use today and tomorrow: keeps the data file small
+                             "days": spot_days(raw, full), "discussion": afd_url(g["office"])}  # site rows use today and tomorrow; the Brief's grids keep a week
                 time.sleep(0.5)
             by_spot[sp["id"]] = gk
             names.setdefault(gk, []).append(sp["name"])

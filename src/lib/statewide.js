@@ -1,6 +1,6 @@
 // Statewide rollups for the landing page. Counts come straight from live region data.
 import { conditions, regionIds, fmtTime } from './conditions.js';
-import { alertHref, roadInfo } from './regionview.js';
+import { alertHref, alertGist, roadInfo } from './regionview.js';
 const R = () => regionIds.map((id) => conditions.regions[id]);
 
 export function statewide() {
@@ -14,7 +14,7 @@ export function statewide() {
   const rank = { red: 0, amber: 1 };
   const alerts = [...byId.values()].map((e) => {
     const ids = e.primary.length ? e.primary : e.all;
-    return { ...e, regionId: ids[0], areas: ids.map((i) => conditions.regions[i].name).join(', '), href: alertHref(e, ids[0]) };
+    return { ...e, regionId: ids[0], areas: ids.map((i) => conditions.regions[i].name).join(', '), href: alertHref(e, ids[0]), gistLine: alertGist(e) };
   }).sort((x, y) => (rank[x.level] ?? 2) - (rank[y.level] ?? 2));
   const aqs = regs.flatMap((r) => r.air.points.filter((p) => p.aqi?.status === 'fresh' && p.aqi.value !== null).map((p) => ({ name: p.name, v: p.aqi.value, cat: p.category }))).sort((a, b) => b.v - a.v);
   const fires = regs.flatMap((r) => r.fire.wildfires.filter((f) => f.status !== 'stale'));
@@ -32,7 +32,7 @@ export function statewide() {
   // Items no region claims (build_conditions "unplaced"): shown inside the matching card as "Statewide <event>" with a one-line note.
   const up = conditions.unplaced ?? {};
   const unplaced = {
-    weather: (up.weather ?? []).map((a) => ({ title: `Statewide ${a.event}`, desc: `Not tied to one region${a.ends ? `. Until ${fmtTime(a.ends, 'America/Boise')}` : ''}.`, href: a.url || 'https://alerts.weather.gov/?area=ID' })),
+    weather: (up.weather ?? []).map((a) => ({ title: `Statewide ${a.event}`, ends: a.ends ?? null, desc: `Not tied to one region${a.ends ? `. Until ${fmtTime(a.ends, 'America/Boise')}` : ''}.${alertGist(a) ? ` ${alertGist(a)}` : ''}`, href: alertHref(a) })),
     roads: (up.roads ?? []).map((x) => ({ title: x.title, desc: x.desc ?? '', href: x.url })),
     air: (up.air ?? []).map((x) => ({ title: x.title, desc: x.desc ?? '', href: x.url })),
     fire: (up.fire ?? []).map((x) => ({ title: x.title, desc: x.desc ?? '', href: x.url })),

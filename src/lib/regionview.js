@@ -67,7 +67,7 @@ export function statusStrip(id) {
     title: 'Weather',
     lead: pts.length ? pts.slice(0, 2).map(tempLine).join(' · ') : 'No forecast',
     sub: !nwsFresh ? 'Weather alerts are out of date.' : alertCount ? '' : pts[0] ? `${pts[0].periods[0].short}.` : 'Forecast unavailable.',
-    links: ((l) => (l.length ? l : null))([alertCount ? { href: alertHref(r.alerts[0], id), label: `${r.alerts[0].event}${alertCount > 1 ? ` (+${alertCount - 1} more)` : ''}: NWS details` } : null, hasDays ? { href: '#forecast', label: 'Seven-day forecast', open: 'forecast' } : null].filter(Boolean)),
+    links: ((l) => (l.length ? l : null))([alertCount ? { href: alertHref(r.alerts[0], id), ends: r.alerts.every((x) => x.ends) ? [...r.alerts.map((x) => x.ends)].sort().at(-1) : null, label: `${r.alerts[0].event}${alertCount > 1 ? ` (+${alertCount - 1} more)` : ''}: NWS details` } : null, hasDays ? { href: '#forecast', label: 'Seven-day forecast', open: 'forecast' } : null].filter(Boolean)),
     src: `National Weather Service${r.forecast.updated ? ` · ${fmtTime(r.forecast.updated, tz)}` : ''}`,
   };
   const road = roadInfo(r);
@@ -105,16 +105,22 @@ export function statusStrip(id) {
   return [weather, roads, fire, snow];
 }
 
-// Human-readable NWS page for a region's alerts: the point forecast page for the region's main city lists active hazards and links the full alert text.
-export function alertLink(regionId) {
-  const name = conditions.regions[regionId]?.name;
-  const pt = points.points.find((p) => p.region === name && p.primary) ?? points.points.find((p) => p.region === name);
-  return pt ? `https://forecast.weather.gov/MapClick.php?lat=${pt.lat}&lon=${pt.lon}` : 'https://alerts.weather.gov';
+// The public NWS alerts page for Idaho. Never a point-forecast (MapClick) page: those often show no Special Weather Statement and never show an expired one.
+export const ALERTS_PAGE = 'https://alerts.weather.gov/?area=ID';
+// One plain line on what the alert says, so a generic outbound link is not the only copy: the first sentence of NWS's description, else its (all-caps) headline in sentence case.
+export function alertGist(a, n = 150) {
+  let t = String(a?.summary ?? '').replace(/\s+/g, ' ').trim();
+  if (t) t = t.split(/(?<=[.!?])\s/)[0];
+  else if (a?.gist) { const g = String(a.gist).trim(); t = g === g.toUpperCase() ? g.charAt(0) + g.slice(1).toLowerCase() : g; }
+  return t.length <= n ? t : t.slice(0, n).replace(/\s+\S*$/, '') + '…';
+}
+export function alertLink(_regionId) {
+  return ALERTS_PAGE;
 }
 
-// Best link for one alert: the per-alert zone link the NWS fetcher stores, else the region's main-city page.
-export function alertHref(a, regionId) {
-  return a?.url && a.url.includes('MapClick') ? a.url : alertLink(regionId);
+// Link for one alert: the page the NWS fetcher stored if it is a real alert page, else the Idaho alerts page (also for older data that stored MapClick).
+export function alertHref(a, _regionId) {
+  return a?.url && /^https?:\/\//.test(a.url) && !a.url.includes('MapClick') ? a.url : ALERTS_PAGE;
 }
 
 // Region alert bar: very short items from the region's own level reasons ("Winter Weather Advisory", "US-95 closed").

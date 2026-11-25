@@ -79,5 +79,23 @@ import fetch_nws as _nws
 _nws.get = lambda url, *a, **k: {"geometry": {"type": "Polygon", "coordinates": [[[0, 0], [10, 0], [10, 1], [1, 1], [1, 10], [0, 10], [0, 0]]]}}
 _pt = _nws.zone_point("https://api.weather.gov/zones/forecast/TEST")
 assert _pt and _nws._inside(_pt[1], _pt[0], [[0, 0], [10, 0], [10, 1], [1, 1], [1, 10], [0, 10], [0, 0]]), _pt
-assert "MapClick.php?lat=" in _nws.alert_url(["https://api.weather.gov/zones/forecast/TEST"])
+assert "MapClick" not in _nws.alert_url({"web": "http://www.weather.gov"})   # alert links are alert pages now, not point forecasts
 print("alert zone point ok")
+
+
+# Special Weather Statement mismatch (Nov 25): the details link is an alerts page (never a MapClick forecast), the gist is kept, and an alert whose end time has passed is dropped
+_now = dt.datetime.now(dt.timezone.utc)
+def _sps(i, expires):
+    return {"properties": {"id": f"urn:oid:test.{i}", "event": "Special Weather Statement", "status": "Actual", "messageType": "Alert", "severity": "Minor",
+            "effective": (_now - dt.timedelta(hours=1)).isoformat(), "ends": None, "expires": expires, "headline": "Special Weather Statement issued by NWS Spokane WA",
+            "web": "http://www.weather.gov", "affectedZones": ["https://api.weather.gov/zones/forecast/IDZ001"], "severity": "Minor",
+            "parameters": {"NWSheadline": ["A WINTRY MIX WILL IMPACT SOUTHERN BOUNDARY AND CENTRAL BONNER COUNTIES UNTIL 630 AM PST"]},
+            "description": "At 538 AM PST, a trained spotter reported a wintry mix.\n\nIcy conditions possible on untreated surfaces."}}
+_nws.get = lambda url, *a, **k: {"features": [_sps(1, (_now + dt.timedelta(minutes=50)).isoformat()), _sps(2, (_now - dt.timedelta(minutes=5)).isoformat())]}
+_zm = {"IDZ001": {"shares": {"Panhandle": 1.0}, "primary": "Panhandle"}}
+_out = _nws.alerts(_zm)
+_pan = _out.get("panhandle", [])
+assert len(_pan) == 1 and _pan[0]["id"] == "urn:oid:test.1", _pan   # the expired statement is gone, the live one stays
+assert "MapClick" not in _pan[0]["url"] and _pan[0]["url"].startswith("https://alerts.weather.gov"), _pan[0]["url"]
+assert _pan[0]["summary"].startswith("At 538 AM PST") and _pan[0]["gist"], _pan[0]
+print("nws alert link and expiry tests ok")

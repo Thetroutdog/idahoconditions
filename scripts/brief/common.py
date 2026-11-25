@@ -32,3 +32,15 @@ def page(title, preheader, body):
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px;max-width:100%;background:{CREAM};border-radius:6px;overflow:hidden;">
 {body}
 </table></td></tr></table></body></html>'''
+
+# ---- v4 (paste-safe beehiiv body): no inline styles, no spans, no colors. Only <a>, <strong>. ----
+def md2html_plain(s):
+    s = html.escape(s, quote=False)
+    s = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', lambda m: f'<a href="{m.group(2)}">{m.group(1)}</a>', s)
+    s = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', s)
+    return s
+
+def words(text):
+    """Word count the way the budget counts: link URLs and markdown marks dropped, bare punctuation (the dots between region names) not counted."""
+    text = re.sub(r'\]\([^)]*\)', ']', text).replace('**', '')
+    return sum(1 for t in text.split() if re.search(r'[A-Za-z0-9]', t))

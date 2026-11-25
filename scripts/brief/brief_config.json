@@ -1,5 +1,5 @@
 {
-  "_note": "Config for the v3 Thursday brief. Edit here, not in code.",
+  "_note": "Config for the v4 Thursday Brief. Edit here, not in code.",
   "maxDataAgeHours": 18,
   "regionUrl": "https://idahoconditions.com/{id}/",
   "regionUrlConfirmed": true,
@@ -39,7 +39,7 @@
         "changed",
         "weekend",
         "normal",
-        "coming",
+        "onemore",
         "avalanche",
         "links",
         "sources"
@@ -48,32 +48,45 @@
         "snow",
         "river"
       ],
-      "comingUpTypes": [
+      "places": [
+        {
+          "label": "Schweitzer",
+          "spot": "panhandle-schweitzer"
+        },
+        {
+          "label": "Lookout Pass",
+          "spot": "panhandle-lookout-pass"
+        },
+        {
+          "label": "Bogus Basin",
+          "spot": "southwest-bogus-basin"
+        },
+        {
+          "label": "Brundage",
+          "spot": "southwest-brundage-mountain"
+        },
+        {
+          "label": "Sun Valley",
+          "spot": "magic-valley-sun-valley-bald-mountain-dollar"
+        },
+        {
+          "label": "Pomerelle",
+          "spot": "magic-valley-pomerelle"
+        },
+        {
+          "label": "Grand Targhee",
+          "spot": "upper-snake-grand-targhee-wy-idaho-access"
+        },
+        {
+          "label": "Stanley / Sawtooths",
+          "spot": "salmon-stanley-sawtooth-nra-fisher-creek-elk-mtn-redfish"
+        }
+      ],
+      "datedTypes": [
         "ski",
         "closure"
       ],
-      "places": [
-        {
-          "label": "Boise",
-          "point": "boise"
-        },
-        {
-          "label": "McCall",
-          "point": "mccall"
-        },
-        {
-          "label": "Ketchum / Sun Valley",
-          "point": "ketchum"
-        },
-        {
-          "label": "Island Park",
-          "point": "island-park"
-        },
-        {
-          "label": "Coeur d'Alene",
-          "point": "coeur-d-alene"
-        }
-      ]
+      "placesNote": "Winter weekend lines read the ski-area NWS grids in conditions.json (spotForecast.bySpot -> grids), labeled by ski area. Swap any spot id from data/spots.json (a spot with a grid) to change a line. Summer keeps town points (point = id in data/region_points.json)."
     },
     "summer": {
       "typeWeight": {
@@ -93,17 +106,13 @@
         "changed",
         "weekend",
         "normal",
-        "coming",
+        "onemore",
         "links",
         "sources"
       ],
       "normalOrder": [
         "river",
         "snow"
-      ],
-      "comingUpTypes": [
-        "closure",
-        "fire"
       ],
       "places": [
         {
@@ -126,6 +135,10 @@
           "label": "Coeur d'Alene",
           "point": "coeur-d-alene"
         }
+      ],
+      "datedTypes": [
+        "closure",
+        "fire"
       ]
     }
   },
@@ -141,32 +154,27 @@
     "fire": 1,
     "gauge": 1
   },
-  "comingUpMax": 3,
-  "comingUpExclude": {
-    "subTypes": [
-      "parade"
-    ],
-    "descriptionContains": [
-      "ramp"
-    ]
-  },
   "avalanche": {
     "centers": {
       "sawtooth": {
         "name": "Sawtooth Avalanche Center",
-        "url": "https://www.sawtoothavalanche.com/"
+        "url": "https://www.sawtoothavalanche.com/",
+        "short": "Sawtooth"
       },
       "payette": {
         "name": "Payette Avalanche Center",
-        "url": "https://payetteavalanche.org/"
+        "url": "https://payetteavalanche.org/",
+        "short": "Payette"
       },
       "ipac": {
         "name": "Idaho Panhandle Avalanche Center",
-        "url": "https://www.idahopanhandleavalanche.org/"
+        "url": "https://www.idahopanhandleavalanche.org/",
+        "short": "Panhandle"
       },
       "avalanche_org": {
         "name": "avalanche.org",
-        "url": "https://avalanche.org/"
+        "url": "https://avalanche.org/",
+        "short": "avalanche.org"
       }
     },
     "regionCenters": {
@@ -211,6 +219,74 @@
         "avalanche_org"
       ]
     },
-    "verified": "2026-11-18: sawtooth + payette 200 via curl; ipac + avalanche.org return 403 to curl (bot block) but load in a normal fetch"
+    "verified": "2026-11-18: sawtooth + payette 200 via curl; ipac + avalanche.org return 403 to curl (bot block) but load in a normal fetch",
+    "bottomLine": [
+      "payette",
+      "sawtooth",
+      "ipac"
+    ]
+  },
+  "titles": {
+    "bottom": "Bottom line",
+    "editor": "From the Desk",
+    "changed": "What changed",
+    "weekend": "The weekend",
+    "normal": "Vs. Normal (to date)",
+    "onemore": "One more thing",
+    "avalanche": "Avalanche",
+    "links": "Current conditions by region",
+    "sources": "Sources"
+  },
+  "wordBudget": {
+    "_note": "[budget, hard cap] words per section, body only. Preflight blocks a section over its cap and a body of bodyWordsHardCap or more; builder drops the lowest-ranked What changed / dated items to stay under the caps.",
+    "bottom": [
+      70,
+      90
+    ],
+    "editor": [
+      50,
+      70
+    ],
+    "changed": [
+      90,
+      110
+    ],
+    "weekend": [
+      150,
+      180
+    ],
+    "normal": [
+      45,
+      60
+    ],
+    "onemore": [
+      50,
+      70
+    ],
+    "avalanche": [
+      30,
+      40
+    ],
+    "links": [
+      20,
+      25
+    ],
+    "sources": [
+      40,
+      55
+    ]
+  },
+  "bodyWordsTarget": [
+    400,
+    550
+  ],
+  "bodyWordsHardCap": 600,
+  "datedMax": 3,
+  "datedExclude": {
+    "subTypes": [],
+    "descriptionContains": [
+      "ramp"
+    ],
+    "_note": "Routine ramp work stays out; a genuine dated event (a parade that closes a highway) is allowed."
   }
 }

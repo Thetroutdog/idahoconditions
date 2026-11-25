@@ -2,7 +2,7 @@
 // Full alerts and conditions for one region: NWS alerts, roads (Idaho 511), air quality, wildfires, prescribed burns.
 // Every source gets a card so an empty one reads "none reported" instead of vanishing.
 import { conditions, fmtTime } from '../lib/conditions.js';
-import { alertHref, alertLink, roadInfo, IDAHO511, BAR_LABEL, shortReason, fireLinks, forestFireLinks } from '../lib/regionview.js';
+import { alertHref, alertGist, alertLink, roadInfo, IDAHO511, BAR_LABEL, shortReason, fireLinks, forestFireLinks } from '../lib/regionview.js';
 import AqiValue from './AqiValue.astro';
 const { id, name } = Astro.props;
 const r = conditions.regions[id];
@@ -39,12 +39,13 @@ const shownHwy = road.hwy.slice(0, 6), moreHwy = road.hwy.slice(6);
       <span>Checked: NWS alerts, Idaho 511 closures, air quality and wildfires.{road.winter.length > 0 && ' Winter road conditions are listed below.'}</span></div>
   )}
 
-  <article class="alert-card">
-    <h3>Weather alerts <span class={`chip ${!nwsFresh ? 'gray' : alerts.length ? 'amber' : 'green'}`}>{!nwsFresh ? 'Out of date' : alerts.length ? `${alerts.length} active` : 'None'}</span></h3>
+  <article class="alert-card" data-alert-group>
+    <h3>Weather alerts <span data-alert-chip data-none="None" class={`chip ${!nwsFresh ? 'gray' : alerts.length ? 'amber' : 'green'}`}>{!nwsFresh ? 'Out of date' : alerts.length ? `${alerts.length} active` : 'None'}</span></h3>
     {!nwsFresh ? <p>National Weather Service alerts are out of date (last checked {fmtTime(nwsAt, tz)}). <a href={alertLink(id)} target="_blank" rel="noopener noreferrer">Check the NWS directly</a>.</p>
       : alerts.length ? (<>
-        <ul>{shownAlerts.map((a) => <li data-ends={a.ends ?? undefined}><strong>{a.event}</strong> until {until(a)}{a.countsTowardLevel === false && <span class="quiet"> · part of the region</span>} · <a href={alertHref(a, id)} target="_blank" rel="noopener noreferrer">Details</a></li>)}</ul>
-        {moreAlerts.length > 0 && <details><summary>Show {moreAlerts.length} more</summary><ul>{moreAlerts.map((a) => <li data-ends={a.ends ?? undefined}><strong>{a.event}</strong> until {until(a)}{a.countsTowardLevel === false && <span class="quiet"> · part of the region</span>} · <a href={alertHref(a, id)} target="_blank" rel="noopener noreferrer">Details</a></li>)}</ul></details>}
+        <ul data-alert-list>{shownAlerts.map((a) => <li data-alert-item data-ends={a.ends ?? undefined}><strong>{a.event}</strong> until {until(a)}{a.countsTowardLevel === false && <span class="quiet"> · part of the region</span>} · <a href={alertHref(a, id)} target="_blank" rel="noopener noreferrer">Details</a>{alertGist(a) && <><br /><span class="quiet">{alertGist(a)}</span></>}</li>)}</ul>
+        {moreAlerts.length > 0 && <details data-alert-list><summary>Show {moreAlerts.length} more</summary><ul>{moreAlerts.map((a) => <li data-alert-item data-ends={a.ends ?? undefined}><strong>{a.event}</strong> until {until(a)}{a.countsTowardLevel === false && <span class="quiet"> · part of the region</span>} · <a href={alertHref(a, id)} target="_blank" rel="noopener noreferrer">Details</a>{alertGist(a) && <><br /><span class="quiet">{alertGist(a)}</span></>}</li>)}</ul></details>}
+        <p class="quiet" data-alert-empty hidden>No NWS alerts for this region.</p>
       </>)
       : <p class="quiet">No NWS alerts for this region.</p>}
     <div class="src">National Weather Service{nwsAt ? ` · ${fmtTime(nwsAt, tz)}` : ''}</div>

@@ -138,6 +138,19 @@ const bar = regionBar ?? statewideBar();
         if (bar) bar.hidden = false;
         // An alert that ended after the page was built is hidden here (each alert line carries its end time in data-ends).
         document.querySelectorAll('[data-ends]').forEach((n) => { const e = Date.parse(n.getAttribute('data-ends') || ''); if (Number.isFinite(e) && e < Date.now()) (n as HTMLElement).hidden = true; });
+        // A card or section whose alerts have all ended must not keep saying "1 active" over a blank list: update its chip, hide its list, show its "none" line.
+        document.querySelectorAll('[data-alert-group]').forEach((g) => {
+          const items = g.querySelectorAll('[data-alert-item]');
+          const gone = [...items].filter((i) => (i as HTMLElement).hidden).length;
+          if (!gone) return;
+          const chip = g.querySelector('[data-alert-chip]') as HTMLElement | null;
+          const was = parseInt(chip?.textContent || '', 10);   // the chip counts every alert; the list may show only the first few
+          const n = Number.isFinite(was) ? Math.max(0, was - gone) : [...items].filter((i) => !(i as HTMLElement).hidden).length;
+          if (chip) { chip.textContent = n ? `${n} active` : chip.getAttribute('data-none') || 'None'; if (!n) chip.className = 'chip green'; }
+          if (n) return;
+          g.querySelectorAll('[data-alert-list], [data-alert-more]').forEach((x) => ((x as HTMLElement).hidden = true));
+          g.querySelectorAll('[data-alert-empty]').forEach((x) => ((x as HTMLElement).hidden = false));
+        });
         if (!gen || sample) return;
         const t = Date.parse(gen);
         if (!Number.isFinite(t) || (Date.now() - t) / 60000 <= 90) return;

@@ -4,6 +4,6 @@ const { items = [] } = Astro.props;
 ---
 {items.length > 0 && (
   <ul class="alert-items">
-    {items.map((x) => <li><a href={x.href} target="_blank" rel="noopener noreferrer">{x.title}</a><small>{x.desc}</small></li>)}
+    {items.map((x) => <li data-alert-item={x.ends !== undefined ? '' : undefined} data-ends={x.ends ?? undefined}><a href={x.href} target="_blank" rel="noopener noreferrer">{x.title}</a><small>{x.desc}</small></li>)}
   </ul>
 )}

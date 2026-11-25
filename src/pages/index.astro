@@ -36,12 +36,13 @@ const sw = statewide();
       <div class="wrap">
         <div class="section-head sub-lead"><h2>Statewide snapshot</h2><p>The picture across Idaho</p></div>
         <div class="statewide-grid">
-          <article class="state-card">
-            <h3>Weather &amp; NWS alerts <span class={`chip ${!sw.nws.fresh ? 'gray' : sw.alerts.length + sw.unplaced.weather.length ? 'amber' : 'green'}`}>{!sw.nws.fresh ? 'Out of date' : sw.alerts.length + sw.unplaced.weather.length ? `${sw.alerts.length + sw.unplaced.weather.length} active` : 'None active'}</span></h3>
+          <article class="state-card" data-alert-group>
+            <h3>Weather &amp; NWS alerts <span data-alert-chip data-none="None active" class={`chip ${!sw.nws.fresh ? 'gray' : sw.alerts.length + sw.unplaced.weather.length ? 'amber' : 'green'}`}>{!sw.nws.fresh ? 'Out of date' : sw.alerts.length + sw.unplaced.weather.length ? `${sw.alerts.length + sw.unplaced.weather.length} active` : 'None active'}</span></h3>
             {!sw.nws.fresh ? <p class="state-lead">Weather alerts are out of date (last checked {fmtTime(sw.nws.at, 'America/Boise')}). <a href="https://alerts.weather.gov/?area=ID" target="_blank" rel="noopener noreferrer">Check the NWS directly</a>.</p>
-              : sw.alerts.length ? <ul class="alert-items">{sw.alerts.slice(0, 4).map((a) => <li><a href={a.href} target="_blank" rel="noopener noreferrer">{a.event}</a><small>{a.areas}</small></li>)}</ul> : sw.unplaced.weather.length ? null : <p class="state-lead">No active NWS alerts in Idaho right now.</p>}
+              : sw.alerts.length ? <ul class="alert-items" data-alert-list>{sw.alerts.slice(0, 4).map((a) => <li data-alert-item data-ends={a.ends ?? undefined}><a href={a.href} target="_blank" rel="noopener noreferrer">{a.event}</a><small>{a.areas}{a.gistLine ? `. ${a.gistLine}` : ''}</small></li>)}</ul> : sw.unplaced.weather.length ? null : <p class="state-lead">No active NWS alerts in Idaho right now.</p>}
+            {sw.nws.fresh && (sw.alerts.length > 0 || sw.unplaced.weather.length > 0) && <p class="state-lead" data-alert-empty hidden>No active NWS alerts in Idaho right now.</p>}
             {sw.nws.fresh && <UnplacedItems items={sw.unplaced.weather} />}
-            {sw.nws.fresh && sw.alerts.length > 4 && <p class="state-more">+{sw.alerts.length - 4} more. Open a region for its full list.</p>}
+            {sw.nws.fresh && sw.alerts.length > 4 && <p class="state-more" data-alert-more>+{sw.alerts.length - 4} more. Open a region for its full list.</p>}
             <p class="state-more"><a href="/weather/">See all weather alerts →</a></p>
             <div class="src">National Weather Service</div>
           </article>

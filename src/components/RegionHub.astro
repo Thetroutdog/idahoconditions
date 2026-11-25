@@ -55,7 +55,7 @@ const sun = sunTimes(reg.name, tz);
           <h2>{c.title}</h2>
           <p class="lead">{c.lead}</p>
           {c.sub && <p class="sub">{c.sub}</p>}
-          {c.links && <p class="sub">{c.links.map((l, i) => <><a href={l.href} {...(l.open ? { 'data-open': l.open } : {})} {...(l.href.startsWith('#') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}>{l.label}</a>{i < c.links.length - 1 ? ' · ' : ''}</>)}</p>}
+          {c.links && <p class="sub">{c.links.map((l, i) => <span data-ends={l.ends ?? undefined}><a href={l.href} {...(l.open ? { 'data-open': l.open } : {})} {...(l.href.startsWith('#') ? {} : { target: '_blank', rel: 'noopener noreferrer' })}>{l.label}</a>{i < c.links.length - 1 ? ' · ' : ''}</span>)}</p>}
           {c.note && <p class="legal-note">{c.note}</p>}
           <div class="src">{c.src}</div>
         </article>

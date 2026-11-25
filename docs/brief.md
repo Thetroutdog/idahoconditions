@@ -1,45 +1,63 @@
-# The Thursday Brief pipeline
+# The Thursday Brief builder (v4)
 
-**Draft-only.** Nothing here sends, posts or emails. The workflow builds a draft and a PASS/BLOCKED report; the editor pastes the draft into beehiiv by hand. (beehiiv's Free plan has no send API anyway.) There are no beehiiv keys in this repo or its workflows, and there should not be.
+**Draft-only.** Nothing here sends, posts or emails. The scripts build a draft and a PASS/BLOCKED report; the editor pastes the draft into beehiiv by hand. (beehiiv's Free plan has no send API anyway.) There are no beehiiv keys in this repo, and there should not be. There is no scheduled workflow: the Brief is built locally.
 
-**Status (Nov 19):** the Thursday GitHub workflow (`brief.yml`) was removed when the repo went public, so nothing builds the Brief automatically. The scripts remain and run locally (see "Local use"). The sections below describe what that workflow did, in case it is brought back (it is in git history if it was ever committed); `snapshots_git.sh` is only needed by a workflow.
+## What the Brief is
+A short weekly email, about 450 to 550 words (hard cap under 600), that adds what the live site does not: a ranked weekend, what changed since last Thursday, a short dated list, and one thing worth reading. The spec lives in the project's notes folder (`grok/2026-11-23-brief-v4-spec.md`).
 
-## What the removed workflow did
-Thursdays 12:17 UTC (5:17 AM MST, 6:17 AM MDT). Steps:
-1. `scripts/refresh_all.sh` (fresh data, same secrets as the refresh job).
-2. River medians (`data/usgs_daily_median.json`, about 4 minutes, fetched once a month and cached). Missing = the "vs. normal" line skips rivers.
-3. Check out the `snapshots` branch into `./snapshots`.
-4. `scripts/brief/run_brief.py`: pick last week's snapshot, `diff_week.py`, `best_bet.py`, `build_brief.py`, then `preflight.py`.
-5. Put `STATUS.md` in the run summary and upload `brief-out/` as the artifact **brief-draft** (kept 14 days).
-6. Scheduled runs (or manual runs with "save snapshot" ticked) save this week's data to the `snapshots` branch, unless the data was stale or a source failed.
+## Sections, in this order
+Bottom line, From the Desk, What changed, The weekend, Vs. Normal (to date), One more thing, Avalanche, Current conditions by region, Sources. Required: Bottom line, From the Desk, One more thing, Current conditions by region, Sources. The others are skipped when they have nothing to say: What changed shows only with 2 or more items (the Bottom line's Biggest change already covers one), and Avalanche is winter-only. In winter a small "Backcountry" line (Payette, Sawtooth, Panhandle) sits just above Current conditions by region; summer has none. Winter ski-area lines are A to Z; Vs. Normal is two short lines (snowpack as the median of each region's SNOTEL sites, lowest and highest region; lowest river vs. its date median). There is no separate "This weekend" or "Coming up".
 
-## What to do each Thursday
-Actions > *Thursday Brief draft* > latest run > read the summary. If it says BLOCKED because of `[EDITOR]`, that is the normal "add your two lines" state: re-run with the **editor_note** input (type `\n` between the two lines) or edit the draft by hand. Optional: **best_bet_override** replaces the rules-based "The numbers favor" pick. Download the artifact, paste `brief-draft.html` into a beehiiv HTML block, and read it before sending. PASS means the automatic checks found nothing, not that the Brief is right.
+- **The weekend** is one section: a short Sat/Sun forecast line per place, then a "Coming up:" lead-in and a second list of up to 3 dated items (`datedMax`): editor-supplied lines first, then ski and nordic openings from `regions[].ski` / `data/resort_status.json` (always labeled "unconfirmed"; the editor spot-checks them) and dated highway closures. Routine ramp work is filtered (`datedExclude` in `brief_config.json`); a genuine event such as a parade closure is allowed. Permit windows are not in the data, so they appear only as an editor-supplied dated line.
+- **Winter places (November to April, `season` in `brief_config.json`):** the weekend lines come from the ski-area NWS grid forecasts already in `conditions.json` (`spotForecast.bySpot` maps a spot id to a grid, `spotForecast.grids` holds the grid), labeled by ski area, in this order: Schweitzer, Lookout Pass, Bogus Basin, Brundage, Sun Valley, Pomerelle, Grand Targhee, Stanley / Sawtooths. The list is `seasons.winter.places` in `brief_config.json` (label plus spot id); the editor can swap any spot that has a grid without touching code. A line whose grid has no Saturday/Sunday data prints `[CHECK: no weekend forecast]`, and the check blocks the draft. `scripts/fetch_nws.py` reads that same list and keeps a week of days (the long text for the first four days, none after) for just those grids, so a Wednesday or Thursday run reaches Saturday and Sunday; every other grid keeps two days. A town forecast is never relabeled as a mountain. The winter "numbers favor" pick in the Bottom line and the subject options is chosen from the same eight ski areas (`best_bet.py` reads the same list; it reads "Saturday at Bogus Basin"); summer still scores the town points. If no ski-area grid reaches the weekend, the pick falls back to a town and is marked `[CHECK]`, so the draft blocks. Summer keeps the town points (`seasons.summer.places`).
+- **Word budgets** are in `wordBudget` (`[budget, hard cap]` per section). The builder drops the lowest-ranked What changed and dated items to stay under a cap; the pre-send check blocks any section over its cap.
+
+## Outputs
+Written to `$BRIEF_HOME/drafts/<send date>/` when `BRIEF_HOME` is set (the send date is the next Thursday, Boise time, so Wednesday and Thursday runs share a folder), otherwise `brief-out/` in the repo (git-ignored):
+
+- `brief-draft.html`: the body only, and the file that gets used. Sections are separated by `<hr>`, and the Bottom line, From the Desk and One more thing are `<blockquote>`s (beehiiv's quote style stands in for the mock's boxes). If a paste drops either, the fallback is plain paragraphs. Headings, paragraphs, bold, links and simple lists; no inline styles, colored boxes, custom fonts or layout tables, because beehiiv's Free editor drops them on paste. No masthead, footer, unsubscribe link or hidden preheader: the beehiiv template already has those. Open it in a browser, select all, copy, and paste into the beehiiv body over the template's placeholder.
+- `brief-titles.txt`: 2 to 3 title (subject) options and 2 to 3 subtitle (preview) options. The editor picks one of each and pastes them into beehiiv's title and subtitle fields (beehiiv uses the subtitle as the inbox preview). They are also listed in `STATUS.md`. They are never in the body.
+- `brief-draft.md`, `brief-draft.txt`: the same body as markdown and plain text.
+- `STATUS.md` and `status.json`: PASS or BLOCKED with the reasons. `diff.json`, `best_bet.json`: the inputs the builder used.
+
+## Inputs the editor supplies
+- `BRIEF_EDITOR_NOTE`: From the Desk, two lines, with `\n` between them. Required.
+- `BRIEF_ONE_MORE_THING`: One more thing, required: `Title | https://link | one-line blurb` (or the three on separate lines joined with `\n`). Or put a file named `one-more-thing.txt` in that week's drafts folder (title, URL and blurb on three lines, or the pipe form). The environment variable wins. The builder never invents this and never pulls it from `conditions.json`; it renders it as one "Worth reading" paragraph and link in the supplied words. Re-runs keep `one-more-thing.txt` and `dated-lines.txt`; every other file in the folder is rebuilt.
+- `BRIEF_BEST_BET_OVERRIDE` (optional): replaces the rules-based "The numbers favor" pick.
+- `BRIEF_DATED_LINES` (optional, or `dated-lines.txt`): dated lines for The weekend, one per line, like `Dec 5: Christmas tree permit window opens`.
 
 ## The pre-send check (`preflight.py`)
-BLOCKED if any of these is true: a `[CHECK…]`, `[EDITOR…]`, `[DEMO…]` or `FAKE` marker is left in the md, html or txt; leaked template text (`{id}`, `None`, `nan`, `undefined`); an empty section; `conditions.json` or any source older than 18 hours (`maxDataAgeHours` in `brief_config.json`); a source that failed; or no real last-week snapshot 5 to 9 days old. The first week has no snapshot, so the first draft is BLOCKED by design.
+BLOCKED if any of these is true:
+- a `[CHECK…]`, `[EDITOR…]`, `[OMT…]`, `[DEMO…]`, `TODO` or `FAKE` marker is left in the md, html or txt;
+- leaked template text (`{id}`, `None`, `nan`, `undefined`);
+- an empty section, or a missing required section (Bottom line, From the Desk, One more thing, Current conditions by region, Sources);
+- One more thing is missing, still a placeholder, or has no link;
+- a section is over its word cap, or the body is 600 words or more;
+- `conditions.json` or any source is older than 18 hours (`maxDataAgeHours`), or a source failed;
+- there is no real last-week snapshot 5 to 9 days old. With no snapshot at all the draft is still built, What changed reads `[CHECK: no last-week snapshot]`, and the run stays BLOCKED.
+PASS means the automatic checks found nothing, not that the Brief is right: read it before you paste. The exit code is 0 even when BLOCKED; `--strict` makes BLOCKED exit 1.
 
 ## Weekly snapshots
-`scripts/brief/snapshot.py save` writes `conditions-YYYY-MM-DD.json` (forecasts removed, about 100 KB) into the snapshots folder and keeps the newest 12. The folder is outside the repo when `BRIEF_HOME` is set (see below), otherwise `snapshots/` in the repo (git-ignored). `snapshots_git.sh` only matters if a workflow ever keeps snapshots on a git branch again; local runs do not use it.
+`scripts/brief/snapshot.py save` writes `conditions-YYYY-MM-DD.json` (forecasts and `spotForecast` removed, about 100 KB) into the snapshots folder and keeps the newest 12. Forecasts are not diffed, so dropping them is intended. The folder is `$BRIEF_HOME/snapshots/` when `BRIEF_HOME` is set, otherwise `snapshots/` in the repo (git-ignored). Run it once a week after a refresh, after the send: `./scripts/refresh_all.sh`, then `python3 scripts/brief/snapshot.py save`. `snapshots_git.sh` only matters if a workflow ever keeps snapshots on a git branch again.
 
 ## Local use
 ```
 set -a; source <your local env file>; set +a; export IC_USER_AGENT="..."
 ./scripts/refresh_all.sh
-python3 scripts/brief/fetch_usgs_stats.py          # once, makes data/usgs_daily_median.json
-python3 scripts/brief/snapshot.py save              # once a week, after a refresh
+python3 scripts/brief/fetch_usgs_stats.py          # once a month, makes data/usgs_daily_median.json (rivers vs. normal)
+python3 scripts/brief/snapshot.py save             # once a week, after a refresh
+export BRIEF_EDITOR_NOTE='line one\nline two'
+export BRIEF_ONE_MORE_THING='Title | https://example.org/page | one-line blurb'
 python3 scripts/brief/run_brief.py
-python3 scripts/brief/selftest.py                  # no network
+python3 scripts/brief/selftest.py                  # no network; uses scripts/brief/fixtures/
 ```
-Where files go (`scripts/brief/paths.py`): set the environment variable `BRIEF_HOME` to a folder outside the repo (for example in your own notes folder; put the export in your shell profile). Then each draft is written to `$BRIEF_HOME/drafts/<send date>/` (the send date is the next Thursday, Boise time, so Wednesday and Thursday runs share a folder) and snapshots to `$BRIEF_HOME/snapshots/`. With `BRIEF_HOME` unset, drafts go to `brief-out/` and snapshots to `snapshots/` in the repo, both git-ignored. `--out`, `--snapshots` and `BRIEF_OUT` override either way. `run_brief.py` prints the output folder when it finishes.
+`run_brief.py` prints the output folder when it finishes. `--out`, `--snapshots` and `BRIEF_OUT` override the folder choices.
 
-Inputs for local runs: environment variables `BRIEF_EDITOR_NOTE` and `BRIEF_BEST_BET_OVERRIDE`.
-
-## Scheduling
-The site refresh is started by a Cloudflare Worker (`workers/refresh-timer/`), not by a GitHub `schedule:`, so GitHub's 60-day auto-disable of scheduled workflows does not apply and no keep-alive workflow is needed (it was removed in v0.14.0). If a Thursday Brief workflow is ever brought back, start it from that Worker too.
-
-## Public repo
-The repo is public, so a workflow's run summary and a `snapshots` branch would be readable by anyone, and artifacts by any signed-in GitHub user. That includes the editor's two lines before the send. Another reason to build the draft locally.
+## Rehearsal paste (Nov 30 or Dec 1)
+The editor pastes a real draft into the beehiiv template, and the HTML is then tuned to whatever survives the paste (headings, lists, links). Until then the output stays plain on purpose: do not rebuild the mockup's colored boxes in the paste. First send: Thursday, Dec 3, 2026.
 
 ## Files
-`scripts/brief/`: `run_brief.py` (orchestrator), `snapshot.py`, `snapshots_git.sh`, `diff_week.py`, `best_bet.py`, `build_brief.py`, `preflight.py`, `common.py` (email styles), `paths.py` (where drafts and snapshots live), `brief_config.json` (weights, sections, limits), `fetch_usgs_stats.py`, `selftest.py`, `assets/` (masthead and logo for the HTML). Ported from the Newsletter Writer's demo scripts (GROK_LOG, item 23).
+`scripts/brief/`: `run_brief.py` (orchestrator: snapshot pick, diff, best bet, build, pre-send check), `snapshot.py`, `snapshots_git.sh`, `diff_week.py`, `best_bet.py`, `build_brief.py`, `preflight.py`, `common.py`, `paths.py` (where drafts and snapshots live), `brief_config.json` (weights, sections, places, titles, word budgets), `fetch_usgs_stats.py`, `selftest.py`, `fixtures/` (a trimmed copy of one real run, for the self-test), `assets/` (no longer used by the body-only HTML).
+
+## Public repo
+The repo is public, so keep the draft folder out of it (set `BRIEF_HOME` to a folder elsewhere, or use the git-ignored `brief-out/`). The editor's words and the One more thing pick are not for publishing before the send.

@@ -6,7 +6,7 @@ import AqiValue from './AqiValue.astro';
 import UnplacedItems from './UnplacedItems.astro';
 import { conditions, regionIds, fmtTime } from '../lib/conditions.js';
 import { statewide } from '../lib/statewide.js';
-import { roadInfo, fireLinks, forestFireLinks, IDAHO511 } from '../lib/regionview.js';
+import { roadInfo, fireLinks, forestFireLinks, alertHref, alertGist, IDAHO511 } from '../lib/regionview.js';
 import { NOTES } from '../lib/site.js';
 const { topic } = Astro.props;
 const sw = statewide();
@@ -26,7 +26,7 @@ const blocks = regionIds.map((id) => {
   const r = conditions.regions[id], tz = r.tz;
   const b = { id, name: r.name, items: [], note: '' };
   if (topic === 'weather') {
-    b.items = sw.nws.fresh ? r.alerts.map((a) => ({ head: a.event, tail: ` until ${until(a, tz)}${a.countsTowardLevel === false ? ' · part of the region' : ''}`, href: a.url && a.url.includes('MapClick') ? a.url : null })) : [];
+    b.items = sw.nws.fresh ? r.alerts.map((a) => ({ head: a.event, tail: ` until ${until(a, tz)}${a.countsTowardLevel === false ? ' · part of the region' : ''}`, gist: alertGist(a), ends: a.ends ?? null, href: alertHref(a) })) : [];
     if (!sw.nws.fresh) b.note = 'Out of date. Check the NWS directly.';
   } else if (topic === 'roads') {
     const info = roadInfo(r);
@@ -62,19 +62,21 @@ const empty = { weather: 'No active National Weather Service alerts in any regio
     {topic === 'fire' && <p class="quiet" style="margin:10px 0 0">More fire info: {fireLinks('none').map((l, i, a) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{i < a.length - 1 ? ' · ' : ''}</>)}</p>}
     <section class="alerts-sec" style="margin-top:14px" aria-label={`${m.name} by region`}>
       {blocks.map((b) => (
-        <article class="alert-card">
+        <article class="alert-card" {...(topic === 'weather' ? { 'data-alert-group': '' } : {})}>
           <h3><a href={`/${b.id}/`}>{b.name} Region</a></h3>
           {b.note && <p class="quiet">{b.note}</p>}
           {b.items.length > 0 ? (
-            <ul>{b.items.map((x) => (
-              <li>
+            <ul data-alert-list>{b.items.map((x) => (
+              <li {...(topic === 'weather' ? { 'data-alert-item': '' } : {})} data-ends={x.ends ?? undefined}>
                 {x.href ? <a href={x.href} target="_blank" rel="noopener noreferrer"><strong>{x.head}</strong></a> : <strong>{x.head}</strong>}
                 {x.aqi != null && <> <AqiValue value={x.aqi} /></>}
                 {x.tag && <> <span class={`tag ${x.tagCls ?? ''}`}>{x.tag}</span></>}
                 {x.tag && /^[,:]/.test(x.tail ?? '') ? <>{x.tail}</> : x.tail}
+                {x.gist && <><br /><span class="quiet">{x.gist}</span></>}
               </li>
             ))}</ul>
           ) : !b.note && <p class="quiet">None reported.</p>}
+          {topic === 'weather' && b.items.length > 0 && <p class="quiet" data-alert-empty hidden>None reported.</p>}
           {topic === 'fire' && forestFireLinks(b.id).length > 0 && <p class="quiet fire-links">Local info: {forestFireLinks(b.id).map((l, i, a) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{i < a.length - 1 ? ' · ' : ''}</>)}</p>}
         </article>
       ))}

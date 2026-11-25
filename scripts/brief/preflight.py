@@ -1,10 +1,12 @@
 """Hard pre-send check for the Thursday brief. Exit 0 = clear to paste; exit 1 = lists every reason.
 Usage: python3 scripts/brief/preflight.py [--max-age-hours N] [--now ISO] [--data FILE] [--diff FILE] [base]
   base default: <output folder from paths.py>/brief-draft ; data default: <repo>/data/conditions.json ; diff default: <base folder>/diff.json
-Checks: placeholder/demo markers in .md/.html/.txt, empty or leaked-template text, empty sections, stale or failed sources,
-and that last week's baseline is a real snapshot 5-9 days old. This tool only reports; nothing in this repo sends email."""
+Checks: placeholder/demo markers in .md/.html/.txt ([CHECK], [EDITOR], [OMT], TODO, FAKE, [DEMO]), empty or leaked-template text, empty or missing required sections
+(Bottom line, From the Desk, One more thing, Current conditions by region, Sources), a One more thing with no link, section word caps and the body cap from brief_config.json,
+stale or failed sources, and that last week's baseline is a real snapshot 5-9 days old. This tool only reports; nothing in this repo sends email."""
 import os, sys, re, json, argparse, datetime as dt
 import paths
+from common import words
 from zoneinfo import ZoneInfo
 B=ZoneInfo('America/Boise'); HERE=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.normpath(os.path.join(HERE,'..','..'))
 cfg=json.load(open(os.path.join(HERE,'brief_config.json')))
@@ -12,7 +14,7 @@ def iso(ts): return dt.datetime.fromisoformat(ts.replace('Z','+00:00'))
 ap=argparse.ArgumentParser(); ap.add_argument('base',nargs='?',default=os.path.join(paths.out_dir(),'brief-draft'))
 ap.add_argument('--max-age-hours',type=float,default=cfg.get('maxDataAgeHours',18)); ap.add_argument('--now')
 ap.add_argument('--data',default=os.path.join(ROOT,'data','conditions.json')); ap.add_argument('--diff'); a=ap.parse_args()
-MARKERS={'[CHECK]':r'\[CHECK','[EDITOR]':r'\[EDITOR','FAKE':r'\bFAKE\b','[DEMO]':r'\[DEMO',
+MARKERS={'[CHECK]':r'\[CHECK','[EDITOR]':r'\[EDITOR','[OMT]':r'\[OMT','TODO':r'\bTODO\b','FAKE':r'\bFAKE\b','[DEMO]':r'\[DEMO',
          'leaked template':r'\{id\}|\{[a-z_]+\}|\bNone\b|\bnan\b|\bundefined\b|Traceback'}
 now=iso(a.now) if a.now else dt.datetime.now(B)
 fails=[]
@@ -30,9 +32,21 @@ for ext in ('md','html','txt'):
 # empty sections (markdown is the canonical text)
 md=open(f"{a.base}.md").read()
 secs=re.split(r'^## ',md,flags=re.M)[1:]
+TITLES=cfg['titles']; KEY={v:k for k,v in TITLES.items()}; BUDGET=cfg['wordBudget']
+have={}
 for sct in secs:
-    title,_,body=sct.partition('\n')
-    if not re.sub(r'[\s\-–—·]','',body.split('\n---')[0]): fails.append(f"empty section: {title.strip()}")
+    title,_,body=sct.partition('\n'); title=title.strip(); have[title]=body
+    if not re.sub(r'[\s\-–—·]','',body): fails.append(f"empty section: {title}")
+    k=KEY.get(title)
+    if k and k in BUDGET:
+        n=words('\n'.join(l for l in body.splitlines() if not l.startswith('**Backcountry:**')))   # the small avalanche line above the next heading is not part of this section's cap
+        if n>BUDGET[k][1]: fails.append(f"section over its word cap: {title} is {n} words (cap {BUDGET[k][1]})")
+total=sum(words(b) for b in have.values())
+if total>=cfg.get('bodyWordsHardCap',600): fails.append(f"body is {total} words (must stay under {cfg.get('bodyWordsHardCap',600)})")
+for k in ('bottom','editor','onemore','links','sources'):
+    if TITLES[k] not in have: fails.append(f"missing required section: {TITLES[k]}")
+omt=have.get(TITLES['onemore'])
+if omt is not None and not re.search(r'\]\(https?://[^)\s]+\)',omt): fails.append("One more thing has no link (needs title, URL and a one-line blurb)")
 # data age
 d=json.load(open(a.data))
 def age(ts): return (now-iso(ts)).total_seconds()/3600
