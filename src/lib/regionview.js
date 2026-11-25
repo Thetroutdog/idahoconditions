@@ -34,6 +34,9 @@ export function airForecastView(r, maxDays = 4) {
   return areas.length ? { areas, source: f.source, url: f.url } : null;
 }
 
+// "PM2.5 · Pocatello Garrett and Gould": the pollutant and the monitor behind a current air reading (the monitor is skipped when it only repeats the city name).
+export const airDetail = (p) => [p.pollutant, p.siteName && p.siteName !== p.name ? p.siteName : null].filter(Boolean).join(' · ');
+
 // Road facts for one region, shared by the status strip, the alerts section and the landing page.
 // Highway closures are full closures on interstates/US/state routes (unplanned first); local roads are only counted.
 export function roadInfo(r) {

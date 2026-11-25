@@ -7,7 +7,7 @@ import UnplacedItems from './UnplacedItems.astro';
 import AirForecast from './AirForecast.astro';
 import { conditions, regionIds, fmtTime } from '../lib/conditions.js';
 import { statewide } from '../lib/statewide.js';
-import { airForecastView, roadInfo, fireLinks, forestFireLinks, alertHref, alertGist, IDAHO511 } from '../lib/regionview.js';
+import { airDetail, airForecastView, roadInfo, fireLinks, forestFireLinks, alertHref, alertGist, IDAHO511 } from '../lib/regionview.js';
 import { NOTES } from '../lib/site.js';
 const { topic } = Astro.props;
 const sw = statewide();
@@ -38,7 +38,7 @@ const blocks = regionIds.map((id) => {
       ...info.winter.filter((g) => sev(g.condition) < 3).slice(0, 8).map((g) => ({ head: g.name, tail: `: ${g.condition}${g.n > 1 ? ` (${g.n} segments)` : ''}` })),
     ];
   } else if (topic === 'air') {
-    b.items = r.air.points.filter((p) => p.aqi?.status === 'fresh' && p.aqi.value !== null).sort((x, y) => y.aqi.value - x.aqi.value).map((p) => ({ head: p.name, aqi: p.aqi.value, tail: p.category ? ` ${p.category}` : '' }));
+    b.items = r.air.points.filter((p) => p.aqi?.status === 'fresh' && p.aqi.value !== null).sort((x, y) => y.aqi.value - x.aqi.value).map((p) => ({ head: p.name, aqi: p.aqi.value, tail: `${p.category ? ` ${p.category}` : ''}${airDetail(p) ? ` · ${airDetail(p)}` : ''}` }));
   } else {
     const fires = r.fire.wildfires.filter((f) => f.status !== 'stale').sort((x, y) => (y.acres ?? 0) - (x.acres ?? 0));
     const burns = r.fire.prescribed.filter((f) => f.status !== 'stale');

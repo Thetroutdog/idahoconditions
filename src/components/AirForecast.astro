@@ -24,6 +24,6 @@ const hasDash = !!v?.areas.some((a) => a.days.some((d) => d.aqi == null));
         {a.discussion && <details class="local-sub"><summary>Forecaster's discussion</summary><p class="quiet">{a.discussion}</p></details>}
       </div>
     ))}
-    <span class="note">{v.source}. Preliminary.{hasDash && ' A dash means the agency forecast only the category (Good, Moderate and so on) for that day, with no AQI number.'} <a href={v.url} target="_blank" rel="noopener noreferrer">AirNow</a></span>
+    <span class="note">{v.source}. Preliminary. A forecast is the expected daily AQI; a current reading is the latest hour and can run higher or lower.{hasDash && ' A dash means the agency forecast only the category (Good, Moderate and so on) for that day, with no AQI number.'} <a href={v.url} target="_blank" rel="noopener noreferrer">AirNow</a></span>
   </div>
 )}

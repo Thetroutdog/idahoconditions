@@ -1,7 +1,7 @@
 ---
 // Detailed live readings for a region (the data behind the strip). Collapsed by default to keep the hub uncluttered.
 import { conditions, show, fmtTime } from '../lib/conditions.js';
-import { alertHref, alertGist } from '../lib/regionview.js';
+import { airDetail, alertHref, alertGist } from '../lib/regionview.js';
 import AqiValue from './AqiValue.astro';
 import AirForecast from './AirForecast.astro';
 import { NOTES } from '../lib/site.js';
@@ -40,7 +40,7 @@ const tz = r.tz;
   </>)}
   <h3>Air quality</h3>
   {r.air.note && <p class="missing">{r.air.note}</p>}
-  {r.air.points.map((p) => { const a = show(p.aqi, tz); return p.aqi.value === null ? <p>{p.name}: <span class="missing">no nearby air monitor</span></p> : <p>{p.name}: {a.cls === 'fresh' ? <AqiValue value={p.aqi.value} /> : <strong class={a.cls}>{a.text}</strong>} {p.category} ({p.pollutant}) <span class="note">{a.note}</span></p>; })}
+  {r.air.points.map((p) => { const a = show(p.aqi, tz); return p.aqi.value === null ? <p>{p.name}: <span class="missing">no nearby air monitor</span></p> : <p>{p.name}: {a.cls === 'fresh' ? <AqiValue value={p.aqi.value} /> : <strong class={a.cls}>{a.text}</strong>} {p.category} ({airDetail(p)}) <span class="note">{a.note}</span></p>; })}
   <AirForecast r={r} />
   <h3>Fire</h3>
   {r.fire.wildfires.length === 0 ? <p>No reported wildfires.</p> : <ul>{r.fire.wildfires.map((f) => <li class={f.status}>{f.name}, {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}{f.status === 'stale' && ` (last update ${fmtTime(f.modifiedAt, tz)})`}</li>)}</ul>}

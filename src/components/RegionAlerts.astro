@@ -2,7 +2,7 @@
 // Full alerts and conditions for one region: NWS alerts, roads (Idaho 511), air quality, wildfires, prescribed burns.
 // Every source gets a card so an empty one reads "none reported" instead of vanishing.
 import { conditions, fmtTime } from '../lib/conditions.js';
-import { airForecastView, alertHref, alertGist, alertLink, roadInfo, IDAHO511, BAR_LABEL, shortReason, fireLinks, forestFireLinks } from '../lib/regionview.js';
+import { airDetail, airForecastView, alertHref, alertGist, alertLink, roadInfo, IDAHO511, BAR_LABEL, shortReason, fireLinks, forestFireLinks } from '../lib/regionview.js';
 import AqiValue from './AqiValue.astro';
 const { id, name } = Astro.props;
 const r = conditions.regions[id];
@@ -75,7 +75,7 @@ const shownHwy = road.hwy.slice(0, 6), moreHwy = road.hwy.slice(6);
 
   <article class="alert-card" id="air-quality">
     <h3>Air quality <span class={`chip ${!aqs.length ? 'gray' : badAir.length ? 'amber' : 'green'}`}>{!aqs.length ? 'No readings' : badAir.length ? 'Unhealthy pockets' : 'No unhealthy air'}</span></h3>
-    {aqs.length ? <ul>{aqs.map((p) => <li>{p.name}: <AqiValue value={p.aqi.value} />{p.category && ` (${p.category})`}</li>)}</ul> : <p class="quiet">No fresh air-quality readings.</p>}
+    {aqs.length ? <ul>{aqs.map((p) => <li>{p.name}: <AqiValue value={p.aqi.value} />{p.category && ` (${p.category})`}{airDetail(p) && <span class="quiet"> · {airDetail(p)}</span>}</li>)}</ul> : <p class="quiet">No fresh air-quality readings.</p>}
     <div class="src src-row"><span>AirNow (preliminary)</span>{hasAirForecast && <a href={`/air/#air-${id}`}>See air quality forecast</a>}</div>
   </article>
 
