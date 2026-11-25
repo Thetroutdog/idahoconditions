@@ -8,6 +8,8 @@ import { regionById, hubActivities, spotsIn } from '../lib/catalog.js';
 import RegionMap from './RegionMap.astro';
 import RegionAlerts from './RegionAlerts.astro';
 import { statusStrip } from '../lib/regionview.js';
+import LocalSection from './LocalSection.astro';
+import { localFor } from '../lib/local.js';
 import { NOTES, feedbackMailto } from '../lib/site.js';
 import { sunTimes } from '../lib/suntimes.js';
 
@@ -18,6 +20,7 @@ const tz = r.tz;
 const tiles = hubActivities(id);
 const total = spotsIn(id).length;
 const strip = statusStrip(id);
+const locals = localFor(id);
 const hasFc = (r.forecast?.points ?? []).some((p) => p.days?.length);
 const updated = fmtTime(conditions.generatedAt, tz);
 const sun = sunTimes(reg.name, tz);
@@ -34,6 +37,7 @@ const sun = sunTimes(reg.name, tz);
         </nav>
         <p class="jump-sub">
           {hasFc && <a href="#forecast" data-open="forecast">Seven-day forecast <span aria-hidden="true">↓</span></a>}
+          {locals.map((l) => <a href={`#${l.domId}`} data-open={l.domId}>{l.linkLabel} <span aria-hidden="true">↓</span></a>)}
           <a href="#readings" data-open="readings">All live readings <span aria-hidden="true">↓</span></a>
         </p>
       </div>
@@ -62,6 +66,8 @@ const sun = sunTimes(reg.name, tz);
       ))}
     </section>
     <p class="legal-line">{NOTES.general} <a href="/terms/">Terms</a></p>
+
+    <LocalSection id={id} />
 
     <div class="section-head sub-lead" id="activities" style="margin-bottom:10px"><h2>Activities</h2><p>Pick one for spots, sources and links.</p></div>
     <ActivityChips region={id} />

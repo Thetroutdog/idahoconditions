@@ -20,6 +20,7 @@ Fetchers (Python) write one `conditions.json`. Astro reads it at build time. Pag
     "snotel":  {"fetchedAt": "...", "ok": true, "error": null},
     "usgs":    {"fetchedAt": "...", "ok": true, "error": null},
     "nifc":    {"fetchedAt": "...", "ok": true, "error": null},
+    "r2r":     {"fetchedAt": "...", "ok": true, "error": null},   // present only once the fetcher has run
     "idaho511":{"fetchedAt": "...", "ok": false, "error": "no key yet"}
   },
   "alertBar": {"level": "amber", "text": "Winter Weather Advisory: Clearwater, Salmon", "moreCount": 0, "regionIds": ["clearwater","salmon"]},
@@ -55,6 +56,21 @@ Notes:
 - `avalanche` lists the avalanche centers whose forecasts cover the region (`id`, `name`, `url`, `area`), from `data/avalanche_centers.json` (static links, edited by hand; Grok confirmed the eastern Idaho cross-border centers). Top-level `avalanchePoints` maps a forecast point id (e.g. `island-park`) to center ids that override the region list for that town.
 - `ski` lists weekly open/closed/opening-soon results per region (ski, nordic and snowmobile areas) from `data/resort_status.json`, written by `scripts/fetch_resort_status.py` locally. Each item: `id`, `name`, `status` (`open`, `closed`, `opening-soon`), `confidence`, `opening`/`openingISO`, `url`, `checkedAt`, `freshness` (`stale` when the crawl is more than 8 days old), `source`. Areas whose status is `unknown` are left out. The site does not display it yet; the Thursday Brief can read it.
 - Idaho 511 fills `roads` once the key arrives; until then `roads.status` is `missing` and the region cannot be green (rule: no green when we can't tell) so the page shows gray plus last-known.
+
+## Local conditions (`regions.<id>.local.<source>`)
+
+Sources that belong to one region (or a few). Regions without the source have no key (`local` is `{}`); the site, the Brief and the watcher must tolerate a missing key. A local source never changes the region's alert level.
+Every local source carries the shared fields `title`, `verdict`, `tone` (`green` | `amber` | `neutral`), `summary` (one plain line), `asOf` (ISO time of the newest underlying report) and `stale` (re-checked at build time against `asOf`). If the fetcher is failing, `sources.<name>.ok` is false and the item gets `fetchFailing: true` (last data kept).
+The site reads them through `src/lib/local.js` (one registry entry per source).
+
+### `regions.southwest.local.r2r` (Ridge to Rivers, part `r2r`, Boise foothills trails)
+
+- Shared fields as above. `verdict` is "Mostly muddy", "Muddy in spots", "Mostly frozen", "Mostly dry", "Mixed conditions" or "No trail reports", from the open, evaluated trails. `stale` is true when the newest `ConditionDate` is over 72 hours old (not a failure).
+- `counts`: trails by code (`muddy`, `mixed`, `dry`, `frozen`, `frozen-am`, `closed`, `unknown`) and `total`. Access roads (subsystem `N/A`) are skipped. `originalText`: the original condition wording seen for each code.
+- `subsystems`: per-subsystem counts (`name`, `n`, plus one count per code). `bestBets`: up to 3 subsystems with at least 3 open trails, 75% or more dry or frozen. `allWeather`: `count` and up to 12 `names` of all-weather trails that are not muddy or closed.
+- `closed`: groups of closed trails sharing a staff note (`note`, `trails`, `areas`; notes are plain text).
+- `url`, `mapUrl`, `credit`: the Ridge to Rivers pages and the required credit line ("Trail conditions, text and photos: City of Boise / Ridge to Rivers").
+- Not yet: the written daily report and photo (planned as a second step; they will be added as `report`).
 
 ## Still to decide (small)
 1. History for sparklines: separate `history.json` (last 7 days per station/gauge) so `conditions.json` stays small.

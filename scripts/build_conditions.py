@@ -78,7 +78,7 @@ def avalanche_links():
 def skeleton(name, tz):
     return {"name": name, "tz": tz, "level": "gray", "levelReasons": [], "summary": "", "alerts": [],
             "forecast": {"points": [], "updated": None}, "roads": {"status": "missing", "passes": [], "closures": [], "restrictions": []},
-            "snow": [], "rivers": [], "air": {"points": [], "note": None}, "fire": {"wildfires": [], "prescribed": []}, "ski": [], "avalanche": []}
+            "snow": [], "rivers": [], "air": {"points": [], "note": None}, "fire": {"wildfires": [], "prescribed": []}, "ski": [], "avalanche": [], "local": {}}
 
 
 def fmt_end(iso, tz):
@@ -128,6 +128,23 @@ def apply_fire_freshness(region, now):
             keep.append(f)
         if kind in region.get("fire", {}):
             region["fire"][kind] = keep
+
+
+LOCAL_STALE_H = {"r2r": 72}  # per local source: hours after its own "as of" before it dims. Local sources never change the region level.
+
+
+def apply_local_freshness(region, parts, now):
+    """Re-check each local source's stale flag at build time, so a stopped fetcher cannot leave an old report looking current."""
+    for key, item in (region.get("local") or {}).items():
+        if not isinstance(item, dict):
+            continue
+        h = LOCAL_STALE_H.get(key)
+        a = age_min(item.get("asOf"), now) if item.get("asOf") else None
+        if h is not None:
+            item["stale"] = a is None or a > h * 60
+        part = parts.get(key)
+        if part is not None and not part.get("ok"):  # fetch failing: keep the last data, flagged so the UI says it may be old
+            item["fetchFailing"] = True
 
 
 def drop_dead_closures(rd, now):
@@ -226,8 +243,11 @@ def build(parts, now, ski_status=None):
         sources[name] = {"fetchedAt": part.get("fetchedAt"), "ok": bool(part.get("ok")), "error": part.get("error")}
         for rid, secs in part.get("regions", {}).items():
             if rid in regions:
-                for k, v in secs.items():  # rivers from several parts (usgs, noaa) are combined, not replaced
-                    regions[rid][k] = regions[rid].get(k, []) + v if k == "rivers" and isinstance(v, list) else v
+                for k, v in secs.items():  # rivers from several parts (usgs, noaa) are combined, not replaced; local sources are merged by source key
+                    if k == "local" and isinstance(v, dict):
+                        regions[rid].setdefault("local", {}).update(v)
+                    else:
+                        regions[rid][k] = regions[rid].get(k, []) + v if k == "rivers" and isinstance(v, list) else v
     av_regions, av_points = avalanche_links()
     for rid, lst in av_regions.items():
         if rid in regions:
@@ -252,6 +272,7 @@ def build(parts, now, ski_status=None):
     for rid, r in regions.items():
         apply_freshness(r, now)
         apply_fire_freshness(r, now)
+        apply_local_freshness(r, parts, now)
         cand = []  # (rank, priority, reason, summary)
         for x in [x for x in r["alerts"] if x.get("level") and x.get("countsTowardLevel", True)] if nws_fresh else []:
             text = f"{x['event']} until {fmt_end(x['ends'], r['tz'])}"

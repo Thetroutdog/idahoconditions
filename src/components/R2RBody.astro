@@ -1,0 +1,16 @@
+---
+// Ridge to Rivers (City of Boise) trail status for the Boise foothills. Their wording is shown faithfully: "Muddy – DO NOT USE" is a stewardship ask.
+const { item, tz, compact = false } = Astro.props;
+const c = item.counts ?? {};
+const closedTrails = (item.closed ?? []).reduce((n, g) => n + g.trails.length, 0);
+---
+<p class="local-lead">{item.stale ? 'This is the last trail report from Ridge to Rivers. Check their site for today.' : 'Muddy trails: stay off. Ridge to Rivers asks you to turn around when you hit mud, so trails stay good.'}</p>
+<p class="local-line">{item.summary}</p>
+{item.bestBets?.length > 0 && !item.stale && <p class="local-line"><strong>Best bets:</strong> {item.bestBets.join(', ')}{item.allWeather?.count ? ` · ${item.allWeather.count} all-weather trails` : ''}</p>}
+{!compact && closedTrails > 0 && (
+  <details class="local-sub">
+    <summary>Closed trails ({closedTrails})</summary>
+    <ul>{item.closed.map((g) => <li><strong>{g.trails.slice(0, 6).join(', ')}{g.trails.length > 6 ? ` and ${g.trails.length - 6} more` : ''}</strong> <span class="quiet">({g.areas.join(', ')})</span>{g.note && <><br /><span class="quiet">{g.note}</span></>}</li>)}</ul>
+  </details>
+)}
+<p class="local-src">{item.credit}. <a href={item.url} target="_blank" rel="noopener noreferrer">Daily condition reports</a> · <a href={item.mapUrl} target="_blank" rel="noopener noreferrer">Interactive trail map</a></p>

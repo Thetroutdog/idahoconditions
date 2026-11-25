@@ -99,3 +99,56 @@ assert len(_pan) == 1 and _pan[0]["id"] == "urn:oid:test.1", _pan   # the expire
 assert "MapClick" not in _pan[0]["url"] and _pan[0]["url"].startswith("https://alerts.weather.gov"), _pan[0]["url"]
 assert _pan[0]["summary"].startswith("At 538 AM PST") and _pan[0]["gist"], _pan[0]
 print("nws alert link and expiry tests ok")
+
+
+# ---- Ridge to Rivers trail status (rows below are trimmed from the real layer, plus synthetic mud) ----
+import fetch_r2r as r2r
+_n = c.now_utc()
+_ms = lambda h: int((_n - dt.timedelta(hours=h)).timestamp() * 1000)
+_row = lambda name, sub, cond, h=2, notes=None, aw="No": {"TrailName": name, "Name": "#1 " + name, "TrailSubSystem": sub, "Condition": cond, "ConditionNotes": notes, "ConditionDate": _ms(h), "AllWeather": aw, "R2R_Use": "Multi-use non-motorized"}
+_DRY, _MUD = "Dry / Tacky - Enjoy", "Muddy – DO NOT USE"
+_MIX = "Dry at start but could be muddy further out – turn around when you encounter mud.  Don’t keep going."
+_sample = ([_row(f"Dry{i}", "Polecat Gulch", _DRY) for i in range(4)] + [_row("Hulls Mud", "Camels Back / Hulls Gulch", _MUD)] * 3
+           + [_row("Mix", "Table Rock", _MIX), _row("Ice", "Dry Creek", "Frozen/snow covered - Enjoy", aw="Yes"), _row("Owl's Roost", "Camels Back / Hulls Gulch", _DRY, aw="Yes"),
+              _row("Mores", "Bogus Basin Area", "CLOSED", notes="These trails are closed for the winter, to allow for Bogus Basin Ski Operations"),
+              _row("Sinker", "Bogus Basin Area", "CLOSED", notes="These trails are closed for the winter, to allow for Bogus Basin Ski Operations"),
+              _row("Pump Track", "Military Reserve", "Not Evaluated", notes='Visit <a href=https://x.example target="_blank">Boise Bike Park website</a> for current condition report.'),
+              _row("8th St Ext", "N/A", "Not Evaluated"), _row("Weird", "Table Rock", "Something new")])
+for t, want in [(_MUD, "muddy"), (_MIX, "mixed"), (_DRY, "dry"), ("Frozen/snow covered - Enjoy", "frozen"), ("Frozen early then muddy – BE OFF THE TRAIL BEFORE IT THAWS…", "frozen-am"), ("CLOSED", "closed"), ("Not Evaluated", "unknown"), ("???", "unknown")]:
+    assert r2r.code_of(t) == want, (t, r2r.code_of(t))
+_r = r2r.summarize(_sample, _n)
+assert _r["counts"]["muddy"] == 3 and _r["counts"]["dry"] == 5 and _r["counts"]["closed"] == 2 and _r["counts"]["mixed"] == 1 and _r["counts"]["frozen"] == 1, _r["counts"]
+assert _r["counts"]["unknown"] == 2 and _r["total"] == 14, _r["counts"]  # the N/A access road is skipped; "Pump Track" and the new wording are unknown
+assert _r["verdict"] == "Mostly dry" and _r["tone"] == "green" and not _r["stale"], _r["verdict"]
+assert _r["bestBets"] == ["Polecat Gulch"], _r["bestBets"]  # Hulls Gulch is mostly mud, so it is not a best bet
+assert _r["closed"][0]["trails"] == ["Mores", "Sinker"] and _r["closed"][0]["areas"] == ["Bogus Basin Area"] and "<" not in _r["closed"][0]["note"], _r["closed"]
+assert _r["allWeather"]["names"] == ["Ice", "Owl's Roost"] and _r["originalText"]["muddy"] == _MUD
+assert "Boise foothills" in _r["title"] and _r["credit"].startswith("Trail conditions, text and photos: City of Boise")
+_mud = r2r.summarize([_row(f"m{i}", "Table Rock", _MUD) for i in range(6)] + [_row("d", "Table Rock", _DRY)], _n)
+assert _mud["verdict"] == "Mostly muddy" and _mud["tone"] == "amber" and _mud["bestBets"] == []
+_old = r2r.summarize([_row("a", "Table Rock", _DRY, h=24 * 5)], _n)
+assert _old["stale"] and _old["asOf"], _old  # over 72 h old: stale, not a failure
+for bad in ([], ):
+    try:
+        r2r.summarize(bad, _n); raise SystemExit("zero rows should raise")
+    except RuntimeError:
+        pass
+r2r.http_json = lambda url, headers=None, timeout=60: {"error": {"code": 400}}
+try:
+    r2r.rows(); raise SystemExit("an ArcGIS error body should raise")
+except RuntimeError:
+    pass
+_pages = [{"features": [{"attributes": a} for a in _sample[:5]], "exceededTransferLimit": True}, {"features": [{"attributes": a} for a in _sample[5:]]}]
+_seen = []
+r2r.http_json = lambda url, headers=None, timeout=60: (_seen.append(url), _pages[len(_seen) - 1])[1]
+assert len(r2r.rows()) == len(_sample) and "resultOffset=5" in _seen[1], _seen
+r2r.http_json = lambda url, headers=None, timeout=60: {"features": [{"attributes": a} for a in _sample]}
+_p = c.run_part("r2r", r2r.fetch)
+assert _p["ok"] and _p["regions"]["southwest"]["local"]["r2r"]["verdict"] == "Mostly dry"
+_b = bc.build({"nws": {"source": "nws", "ok": True, "fetchedAt": _n.isoformat(), "error": None, "forecast": {}, "alerts": {}}, "r2r": _p}, _n)
+assert _b["regions"]["southwest"]["local"]["r2r"]["verdict"] == "Mostly dry" and _b["sources"]["r2r"]["ok"], _b["sources"]
+assert _b["regions"]["panhandle"]["local"] == {} and _b["regions"]["southwest"]["level"] == bc.build({"nws": {"source": "nws", "ok": True, "fetchedAt": _n.isoformat(), "error": None, "forecast": {}, "alerts": {}}}, _n)["regions"]["southwest"]["level"]  # a local source never changes the region level
+_late = bc.build({"r2r": _p}, _n + dt.timedelta(hours=100))
+assert _late["regions"]["southwest"]["local"]["r2r"]["stale"], "build re-checks staleness from asOf"
+assert "r2r" not in bc.build({}, _n)["sources"] and bc.build({}, _n)["regions"]["southwest"]["local"] == {}, "the build works with the part missing"
+print("r2r trail status tests ok")

@@ -5,7 +5,7 @@
 cd "$(dirname "$0")/.." || exit 1
 [ -z "$IC_USER_AGENT" ] && echo "!! WARNING: IC_USER_AGENT is not set. NWS wants a contact in the User-Agent; alerts may be refused."
 LOGS=$(mktemp -d); trap 'rm -rf "$LOGS"' EXIT
-FETCHERS="fetch_nws fetch_snotel fetch_usgs fetch_noaa fetch_airnow fetch_nifc fetch_511"
+FETCHERS="fetch_nws fetch_snotel fetch_usgs fetch_noaa fetch_airnow fetch_nifc fetch_511 fetch_r2r"
 for s in $FETCHERS; do
   ( python3 scripts/$s.py >"$LOGS/$s.log" 2>&1 || echo "!! $s failed" >>"$LOGS/$s.log" ) &
 done

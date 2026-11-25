@@ -197,6 +197,26 @@ tt8=rd(o8,'brief-titles.txt')
 check('r2: no title or subtitle says "changes that matter" for a count of one, or "went <one word>"', not re.search(r'\bOne changes\b',tt8) and not re.search(r'went \w+;',tt8))
 check('r2: every subject line is a clean sentence start (no lowercase "not", no empty clause)', all(not re.search(r'\b(went|is|are) (not|)$',x.split(';')[0]) for x in re.findall(r'^  \d\. (.*)$',tt8.split('SUBTITLE')[0],flags=re.M)))
 
+# =========================== foothills trails line (Ridge to Rivers) ===========================
+check('r2r: no foothills line when the fixture has no trail data', 'Foothills trails' not in md1)
+def with_r2r(name, **kw):
+    dd=json.loads(json.dumps(fx))
+    base={"title":"Boise foothills trails","verdict":"Mostly muddy","tone":"amber","summary":"x","asOf":dd['generatedAt'],"stale":False,"counts":{"muddy":9,"mixed":2,"dry":3,"frozen":0,"frozen-am":0,"closed":1,"unknown":0},
+          "bestBets":["Hulls Gulch","Polecat Gulch"],"url":"https://www.ridgetorivers.org/condition-reports/"}; base.update(kw)
+    dd['regions']['southwest'].setdefault('local',{})['r2r']=base
+    F=os.path.join(tmp,name+'.json'); json.dump(dd,open(F,'w'))
+    o,st,r=build(name,data=F,env={'BRIEF_EDITOR_NOTE':NOTE_OK,'BRIEF_ONE_MORE_THING':OMT_OK})
+    return rd(o,'brief-draft.md'),rd(o,'brief-draft.html'),st
+mdm,htm,_=with_r2r('r2rmud')
+check('r2r: muddy foothills get one linked line with the City of Boise credit, between the forecast list and Coming up', '**Foothills trails:** mostly muddy; best bets are Hulls Gulch and Polecat Gulch. Trail conditions: [City of Boise / Ridge to Rivers](https://www.ridgetorivers.org/condition-reports/).' in mdm and mdm.index('Foothills trails')<mdm.index('Coming up') and '<p><strong>Foothills trails:</strong>' in htm and mdm.count('Foothills trails')==1)
+mdd,_,_=with_r2r('r2rdry',verdict='Mostly dry',tone='green',counts={"muddy":0,"mixed":0,"dry":40,"frozen":2,"frozen-am":0,"closed":3,"unknown":0})
+check('r2r: no foothills line when the trails are overwhelmingly dry', 'Foothills trails' not in mdd)
+mds,_,_=with_r2r('r2rstale',stale=True)
+check('r2r: no foothills line when the trail report is stale', 'Foothills trails' not in mds)
+mdn,_,_=with_r2r('r2rnobest',bestBets=[])
+check('r2r: with no best bets the line says to stay off muddy trails', 'stay off muddy trails' in mdn)
+check('r2r: the foothills line does not count as a forecast line (weekend line count unchanged)', mdm.count('\n- **')>=8 and 'in eight lines' in rd(os.path.join(tmp,'r2rmud'),'brief-titles.txt'))
+
 # =========================== v4 round 3 ===========================
 check('r3: By region is now "Current conditions by region"; Vs. normal is "Vs. Normal (to date)"', '## Current conditions by region' in md1 and '## Vs. Normal (to date)' in md1 and '## By region' not in md1 and '## Vs. normal' not in md1)
 bl=md1.split('## From the Desk')[0]

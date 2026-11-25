@@ -157,7 +157,16 @@ if 'closure' in S['datedTypes']:
 dated=(dated_ed+sorted(auto,key=lambda z:z[0]))[:cfg['datedMax']]
 dated_lines=[f"**{o.strftime('%b %-d')}:** {endp(t)}" if o!=dt.date.max else endp(t) for o,t in dated]
 # keep the section under its hard cap: drop the last dated items first
-while dated_lines and words(' '.join(wk+dated_lines))>BUDGET['weekend'][1]: dated_lines.pop()
+# Boise foothills trails (Ridge to Rivers, City of Boise): one line, from the trail-status rollup. Left out when the data is stale or the trails are overwhelmingly dry.
+foot=None
+_r2r=((d['regions'].get('southwest') or {}).get('local') or {}).get('r2r')
+if _r2r and not _r2r.get('stale') and _r2r.get('verdict') and _r2r.get('verdict')!='No trail reports':
+    _c=_r2r.get('counts') or {}; _open=sum(_c.get(k,0) for k in ('muddy','mixed','dry','frozen','frozen-am'))
+    if _open and _c.get('dry',0)/_open<0.9:
+        _bb=_r2r.get('bestBets') or []
+        _best=(" and ".join([", ".join(_bb[:-1]),_bb[-1]]) if len(_bb)>1 else _bb[0]) if _bb else None
+        foot=f"**Foothills trails:** {_r2r['verdict'].lower()}"+(f"; best bets are {_best}" if _best else "; stay off muddy trails")+f". Trail conditions: [City of Boise / Ridge to Rivers]({_r2r.get('url','https://www.ridgetorivers.org/condition-reports/')})."
+while dated_lines and words(' '.join(wk+([foot] if foot else [])+dated_lines))>BUDGET['weekend'][1]: dated_lines.pop()
 # ---------- Bottom line ----------
 best=bb['best']
 bw=[]
@@ -245,7 +254,7 @@ SUBJECT,PRE=SUBJECTS[0],PREVIEWS[0]
 FAKE="DEMO: \"last week\" is a FAKE snapshot made up to show the weekly diff." if lastfake else None
 open(os.path.join(OUTDIR,'brief-titles.txt'),'w').write("TITLE (subject) options. Paste one into beehiiv's title field:\n"+''.join(f"  {i}. {s}\n" for i,s in enumerate(SUBJECTS,1))+
     "\nSUBTITLE (preview) options. Paste one into beehiiv's subtitle field:\n"+''.join(f"  {i}. {s}\n" for i,s in enumerate(PREVIEWS,1)))
-CONTENT={"bottom":bottom,"editor":[x.strip() for x in EN.splitlines() if x.strip()],"changed":changed,"weekend":wk+(["**Coming up:**"]+dated_lines if dated_lines else []),"normal":normal,"onemore":OMT,"avalanche":[aval] if aval else [],"links":[rl],"sources":[footer]}
+CONTENT={"bottom":bottom,"editor":[x.strip() for x in EN.splitlines() if x.strip()],"changed":changed,"weekend":wk+([foot] if foot else [])+(["**Coming up:**"]+dated_lines if dated_lines else []),"normal":normal,"onemore":OMT,"avalanche":[aval] if aval else [],"links":[rl],"sources":[footer]}
 BULLETS={"changed","weekend","normal"}
 QUOTED={"bottom","editor","onemore"}   # beehiiv renders a <blockquote> in its quote style: the stand-in for the mock's dark and dashed boxes
 # ---------- Markdown (body only: no masthead, dateline or footer; beehiiv's template has those) ----------
@@ -256,7 +265,7 @@ for i,sec in enumerate(shown):
     if sec=='links' and BACK: m+=[BACK,""]
     if i: m+=["---",""]   # a divider between sections, not before the first or after the last
     m+=[f"## {TITLES[sec]}",""]
-    if sec=='weekend': m+=[f"- {x}" for x in wk]+[""]+(["**Coming up:**","",*[f"- {x}" for x in dated_lines],""] if dated_lines else [])
+    if sec=='weekend': m+=[f"- {x}" for x in wk]+[""]+([foot,""] if foot else [])+(["**Coming up:**","",*[f"- {x}" for x in dated_lines],""] if dated_lines else [])
     elif sec in ('changed','normal') and not NOBASE: m+=[f"- {x}" for x in items]+[""]
     elif sec in QUOTED: m+=[y for x in items for y in (f"> {x}",">")][:-1]+[""]
     else: m+=[y for x in items for y in (x,"")]
@@ -270,7 +279,7 @@ for i,sec in enumerate(shown):
     if sec=='links' and BACK: h.append(f'<p>{md2html_plain(BACK)}</p>')
     if i: h.append('<hr>')
     h.append(f'<h2>{html.escape(TITLES[sec])}</h2>')
-    if sec=='weekend': h.append(ul(wk)+(('\n<p><strong>Coming up:</strong></p>\n'+ul(dated_lines)) if dated_lines else ''))
+    if sec=='weekend': h.append(ul(wk)+(f'\n<p>{md2html_plain(foot)}</p>' if foot else '')+(('\n<p><strong>Coming up:</strong></p>\n'+ul(dated_lines)) if dated_lines else ''))
     elif sec in ('changed','normal') and not NOBASE: h.append(ul(items))
     elif sec in QUOTED: h.append('<blockquote>\n'+'\n'.join(f'<p>{md2html_plain(x)}</p>' for x in items)+'\n</blockquote>')
     else: h+= [f'<p>{md2html_plain(x)}</p>' for x in items]

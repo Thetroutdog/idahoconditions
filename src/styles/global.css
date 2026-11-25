@@ -2102,3 +2102,14 @@ details.fc7-detail + details.data-detail { margin-top: 0; border-top: 0; padding
 .feedback-line { text-align: center; margin: -8px 0 calc(-1 * var(--footer-pad)); padding: 12px 0; font-size: 15px; line-height: 1.5; color: var(--ink-soft); position: relative; z-index: 1; }
 /* On the home page nothing sits above it, so it gets its own top line. */
 .feedback-line.is-ruled { margin-top: 0; border-top: 1px solid var(--line); }
+
+/* Local conditions (src/lib/local.js): collapsed sections with a visible one-line summary, like the seven-day forecast */
+.local-detail { margin: 0; border-top: 0; padding-top: 12px; }
+.local-detail > summary { font-size: 15px; }  /* keep it a normal list-item summary so the browser's disclosure arrow shows, like the forecast */
+.local-detail > summary .chip { display: inline-block; margin-left: 8px; font-size: 12px; padding: 2px 8px; border-radius: 8px; font-weight: 600; vertical-align: 1px; }
+.local-lead { margin: 10px 0 6px; font-size: 14px; color: var(--ink); }
+.local-line { margin: 4px 0; font-size: 14px; color: var(--ink-soft); }
+.local-sub { margin: 8px 0; }
+.local-sub > summary { cursor: pointer; font-size: 13px; color: var(--pine); }
+.local-sub ul { margin: 6px 0 0; padding-left: 18px; font-size: 13px; }
+.local-src { margin: 10px 0 2px; font-size: 12px; color: var(--muted); }

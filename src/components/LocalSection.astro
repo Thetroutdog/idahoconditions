@@ -1,0 +1,18 @@
+---
+// Collapsed "Local conditions" sections for one region (the same pattern as the seven-day forecast): a one-line summary stays visible when closed
+// (title, verdict chip, as-of), the body opens on tap. On an activity page only the sources tagged for that activity show, open by default.
+import { localFor } from '../lib/local.js';
+import R2RBody from './R2RBody.astro';
+const { id, activity = null, open = false } = Astro.props;
+const BODY = { r2r: R2RBody };
+const list = localFor(id, activity);
+---
+{list.map((s) => {
+  const Body = BODY[s.key];
+  return (
+    <details class="data-detail local-detail" id={s.domId} open={open} aria-label={s.item.title}>
+      <summary>{s.item.title}<span class={`chip ${s.chip.tone}`}>{s.chip.label}</span>{s.glance && <span class="fc7-glance"> · {s.glance}</span>}</summary>
+      {Body && <Body item={s.item} tz={s.tz} compact={!!activity} />}
+    </details>
+  );
+})}

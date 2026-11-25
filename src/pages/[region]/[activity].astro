@@ -3,6 +3,7 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import SpotTable from '../../components/SpotTable.astro';
 import ActivityChips from '../../components/ActivityChips.astro';
+import LocalSection from '../../components/LocalSection.astro';
 import { conditions, fmtTime } from '../../lib/conditions.js';
 import { regionBar } from '../../lib/regionview.js';
 import { NOTES } from '../../lib/site.js';
@@ -31,6 +32,7 @@ const noun = activity === 'ski' ? 'areas' : 'spots';
       </div>
       <ActivityChips region={region} current={activity} />
       <p class="verdict">{rollup(list, activity)}</p>
+      <LocalSection id={region} activity={activity} open />
       <p class="legal-line">{NOTES.general} <a href="/terms/">Terms</a></p>
       <SpotTable rows={rows} variant="activity" label={activity === 'ski' ? 'Area' : 'Spot'} />
       <p style="margin:16px 0 0"><a href={`/${activity}/`} data-astro-prefetch>See all Idaho {activityTitle(activity)} →</a></p>
