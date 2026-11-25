@@ -217,6 +217,28 @@ mdn,_,_=with_r2r('r2rnobest',bestBets=[])
 check('r2r: with no best bets the line says to stay off muddy trails', 'stay off muddy trails' in mdn)
 check('r2r: the foothills line does not count as a forecast line (weekend line count unchanged)', mdm.count('\n- **')>=8 and 'in eight lines' in rd(os.path.join(tmp,'r2rmud'),'brief-titles.txt'))
 
+# =========================== air quality forecast line (Idaho DEQ via AirNow) ===========================
+from zoneinfo import ZoneInfo
+_g=utc(fx['generatedAt']).astimezone(ZoneInfo('America/Boise')).date()
+def _day(n,cat,action=False): return {"date":(_g+dt.timedelta(days=n)).isoformat(),"aqi":40+30*cat,"cat":cat,"category":["","Good","Moderate","Unhealthy for Sensitive Groups","Unhealthy","Very Unhealthy","Hazardous"][cat],"pollutant":"PM2.5","actionDay":action}
+def with_air(name, days, region='southwest', area='Boise'):
+    dd=json.loads(json.dumps(fx))
+    dd['regions'][region]['airForecast']={"source":"x","url":"https://www.airnow.gov/","areas":[{"name":area,"issued":_g.isoformat(),"days":days,"actionDay":any(x['actionDay'] for x in days),"discussion":""}]}
+    F=os.path.join(tmp,name+'.json'); json.dump(dd,open(F,'w'))
+    o,st,r=build(name,data=F,env={'BRIEF_EDITOR_NOTE':NOTE_OK,'BRIEF_ONE_MORE_THING':OMT_OK})
+    return rd(o,'brief-draft.md'),rd(o,'brief-draft.html'),st
+check('air: no air line when the fixture has no forecast', 'Air quality:' not in md1)
+mdq,_,_=with_air('airgood',[_day(0,1),_day(1,2),_day(2,2),_day(3,2)])
+check('air: Good and Moderate days never produce a line', 'Air quality:' not in mdq)
+mda,hta,_=with_air('airusg',[_day(0,2),_day(1,3),_day(2,3)])
+check('air: a forecast day at Unhealthy for Sensitive Groups or worse gets one linked, credited line before Coming up', '**Air quality:** Boise is forecast Unhealthy for Sensitive Groups' in mda and 'Forecast by Idaho DEQ via [AirNow](https://www.airnow.gov/), preliminary.' in mda and mda.count('Air quality:')==1 and '<p><strong>Air quality:</strong>' in hta and ('Coming up' not in mda or mda.index('Air quality:')<mda.index('Coming up')))
+mdx,_,_=with_air('airaction',[_day(0,2),_day(1,2,True)])
+check('air: an Action Day on a Moderate day still gets a line, worded as an action day', 'Boise has an air quality action day' in mdx)
+mdf,_,_=with_air('airfar',[_day(6,3,True)])
+check('air: a bad day more than 4 days out is left out', 'Air quality:' not in mdf)
+mdp,_,_=with_air('airpast',[_day(-2,3,True)])
+check('air: a past day is left out', 'Air quality:' not in mdp)
+
 # =========================== v4 round 3 ===========================
 check('r3: By region is now "Current conditions by region"; Vs. normal is "Vs. Normal (to date)"', '## Current conditions by region' in md1 and '## Vs. Normal (to date)' in md1 and '## By region' not in md1 and '## Vs. normal' not in md1)
 bl=md1.split('## From the Desk')[0]

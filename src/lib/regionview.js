@@ -14,6 +14,26 @@ export const fireLinks = (id) => [...(fireData.regions[id] ?? []), ...fireData.s
 const AQI_BANDS = [[50, '#00E400', '#000'], [100, '#FFFF00', '#000'], [150, '#FF7E00', '#000'], [200, '#FF0000', '#fff'], [300, '#8F3F97', '#fff'], [Infinity, '#7E0023', '#fff']];
 export function aqiColors(v) { const b = AQI_BANDS.find(([max]) => v <= max); return { bg: b[1], fg: b[2] }; }
 
+// Air quality forecast for one region (data from scripts/fetch_airnow_forecast.py, freshness already applied at build time). Returns null when
+// there is nothing current to show. An Action Day is information only: it never changes a region's level, chips or alert bar.
+const CAT_TOP = [50, 100, 150, 200, 300, 301];
+export const ACTION_DAY_LABEL = 'Air quality action day';
+export const ACTION_DAY_NOTE = 'The air agency expects poor air and asks people to cut back on emissions, such as wood burning and idling. This is a forecast, not a current reading.';
+export function airForecastView(r, maxDays = 4) {
+  const f = r.airForecast;
+  if (!f?.areas?.length) return null;
+  const tz = r.tz;
+  const ymd = (d) => d.toLocaleDateString('en-CA', { timeZone: tz });
+  const today = ymd(new Date());
+  const diff = (iso) => Math.round((Date.parse(`${iso}T00:00:00Z`) - Date.parse(`${today}T00:00:00Z`)) / 86400000);
+  const label = (iso) => { const n = diff(iso); return n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : new Date(`${iso}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' }); };
+  const areas = f.areas.map((a) => ({
+    name: a.name, actionDay: !!a.actionDay, discussion: a.discussion || '',
+    days: a.days.filter((d) => diff(d.date) >= 0).slice(0, maxDays).map((d) => ({ ...d, label: label(d.date), short: diff(d.date) === 0 ? 'Today' : new Date(`${d.date}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'short', timeZone: 'UTC' }), ...aqiColors(CAT_TOP[(d.cat ?? 1) - 1] ?? 301) })),
+  })).filter((a) => a.days.length);
+  return areas.length ? { areas, source: f.source, url: f.url } : null;
+}
+
 // Road facts for one region, shared by the status strip, the alerts section and the landing page.
 // Highway closures are full closures on interstates/US/state routes (unplanned first); local roads are only counted.
 export function roadInfo(r) {
@@ -76,7 +96,7 @@ export function statusStrip(id) {
     title: 'Roads',
     lead: !road.live ? 'Not connected yet' : road.hwy[0] ? `${road.hwy[0].name} ${road.hwy[0].unplanned ? 'closed' : 'closure'}` : nRoads ? `${nRoads} road${nRoads === 1 ? '' : 's'} with snow or ice` : 'No closures reported',
     sub: !road.live ? 'Road conditions arrive with the Idaho 511 connection.' : road.hwy.length > 1 ? `+${road.hwy.length - 1} more highway closure${road.hwy.length > 2 ? 's' : ''}.` : road.stale ? 'Road data is out of date.' : '',
-    links: [{ href: '#alerts', label: 'Details' }, { href: IDAHO511, label: 'Idaho 511' }],
+    links: [{ href: '#roads', label: 'Details' }, { href: IDAHO511, label: 'Idaho 511' }],
     note: NOTES.roads,
     src: `Idaho 511${road.asOf ? ` · ${fmtTime(road.asOf, tz)}` : ''}`,
   };
@@ -86,10 +106,10 @@ export function statusStrip(id) {
   const fires = r.fire.wildfires.filter((f) => f.status !== 'stale').length;
   const burns = r.fire.prescribed.filter((f) => f.status !== 'stale').length;
   const fire = {
-    title: 'Fire & smoke',
+    title: 'Air, fire & smoke',
     lead: aqAll.length ? aqLine(aqAll[0]) : 'No current air reading',
     sub: `${aqAll.length > 1 ? aqAll.slice(1).map(aqLine).join('. ') + '. ' : ''}${fires ? `${fires} wildfire${fires === 1 ? '' : 's'} reported` : 'No wildfires reported'}${burns ? `, ${burns} prescribed burn${burns === 1 ? '' : 's'}` : ''}.`,
-    links: [{ href: '#alerts', label: 'Air, wildfire and burn details' }],
+    links: [{ href: '#air-quality', label: 'Air quality' }, { href: '#wildfires', label: 'Wildfires and burns' }],
     note: NOTES.fire,
     src: 'AirNow · NIFC',
   };

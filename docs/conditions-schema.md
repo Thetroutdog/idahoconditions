@@ -81,3 +81,14 @@ The site reads them through `src/lib/local.js` (one registry entry per source).
 - A region spans several NWS offices: Panhandle and Clearwater are OTX (Spokane); Southwest BOI; Magic Valley BOI and PIH (Ketchum is PIH); Southeast and Upper Snake PIH; Salmon MSO (Missoula). Fetchers must not assume one office per region.
 - Alerts are issued by zone, so each region needs the list of NWS zones inside it. Example zones: Coeur d'Alene IDZ002, Lewiston IDZ026, Boise IDZ014, McCall IDZ011, Twin Falls IDZ016, Ketchum IDZ073, Pocatello IDZ054, Idaho Falls IDZ053, Island Park IDZ066, Salmon IDZ010.
 - Panhandle and Clearwater points are America/Los_Angeles; all others America/Boise.
+
+## Air quality forecast (`regions.<id>.airForecast`, part `airnow_forecast`)
+
+Forecasts from the state and local air agencies (Idaho DEQ in Idaho), republished by AirNow's reporting-area file. `null` when the region has no current forecast. The site, the Brief and the watcher must tolerate a missing key.
+An Action Day is information only: it never changes `level`, the status chips or the alert bar.
+- `areas`: one entry per AirNow reporting area inside the region (for example Boise, McCall and Idaho City in Southwest). Each has `name`, `issued` (the date the agency issued the forecast, `YYYY-MM-DD`; the newest across the area's rows), `days`, `actionDay` (any remaining day is flagged) and `discussion` (the forecaster's text, plain, at most 600 characters, may be empty).
+- `days[]`: `date` (`YYYY-MM-DD`, region time zone), `cat` (1 Good, 2 Moderate, 3 Unhealthy for Sensitive Groups, 4 Unhealthy, 5 Very Unhealthy, 6 Hazardous), `category` (name), `aqi` (number, or null when the agency gave only a category), `pollutant`, `actionDay`. One entry per date: the worst pollutant that day.
+- `source`, `url`: the credit text ("Idaho DEQ forecast, via AirNow") and https://www.airnow.gov/.
+- Freshness is decided at build time (`build_conditions.apply_air_forecast_freshness`), not by a stale flag: days before today (region time zone) are dropped; an area is removed when no day remains or it was issued more than 3 days ago. Idaho DEQ mostly forecasts on weekdays, so a Friday forecast still serves the weekend.
+- `sources.airnow_forecast.{fetchedAt,ok,error}` follow the usual rules (on failure the last data is kept, then ages out by the rule above).
+- Fetcher: `scripts/fetch_airnow_forecast.py`, one keyless download of AirNow's reporting-area file. It does not use `AIRNOW_API_KEY`.

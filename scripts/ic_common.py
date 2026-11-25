@@ -25,6 +25,12 @@ def http_json(url, headers=None, timeout=60):
         return json.loads(r.read())
 
 
+def http_text(url, timeout=60):
+    """A plain-text download (pipe-delimited files and the like), decoded leniently: a stray odd byte must not fail the run."""
+    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=timeout) as r:
+        return r.read().decode("utf-8", "replace")
+
+
 def q(base, **params):
     return base + "?" + urllib.parse.urlencode({k: v for k, v in params.items() if v not in (None, "")})
 

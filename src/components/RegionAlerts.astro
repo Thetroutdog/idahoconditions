@@ -2,7 +2,7 @@
 // Full alerts and conditions for one region: NWS alerts, roads (Idaho 511), air quality, wildfires, prescribed burns.
 // Every source gets a card so an empty one reads "none reported" instead of vanishing.
 import { conditions, fmtTime } from '../lib/conditions.js';
-import { alertHref, alertGist, alertLink, roadInfo, IDAHO511, BAR_LABEL, shortReason, fireLinks, forestFireLinks } from '../lib/regionview.js';
+import { airForecastView, alertHref, alertGist, alertLink, roadInfo, IDAHO511, BAR_LABEL, shortReason, fireLinks, forestFireLinks } from '../lib/regionview.js';
 import AqiValue from './AqiValue.astro';
 const { id, name } = Astro.props;
 const r = conditions.regions[id];
@@ -10,6 +10,7 @@ const tz = r.tz;
 const nwsFresh = conditions.meta?.nwsFresh !== false; // the sample file has no flag
 const nwsAt = conditions.sources?.nws?.fetchedAt;
 const road = roadInfo(r);
+const hasAirForecast = !!airForecastView(r);
 const aqs = r.air.points.filter((p) => p.aqi?.status === 'fresh' && p.aqi.value !== null).sort((a, b) => b.aqi.value - a.aqi.value);
 const badAir = aqs.filter((p) => p.aqi.value >= 101);
 const fires = r.fire.wildfires.filter((f) => f.status !== 'stale');
@@ -51,7 +52,7 @@ const shownHwy = road.hwy.slice(0, 6), moreHwy = road.hwy.slice(6);
     <div class="src">National Weather Service{nwsAt ? ` · ${fmtTime(nwsAt, tz)}` : ''}</div>
   </article>
 
-  <article class="alert-card">
+  <article class="alert-card" id="roads">
     <h3>Roads <span class={`chip ${!road.live ? 'gray' : road.hwy.some((c) => c.unplanned) ? 'red' : road.hwy.length || road.winter.some((g) => /snow|pack|cover|ice|icy|slick/i.test(g.condition)) ? 'amber' : road.winter.length ? 'neutral' : 'green'}`}>{!road.live ? 'Not connected' : road.hwy.length ? `${road.hwy.length} closure${road.hwy.length === 1 ? '' : 's'}` : road.winter.length ? 'Winter conditions' : 'No closures'}</span></h3>
     {!road.live && <p class="quiet">Road data is not available right now.</p>}
     {road.hwy.length > 0 && <ul>{shownHwy.map((c) => <li><strong>{c.name}</strong> <span class={`tag ${c.unplanned ? 'tag-red' : ''}`}>{c.unplanned ? 'Unplanned' : 'Planned'}</span><br /><span class="quiet">{clean(c.description)}</span>{c.updated && <small> Updated {fmtTime(c.updated, tz)}</small>}</li>)}</ul>}
@@ -72,29 +73,29 @@ const shownHwy = road.hwy.slice(0, 6), moreHwy = road.hwy.slice(6);
     <div class="src">Idaho 511{road.asOf ? ` · ${fmtTime(road.asOf, tz)}` : ''}{road.stale ? ' · out of date' : ''}</div>
   </article>
 
-  <article class="alert-card">
+  <article class="alert-card" id="air-quality">
     <h3>Air quality <span class={`chip ${!aqs.length ? 'gray' : badAir.length ? 'amber' : 'green'}`}>{!aqs.length ? 'No readings' : badAir.length ? 'Unhealthy pockets' : 'No unhealthy air'}</span></h3>
     {aqs.length ? <ul>{aqs.map((p) => <li>{p.name}: <AqiValue value={p.aqi.value} />{p.category && ` (${p.category})`}</li>)}</ul> : <p class="quiet">No fresh air-quality readings.</p>}
-    <div class="src">AirNow (preliminary)</div>
+    <div class="src src-row"><span>AirNow (preliminary)</span>{hasAirForecast && <a href={`/air/#air-${id}`}>See air quality forecast</a>}</div>
   </article>
 
-  <article class="alert-card">
+  <article class="alert-card" id="wildfires">
     <h3>Wildfires <span class={`chip ${fires.length ? 'amber' : 'green'}`}>{fires.length ? `${fires.length} reported` : 'None reported'}</span></h3>
     {fires.length ? (<>
       <ul>{shownFires.map((f) => <li><strong>{f.name}</strong>{f.county && `, ${f.county} County`}: {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}</li>)}</ul>
       {moreFires.length > 0 && <details><summary>Show {moreFires.length} more</summary><ul>{moreFires.map((f) => <li><strong>{f.name}</strong>{f.county && `, ${f.county} County`}: {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}</li>)}</ul></details>}
     </>) : <p class="quiet">No wildfires reported in this region.</p>}
     <p class="quiet fire-links">More fire info: {moreFire.map((l, i) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{i < moreFire.length - 1 ? ' · ' : ''}</>)}</p>
-    <div class="src">NIFC</div>
+    <div class="src src-row"><span>NIFC</span><a href={`/fire/#fire-${id}`}>See statewide fire page</a></div>
   </article>
 
-  <article class="alert-card">
+  <article class="alert-card" id="prescribed-burns">
     <h3>Prescribed burns <span class="chip neutral">{burns.length ? burns.length : 'None'}</span></h3>
     {burns.length === 0 ? <p class="quiet">No prescribed burns reported.</p> : burns.length > 4
       ? <details><summary>Show all {burns.length}</summary><ul>{burns.map((f) => <li>{f.name}: {f.acres ?? '?'} acres{f.county && `, ${f.county} County`}</li>)}</ul></details>
       : <ul>{burns.map((f) => <li>{f.name}: {f.acres ?? '?'} acres{f.county && `, ${f.county} County`}</li>)}</ul>}
     {forestFire.length > 0 && <p class="quiet fire-links">Burn plans and local fire info: {forestFire.map((l, k) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{k < forestFire.length - 1 ? ' · ' : ''}</>)}</p>}
-    <div class="src">NIFC</div>
+    <div class="src src-row"><span>NIFC</span><a href={`/fire/#fire-${id}`}>See statewide fire page</a></div>
   </article>
   <p class="quiet">Conditions change fast and data can be late. Check <a href="https://www.weather.gov/" target="_blank" rel="noopener noreferrer">weather.gov</a> and <a href={IDAHO511} target="_blank" rel="noopener noreferrer">511.idaho.gov</a> before you go.</p>
 </section>

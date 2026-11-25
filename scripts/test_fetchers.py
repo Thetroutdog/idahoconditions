@@ -152,3 +152,43 @@ _late = bc.build({"r2r": _p}, _n + dt.timedelta(hours=100))
 assert _late["regions"]["southwest"]["local"]["r2r"]["stale"], "build re-checks staleness from asOf"
 assert "r2r" not in bc.build({}, _n)["sources"] and bc.build({}, _n)["regions"]["southwest"]["local"] == {}, "the build works with the part missing"
 print("r2r trail status tests ok")
+
+# ---- AirNow forecasts (fetch_airnow_forecast.py). The sample lines are SYNTHETIC, written from AirNow's file documentation; the real file
+# ---- is checked by running the fetcher once on a real machine (it prints what it found).
+import fetch_airnow_forecast as af
+_ln = lambda date, typ, area, st, lat, lon, par, aqi, cat, action="No", disc="", prim="Y", issue="11/25/26": "|".join([issue, date, "", "MST", "0", typ, prim, area, st, f"{lat:.4f}", f"{lon:.4f}", par, "" if aqi is None else str(aqi), str(cat), action, disc, "Idaho Department of Environmental Quality"])
+_air = "\n".join([
+    _ln("11/25/26", "O", "Boise", "ID", 43.6, -116.2, "PM2.5", 52, 2),                                   # observed: ignored
+    _ln("11/25/26", "F", "Boise", "ID", 43.6, -116.2, "PM2.5", 60, 2, "", "Stagnant air builds under an inversion."),
+    _ln("11/26/26", "F", "Boise", "ID", 43.6, -116.2, "PM2.5", 118, 3, "Yes", ""),
+    _ln("11/26/26", "F", "Boise", "ID", 43.6, -116.2, "O3", 30, 1, "", "", "N"),                         # a lesser pollutant the same day: the worse one wins
+    _ln("11/27/26", "F", "Boise", "ID", 43.6, -116.2, "PM2.5", None, "Moderate"),                         # category only, empty AQI
+    _ln("11/25/26", "F", "Coeur d'Alene", "ID", 47.68, -116.78, "PM2.5", 38, "Good", "No", "Fog and rain.", issue="11/24/26"),
+    _ln("11/25/26", "F", "Spokane", "WA", 47.66, -117.4, "PM2.5", 80, 2),                                 # not Idaho: ignored
+    "garbage line", ""])
+_rows = af.parse(_air)
+assert {r["area"] for r in _rows} == {"Boise", "Coeur d'Alene"} and all(r["date"].startswith("2026-11-") for r in _rows), _rows
+_o = af.build_regions(_rows)
+_b = _o["southwest"]["airForecast"]["areas"][0]
+assert _b["name"] == "Boise" and _b["issued"] == "2026-11-25" and _o["panhandle"]["airForecast"]["areas"][0]["issued"] == "2026-11-24" and [d["cat"] for d in _b["days"]] == [2, 3, 2], _b
+assert _b["days"][1]["actionDay"] is True and _b["days"][1]["pollutant"] == "PM2.5" and _b["days"][1]["aqi"] == 118 and _b["actionDay"] is True, _b
+assert _b["days"][2]["aqi"] is None and _b["days"][2]["category"] == "Moderate", "category-only forecast keeps its category"
+assert _b["discussion"].startswith("Stagnant air") and _o["panhandle"]["airForecast"]["areas"][0]["days"][0]["cat"] == 1, _o
+assert _o["panhandle"]["airForecast"]["areas"][0]["actionDay"] is False, '"No" is not an Action Day'
+for bad in ("", "just some text\nwith no pipes", _ln("11/25/26", "O", "Boise", "ID", 43.6, -116.2, "PM2.5", 52, 2)):
+    try:
+        af.parse(bad); raise SystemExit("an unrecognised or Idaho-forecast-free file should raise")
+    except RuntimeError:
+        pass
+af.http_text = lambda url, timeout=60: _air
+_pa = c.run_part("airnow_forecast", af.fetch)
+assert _pa["ok"] and "southwest" in _pa["regions"], _pa
+_nw = {"source": "nws", "ok": True, "fetchedAt": _n.isoformat(), "error": None, "forecast": {}, "alerts": {}}
+_bb = bc.build({"nws": _nw, "airnow_forecast": _pa}, dt.datetime(2026, 11, 26, 19, 0, tzinfo=dt.timezone.utc))
+assert [d["date"] for d in _bb["regions"]["southwest"]["airForecast"]["areas"][0]["days"]] == ["2026-11-26", "2026-11-27"], "today's and later days remain"
+assert _bb["sources"]["airnow_forecast"]["ok"] and _bb["regions"]["southwest"]["level"] == bc.build({"nws": _nw}, _n)["regions"]["southwest"]["level"], "Action Day never changes the level"
+af.http_text = lambda url, timeout=60: (_ for _ in ()).throw(OSError("down"))
+_pf = c.run_part("airnow_forecast", af.fetch)
+assert not _pf["ok"] and "southwest" in _pf["regions"], "a failed fetch keeps the last forecast"
+assert bc.build({}, _n)["regions"]["southwest"]["airForecast"] is None, "the build works with the part missing"
+print("air forecast tests ok")

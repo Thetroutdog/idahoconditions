@@ -166,7 +166,26 @@ if _r2r and not _r2r.get('stale') and _r2r.get('verdict') and _r2r.get('verdict'
         _bb=_r2r.get('bestBets') or []
         _best=(" and ".join([", ".join(_bb[:-1]),_bb[-1]]) if len(_bb)>1 else _bb[0]) if _bb else None
         foot=f"**Foothills trails:** {_r2r['verdict'].lower()}"+(f"; best bets are {_best}" if _best else "; stay off muddy trails")+f". Trail conditions: [City of Boise / Ridge to Rivers]({_r2r.get('url','https://www.ridgetorivers.org/condition-reports/')})."
-while dated_lines and words(' '.join(wk+([foot] if foot else [])+dated_lines))>BUDGET['weekend'][1]: dated_lines.pop()
+# Air quality forecast (Idaho DEQ via AirNow): one line, and only when there is something to flag. The bar is deliberately high: an agency-flagged
+# Action Day, or a forecast day at Unhealthy for Sensitive Groups or worse, from today through the next 4 days. Good and Moderate days never appear.
+air=None
+_ah=[]
+for _r in d['regions'].values():
+    for _a in ((_r.get('airForecast') or {}).get('areas') or []):
+        _ds=[x for x in _a.get('days',[]) if gen.date()<=dt.date.fromisoformat(x['date'])<=gen.date()+dt.timedelta(days=4)]
+        _bad=[x for x in _ds if (x.get('cat') or 0)>=3]; _act=[x for x in _ds if x.get('actionDay')]
+        if _bad or _act: _ah.append((-max([x['cat'] for x in _bad] or [0]),min(x['date'] for x in _bad+_act),_a['name'],_bad,_act))
+def _dn(xs): return " and ".join([", ".join(dt.date.fromisoformat(x['date']).strftime('%a') for x in xs[:-1]),dt.date.fromisoformat(xs[-1]['date']).strftime('%a')]) if len(xs)>1 else dt.date.fromisoformat(xs[0]['date']).strftime('%a')
+if _ah:
+    _parts=[]
+    for _w,_f,_nm,_bad,_act in sorted(_ah)[:2]:
+        if _bad:
+            _top=max(_bad,key=lambda x:x['cat'])['category']
+            _parts.append(f"{_nm} is forecast {_top} {_dn(_bad)}"+(f" (air quality action day {_dn(_act)})" if _act else ""))
+        else: _parts.append(f"{_nm} has an air quality action day {_dn(_act)}")
+    air="**Air quality:** "+"; ".join(_parts)+". Forecast by Idaho DEQ via [AirNow](https://www.airnow.gov/), preliminary."
+extra=[x for x in (foot,air) if x]
+while dated_lines and words(' '.join(wk+extra+dated_lines))>BUDGET['weekend'][1]: dated_lines.pop()
 # ---------- Bottom line ----------
 best=bb['best']
 bw=[]
@@ -254,7 +273,7 @@ SUBJECT,PRE=SUBJECTS[0],PREVIEWS[0]
 FAKE="DEMO: \"last week\" is a FAKE snapshot made up to show the weekly diff." if lastfake else None
 open(os.path.join(OUTDIR,'brief-titles.txt'),'w').write("TITLE (subject) options. Paste one into beehiiv's title field:\n"+''.join(f"  {i}. {s}\n" for i,s in enumerate(SUBJECTS,1))+
     "\nSUBTITLE (preview) options. Paste one into beehiiv's subtitle field:\n"+''.join(f"  {i}. {s}\n" for i,s in enumerate(PREVIEWS,1)))
-CONTENT={"bottom":bottom,"editor":[x.strip() for x in EN.splitlines() if x.strip()],"changed":changed,"weekend":wk+([foot] if foot else [])+(["**Coming up:**"]+dated_lines if dated_lines else []),"normal":normal,"onemore":OMT,"avalanche":[aval] if aval else [],"links":[rl],"sources":[footer]}
+CONTENT={"bottom":bottom,"editor":[x.strip() for x in EN.splitlines() if x.strip()],"changed":changed,"weekend":wk+extra+(["**Coming up:**"]+dated_lines if dated_lines else []),"normal":normal,"onemore":OMT,"avalanche":[aval] if aval else [],"links":[rl],"sources":[footer]}
 BULLETS={"changed","weekend","normal"}
 QUOTED={"bottom","editor","onemore"}   # beehiiv renders a <blockquote> in its quote style: the stand-in for the mock's dark and dashed boxes
 # ---------- Markdown (body only: no masthead, dateline or footer; beehiiv's template has those) ----------
@@ -265,7 +284,7 @@ for i,sec in enumerate(shown):
     if sec=='links' and BACK: m+=[BACK,""]
     if i: m+=["---",""]   # a divider between sections, not before the first or after the last
     m+=[f"## {TITLES[sec]}",""]
-    if sec=='weekend': m+=[f"- {x}" for x in wk]+[""]+([foot,""] if foot else [])+(["**Coming up:**","",*[f"- {x}" for x in dated_lines],""] if dated_lines else [])
+    if sec=='weekend': m+=[f"- {x}" for x in wk]+[""]+[y for x in extra for y in (x,"")]+(["**Coming up:**","",*[f"- {x}" for x in dated_lines],""] if dated_lines else [])
     elif sec in ('changed','normal') and not NOBASE: m+=[f"- {x}" for x in items]+[""]
     elif sec in QUOTED: m+=[y for x in items for y in (f"> {x}",">")][:-1]+[""]
     else: m+=[y for x in items for y in (x,"")]
@@ -279,7 +298,7 @@ for i,sec in enumerate(shown):
     if sec=='links' and BACK: h.append(f'<p>{md2html_plain(BACK)}</p>')
     if i: h.append('<hr>')
     h.append(f'<h2>{html.escape(TITLES[sec])}</h2>')
-    if sec=='weekend': h.append(ul(wk)+(f'\n<p>{md2html_plain(foot)}</p>' if foot else '')+(('\n<p><strong>Coming up:</strong></p>\n'+ul(dated_lines)) if dated_lines else ''))
+    if sec=='weekend': h.append(ul(wk)+''.join(f'\n<p>{md2html_plain(x)}</p>' for x in extra)+(('\n<p><strong>Coming up:</strong></p>\n'+ul(dated_lines)) if dated_lines else ''))
     elif sec in ('changed','normal') and not NOBASE: h.append(ul(items))
     elif sec in QUOTED: h.append('<blockquote>\n'+'\n'.join(f'<p>{md2html_plain(x)}</p>' for x in items)+'\n</blockquote>')
     else: h+= [f'<p>{md2html_plain(x)}</p>' for x in items]

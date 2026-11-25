@@ -4,16 +4,17 @@
 import PageHero from './PageHero.astro';
 import AqiValue from './AqiValue.astro';
 import UnplacedItems from './UnplacedItems.astro';
+import AirForecast from './AirForecast.astro';
 import { conditions, regionIds, fmtTime } from '../lib/conditions.js';
 import { statewide } from '../lib/statewide.js';
-import { roadInfo, fireLinks, forestFireLinks, alertHref, alertGist, IDAHO511 } from '../lib/regionview.js';
+import { airForecastView, roadInfo, fireLinks, forestFireLinks, alertHref, alertGist, IDAHO511 } from '../lib/regionview.js';
 import { NOTES } from '../lib/site.js';
 const { topic } = Astro.props;
 const sw = statewide();
 const META = {
   weather: { name: 'Weather alerts', lede: 'Every active National Weather Service alert in Idaho, by region.', src: 'National Weather Service', crumb: 'Weather alerts' },
   roads: { name: 'Roads and passes', lede: 'Highway closures, winter road conditions and mountain passes across Idaho, by region.', src: 'Idaho 511', crumb: 'Roads' },
-  air: { name: 'Air quality', lede: 'Current air quality readings across Idaho, worst first within each region.', src: 'AirNow (preliminary)', crumb: 'Air quality' },
+  air: { name: 'Air quality', lede: 'Current air quality readings across Idaho, worst first within each region, plus the air agencies\' forecasts where they publish one.', src: 'AirNow (preliminary). Forecasts: Idaho DEQ and other air agencies, via AirNow', crumb: 'Air quality' },
   fire: { name: 'Fire activity', lede: 'Wildfires and prescribed burns reported in Idaho, by region.', src: 'NIFC', crumb: 'Fire' },
 };
 const m = META[topic];
@@ -49,20 +50,21 @@ const blocks = regionIds.map((id) => {
   return b;
 });
 const total = blocks.reduce((n, b) => n + b.items.length, 0);
+const forecastRegions = topic === 'air' ? regionIds.filter((id) => airForecastView(conditions.regions[id])).length : 0;
 const empty = { weather: 'No active National Weather Service alerts in any region.', roads: 'No highway closures or winter road conditions reported in any region.', air: 'No fresh air-quality readings.', fire: 'No wildfires or prescribed burns reported.' }[topic];
 ---
 <main>
   <div class="wrap">
     <nav class="crumb" aria-label="Breadcrumb"><a href="/">Idaho</a><span aria-hidden="true"> / </span><strong style="color:var(--ink);font-weight:600">{m.crumb}</strong></nav>
-    <PageHero title={`Idaho ${m.name.toLowerCase()}.`} lede={m.lede} updated={updated} meta={[total ? `${total} item${total === 1 ? '' : 's'} statewide` : 'Nothing reported']} />
+    <PageHero title={`Idaho ${m.name.toLowerCase()}.`} lede={m.lede} updated={updated} meta={[total ? `${total} item${total === 1 ? '' : 's'} statewide` : forecastRegions ? 'Forecasts only' : 'Nothing reported']} />
     <p class="legal-line">{NOTES.general} <a href="/terms/">Terms</a></p>
-    {total === 0 && <div class="all-clear" style="margin-top:12px"><strong>{empty}</strong></div>}
+    {total === 0 && forecastRegions === 0 && <div class="all-clear" style="margin-top:12px"><strong>{empty}</strong></div>}
     <UnplacedItems items={sw.unplaced[topic]} />
     {topic === 'roads' && <p class="quiet" style="margin:10px 0 0">Passes and roads listed here have a reported snow, ice or closure condition. For the live map, cameras and every pass, open <a href={IDAHO511} target="_blank" rel="noopener noreferrer">Idaho 511</a>.</p>}
     {topic === 'fire' && <p class="quiet" style="margin:10px 0 0">More fire info: {fireLinks('none').map((l, i, a) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{i < a.length - 1 ? ' · ' : ''}</>)}</p>}
     <section class="alerts-sec" style="margin-top:14px" aria-label={`${m.name} by region`}>
       {blocks.map((b) => (
-        <article class="alert-card" {...(topic === 'weather' ? { 'data-alert-group': '' } : {})}>
+        <article class="alert-card" id={`${topic}-${b.id}`} {...(topic === 'weather' ? { 'data-alert-group': '' } : {})}>
           <h3><a href={`/${b.id}/`}>{b.name} Region</a></h3>
           {b.note && <p class="quiet">{b.note}</p>}
           {b.items.length > 0 ? (
@@ -75,7 +77,8 @@ const empty = { weather: 'No active National Weather Service alerts in any regio
                 {x.gist && <><br /><span class="quiet">{x.gist}</span></>}
               </li>
             ))}</ul>
-          ) : !b.note && <p class="quiet">None reported.</p>}
+          ) : !b.note && !(topic === 'air' && airForecastView(conditions.regions[b.id])) && <p class="quiet">None reported.</p>}
+          {topic === 'air' && <AirForecast r={conditions.regions[b.id]} />}
           {topic === 'weather' && b.items.length > 0 && <p class="quiet" data-alert-empty hidden>None reported.</p>}
           {topic === 'fire' && forestFireLinks(b.id).length > 0 && <p class="quiet fire-links">Local info: {forestFireLinks(b.id).map((l, i, a) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{i < a.length - 1 ? ' · ' : ''}</>)}</p>}
         </article>

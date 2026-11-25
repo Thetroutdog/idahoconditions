@@ -2045,7 +2045,7 @@ details.data-detail > summary { cursor: pointer; font-weight: 650; font-size: 14
 .jump-btn:hover { background: var(--pine); border-color: var(--pine); }
 .section-head.sub-lead p, .sub-cap { font-size: 16px; color: var(--ink-soft); }
 .sub-cap { margin: 10px 0 14px; }
-[id="activities"], [id="alerts"], [id="regions"] { scroll-margin-top: 70px; }
+[id="activities"], [id="alerts"], [id="regions"], .alert-card[id] { scroll-margin-top: 70px; }
 .alert-bar.green { background: #2c6a46; }
 .alert-bar.gray { background: #5d6660; }
 .fc7-detail { margin-top: 0; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
@@ -2113,3 +2113,36 @@ details.fc7-detail + details.data-detail { margin-top: 0; border-top: 0; padding
 .local-sub > summary { cursor: pointer; font-size: 13px; color: var(--pine); }
 .local-sub ul { margin: 6px 0 0; padding-left: 18px; font-size: 13px; }
 .local-src { margin: 10px 0 2px; font-size: 12px; color: var(--muted); }
+
+/* Air quality forecast (AirForecast.astro): one strip of day tiles per reporting area, number on the official AQI color */
+.air-forecast { margin: 10px 0 4px; }
+.af-area { margin: 8px 0 14px; }
+.af-head { margin: 0 0 6px; font-size: 14px; }
+.af-strip { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 6px; }
+.af-tile { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; padding: 6px 8px; background: var(--surface-2); border-radius: 8px; min-width: 0; }
+.af-tile-action { outline: 2px solid #8a5a10; outline-offset: -2px; }
+.af-name { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.af-num { display: inline-block; min-width: 2.4em; text-align: center; padding: 1px 8px; border-radius: 4px; font-weight: 650; font-size: 16px; line-height: 1.4; border: 1px solid rgba(0, 0, 0, .18); }
+.af-cat { font-size: 11px; line-height: 1.25; color: var(--ink-soft); }
+.af-flag { font-size: 10px; font-weight: 700; color: #8a5a10; }
+.af-action { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; background: var(--amber-bg); color: #8a5a10; }
+.af-note { margin: 6px 0 4px; font-size: 13px; }
+
+/* A card's source line with a link to the statewide page on the right */
+.alert-card .src-row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+
+/* Phones: all six forecast days on one line per area (fixed six columns so areas line up), smaller type; short day names; taller scroll margin under the two-row header */
+.af-short { display: none; }
+@media (max-width: 520px) {
+  .af-strip { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 4px; }
+  .af-tile { padding: 5px 3px; gap: 3px; align-items: center; text-align: center; }
+  .af-long { display: none; }
+  .af-short { display: inline; }
+  .af-name { font-size: 9px; letter-spacing: 0.04em; }
+  .af-num { min-width: 0; padding: 1px 4px; font-size: 14px; }
+  .af-cat { font-size: 9px; line-height: 1.2; overflow-wrap: normal; hyphens: none; }
+  .af-flag { font-size: 9px; }
+}
+@media (max-width: 700px) {
+  [id="activities"], [id="alerts"], [id="regions"], .alert-card[id] { scroll-margin-top: 112px; }
+}

@@ -1,0 +1,29 @@
+---
+// Air quality forecast for one region: one horizontal strip of day tiles per reporting area (same idea as the seven-day forecast), the number on EPA's
+// official AQI color with the agency's category name under it. An "Air quality action day" badge and the forecaster's discussion appear only when there is one.
+// Information only: an action day never changes the region's status.
+import { airForecastView, ACTION_DAY_LABEL, ACTION_DAY_NOTE } from '../lib/regionview.js';
+const { r } = Astro.props;
+const v = airForecastView(r, 6);
+const hasDash = !!v?.areas.some((a) => a.days.some((d) => d.aqi == null));
+---
+{v && (
+  <div class="air-forecast">
+    {v.areas.map((a) => (
+      <div class="af-area">
+        <p class="af-head"><strong>{a.name}</strong> air quality forecast{a.actionDay && <> <span class="tag af-action">{ACTION_DAY_LABEL}</span></>}</p>
+        <ol class="af-strip">{a.days.map((d) => (
+          <li class={`af-tile${d.actionDay ? ' af-tile-action' : ''}`} title={`${d.category}${d.aqi != null ? `, AQI ${d.aqi}` : ', category only'}${d.pollutant ? ` (${d.pollutant})` : ''}${d.actionDay ? '. Action day' : ''}`}>
+            <span class="af-name"><span class="af-long">{d.label}</span><span class="af-short">{d.short}</span></span>
+            <span class="af-num" style={`background:${d.bg};color:${d.fg}`}>{d.aqi != null ? d.aqi : '–'}</span>
+            <span class="af-cat">{d.category}</span>
+            {d.actionDay && <span class="af-flag">Action day</span>}
+          </li>
+        ))}</ol>
+        {a.actionDay && <p class="quiet af-note">{ACTION_DAY_NOTE}</p>}
+        {a.discussion && <details class="local-sub"><summary>Forecaster's discussion</summary><p class="quiet">{a.discussion}</p></details>}
+      </div>
+    ))}
+    <span class="note">{v.source}. Preliminary.{hasDash && ' A dash means the agency forecast only the category (Good, Moderate and so on) for that day, with no AQI number.'} <a href={v.url} target="_blank" rel="noopener noreferrer">AirNow</a></span>
+  </div>
+)}

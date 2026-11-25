@@ -100,7 +100,7 @@ const bar = regionBar ?? statewideBar();
           <div class="sources">
             {FOOTER_SOURCES.map(([k, href, name, tag]) => <a href={href} rel="noopener" class={delayed(k) ? 'delayed' : undefined}>{srcLabel(k, name, tag)}</a>)}
           </div>
-          <p class="footer-note">Air quality data are preliminary, courtesy of federal, state, local and tribal air quality agencies and the EPA AirNow program (<a href="https://www.airnow.gov/partners/" rel="noopener">partner agencies</a>). AirNow observations are preliminary and subject to change. USGS and NOAA river readings are provisional and subject to revision. Fire locations from NIFC/WFIGS are dynamic and provided as is. Road and pass information: <a href={ITD_URL} rel="noopener">{ITD_CREDIT}</a>. Always check the official source before you travel. <a href="/about/#data">About the data</a> · <a href="/terms/">Full terms</a>.</p>
+          <p class="footer-note">Air quality data and forecasts are preliminary, courtesy of federal, state, local and tribal air quality agencies and the EPA AirNow program (<a href="https://www.airnow.gov/partners/" rel="noopener">partner agencies</a>). AirNow observations and forecasts are preliminary and subject to change. USGS and NOAA river readings are provisional and subject to revision. Fire locations from NIFC/WFIGS are dynamic and provided as is. Road and pass information: <a href={ITD_URL} rel="noopener">{ITD_CREDIT}</a>. Always check the official source before you travel. <a href="/about/#data">About the data</a> · <a href="/terms/">Full terms</a>.</p>
         </div>
       </div>
     </footer>

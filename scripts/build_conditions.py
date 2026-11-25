@@ -78,7 +78,7 @@ def avalanche_links():
 def skeleton(name, tz):
     return {"name": name, "tz": tz, "level": "gray", "levelReasons": [], "summary": "", "alerts": [],
             "forecast": {"points": [], "updated": None}, "roads": {"status": "missing", "passes": [], "closures": [], "restrictions": []},
-            "snow": [], "rivers": [], "air": {"points": [], "note": None}, "fire": {"wildfires": [], "prescribed": []}, "ski": [], "avalanche": [], "local": {}}
+            "snow": [], "rivers": [], "air": {"points": [], "note": None}, "fire": {"wildfires": [], "prescribed": []}, "ski": [], "avalanche": [], "local": {}, "airForecast": None}
 
 
 def fmt_end(iso, tz):
@@ -145,6 +145,29 @@ def apply_local_freshness(region, parts, now):
         part = parts.get(key)
         if part is not None and not part.get("ok"):  # fetch failing: keep the last data, flagged so the UI says it may be old
             item["fetchFailing"] = True
+
+
+AIR_FORECAST_MAX_DAYS = 3  # about 72 h. Idaho DEQ mostly forecasts on weekdays, so a Friday forecast must still be current on Saturday and Sunday.
+
+
+def apply_air_forecast_freshness(region, now):
+    """A forecast area stays while it still covers today (in the region's time zone) and was issued no more than 3 days ago; days already past
+    are dropped. Never changes the region level: an Action Day is information, not a status."""
+    af = region.get("airForecast")
+    if not af:
+        return
+    today = now.astimezone(ZoneInfo(region["tz"])).date()
+    keep = []
+    for a in af.get("areas", []):
+        try:
+            issued = dt.date.fromisoformat(a["issued"])
+            days = [d for d in a.get("days", []) if dt.date.fromisoformat(d["date"]) >= today]
+        except (KeyError, ValueError, TypeError):
+            continue
+        if not days or (today - issued).days > AIR_FORECAST_MAX_DAYS:
+            continue
+        keep.append({**a, "days": days, "actionDay": any(d.get("actionDay") for d in days)})
+    region["airForecast"] = {**af, "areas": keep} if keep else None
 
 
 def drop_dead_closures(rd, now):
@@ -273,6 +296,7 @@ def build(parts, now, ski_status=None):
         apply_freshness(r, now)
         apply_fire_freshness(r, now)
         apply_local_freshness(r, parts, now)
+        apply_air_forecast_freshness(r, now)
         cand = []  # (rank, priority, reason, summary)
         for x in [x for x in r["alerts"] if x.get("level") and x.get("countsTowardLevel", True)] if nws_fresh else []:
             text = f"{x['event']} until {fmt_end(x['ends'], r['tz'])}"
@@ -428,6 +452,19 @@ def selftest():
     assert [c["id"] for c in cv["regions"]["upper-snake"]["avalanche"]] == ["gnfac", "btac"], cv["regions"]["upper-snake"]["avalanche"]
     assert cv["regions"]["southeast"]["avalanche"][0]["id"] == "uac_logan" and cv["regions"]["panhandle"]["avalanche"][0]["url"].startswith("https://")
     assert cv["avalanchePoints"]["island-park"] == ["gnfac"]
+    # air forecast: shown while it covers today and is at most 3 days old (Friday's forecast still serves the weekend); never moves the region level
+    day = lambda d, c, a=False: {"date": d, "aqi": 40 + 30 * c, "cat": c, "category": "x", "pollutant": "PM2.5", "actionDay": a}
+    fc = lambda issued, days: {"source": "airnow_forecast", "ok": True, "fetchedAt": fresh, "error": None, "regions": {"southwest": {"airForecast": {
+        "areas": [{"name": "Boise", "issued": issued, "days": days, "actionDay": False, "discussion": ""}], "source": "x", "url": "https://www.airnow.gov/"}}}}
+    now_sat = dt.datetime(2026, 11, 28, 19, 0, tzinfo=dt.timezone.utc)  # Saturday noon in Boise
+    cg = build({"nws": {**nws_ok, "fetchedAt": "2026-11-28T18:50:00+00:00"}, "airnow_forecast": fc("2026-11-27", [day("2026-11-27", 2), day("2026-11-28", 3, True), day("2026-11-29", 2)])}, now_sat)
+    af = cg["regions"]["southwest"]["airForecast"]
+    assert [d["date"] for d in af["areas"][0]["days"]] == ["2026-11-28", "2026-11-29"] and af["areas"][0]["actionDay"] is True, af
+    assert cg["regions"]["southwest"]["level"] != "amber" and "Action" not in cg["regions"]["southwest"]["summary"], "an Action Day must not change the region level"
+    ch = build({"nws": {**nws_ok, "fetchedAt": "2026-11-28T18:50:00+00:00"}, "airnow_forecast": fc("2026-11-24", [day("2026-11-24", 2), day("2026-11-29", 2)])}, now_sat)
+    assert ch["regions"]["southwest"]["airForecast"] is None, "issued more than 3 days ago: hidden"
+    ci = build({"nws": {**nws_ok, "fetchedAt": "2026-11-28T18:50:00+00:00"}, "airnow_forecast": fc("2026-11-27", [day("2026-11-27", 2)])}, now_sat)
+    assert ci["regions"]["southwest"]["airForecast"] is None, "no day covers today: hidden"
     ROADS_LIVE = orig_live
     print("selftest ok")
 
