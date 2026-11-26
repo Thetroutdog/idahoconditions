@@ -17,7 +17,8 @@ def daily(item, code):
 def fetch():
     find = region_finder()
     entries = [x for x in load_json("data/selected_stations.json")["snow"] if x.get("snotel")]
-    ids = sorted({x["snotel"]["id"] for x in entries})
+    peaks = load_json("data/peaks.json").get("peaks", [])  # nearby stations for each backcountry peak (not on the region Snow card)
+    ids = sorted({x["snotel"]["id"] for x in entries} | {st["id"] for pk in peaks for st in pk["stations"]})
     end = dt.date.today()
     rows = http_json(q(AWDB + "/data", stationTriplets=",".join(ids), elements="SNWD,WTEQ", duration="DAILY",
                        beginDate=(end - dt.timedelta(days=5)).isoformat(), endDate=end.isoformat(), returnFlags="false"))
@@ -57,6 +58,22 @@ def fetch():
         rid = find(sn["lon"], sn["lat"])
         if rid:
             out.setdefault(rid, {}).setdefault("snow", []).append(entry)
+    # per-peak nearby stations: out[region]["peaks"][spot id] = [station + distance/direction/feet below summit, ...]
+    for pk in peaks:
+        lst = []
+        for st in pk["stations"]:
+            it = by.get(st["id"], {})
+            d, _ = daily(it, "SNWD")
+            w, _ = daily(it, "WTEQ")
+            obs = (lambda v: f"{v['date']}T23:59:00-08:00")(d[-1]) if d else None
+            wobs = (lambda v: f"{v['date']}T23:59:00-08:00")(w[-1]) if w else None
+            change = (d[-1]["value"] - d[-2]["value"]) if len(d) >= 2 and d[-1]["date"] > d[-2]["date"] else None
+            lst.append({"id": st["id"], "name": st["name"], "elevationFt": elev.get(st["id"]) or st.get("elevationFt"),
+                        "distanceMi": st["distanceMi"], "bearing": st["bearing"], "feetBelowSummit": st["feetBelowSummit"],
+                        "depth": reading(d[-1]["value"] if d else None, "in", obs, "NRCS SNOTEL"),
+                        "swe": reading(w[-1]["value"] if w else None, "in", wobs, "NRCS SNOTEL"),
+                        "depthChange24h": reading(change, "in", obs, "NRCS SNOTEL")})
+        out.setdefault(pk["region"], {}).setdefault("peaks", {})[pk["id"]] = lst
     return out
 
 

@@ -69,6 +69,30 @@ export function hubActivities(region) {
 }
 
 // ---- Optional spot -> data source links (data/spot_sources.json). Only entries with confirmed:true are used. ----
+// data/peaks.json: backcountry peaks. Their snow figures come from nearby SNOTEL stations (conditions.regions[r].peaks[spot id]), never from the peak itself.
+const peakFacts = Object.fromEntries((readJson('peaks.json', { peaks: [] }).peaks ?? []).map((p) => [p.id, p]));
+const nf = (n) => n.toLocaleString('en-US');
+function peakView(spot, fl, o) {
+  const pk = peakFacts[spot.id];
+  const sts = conditions.regions[spot.region]?.peaks?.[spot.id] ?? [];
+  if (!pk) return null;
+  const parts = sts.map((s) => {
+    const gap = s.feetBelowSummit, rel = gap >= 0 ? `${nf(gap)} ft below summit` : `${nf(-gap)} ft above summit`;
+    const where = `Nearby station: ${s.name} SNOTEL, ${s.distanceMi} mi ${s.bearing}, ${rel}`;
+    const d = s.depth;
+    if (!d || d.value === null || d.status === 'missing') return `${where}. No current reading.`;
+    return `${where}: ${d.value} in snow depth${d.status === 'stale' ? ' (reading delayed)' : ''}${s.swe?.value != null ? `, ${s.swe.value} in water equivalent` : ''}.`;
+  });
+  const first = sts[0]?.depth;
+  const metric = first && first.value !== null && first.status !== 'missing'
+    ? { text: `${first.value} ${first.unit}`, trend: `${sts[0].name}, ${sts[0].distanceMi} mi ${sts[0].bearing}`, observedAt: first.observedAt, stale: first.status === 'stale' } : null;
+  let tail = '';
+  if (o?.elev) { const gap = pk.elevationFt - o.elev; tail = ` The NWS forecast is for a point at about ${nf(o.elev)} ft${gap > 300 ? `, ${nf(gap)} ft below the summit` : ''}, not the summit.`; }
+  const road = pk.highway ? ` Highway conditions: see Idaho 511 (${pk.highway}).` : '';
+  const text = `${parts.join(' ')}${parts.length ? ' This is not a reading on the peak.' : 'No nearby station reading yet.'}${o?.mountain && fl ? ` ${fl}` : ''}${tail}${road}${pk.avalancheNote ? ` ${pk.avalancheNote}` : ''}`; // a region-level forecast point (valley town) is never shown for a peak: only the forecast at the peak's own coordinates
+  return { metric, text, pill: { text: parts.length ? 'Nearby station' : 'Forecast only', cls: 'muted' } };
+}
+
 let sources = {};
 try { sources = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'data', 'spot_sources.json'), 'utf8')); } catch { /* optional */ }
 
@@ -119,10 +143,14 @@ export function spotView(spot, tz) {
     verdict = fl ?? `Off season in ${monthName}. Check the linked sources before planning.`;
   } else if (state === 'pre') {
     pill = { text: 'Preseason', cls: 'muted' };
-    verdict = fl ?? 'Preseason. Check the linked sources for opening dates.';
+    verdict = fl ?? (spot.activity === 'backcountry' ? 'Check the linked sources for additional information.' : 'Preseason. Check the linked sources for opening dates.');
   } else {
     if (fl) { pill = { text: 'Forecast only', cls: 'muted' }; verdict = fl; }
     else verdict = 'No live reading connected yet. Check the linked sources.';
+  }
+  if (spot.peak) {
+    const pv = peakView(spot, fl, o);
+    if (pv) { metric = pv.metric; verdict = pv.text; pill = pv.pill; }
   }
   const aw = sources[spot.id]?.confirmed === true && sources[spot.id].aw;
   const links = aw && !spot.sources.some((l) => l.url === aw) ? [...spot.sources, { label: 'AW river page', url: aw }] : spot.sources;

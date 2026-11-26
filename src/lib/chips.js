@@ -49,6 +49,7 @@ export function outlook(spot) {
     place = mountain ? shortName(spot.name) : (spot.town ?? '').split(/\s*[\/,]\s*/)[0] || shortName(spot.name);
     elev = NO_ELEV.has(spot.activity) ? null : g.elevationFt; days = gDays; periods = g.periods ?? [];
   } else {
+    if (spot.activity === 'backcountry') return null;  // a zone or area has no point of its own: the region's town forecast says nothing about the terrain, so show none
     const p = pointFor(spot, r);
     if (!p) return null;
     place = p.name; days = upcoming(p.days); periods = p.periods ?? [];

@@ -51,6 +51,7 @@ Region ids: `panhandle`, `clearwater`, `southwest`, `magic-valley`, `southeast`,
 ```
 Notes:
 - `depthChange24h` is the change in SNOTEL snow depth since the previous day (can be negative as snow settles); it is not a snowfall total.
+- `peaks` is `{spot id: [station, ...]}` for the backcountry peaks in `data/peaks.json`, written by `scripts/fetch_snotel.py`. Each station has `id`, `name`, `elevationFt`, `distanceMi`, `bearing`, `feetBelowSummit` and `depth`, `swe`, `depthChange24h` readings. These are nearby SNOTEL sites, not readings on the peak, and are kept off the region Snow card.
 - `snow`, `rivers` and `air.points` list only items chosen in `data/selected_stations.json` and `data/region_points.json`.
 - `fire.wildfires` and `fire.prescribed` are separate lists (design decision: show prescribed burns as their own line).
 - `avalanche` lists the avalanche centers whose forecasts cover the region (`id`, `name`, `url`, `area`), from `data/avalanche_centers.json` (static links, edited by hand; Grok confirmed the eastern Idaho cross-border centers). Top-level `avalanchePoints` maps a forecast point id (e.g. `island-park`) to center ids that override the region list for that town.

@@ -1,0 +1,363 @@
+{
+ "_note": "Backcountry peaks shown on the backcountry pages. Station values are NEARBY SNOTEL sites, never readings on the peak. Edit here, then keep the matching entry in spots_extra.json (peak: true) and spot_coords_manual.json in step. Elevations and coordinates still need USGS GNIS/NGS verification (verifiedWithGnis).",
+ "tierRules": {
+  "A": "nearest SNOTEL within 15 mi and within 2,500 ft of summit elevation",
+  "B": "within 30 mi",
+  "C": "none"
+ },
+ "peaks": [
+  {
+   "id": "southwest-pilot-peak",
+   "name": "Pilot Peak",
+   "region": "southwest",
+   "tier": "A",
+   "elevationFt": 8128,
+   "lat": 43.9605342,
+   "lon": -115.6870255,
+   "elevationSource": "USGS map via Idaho Climbing Guide (LiDAR 8,135)",
+   "coordSource": "map check, 2026-11-26",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Banner Summit zone (Sawtooth Avalanche Center): nearest zone, covers conditions farther east near Lowman; no center forecasts Mores Creek itself",
+    "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/banner-summit"
+   },
+   "stations": [
+    {
+     "id": "637:ID:SNTL",
+     "name": "Mores Creek Summit",
+     "elevationFt": 6090,
+     "distanceMi": 2.2,
+     "bearing": "SSE",
+     "feetBelowSummit": 2038
+    }
+   ],
+   "highway": "SH 21",
+   "avalancheNote": "No avalanche center forecasts Mores Creek. The nearest zone forecast is Sawtooth Avalanche Center's Banner Summit zone, farther east near Lowman."
+  },
+  {
+   "id": "southwest-freeman-peak",
+   "name": "Freeman Peak",
+   "region": "southwest",
+   "tier": "A",
+   "elevationFt": 8111,
+   "lat": 43.95128,
+   "lon": -115.70789,
+   "elevationSource": "Idaho Climbing Guide (TopoZone approx 8,094)",
+   "coordSource": "TopoZone",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Banner Summit zone (Sawtooth Avalanche Center): nearest zone, covers conditions farther east near Lowman; no center forecasts Mores Creek itself",
+    "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/banner-summit"
+   },
+   "stations": [
+    {
+     "id": "637:ID:SNTL",
+     "name": "Mores Creek Summit",
+     "elevationFt": 6090,
+     "distanceMi": 2.5,
+     "bearing": "ESE",
+     "feetBelowSummit": 2021
+    }
+   ],
+   "highway": "SH 21",
+   "avalancheNote": "No avalanche center forecasts Mores Creek. The nearest zone forecast is Sawtooth Avalanche Center's Banner Summit zone, farther east near Lowman."
+  },
+  {
+   "id": "southwest-sunset-mountain",
+   "name": "Sunset Mountain",
+   "region": "southwest",
+   "tier": "A",
+   "elevationFt": 7869,
+   "lat": 43.8987,
+   "lon": -115.647,
+   "elevationSource": "SummitPost / Idaho Climbing Guide",
+   "coordSource": "SummitPost",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Banner Summit zone (Sawtooth Avalanche Center): nearest zone, covers conditions farther east near Lowman; no center forecasts Mores Creek itself",
+    "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/banner-summit"
+   },
+   "stations": [
+    {
+     "id": "637:ID:SNTL",
+     "name": "Mores Creek Summit",
+     "elevationFt": 6090,
+     "distanceMi": 2.5,
+     "bearing": "NNW",
+     "feetBelowSummit": 1779
+    }
+   ],
+   "highway": "SH 21",
+   "avalancheNote": "No avalanche center forecasts Mores Creek. The nearest zone forecast is Sawtooth Avalanche Center's Banner Summit zone, farther east near Lowman."
+  },
+  {
+   "id": "southwest-beaverdam-peak",
+   "name": "Beaverdam Peak",
+   "region": "southwest",
+   "tier": "A",
+   "elevationFt": 8579,
+   "lat": 45.0278137,
+   "lon": -115.9657399,
+   "elevationSource": "GNIS/topo (ListsOfJohn lists 8,653)",
+   "coordSource": "map check, 2026-11-26",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Salmon River Mountains zone (Payette Avalanche Center)",
+    "url": "https://payetteavalanche.org/forecasts/avalanche/salmon-river-mountains"
+   },
+   "stations": [
+    {
+     "id": "370:ID:SNTL",
+     "name": "Brundage Reservoir",
+     "elevationFt": 6280,
+     "distanceMi": 8.2,
+     "bearing": "W",
+     "feetBelowSummit": 2299
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-titus-peak",
+   "name": "Titus Peak",
+   "region": "magic-valley",
+   "tier": "A",
+   "elevationFt": 10116,
+   "lat": 43.83641,
+   "lon": -114.7113,
+   "elevationSource": "ListsOfJohn LiDAR (map 10,110)",
+   "coordSource": "ListsOfJohn / Wikipedia",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Galena Summit & Eastern Mtns zone (Sawtooth Avalanche Center)",
+    "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/galena-summit-&-eastern-mtns"
+   },
+   "stations": [
+    {
+     "id": "490:ID:SNTL",
+     "name": "Galena Summit",
+     "elevationFt": 8790,
+     "distanceMi": 2.7,
+     "bearing": "N",
+     "feetBelowSummit": 1326
+    }
+   ],
+   "highway": "SH 75"
+  },
+  {
+   "id": "magic-valley-lower-titus-peak",
+   "name": "Lower Titus Peak",
+   "region": "magic-valley",
+   "tier": "A",
+   "elevationFt": 10005,
+   "lat": 43.844,
+   "lon": -114.7176,
+   "elevationSource": "Wikipedia",
+   "coordSource": "Wikipedia",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Galena Summit & Eastern Mtns zone (Sawtooth Avalanche Center)",
+    "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/galena-summit-&-eastern-mtns"
+   },
+   "stations": [
+    {
+     "id": "490:ID:SNTL",
+     "name": "Galena Summit",
+     "elevationFt": 8790,
+     "distanceMi": 2.1,
+     "bearing": "N",
+     "feetBelowSummit": 1215
+    }
+   ],
+   "highway": "SH 75"
+  },
+  {
+   "id": "magic-valley-bromaghin-peak",
+   "name": "Bromaghin Peak",
+   "region": "magic-valley",
+   "tier": "A",
+   "elevationFt": 10233,
+   "lat": 43.831172,
+   "lon": -114.7192753,
+   "elevationSource": "ListsOfJohn LiDAR (map 10,225)",
+   "coordSource": "map check, 2026-11-26",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Galena Summit & Eastern Mtns zone (Sawtooth Avalanche Center)",
+    "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/galena-summit-&-eastern-mtns"
+   },
+   "stations": [
+    {
+     "id": "490:ID:SNTL",
+     "name": "Galena Summit",
+     "elevationFt": 8790,
+     "distanceMi": 3.1,
+     "bearing": "N",
+     "feetBelowSummit": 1443
+    }
+   ],
+   "highway": "SH 75"
+  },
+  {
+   "id": "panhandle-stevens-peak",
+   "name": "Stevens Peak",
+   "region": "panhandle",
+   "tier": "A",
+   "elevationFt": 6838,
+   "lat": 47.4256019,
+   "lon": -115.7723875,
+   "elevationSource": "SummitPost (TopoZone 6,788)",
+   "coordSource": "map check, 2026-11-26",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Silver Valley & Bitterroot Mountains zone (Idaho Panhandle Avalanche Center)",
+    "url": "https://www.idahopanhandleavalanche.org/forecasts/#/silver-valley-&-bitterroot-mountains/"
+   },
+   "stations": [
+    {
+     "id": "594:ID:SNTL",
+     "name": "Lookout",
+     "elevationFt": 5180,
+     "distanceMi": 3.9,
+     "bearing": "NE",
+     "feetBelowSummit": 1658
+    }
+   ]
+  },
+  {
+   "id": "salmon-thompson-peak",
+   "name": "Thompson Peak",
+   "region": "salmon",
+   "tier": "B",
+   "elevationFt": 10751,
+   "lat": 44.1420331,
+   "lon": -115.0100426,
+   "elevationSource": "NGS datasheet via Wikipedia",
+   "coordSource": "map check, 2026-11-26",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Sawtooth & Western Smoky Mtns zone (Sawtooth Avalanche Center)",
+    "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/sawtooth-&-western-smoky-mtns"
+   },
+   "stations": [
+    {
+     "id": "312:ID:SNTL",
+     "name": "Banner Summit",
+     "elevationFt": 7040,
+     "distanceMi": 15.8,
+     "bearing": "NW",
+     "feetBelowSummit": 3711
+    },
+    {
+     "id": "845:ID:SNTL",
+     "name": "Vienna Mine",
+     "elevationFt": 8930,
+     "distanceMi": 24.9,
+     "bearing": "SSE",
+     "feetBelowSummit": 1821
+    }
+   ]
+  },
+  {
+   "id": "salmon-williams-peak",
+   "name": "Williams Peak",
+   "region": "salmon",
+   "tier": "B",
+   "elevationFt": 10636,
+   "lat": 44.1524,
+   "lon": -115.0059,
+   "elevationSource": "Wikipedia (10,635 in one version)",
+   "coordSource": "TopoZone (Idaho Climbing Guide longitude -115.05751 looks like a typo, about 2.5 mi off)",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Sawtooth & Western Smoky Mtns zone (Sawtooth Avalanche Center)",
+    "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/sawtooth-&-western-smoky-mtns"
+   },
+   "stations": [
+    {
+     "id": "312:ID:SNTL",
+     "name": "Banner Summit",
+     "elevationFt": 7040,
+     "distanceMi": 15.4,
+     "bearing": "NW",
+     "feetBelowSummit": 3596
+    },
+    {
+     "id": "845:ID:SNTL",
+     "name": "Vienna Mine",
+     "elevationFt": 8930,
+     "distanceMi": 25.6,
+     "bearing": "SSE",
+     "feetBelowSummit": 1706
+    }
+   ]
+  },
+  {
+   "id": "salmon-mcgowan-peak",
+   "name": "McGowan Peak",
+   "region": "salmon",
+   "tier": "B",
+   "elevationFt": 9860,
+   "lat": 44.21324,
+   "lon": -115.08092,
+   "elevationSource": "Wikipedia",
+   "coordSource": "Wikipedia",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Sawtooth & Western Smoky Mtns zone (Sawtooth Avalanche Center)",
+    "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/sawtooth-&-western-smoky-mtns"
+   },
+   "stations": [
+    {
+     "id": "312:ID:SNTL",
+     "name": "Banner Summit",
+     "elevationFt": 7040,
+     "distanceMi": 9.8,
+     "bearing": "NW",
+     "feetBelowSummit": 2820
+    },
+    {
+     "id": "490:ID:SNTL",
+     "name": "Galena Summit",
+     "elevationFt": 8790,
+     "distanceMi": 29.6,
+     "bearing": "SE",
+     "feetBelowSummit": 1070
+    }
+   ]
+  },
+  {
+   "id": "salmon-mount-heyburn",
+   "name": "Mount Heyburn",
+   "region": "salmon",
+   "tier": "B",
+   "elevationFt": 10229,
+   "lat": 44.1011403,
+   "lon": -114.9762176,
+   "elevationSource": "Wikipedia",
+   "coordSource": "map check, 2026-11-26",
+   "verifiedWithGnis": false,
+   "avalancheZone": {
+    "name": "Sawtooth & Western Smoky Mtns zone (Sawtooth Avalanche Center)",
+    "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/sawtooth-&-western-smoky-mtns"
+   },
+   "stations": [
+    {
+     "id": "496:ID:SNTL",
+     "name": "Graham Guard Sta.",
+     "elevationFt": 5690,
+     "distanceMi": 18.1,
+     "bearing": "SW",
+     "feetBelowSummit": 4539
+    },
+    {
+     "id": "845:ID:SNTL",
+     "name": "Vienna Mine",
+     "elevationFt": 8930,
+     "distanceMi": 21.7,
+     "bearing": "SSE",
+     "feetBelowSummit": 1299
+    }
+   ]
+  }
+ ]
+}

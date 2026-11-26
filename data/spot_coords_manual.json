@@ -178,5 +178,65 @@
   "lat": 43.77063,
   "lon": -116.09089,
   "note": "Bogus Basin recreation area (mid-basin, about 7,300 ft terrain); same NWS forecast cell, about 6,540 ft, as the Nordic lodge at the base; the geocoded point was Boise town"
+ },
+ "southwest-pilot-peak": {
+  "lat": 43.9605342,
+  "lon": -115.6870255,
+  "note": "backcountry peak summit (checked on a map by hand, Nov 26)"
+ },
+ "southwest-freeman-peak": {
+  "lat": 43.95128,
+  "lon": -115.70789,
+  "note": "backcountry peak summit (TopoZone); verify against USGS GNIS before launch"
+ },
+ "southwest-sunset-mountain": {
+  "lat": 43.8987,
+  "lon": -115.647,
+  "note": "backcountry peak summit (SummitPost); verify against USGS GNIS before launch"
+ },
+ "southwest-beaverdam-peak": {
+  "lat": 45.0278137,
+  "lon": -115.9657399,
+  "note": "backcountry peak summit (checked on a map by hand, Nov 26)"
+ },
+ "magic-valley-titus-peak": {
+  "lat": 43.83641,
+  "lon": -114.7113,
+  "note": "backcountry peak summit (ListsOfJohn / Wikipedia); verify against USGS GNIS before launch"
+ },
+ "magic-valley-lower-titus-peak": {
+  "lat": 43.844,
+  "lon": -114.7176,
+  "note": "backcountry peak summit (Wikipedia); verify against USGS GNIS before launch"
+ },
+ "magic-valley-bromaghin-peak": {
+  "lat": 43.831172,
+  "lon": -114.7192753,
+  "note": "backcountry peak summit (checked on a map by hand, Nov 26)"
+ },
+ "panhandle-stevens-peak": {
+  "lat": 47.4256019,
+  "lon": -115.7723875,
+  "note": "backcountry peak summit (checked on a map by hand, Nov 26)"
+ },
+ "salmon-thompson-peak": {
+  "lat": 44.1420331,
+  "lon": -115.0100426,
+  "note": "backcountry peak summit (checked on a map by hand, Nov 26)"
+ },
+ "salmon-williams-peak": {
+  "lat": 44.1524,
+  "lon": -115.0059,
+  "note": "backcountry peak summit (TopoZone (Idaho Climbing Guide longitude -115.05751 looks like a typo, about 2.5 mi off)); verify against USGS GNIS before launch"
+ },
+ "salmon-mcgowan-peak": {
+  "lat": 44.21324,
+  "lon": -115.08092,
+  "note": "backcountry peak summit (Wikipedia); verify against USGS GNIS before launch"
+ },
+ "salmon-mount-heyburn": {
+  "lat": 44.1011403,
+  "lon": -114.9762176,
+  "note": "backcountry peak summit (checked on a map by hand, Nov 26)"
  }
 }

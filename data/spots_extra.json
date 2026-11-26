@@ -2157,6 +2157,246 @@
      "url": "https://bcrd.org/wintertrailink/"
     }
    ]
+  },
+  {
+   "id": "southwest-pilot-peak",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Pilot Peak",
+   "desc": "Mores Creek Summit backcountry, 8,128 ft",
+   "town": "Idaho City / Boise Basin",
+   "sources": [
+    {
+     "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/banner-summit",
+     "label": "Banner Summit zone (nearest)"
+    },
+    {
+     "url": "https://avalanche.org/",
+     "label": "avalanche.org"
+    }
+   ],
+   "peak": true
+  },
+  {
+   "id": "southwest-freeman-peak",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Freeman Peak",
+   "desc": "Mores Creek Summit backcountry, 8,111 ft",
+   "town": "Idaho City / Boise Basin",
+   "sources": [
+    {
+     "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/banner-summit",
+     "label": "Banner Summit zone (nearest)"
+    },
+    {
+     "url": "https://avalanche.org/",
+     "label": "avalanche.org"
+    }
+   ],
+   "peak": true
+  },
+  {
+   "id": "southwest-sunset-mountain",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Sunset Mountain",
+   "desc": "Mores Creek Summit backcountry, 7,869 ft",
+   "town": "Idaho City / Boise Basin",
+   "sources": [
+    {
+     "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/banner-summit",
+     "label": "Banner Summit zone (nearest)"
+    },
+    {
+     "url": "https://avalanche.org/",
+     "label": "avalanche.org"
+    }
+   ],
+   "peak": true
+  },
+  {
+   "id": "southwest-beaverdam-peak",
+   "region": "southwest",
+   "region_name": "Southwest",
+   "region_code": "SW",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Beaverdam Peak",
+   "desc": "Lick Creek backcountry, Payette NF, 8,579 ft",
+   "town": "McCall",
+   "sources": [
+    {
+     "url": "https://payetteavalanche.org/forecasts/avalanche/salmon-river-mountains",
+     "label": "Avalanche forecast"
+    }
+   ],
+   "peak": true
+  },
+  {
+   "id": "magic-valley-titus-peak",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Titus Peak",
+   "desc": "Galena Summit area, 10,116 ft",
+   "town": "Ketchum / Sun Valley",
+   "sources": [
+    {
+     "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/galena-summit-&-eastern-mtns",
+     "label": "Avalanche forecast"
+    }
+   ],
+   "peak": true
+  },
+  {
+   "id": "magic-valley-lower-titus-peak",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Lower Titus Peak",
+   "desc": "Galena Summit area, 10,005 ft",
+   "town": "Ketchum / Sun Valley",
+   "sources": [
+    {
+     "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/galena-summit-&-eastern-mtns",
+     "label": "Avalanche forecast"
+    }
+   ],
+   "peak": true
+  },
+  {
+   "id": "magic-valley-bromaghin-peak",
+   "region": "magic-valley",
+   "region_name": "Magic Valley",
+   "region_code": "MV",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Bromaghin Peak",
+   "desc": "Galena Summit area, 10,233 ft",
+   "town": "Ketchum / Sun Valley",
+   "sources": [
+    {
+     "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/galena-summit-&-eastern-mtns",
+     "label": "Avalanche forecast"
+    }
+   ],
+   "peak": true
+  },
+  {
+   "id": "panhandle-stevens-peak",
+   "region": "panhandle",
+   "region_name": "Panhandle",
+   "region_code": "PH",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Stevens Peak",
+   "desc": "Lookout Pass area, Bitterroots, 6,838 ft",
+   "town": "Wallace / Mullan",
+   "sources": [
+    {
+     "url": "https://www.idahopanhandleavalanche.org/forecasts/#/silver-valley-&-bitterroot-mountains/",
+     "label": "Avalanche forecast"
+    }
+   ],
+   "peak": true
+  },
+  {
+   "id": "salmon-thompson-peak",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Thompson Peak",
+   "desc": "Sawtooth Range, access from Stanley, 10,751 ft",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/sawtooth-&-western-smoky-mtns",
+     "label": "Avalanche forecast"
+    }
+   ],
+   "peak": true
+  },
+  {
+   "id": "salmon-williams-peak",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Williams Peak",
+   "desc": "Sawtooth Range, access from Stanley, 10,636 ft",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/sawtooth-&-western-smoky-mtns",
+     "label": "Avalanche forecast"
+    }
+   ],
+   "peak": true
+  },
+  {
+   "id": "salmon-mcgowan-peak",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "McGowan Peak",
+   "desc": "Sawtooth Range, access from Stanley, 9,860 ft",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/sawtooth-&-western-smoky-mtns",
+     "label": "Avalanche forecast"
+    }
+   ],
+   "peak": true
+  },
+  {
+   "id": "salmon-mount-heyburn",
+   "region": "salmon",
+   "region_name": "Salmon",
+   "region_code": "SA",
+   "activity": "backcountry",
+   "activity_name": "Backcountry",
+   "activity_catalog": "Backcountry Skiing",
+   "name": "Mount Heyburn",
+   "desc": "Sawtooth Range, access from Stanley, 10,229 ft",
+   "town": "Stanley",
+   "sources": [
+    {
+     "url": "https://www.sawtoothavalanche.com/forecasts/avalanche/sawtooth-&-western-smoky-mtns",
+     "label": "Avalanche forecast"
+    }
+   ],
+   "peak": true
   }
  ]
 }
