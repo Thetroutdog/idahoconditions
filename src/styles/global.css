@@ -2045,7 +2045,7 @@ details.data-detail > summary { cursor: pointer; font-weight: 650; font-size: 14
 .jump-btn:hover { background: var(--pine); border-color: var(--pine); }
 .section-head.sub-lead p, .sub-cap { font-size: 16px; color: var(--ink-soft); }
 .sub-cap { margin: 10px 0 14px; }
-[id="activities"], [id="alerts"], [id="regions"], .alert-card[id] { scroll-margin-top: 70px; }
+[id="activities"], [id="alerts"], [id="regions"], .alert-card[id] { scroll-margin-top: 90px; }
 .alert-bar.green { background: #2c6a46; }
 .alert-bar.gray { background: #5d6660; }
 .fc7-detail { margin-top: 0; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
@@ -2063,7 +2063,7 @@ details.fc7-detail + details.data-detail { margin-top: 0; border-top: 0; padding
 .jump-sub { display: flex; gap: 22px; flex-wrap: wrap; justify-content: flex-end; margin: 12px 0 0; font-size: 15px; font-weight: 650; }
 .jump-sub a { color: var(--ink); text-decoration: none; }
 .jump-sub a:hover { color: var(--pine); }
-[id="forecast"], [id="readings"] { scroll-margin-top: 70px; }
+[id="forecast"], [id="readings"], .local-detail[id] { scroll-margin-top: 90px; }
 .toolbar .jump-col .jump-btns { padding-top: 22px; }
 @media (max-width: 720px) { .jump-col { width: 100%; align-items: stretch; } .jump-sub { justify-content: flex-start; margin-top: 10px; } .toolbar .jump-col .jump-btns { padding-top: 0; } }
 
@@ -2081,7 +2081,7 @@ details.fc7-detail + details.data-detail { margin-top: 0; border-top: 0; padding
 .brief-cta { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
 .brief-cta .btn { padding: 12px 20px; font-size: 15px; }
 .brief-cta noscript p, .brief-cta noscript a { color: rgba(244, 239, 228, 0.85); }
-[id="brief"] { scroll-margin-top: 70px; }
+[id="brief"] { scroll-margin-top: 90px; }
 .doc { max-width: 46em; padding: 10px 0 40px; }
 .doc h2 { font-family: var(--font-serif); font-weight: 500; font-size: 24px; margin: 28px 0 8px; color: var(--pine-deep); }
 .doc p, .doc li { color: var(--ink-soft); font-size: 16px; line-height: 1.6; }
@@ -2144,5 +2144,5 @@ details.fc7-detail + details.data-detail { margin-top: 0; border-top: 0; padding
   .af-flag { font-size: 9px; }
 }
 @media (max-width: 700px) {
-  [id="activities"], [id="alerts"], [id="regions"], .alert-card[id] { scroll-margin-top: 112px; }
+  [id="activities"], [id="alerts"], [id="regions"], [id="forecast"], [id="readings"], [id="brief"], .alert-card[id], .local-detail[id] { scroll-margin-top: 112px; }
 }
