@@ -202,19 +202,21 @@ check('r2r: no foothills line when the fixture has no trail data', 'Foothills tr
 def with_r2r(name, **kw):
     dd=json.loads(json.dumps(fx))
     base={"title":"Boise foothills trails","verdict":"Mostly muddy","tone":"amber","summary":"x","asOf":dd['generatedAt'],"stale":False,"counts":{"muddy":9,"mixed":2,"dry":3,"frozen":0,"frozen-am":0,"closed":1,"unknown":0},
-          "bestBets":["Hulls Gulch","Polecat Gulch"],"url":"https://www.ridgetorivers.org/condition-reports/"}; base.update(kw)
+          "driest":[{"name":"Hulls Gulch","dry":9},{"name":"Polecat Gulch","dry":7}],"suggestAllWeather":True,"url":"https://www.ridgetorivers.org/condition-reports/"}; base.update(kw)
     dd['regions']['southwest'].setdefault('local',{})['r2r']=base
     F=os.path.join(tmp,name+'.json'); json.dump(dd,open(F,'w'))
     o,st,r=build(name,data=F,env={'BRIEF_EDITOR_NOTE':NOTE_OK,'BRIEF_ONE_MORE_THING':OMT_OK})
     return rd(o,'brief-draft.md'),rd(o,'brief-draft.html'),st
 mdm,htm,_=with_r2r('r2rmud')
-check('r2r: muddy foothills get one linked line with the City of Boise credit, between the forecast list and Coming up', '**Foothills trails:** mostly muddy; best bets are Hulls Gulch and Polecat Gulch. Trail conditions: [City of Boise / Ridge to Rivers](https://www.ridgetorivers.org/condition-reports/).' in mdm and mdm.index('Foothills trails')<mdm.index('Coming up') and '<p><strong>Foothills trails:</strong>' in htm and mdm.count('Foothills trails')==1)
+check('r2r: muddy foothills get one linked line with the City of Boise credit, between the forecast list and Coming up', '**Foothills trails:** mostly muddy; driest areas right now are Hulls Gulch (9 dry) and Polecat Gulch (7 dry); we suggest sticking to all-weather trails or the Greenbelt. Trail conditions: [City of Boise / Ridge to Rivers](https://www.ridgetorivers.org/condition-reports/).' in mdm and mdm.index('Foothills trails')<mdm.index('Coming up') and '<p><strong>Foothills trails:</strong>' in htm and mdm.count('Foothills trails')==1)
 mdd,_,_=with_r2r('r2rdry',verdict='Mostly dry',tone='green',counts={"muddy":0,"mixed":0,"dry":40,"frozen":2,"frozen-am":0,"closed":3,"unknown":0})
 check('r2r: no foothills line when the trails are overwhelmingly dry', 'Foothills trails' not in mdd)
 mds,_,_=with_r2r('r2rstale',stale=True)
 check('r2r: no foothills line when the trail report is stale', 'Foothills trails' not in mds)
-mdn,_,_=with_r2r('r2rnobest',bestBets=[])
-check('r2r: with no best bets the line says to stay off muddy trails', 'stay off muddy trails' in mdn)
+mdn,_,_=with_r2r('r2rnobest',driest=[],suggestAllWeather=False)
+check('r2r: with no driest areas and no all-weather suggestion the line says to stay off muddy trails', 'stay off muddy trails' in mdn)
+mdw,_,_=with_r2r('r2rallweather',driest=[])
+check('r2r: a muddy day with no dry area suggests all-weather trails or the Greenbelt and names no area', 'we suggest sticking to all-weather trails or the Greenbelt' in mdw and 'driest areas' not in mdw)
 check('r2r: the foothills line does not count as a forecast line (weekend line count unchanged)', mdm.count('\n- **')>=8 and 'in eight lines' in rd(os.path.join(tmp,'r2rmud'),'brief-titles.txt'))
 
 # =========================== air quality forecast line (Idaho DEQ via AirNow) ===========================

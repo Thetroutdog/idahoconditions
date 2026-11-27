@@ -2112,6 +2112,11 @@ details.fc7-detail + details.data-detail { margin-top: 0; border-top: 0; padding
 .local-sub { margin: 8px 0; }
 .local-sub > summary { cursor: pointer; font-size: 13px; color: var(--pine); }
 .local-sub ul { margin: 6px 0 0; padding-left: 18px; font-size: 13px; }
+.local-table-wrap { overflow-x: auto; margin-top: 6px; }
+.local-table { border-collapse: collapse; font-size: 13px; min-width: 100%; }
+.local-table th, .local-table td { padding: 4px 10px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.local-table thead th { font-size: 11px; font-weight: 700; color: var(--muted); }
+.local-table th[scope="row"], .local-table thead th:first-child { text-align: left; font-weight: 500; white-space: normal; }
 .local-src { margin: 10px 0 2px; font-size: 12px; color: var(--muted); }
 
 /* Air quality forecast (AirForecast.astro): one strip of day tiles per reporting area, number on the official AQI color */

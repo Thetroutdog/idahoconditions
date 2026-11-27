@@ -163,9 +163,10 @@ _r2r=((d['regions'].get('southwest') or {}).get('local') or {}).get('r2r')
 if _r2r and not _r2r.get('stale') and _r2r.get('verdict') and _r2r.get('verdict')!='No trail reports':
     _c=_r2r.get('counts') or {}; _open=sum(_c.get(k,0) for k in ('muddy','mixed','dry','frozen','frozen-am'))
     if _open and _c.get('dry',0)/_open<0.9:
-        _bb=_r2r.get('bestBets') or []
-        _best=(" and ".join([", ".join(_bb[:-1]),_bb[-1]]) if len(_bb)>1 else _bb[0]) if _bb else None
-        foot=f"**Foothills trails:** {_r2r['verdict'].lower()}"+(f"; best bets are {_best}" if _best else "; stay off muddy trails")+f". Trail conditions: [City of Boise / Ridge to Rivers]({_r2r.get('url','https://www.ridgetorivers.org/condition-reports/')})."
+        _dr=[f"{x['name']} ({x['dry']} dry)" for x in (_r2r.get('driest') or []) if x.get('name') and x.get('dry')]
+        _best=(" and ".join([", ".join(_dr[:-1]),_dr[-1]]) if len(_dr)>1 else _dr[0]) if _dr else None
+        _tail=(f"; driest areas right now are {_best}" if _best else "")+("; we suggest sticking to all-weather trails or the Greenbelt" if _r2r.get('suggestAllWeather') else ("" if _best else "; stay off muddy trails"))
+        foot=f"**Foothills trails:** {_r2r['verdict'].lower()}{_tail}. Trail conditions: [City of Boise / Ridge to Rivers]({_r2r.get('url','https://www.ridgetorivers.org/condition-reports/')})."
 # Air quality forecast (Idaho DEQ via AirNow): one line, and only when there is something to flag. The bar is deliberately high: an agency-flagged
 # Action Day, or a forecast day at Unhealthy for Sensitive Groups or worse, from today through the next 4 days. Good and Moderate days never appear.
 air=None

@@ -16,6 +16,10 @@ PAGE_URL = "https://www.ridgetorivers.org/condition-reports/"
 MAP_URL = "https://www.ridgetorivers.org/trails/interactive-map/"
 CREDIT = "Trail conditions, text and photos: City of Boise / Ridge to Rivers"
 CODES = ("muddy", "mixed", "dry", "frozen", "frozen-am", "closed", "unknown")
+AREA_MIN_OPEN = 5      # an area needs this many open (dry/frozen/mixed/muddy) trails to be named as driest or frozen
+AREA_SHARE = 0.9       # ...and at least this share of them dry (or, for the frozen list, frozen)
+AREA_MAX_CLOSED = 0.25  # ...and less than this share of all its trails closed (a mostly closed area is not a place to go)
+MUDDY_VERDICTS = ("Mostly muddy", "Muddy in spots")
 
 
 def code_of(text):
@@ -63,7 +67,7 @@ def summarize(rs, now=None):
     if not rs:
         raise RuntimeError("R2R returned zero trail rows")
     counts = {c: 0 for c in CODES}
-    subs, closed, allw, unk, original, newest = {}, {}, [], set(), {}, 0
+    subs, closed, allw, unk, original, newest = {}, {}, [], set(), {}, 0  # allw: (trail, area) of all-weather trails still usable
     for a in rs:
         sub = (a.get("TrailSubSystem") or "").strip()
         if not sub or sub == "N/A":  # access roads and unassigned rows
@@ -85,7 +89,7 @@ def summarize(rs, now=None):
             if sub not in g["areas"]:
                 g["areas"].append(sub)
         if (a.get("AllWeather") or "").lower() == "yes" and c in ("dry", "frozen", "frozen-am", "mixed"):
-            allw.append(name)
+            allw.append((name, sub))
     if unk:
         print("R2R: unrecognized condition wording mapped to unknown:", sorted(unk))
     evald = {k: counts[k] for k in CODES if k not in ("unknown", "closed")}
@@ -103,19 +107,27 @@ def summarize(rs, now=None):
         verdict, tone = "Mostly dry", "green"
     else:
         verdict, tone = "Mixed conditions", "neutral"
-    parts = [f"{counts[k]} {k.replace('frozen-am', 'frozen early')}" for k in ("muddy", "mixed", "dry", "frozen", "frozen-am", "closed") if counts[k]]
-    ranked = []
-    for s in subs.values():
-        ok = s["dry"] + s["frozen"] + s["frozen-am"]
-        opn = ok + s["muddy"] + s["mixed"]
-        if opn >= 3 and ok / opn >= 0.75:
-            ranked.append((-ok / opn, -opn, s["name"]))
-    best = [x[2] for x in sorted(ranked)[:3]]
+    parts = [f"{counts[k]} {k.replace('frozen-am', 'frozen early').replace('unknown', 'not evaluated')}" for k in ("muddy", "mixed", "dry", "frozen", "frozen-am", "closed", "unknown") if counts[k]]
+    def opn(a):
+        return a["dry"] + a["frozen"] + a["frozen-am"] + a["mixed"] + a["muddy"]
+    def fit(a, code):  # an area worth naming: enough open trails, nearly all in `code`, and not mostly closed for the winter
+        o = opn(a)
+        return o >= AREA_MIN_OPEN and a[code] / o >= AREA_SHARE and a["closed"] / a["n"] < AREA_MAX_CLOSED
+    areas = sorted(subs.values(), key=lambda a: a["name"])
+    driest = sorted((a for a in areas if fit(a, "dry")), key=lambda a: (-a["dry"], a["name"]))[:3]
+    frozen_areas = sorted((a for a in areas if fit(a, "frozen")), key=lambda a: (-a["frozen"], a["name"]))[:3]
+    muddiest = sorted((a for a in areas if a["muddy"] >= AREA_MIN_OPEN), key=lambda a: (-a["muddy"], a["name"]))[:3]
+    closed_areas = sorted((a for a in areas if a["closed"] and a["closed"] / a["n"] >= AREA_MAX_CLOSED), key=lambda a: (-a["closed"], a["name"]))
+    aw_areas = {}
+    for _, sub in allw:
+        aw_areas[sub] = aw_areas.get(sub, 0) + 1
     as_of = iso(newest)
     stale = (not as_of) or (now - dt.datetime.fromisoformat(as_of)).total_seconds() > STALE_H * 3600
     return {"title": "Boise foothills trails", "verdict": verdict, "tone": tone, "summary": ", ".join(parts) + ".", "asOf": as_of, "stale": stale,
             "counts": counts, "total": sum(counts.values()), "subsystems": sorted(subs.values(), key=lambda s: s["name"]),
-            "bestBets": best, "allWeather": {"count": len(allw), "names": sorted(set(allw))[:12]},
+            "driest": driest, "frozenAreas": frozen_areas, "muddiest": muddiest, "closedAreas": closed_areas,
+            "suggestAllWeather": verdict in MUDDY_VERDICTS,
+            "allWeather": {"count": len(allw), "areas": [{"name": k, "count": v} for k, v in sorted(aw_areas.items(), key=lambda kv: (-kv[1], kv[0]))]},
             "closed": sorted(closed.values(), key=lambda g: -len(g["trails"])), "originalText": original,
             "url": PAGE_URL, "mapUrl": MAP_URL, "credit": CREDIT}
 

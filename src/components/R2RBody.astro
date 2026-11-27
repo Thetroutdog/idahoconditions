@@ -1,12 +1,48 @@
 ---
-// Ridge to Rivers (City of Boise) trail status for the Boise foothills. Their wording is shown faithfully: "Muddy – DO NOT USE" is a stewardship ask.
+// Ridge to Rivers (City of Boise) trail status for the Boise foothills. The counts and area lines are our summary of their trail reports (see
+// scripts/fetch_r2r.py), worded as ours: only the closure notes are their text. Areas are listed with counts, never trail by trail.
+import { asOfLabel } from '../lib/local.js';
 const { item, tz, compact = false } = Astro.props;
 const c = item.counts ?? {};
 const closedTrails = (item.closed ?? []).reduce((n, g) => n + g.trails.length, 0);
+const LABEL = { dry: 'dry', frozen: 'frozen', 'frozen-am': 'frozen early', mixed: 'mixed', muddy: 'muddy' };
+// "Table Rock (19 muddy, 1 dry)": the usable codes, biggest first, zeros left out. Closed and not-evaluated counts are in the all-areas table.
+const counts = (a) => Object.keys(LABEL).filter((k) => a[k]).sort((x, y) => a[y] - a[x]).map((k) => `${a[k]} ${LABEL[k]}`).join(', ');
+const line = (list) => list.map((a) => `${a.name} (${counts(a)})`).join(' · ');
+const muddy = item.suggestAllWeather;
+const summer = new Date().getMonth() >= 4 && new Date().getMonth() <= 9; // May to October
+const asOf = asOfLabel(item.asOf, tz);
+const areas = item.subsystems ?? [];
+const showEarly = areas.some((a) => a['frozen-am']);
+const awAreas = item.allWeather?.areas ?? [];
 ---
-<p class="local-lead">{item.stale ? 'This is the last trail report from Ridge to Rivers. Check their site for today.' : 'Muddy trails: stay off. Ridge to Rivers asks you to turn around when you hit mud, so trails stay good.'}</p>
-<p class="local-line">{item.summary}</p>
-{item.bestBets?.length > 0 && !item.stale && <p class="local-line"><strong>Best bets:</strong> {item.bestBets.join(', ')}{item.allWeather?.count ? ` · ${item.allWeather.count} all-weather trails` : ''}</p>}
+{item.stale ? (
+  <p class="local-lead">{summer
+    ? 'Ridge to Rivers typically stops posting trail conditions in summer. Check their map for closures before you go.'
+    : `Ridge to Rivers has not updated trail conditions recently (last update ${asOf}). Check their map for today.`}</p>
+) : (
+  <>
+    {c.muddy > 0 && <p class="local-lead">Muddy trails get rutted fast. If you hit mud, turn around.</p>}
+    {muddy && <p class="local-lead"><strong>Suggest sticking to all-weather trails or the Greenbelt today.</strong></p>}
+    <p class="local-line"><strong>{item.verdict}.</strong></p>
+    <p class="local-line">{item.summary} Ridge to Rivers trail reports, as of {asOf}.</p>
+    {item.driest?.length > 0 && <p class="local-line"><strong>Driest areas right now:</strong>{' '}{line(item.driest)}</p>}
+    {!item.driest?.length && muddy && <p class="local-line"><strong>No area is mostly dry right now.</strong></p>}
+    {item.frozenAreas?.length > 0 && <p class="local-line"><strong>Frozen or snow-covered:</strong>{' '}{line(item.frozenAreas)}</p>}
+    {item.muddiest?.length > 0 && <p class="local-line"><strong>Muddiest:</strong>{' '}{line(item.muddiest)}</p>}
+    {item.closedAreas?.length > 0 && <p class="local-line"><strong>Mostly closed:</strong>{' '}{item.closedAreas.map((a) => `${a.name} (${a.closed} of ${a.n} trails)`).join(' · ')}</p>}
+    {muddy && !item.driest?.length && awAreas.length > 0 && <p class="local-line"><strong>All-weather trails not rated muddy ({item.allWeather.count}):</strong>{' '}{awAreas.map((a) => `${a.name} ${a.count}`).join(' · ')}</p>}
+    {!compact && areas.length > 0 && (
+      <details class="local-sub">
+        <summary>All areas ({areas.length})</summary>
+        <div class="local-table-wrap"><table class="local-table">
+          <thead><tr><th scope="col">Area</th><th scope="col">Dry</th><th scope="col">Frozen</th>{showEarly && <th scope="col">Frozen early</th>}<th scope="col">Mixed</th><th scope="col">Muddy</th><th scope="col">Closed</th><th scope="col">Not evaluated</th></tr></thead>
+          <tbody>{areas.map((a) => <tr><th scope="row">{a.name}</th><td>{a.dry || ''}</td><td>{a.frozen || ''}</td>{showEarly && <td>{a['frozen-am'] || ''}</td>}<td>{a.mixed || ''}</td><td>{a.muddy || ''}</td><td>{a.closed || ''}</td><td>{a.unknown || ''}</td></tr>)}</tbody>
+        </table></div>
+      </details>
+    )}
+  </>
+)}
 {!compact && closedTrails > 0 && (
   <details class="local-sub">
     <summary>Closed trails ({closedTrails})</summary>

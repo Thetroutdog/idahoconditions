@@ -108,7 +108,7 @@ _ms = lambda h: int((_n - dt.timedelta(hours=h)).timestamp() * 1000)
 _row = lambda name, sub, cond, h=2, notes=None, aw="No": {"TrailName": name, "Name": "#1 " + name, "TrailSubSystem": sub, "Condition": cond, "ConditionNotes": notes, "ConditionDate": _ms(h), "AllWeather": aw, "R2R_Use": "Multi-use non-motorized"}
 _DRY, _MUD = "Dry / Tacky - Enjoy", "Muddy – DO NOT USE"
 _MIX = "Dry at start but could be muddy further out – turn around when you encounter mud.  Don’t keep going."
-_sample = ([_row(f"Dry{i}", "Polecat Gulch", _DRY) for i in range(4)] + [_row("Hulls Mud", "Camels Back / Hulls Gulch", _MUD)] * 3
+_sample = ([_row(f"Dry{i}", "Polecat Gulch", _DRY) for i in range(6)] + [_row("Hulls Mud", "Camels Back / Hulls Gulch", _MUD)] * 3
            + [_row("Mix", "Table Rock", _MIX), _row("Ice", "Dry Creek", "Frozen/snow covered - Enjoy", aw="Yes"), _row("Owl's Roost", "Camels Back / Hulls Gulch", _DRY, aw="Yes"),
               _row("Mores", "Bogus Basin Area", "CLOSED", notes="These trails are closed for the winter, to allow for Bogus Basin Ski Operations"),
               _row("Sinker", "Bogus Basin Area", "CLOSED", notes="These trails are closed for the winter, to allow for Bogus Basin Ski Operations"),
@@ -117,15 +117,30 @@ _sample = ([_row(f"Dry{i}", "Polecat Gulch", _DRY) for i in range(4)] + [_row("H
 for t, want in [(_MUD, "muddy"), (_MIX, "mixed"), (_DRY, "dry"), ("Frozen/snow covered - Enjoy", "frozen"), ("Frozen early then muddy – BE OFF THE TRAIL BEFORE IT THAWS…", "frozen-am"), ("CLOSED", "closed"), ("Not Evaluated", "unknown"), ("???", "unknown")]:
     assert r2r.code_of(t) == want, (t, r2r.code_of(t))
 _r = r2r.summarize(_sample, _n)
-assert _r["counts"]["muddy"] == 3 and _r["counts"]["dry"] == 5 and _r["counts"]["closed"] == 2 and _r["counts"]["mixed"] == 1 and _r["counts"]["frozen"] == 1, _r["counts"]
-assert _r["counts"]["unknown"] == 2 and _r["total"] == 14, _r["counts"]  # the N/A access road is skipped; "Pump Track" and the new wording are unknown
+assert _r["counts"]["muddy"] == 3 and _r["counts"]["dry"] == 7 and _r["counts"]["closed"] == 2 and _r["counts"]["mixed"] == 1 and _r["counts"]["frozen"] == 1, _r["counts"]
+assert _r["counts"]["unknown"] == 2 and _r["total"] == 16, _r["counts"]  # the N/A access road is skipped; "Pump Track" and the new wording are unknown
 assert _r["verdict"] == "Mostly dry" and _r["tone"] == "green" and not _r["stale"], _r["verdict"]
-assert _r["bestBets"] == ["Polecat Gulch"], _r["bestBets"]  # Hulls Gulch is mostly mud, so it is not a best bet
+assert [a["name"] for a in _r["driest"]] == ["Polecat Gulch"], _r["driest"]  # Hulls Gulch is mostly mud, so it is not named
+assert not _r["suggestAllWeather"] and "2 not evaluated" in _r["summary"], _r["summary"]
 assert _r["closed"][0]["trails"] == ["Mores", "Sinker"] and _r["closed"][0]["areas"] == ["Bogus Basin Area"] and "<" not in _r["closed"][0]["note"], _r["closed"]
-assert _r["allWeather"]["names"] == ["Ice", "Owl's Roost"] and _r["originalText"]["muddy"] == _MUD
+assert _r["allWeather"]["count"] == 2 and _r["allWeather"]["areas"] == [{"name": "Camels Back / Hulls Gulch", "count": 1}, {"name": "Dry Creek", "count": 1}], _r["allWeather"]
+assert _r["originalText"]["muddy"] == _MUD
 assert "Boise foothills" in _r["title"] and _r["credit"].startswith("Trail conditions, text and photos: City of Boise")
 _mud = r2r.summarize([_row(f"m{i}", "Table Rock", _MUD) for i in range(6)] + [_row("d", "Table Rock", _DRY)], _n)
-assert _mud["verdict"] == "Mostly muddy" and _mud["tone"] == "amber" and _mud["bestBets"] == []
+assert _mud["verdict"] == "Mostly muddy" and _mud["tone"] == "amber" and _mud["driest"] == [] and _mud["suggestAllWeather"]
+# area lines (driest, frozen, muddiest, mostly closed): rebuilt from a day like Nov 27 2026, when Bogus Basin had 12 frozen trails and 15 closed
+_day = ([_row(f"a{i}", "Ada-Eagle Bike Park", _DRY) for i in range(41)] + [_row("am", "Ada-Eagle Bike Park", _MUD)]
+        + [_row(f"o{i}", "Oregon Trail Reserve", _DRY) for i in range(6)] + [_row(f"t{i}", "Table Rock", _MUD) for i in range(19)] + [_row("td", "Table Rock", _DRY)]
+        + [_row(f"b{i}", "Bogus Basin Area", "Frozen/snow covered - Enjoy") for i in range(12)] + [_row(f"c{i}", "Bogus Basin Area", "CLOSED", notes="closed for the winter") for i in range(15)]
+        + [_row(f"u{i}", "Upper Dry Creek", "Frozen/snow covered - Enjoy") for i in range(6)] + [_row(f"s{i}", "Small Area", _DRY) for i in range(4)]
+        + [_row(f"x{i}", "Hulls Gulch", _MUD, aw="Yes") for i in range(3)] + [_row(f"w{i}", "Hulls Gulch", _DRY, aw="Yes") for i in range(2)])
+_d = r2r.summarize(_day, _n)
+assert [a["name"] for a in _d["driest"]] == ["Ada-Eagle Bike Park", "Oregon Trail Reserve"], _d["driest"]  # 41 of 42 dry counts; 4 open trails is too few
+assert [a["name"] for a in _d["frozenAreas"]] == ["Upper Dry Creek"], _d["frozenAreas"]  # Bogus is mostly closed, so it is not a frozen-area pick
+assert [a["name"] for a in _d["closedAreas"]] == ["Bogus Basin Area"] and _d["closedAreas"][0]["closed"] == 15 and _d["closedAreas"][0]["n"] == 27
+assert [a["name"] for a in _d["muddiest"]] == ["Table Rock"], _d["muddiest"]
+assert _d["verdict"] == "Mostly dry" and not _d["suggestAllWeather"] and _d["allWeather"]["count"] == 2 and _d["allWeather"]["areas"] == [{"name": "Hulls Gulch", "count": 2}]
+assert all(set(a) >= {"name", "n", "dry", "muddy", "frozen", "closed", "unknown"} for a in _d["driest"] + _d["subsystems"])
 _old = r2r.summarize([_row("a", "Table Rock", _DRY, h=24 * 5)], _n)
 assert _old["stale"] and _old["asOf"], _old  # over 72 h old: stale, not a failure
 for bad in ([], ):
