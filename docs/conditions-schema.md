@@ -45,7 +45,7 @@ Region ids: `panhandle`, `clearwater`, `southwest`, `magic-valley`, `southeast`,
             "swe": Reading, "depth": Reading, "depthChange24h": Reading, "pctOfMedian": Reading}],
   "rivers": [{"id": "USGS-13246000", "name": "NF Payette near Banks", "use": ["paddling"], "flow": Reading, "stage": Reading, "trend": "rising|falling|steady"}],
   "air": {"points": [{"id": "boise", "name": "Boise", "aqi": Reading, "category": "Good", "pollutant": "PM2.5", "provisional": true}], "note": null},
-  "fire": {"wildfires": [{"name": "...", "acres": 120, "containmentPct": 40, "modifiedAt": "..."}], "prescribed": [{"name": "...", "acres": 30, "modifiedAt": "..."}]},
+  "fire": {"wildfires": [{"name": "...", "acres": 120, "containmentPct": 40, "oldRecord": false, "cause": "Natural", "unit": "IDNCF", "lat": 46.4035, "lon": -114.6509, "discoveredAt": "...", "modifiedAt": "..."}], "prescribed": [{"name": "...", "acres": 30, "modifiedAt": "..."}]},
   "ski": [{"name": "Brundage", "status": "unknown", "source": "manual", "note": "resort status needs permission or manual entry"}]
 }
 ```

@@ -2,7 +2,7 @@
 // Full alerts and conditions for one region: NWS alerts, roads (Idaho 511), air quality, wildfires, prescribed burns.
 // Every source gets a card so an empty one reads "none reported" instead of vanishing.
 import { conditions, fmtTime } from '../lib/conditions.js';
-import { airDetail, airForecastView, alertHref, alertGist, alertLink, roadInfo, IDAHO511, BAR_LABEL, shortReason, fireLinks, forestFireLinks } from '../lib/regionview.js';
+import { airDetail, airForecastView, alertHref, alertGist, alertLink, roadInfo, IDAHO511, BAR_LABEL, shortReason, fireLinks, forestFireLinks, fireFacts, fireLinksFor } from '../lib/regionview.js';
 import AqiValue from './AqiValue.astro';
 const { id, name } = Astro.props;
 const r = conditions.regions[id];
@@ -80,10 +80,10 @@ const shownHwy = road.hwy.slice(0, 6), moreHwy = road.hwy.slice(6);
   </article>
 
   <article class="alert-card" id="wildfires">
-    <h3>Wildfires <span class={`chip ${fires.length ? 'amber' : 'green'}`}>{fires.length ? `${fires.length} reported` : 'None reported'}</span></h3>
+    <h3>Wildfires <span class={`chip ${fires.some((f) => !f.oldRecord) ? 'amber' : fires.length ? 'gray' : 'green'}`}>{fires.some((f) => !f.oldRecord) ? `${fires.filter((f) => !f.oldRecord).length} reported` : fires.length ? 'Possibly outdated' : 'None reported'}</span></h3>
     {fires.length ? (<>
-      <ul>{shownFires.map((f) => <li><strong>{f.name}</strong>{f.county && `, ${f.county} County`}: {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}</li>)}</ul>
-      {moreFires.length > 0 && <details><summary>Show {moreFires.length} more</summary><ul>{moreFires.map((f) => <li><strong>{f.name}</strong>{f.county && `, ${f.county} County`}: {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}</li>)}</ul></details>}
+      <ul>{shownFires.map((f) => <li><strong>{f.name}</strong>{f.county && `, ${f.county} County`}: {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}<br /><span class="quiet">{fireFacts(f, tz)}</span>{fireLinksFor(f, moreFire).length > 0 && <><br /><span class="quiet">{fireLinksFor(f, moreFire).map((l, i, a) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{i < a.length - 1 ? ' · ' : ''}</>)}</span></>}</li>)}</ul>
+      {moreFires.length > 0 && <details><summary>Show {moreFires.length} more</summary><ul>{moreFires.map((f) => <li><strong>{f.name}</strong>{f.county && `, ${f.county} County`}: {f.acres ?? '?'} acres{f.containmentPct != null && `, ${f.containmentPct}% contained`}<br /><span class="quiet">{fireFacts(f, tz)}</span>{fireLinksFor(f, moreFire).length > 0 && <><br /><span class="quiet">{fireLinksFor(f, moreFire).map((l, i, a) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{i < a.length - 1 ? ' · ' : ''}</>)}</span></>}</li>)}</ul></details>}
     </>) : <p class="quiet">No wildfires reported in this region.</p>}
     <p class="quiet fire-links">More fire info: {moreFire.map((l, i) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{i < moreFire.length - 1 ? ' · ' : ''}</>)}</p>
     <div class="src src-row"><span>NIFC</span><a href={`/fire/#fire-${id}`}>See statewide fire page</a></div>

@@ -7,7 +7,7 @@ import json, os, sys, time, urllib.request, urllib.parse, datetime as dt
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 PART = os.path.join(ROOT, "data", "parts", "nws.json")
 UA = os.environ.get("IC_USER_AGENT") or "idahoconditions.com (contact@idahoconditions.com)"  # "or": an unset Actions secret arrives as an empty string
-MIN_SHARE_SHOW = 0.15   # alert is listed on a region page if the zone has at least this share in the region
+MIN_SHARE_SHOW = 0.25   # alert is listed on a region page if the zone has at least this share in the region
 MIN_SHARE_LEVEL = 0.30  # ...and counts toward the region's color only at this share or more (or if it is the primary region)
 
 
@@ -108,15 +108,20 @@ def zone_point(zurl):
     return pt
 
 
-ALERTS_PAGE = "https://alerts.weather.gov/?area=ID"
+ALERTS_PAGE = "https://www.weather.gov/alerts"  # national active-alerts page; last resort (the old alerts.weather.gov host is retired)
 
 
-def alert_url(p):
-    """A page that is about alerts, never a point forecast. NWS's own `web` field when it is a real page (not just the site root),
-    else the public Idaho alerts page. (A MapClick forecast page often shows no Special Weather Statement and never shows an expired one.)"""
-    web = (p.get("web") or "").strip()
-    if web.startswith("http") and "MapClick" not in web and urllib.parse.urlparse(web).path.strip("/"):
-        return web
+def alert_url(p, zone_map=None):
+    """A page that shows this alert's own text. NWS's showsigwx page takes a forecast zone plus a county: the zone is the alert's first Idaho zone,
+    the county is the first Idaho county in its SAME codes (016059 -> IDC059). Without a usable zone: the issuing office's page, then the national alerts page."""
+    zones = [z.rsplit("/", 1)[-1] for z in p.get("affectedZones", [])]
+    zid = next((z for z in zones if z.startswith("IDZ")), None)
+    same = next((c for c in (p.get("geocode") or {}).get("SAME", []) if len(c) == 6 and c.startswith("016")), None)
+    if zid and same:
+        return f"https://forecast.weather.gov/showsigwx.php?warnzone={zid}&warncounty=IDC{same[3:]}"
+    office = (zone_map or {}).get(zid or "", {}).get("office")
+    if office:
+        return f"https://www.weather.gov/{office.lower()}/"
     return ALERTS_PAGE
 
 
@@ -156,7 +161,7 @@ def alerts(zone_map):
                 regions[prim] = 1.0
         item = {"id": p["id"], "event": p["event"], "severity": p.get("severity"), "level": alert_level(p), "onset": p.get("onset") or p.get("effective"),
                 "ends": p.get("ends") or p.get("expires"), "headline": p.get("headline"), "gist": clip((p.get("parameters") or {}).get("NWSheadline", [None])[0], 160) or None,
-                "summary": clip(p.get("description"), 320) or None, "url": alert_url(p), "_zones": len(p.get("affectedZones", []))}
+                "summary": clip(p.get("description"), 320) or None, "url": alert_url(p, zone_map), "_zones": len(p.get("affectedZones", []))}
         if not regions:
             # No Idaho region claims this alert (its zones are unmapped or outside the IDFG regions): keep it for the statewide card
             # instead of dropping it silently. Stored under "_unplaced"; build_conditions turns it into conditions["unplaced"]["weather"].

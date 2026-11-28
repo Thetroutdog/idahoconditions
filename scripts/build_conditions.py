@@ -112,6 +112,18 @@ def restatus(r, stale_h, hide_h, now):
 FIRE_CUT_DAYS = {"wildfires": (7, 14), "prescribed": (14, 30)}  # same as fetch_nifc.py: (stale after, hide after)
 
 
+OLD_RECORD_DAYS = 60
+
+
+def is_old_record(f, now):
+    """A wildfire found 60+ days ago that still has no containment figure is most likely a record nobody closed out (editing it keeps NIFC's date fresh).
+    It stays listed, tagged, but it does not color a region."""
+    try:
+        return f.get("containmentPct") is None and (now - dt.datetime.fromisoformat(f["discoveredAt"])).days >= OLD_RECORD_DAYS
+    except Exception:
+        return False
+
+
 def apply_fire_freshness(region, now):
     """NIFC's own status is set when it is fetched. If the fetch stops, old fires must not keep a region amber, so re-check modifiedAt here."""
     for kind, (stale_d, hide_d) in FIRE_CUT_DAYS.items():
@@ -125,6 +137,8 @@ def apply_fire_freshness(region, now):
             if age > hide_d:
                 continue
             f["status"] = "stale" if age > stale_d else "fresh"
+            if kind == "wildfires":
+                f["oldRecord"] = is_old_record(f, now)
             keep.append(f)
         if kind in region.get("fire", {}):
             region["fire"][kind] = keep
@@ -311,7 +325,7 @@ def build(parts, now, ski_status=None):
             if v >= 101:
                 lv = 2 if v >= 151 else 1
                 cand.append((lv, 2 if lv == 2 else 0, ("air", f"AQI {v} ({p['category']}) at {p['name']}"), f"AQI {v} ({p['category']})."))
-        for f in [f for f in r["fire"]["wildfires"] if f.get("status") == "fresh" and (f.get("containmentPct") or 0) < 100]:
+        for f in [f for f in r["fire"]["wildfires"] if f.get("status") == "fresh" and not f.get("oldRecord") and (f.get("containmentPct") or 0) < 100]:
             cand.append((1, 0, ("wildfire", f"{f['name']} fire, {f.get('acres') or '?'} acres"), f"{f['name']} fire, {f.get('acres') or '?'} acres."))
         roads_ok = r["roads"]["status"] == "fresh"
         if roads_ok:  # only reachable once ROADS_LIVE is on
@@ -435,6 +449,13 @@ def selftest():
     pf = {"source": "nifc", "ok": True, "fetchedAt": fresh, "error": None, "regions": {"salmon": {"fire": {"wildfires": [old_fire("2026-11-01T20:00:00+00:00"), old_fire("2026-10-20T00:00:00+00:00")], "prescribed": []}}}}
     cf = build({"nws": nws_ok, "nifc": pf}, now)
     assert [f["status"] for f in cf["regions"]["salmon"]["fire"]["wildfires"]] == ["stale"], cf["regions"]["salmon"]["fire"]
+    # an unclosed old record (found 60+ days ago, no containment figure) is tagged and never colors the region; a contained or recent fire is not tagged
+    rec = lambda disc, pct: {"name": "Y", "acres": 45, "containmentPct": pct, "discoveredAt": disc, "modifiedAt": "2026-11-25T20:00:00+00:00", "status": "fresh"}
+    pf2 = {"source": "nifc", "ok": True, "fetchedAt": fresh, "error": None, "regions": {"salmon": {"fire": {"wildfires": [rec("2026-08-28T01:00:00+00:00", None), rec("2026-11-20T01:00:00+00:00", None), rec("2026-08-28T01:00:00+00:00", 90)], "prescribed": []}}}}
+    c5 = build({"nws": nws_ok, "nifc": pf2}, now)
+    assert [f["oldRecord"] for f in c5["regions"]["salmon"]["fire"]["wildfires"]] == [True, False, False], c5["regions"]["salmon"]["fire"]
+    pf3 = {**pf2, "regions": {"salmon": {"fire": {"wildfires": [rec("2026-08-28T01:00:00+00:00", None)], "prescribed": []}}}}
+    assert not any(x["kind"] == "wildfire" for x in build({"nws": nws_ok, "nifc": pf3}, now)["regions"]["salmon"]["levelReasons"]), "old record colored the region"
     # passes: a pass takes the condition of the same-highway segment that names it; no name match means None (never the nearest segment)
     pp = {**p511, "fetchedAt": fresh, "regions": {"salmon": {"roads": {"winter": [
         {"name": "SH-21", "condition": "Slush", "where": "Idaho City/Beaver Creek Summit from MP 39", "updated": fresh},

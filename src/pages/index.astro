@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { conditions, regionIds, levelLabel, fmtTime } from '../lib/conditions.js';
-import { regionTemp, dotClass, IDAHO511 } from '../lib/regionview.js';
+import { regionTemp, dotClass, IDAHO511, fireLine } from '../lib/regionview.js';
 import { statewide } from '../lib/statewide.js';
 import { activities, spotsFor } from '../lib/catalog.js';
 import map from '../data/idaho-map.json';
@@ -13,6 +13,8 @@ const rivers = stateRivers();
 const regs = conditions.regions;
 const updated = fmtTime(conditions.generatedAt, 'America/Boise');
 const sw = statewide();
+const activeFires = sw.fires.filter((f) => !f.oldRecord);  // an unclosed old record (see build_conditions is_old_record) is listed but never raises the chip
+const bigFire = activeFires.some((f) => (f.acres ?? 1000) >= 100);  // under 100 acres reads as a quiet chip, not an amber alarm
 ---
 <Base title="Idaho Conditions — roads, snow, rivers, and air, by region">
   <main>
@@ -38,43 +40,45 @@ const sw = statewide();
         <div class="statewide-grid">
           <article class="state-card" data-alert-group>
             <h3>Weather &amp; NWS alerts <span data-alert-chip data-none="None active" class={`chip ${!sw.nws.fresh ? 'gray' : sw.alerts.length + sw.unplaced.weather.length ? 'amber' : 'green'}`}>{!sw.nws.fresh ? 'Out of date' : sw.alerts.length + sw.unplaced.weather.length ? `${sw.alerts.length + sw.unplaced.weather.length} active` : 'None active'}</span></h3>
-            {!sw.nws.fresh ? <p class="state-lead">Weather alerts are out of date (last checked {fmtTime(sw.nws.at, 'America/Boise')}). <a href="https://alerts.weather.gov/?area=ID" target="_blank" rel="noopener noreferrer">Check the NWS directly</a>.</p>
+            {!sw.nws.fresh ? <p class="state-lead">Weather alerts are out of date (last checked {fmtTime(sw.nws.at, 'America/Boise')}). <a href="https://www.weather.gov/alerts" target="_blank" rel="noopener noreferrer">Check the NWS directly</a>.</p>
               : sw.alerts.length ? <ul class="alert-items" data-alert-list>{sw.alerts.slice(0, 4).map((a) => <li data-alert-item data-ends={a.ends ?? undefined}><a href={a.href} target="_blank" rel="noopener noreferrer">{a.event}</a><small>{a.areas}{a.gistLine ? `. ${a.gistLine}` : ''}</small></li>)}</ul> : sw.unplaced.weather.length ? null : <p class="state-lead">No active NWS alerts in Idaho right now.</p>}
             {sw.nws.fresh && (sw.alerts.length > 0 || sw.unplaced.weather.length > 0) && <p class="state-lead" data-alert-empty hidden>No active NWS alerts in Idaho right now.</p>}
             {sw.nws.fresh && <UnplacedItems items={sw.unplaced.weather} />}
             {sw.nws.fresh && sw.alerts.length > 4 && <p class="state-more" data-alert-more>+{sw.alerts.length - 4} more. Open a region for its full list.</p>}
             <p class="state-more"><a href="/weather/">See all weather alerts →</a></p>
-            <div class="src">National Weather Service</div>
+            <div class="src">National Weather Service{sw.nws.at ? ` · ${fmtTime(sw.nws.at, 'America/Boise')}` : ''}</div>
           </article>
           <article class="state-card">
             <h3>Roads &amp; passes <span class={`chip ${!sw.roads.live ? 'gray' : sw.roads.closures.length ? 'red' : sw.roads.winterRoads ? 'amber' : 'green'}`}>{!sw.roads.live ? 'Not connected' : sw.roads.closures.length ? `${sw.roads.closures.length} closed` : sw.roads.winterRoads ? 'Winter conditions' : 'No closures'}</span></h3>
             {sw.roads.live ? (<>
               {sw.roads.closures.length ? <ul class="alert-items">{sw.roads.closures.slice(0, 4).map((c) => <li><a href={`/${c.regionId}/#alerts`}>{c.name} closed</a><small>{c.regionName}{c.desc && 110 >= c.desc.length ? `: ${c.desc}` : ''}</small></li>)}</ul> : <p class="state-lead">No unplanned highway closures reported.</p>}
               {sw.roads.closures.length > 4 && <p class="state-more">+{sw.roads.closures.length - 4} more. Open a region for its full list.</p>}
-              {sw.roads.winterRoads > 0 && <p class="state-more">{sw.roads.winterRoads} highways report snow, ice or slush.</p>}
-              {sw.roads.passMatched > 0 && <p class="state-more">Passes: {sw.roads.passBad} of {sw.roads.passMatched} with a report are snow-covered, packed or icy ({sw.roads.passTotal} tracked).</p>}
+              {sw.roads.winterRoads > 0 && <p class="state-more">{sw.roads.winterRoads} highway{sw.roads.winterRoads === 1 ? '' : 's'} report{sw.roads.winterRoads === 1 ? 's' : ''} snow, ice or slush.</p>}
+              {sw.roads.planned > 0 && <p class="state-more">{sw.roads.planned} planned closure{sw.roads.planned === 1 ? '' : 's'}, not emergencies.</p>}
+              {sw.roads.passMatched > 0 && <p class="state-more">Passes: {sw.roads.passMatched} of {sw.roads.passTotal} tracked have a report; {sw.roads.passBad} of those are snow-covered, packed or icy. Check 511 for the rest.</p>}
             </>) : <p class="state-lead">Road data is not available right now.</p>}
             <UnplacedItems items={sw.unplaced.roads} />
             <p class="state-more"><a href={IDAHO511} target="_blank" rel="noopener noreferrer">Open Idaho 511</a> for the live map, cameras and pass reports.</p>
             <p class="state-more">{NOTES.roads}</p>
             <p class="state-more"><a href="/roads/">See all road conditions →</a></p>
-            <div class="src">Idaho 511{sw.roads.stale ? ' · out of date' : ''}</div>
+            <div class="src">Idaho 511{sw.times.roads ? ` · ${fmtTime(sw.times.roads, 'America/Boise')}` : ''}{sw.roads.stale ? ' · out of date' : ''}</div>
           </article>
           <article class="state-card">
             <h3>Air quality &amp; smoke {sw.aqs.length ? <span class={`chip ${sw.aqs[0].v > 100 ? 'amber' : 'green'}`}>{sw.aqs[0].v > 100 ? 'Unhealthy pockets' : 'No unhealthy air'}</span> : <span class="chip gray">No readings</span>}</h3>
-            <p class="state-lead">{sw.aqs.length ? (<>Highest reading: {sw.aqs[0].name}, <AqiValue value={sw.aqs[0].v} />{sw.aqs[0].cat ? ` (${sw.aqs[0].cat})` : ''}.</>) : 'No fresh air-quality readings.'}</p>
+            <p class="state-lead">{sw.aqs.length ? (<>Highest reading: {sw.aqs[0].name}, <AqiValue value={sw.aqs[0].v} />{sw.aqs[0].cat ? ` (${sw.aqs[0].cat})` : ''}{sw.aqs[0].detail ? `. ${sw.aqs[0].detail}` : ''}.</>) : 'No fresh air-quality readings.'}</p>
             <UnplacedItems items={sw.unplaced.air} />
             <p class="state-more"><a href="/air/">See all air quality readings →</a></p>
-            <div class="src">AirNow (preliminary)</div>
+            <div class="src">AirNow (preliminary){sw.times.air ? ` · ${fmtTime(sw.times.air, 'America/Boise')}` : ''}</div>
           </article>
           <article class="state-card">
-            <h3>Fire activity <span class={`chip ${sw.fires.length ? 'amber' : 'green'}`}>{sw.fires.length ? `${sw.fires.length} reported` : 'None reported'}</span></h3>
-            <p class="state-lead">{sw.fires.length ? 'Wildfires are listed on the fire page and each region page.' : 'No current wildfires reported in Idaho.'}</p>
+            <h3>Fire activity <span class={`chip ${!sw.fires.length ? 'green' : !activeFires.length ? 'gray' : bigFire ? 'amber' : 'green'}`}>{!sw.fires.length ? 'None reported' : !activeFires.length ? `${sw.fires.length} old record${sw.fires.length === 1 ? '' : 's'}` : bigFire ? `${activeFires.length} reported` : `${activeFires.length} small fire${activeFires.length === 1 ? '' : 's'}`}</span></h3>
+            {sw.fires.length ? <ul class="alert-items">{sw.fires.slice(0, 3).map((f) => <li><a href="/fire/">{fireLine(f)}</a></li>)}</ul> : <p class="state-lead">No current wildfires reported in Idaho.</p>}
+            {sw.fires.length > 3 && <p class="state-more">+{sw.fires.length - 3} more on the fire page.</p>}
             {sw.burns.length > 0 && <p class="state-more">{sw.burns.length} prescribed burn{sw.burns.length === 1 ? '' : 's'} reported. The fire page and each region page list them.</p>}
             <UnplacedItems items={sw.unplaced.fire} />
             <p class="state-more">{NOTES.fire}</p>
             <p class="state-more"><a href="/fire/">See all fire activity →</a></p>
-            <div class="src">NIFC</div>
+            <div class="src">NIFC{sw.times.fire ? ` · ${fmtTime(sw.times.fire, 'America/Boise')}` : ''}</div>
           </article>
         </div>
         <p class="legal-line">{NOTES.general} <a href="/terms/">Terms</a></p>

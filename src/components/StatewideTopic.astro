@@ -7,7 +7,7 @@ import UnplacedItems from './UnplacedItems.astro';
 import AirForecast from './AirForecast.astro';
 import { conditions, regionIds, fmtTime } from '../lib/conditions.js';
 import { statewide } from '../lib/statewide.js';
-import { airDetail, airForecastView, roadInfo, fireLinks, forestFireLinks, alertHref, alertGist, IDAHO511 } from '../lib/regionview.js';
+import { airDetail, airForecastView, roadInfo, fireLinks, forestFireLinks, fireFacts, fireLinksFor, alertHref, alertGist, IDAHO511 } from '../lib/regionview.js';
 import { NOTES } from '../lib/site.js';
 const { topic } = Astro.props;
 const sw = statewide();
@@ -43,7 +43,7 @@ const blocks = regionIds.map((id) => {
     const fires = r.fire.wildfires.filter((f) => f.status !== 'stale').sort((x, y) => (y.acres ?? 0) - (x.acres ?? 0));
     const burns = r.fire.prescribed.filter((f) => f.status !== 'stale');
     b.items = [
-      ...fires.map((f) => ({ head: f.name, tag: 'Wildfire', tail: `${f.county ? `, ${f.county} County` : ''}: ${f.acres ?? '?'} acres${f.containmentPct != null ? `, ${f.containmentPct}% contained` : ''}` })),
+      ...fires.map((f) => ({ head: f.name, tag: f.oldRecord ? 'Possibly outdated' : 'Wildfire', tagCls: f.oldRecord ? 'tag-quiet' : '', tail: `${f.county ? `, ${f.county} County` : ''}: ${f.acres ?? '?'} acres${f.containmentPct != null ? `, ${f.containmentPct}% contained` : ''}`, gist: fireFacts(f, r.tz), links: fireLinksFor(f, forestFireLinks(id)) })),
       ...burns.map((f) => ({ head: f.name, tag: 'Prescribed burn', tagCls: 'tag-quiet', tail: `${f.county ? `, ${f.county} County` : ''}: ${f.acres ?? '?'} acres` })),
     ];
   }
@@ -75,6 +75,7 @@ const empty = { weather: 'No active National Weather Service alerts in any regio
                 {x.tag && <> <span class={`tag ${x.tagCls ?? ''}`}>{x.tag}</span></>}
                 {x.tag && /^[,:]/.test(x.tail ?? '') ? <>{x.tail}</> : x.tail}
                 {x.gist && <><br /><span class="quiet">{x.gist}</span></>}
+                {x.links?.length > 0 && <><br /><span class="quiet">{x.links.map((l, i) => <><a href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>{i < x.links.length - 1 ? ' · ' : ''}</>)}</span></>}
               </li>
             ))}</ul>
           ) : !b.note && !(topic === 'air' && airForecastView(conditions.regions[b.id])) && <p class="quiet">None reported.</p>}

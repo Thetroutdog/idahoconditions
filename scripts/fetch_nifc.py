@@ -37,7 +37,8 @@ def fetch():
         if age > hide_d or (pct is not None and pct >= 100):
             continue
         item = {"name": (a.get("IncidentName") or "").title(), "acres": a.get("IncidentSize"), "containmentPct": pct,
-                "county": a.get("POOCounty"), "discoveredAt": (ms(a.get("FireDiscoveryDateTime")) or now).isoformat(timespec="seconds"),
+                "county": a.get("POOCounty"), "cause": a.get("FireCause"), "unit": a.get("POOProtectingUnit") or a.get("POOJurisdictionalUnit"),
+                "lat": round(g["y"], 4), "lon": round(g["x"], 4), "discoveredAt": (ms(a.get("FireDiscoveryDateTime")) or now).isoformat(timespec="seconds"),
                 "modifiedAt": mod.isoformat(timespec="seconds"), "status": "stale" if age > stale_d else "fresh"}
         out.setdefault(rid, {"fire": {"wildfires": [], "prescribed": []}})["fire"]["wildfires" if kind == "WF" else "prescribed"].append(item)
     return out

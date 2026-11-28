@@ -38,7 +38,7 @@ def fake(url, headers=None, timeout=60):
         ms = lambda days: int((now - dt.timedelta(days=days)).timestamp() * 1000)
         base = {"POOCounty": "Valley", "PercentContained": 20, "ModifiedOnDateTime_dt": ms(1), "FireDiscoveryDateTime": ms(3)}
         return {"features": [
-            {"attributes": {**base, "IncidentName": "TEST FIRE", "IncidentTypeCategory": "WF", "IncidentSize": 120}, "geometry": {"x": -116.1, "y": 44.9}},
+            {"attributes": {**base, "IncidentName": "TEST FIRE", "IncidentTypeCategory": "WF", "IncidentSize": 120, "FireCause": "Natural", "POOProtectingUnit": "IDNCF"}, "geometry": {"x": -116.1, "y": 44.9}},
             {"attributes": {**base, "IncidentName": "BURN ONE", "IncidentTypeCategory": "RX", "IncidentSize": 30}, "geometry": {"x": -116.1, "y": 44.9}},
             {"attributes": {**base, "IncidentName": "OLD FIRE", "IncidentTypeCategory": "WF", "ModifiedOnDateTime_dt": ms(40)}, "geometry": {"x": -116.1, "y": 44.9}},
             {"attributes": {**base, "IncidentName": "MONTANA", "IncidentTypeCategory": "WF"}, "geometry": {"x": -112.0, "y": 47.0}}]}
@@ -64,6 +64,8 @@ assert air["southwest"]["air"]["points"][0]["aqi"]["value"] == 118 and air["uppe
 fire = parts["nifc"]["regions"]["southwest"]["fire"]
 assert [f["name"] for f in fire["wildfires"]] == ["Test Fire"] and [f["name"] for f in fire["prescribed"]] == ["Burn One"], fire
 assert "montana" not in json.dumps(parts["nifc"]).lower()
+_tf = fire["wildfires"][0]
+assert _tf["cause"] == "Natural" and _tf["unit"] == "IDNCF" and _tf["lat"] == 44.9 and _tf["lon"] == -116.1, _tf   # cause, protecting unit and a map point come through
 conds = bc.build({"nws": {"source": "nws", "ok": True, "fetchedAt": now.isoformat(), "error": None, "forecast": {}, "alerts": {}}, **parts}, now)
 sw = conds["regions"]["southwest"]
 assert sw["level"] == "amber" and "AQI 118" in sw["summary"] and any(r["kind"] == "wildfire" for r in sw["levelReasons"]), sw["levelReasons"]
@@ -79,7 +81,11 @@ import fetch_nws as _nws
 _nws.get = lambda url, *a, **k: {"geometry": {"type": "Polygon", "coordinates": [[[0, 0], [10, 0], [10, 1], [1, 1], [1, 10], [0, 10], [0, 0]]]}}
 _pt = _nws.zone_point("https://api.weather.gov/zones/forecast/TEST")
 assert _pt and _nws._inside(_pt[1], _pt[0], [[0, 0], [10, 0], [10, 1], [1, 1], [1, 10], [0, 10], [0, 0]]), _pt
-assert "MapClick" not in _nws.alert_url({"web": "http://www.weather.gov"})   # alert links are alert pages now, not point forecasts
+# alert links: the alert's own page (zone + county from its SAME code), else the issuing office, else the national alerts page; never a point forecast
+assert _nws.alert_url({"affectedZones": ["https://api.weather.gov/zones/forecast/IDZ010"], "geocode": {"SAME": ["016059"]}}) == "https://forecast.weather.gov/showsigwx.php?warnzone=IDZ010&warncounty=IDC059"
+assert _nws.alert_url({"affectedZones": ["https://api.weather.gov/zones/forecast/MTZ001", "https://api.weather.gov/zones/forecast/IDZ010"], "geocode": {"SAME": ["030001", "016059"]}}).endswith("warnzone=IDZ010&warncounty=IDC059")
+assert _nws.alert_url({"affectedZones": ["https://api.weather.gov/zones/forecast/IDZ010"]}, {"IDZ010": {"office": "MSO"}}) == "https://www.weather.gov/mso/"
+assert _nws.alert_url({"web": "http://www.weather.gov"}) == _nws.ALERTS_PAGE and "alerts.weather.gov" not in _nws.ALERTS_PAGE
 print("alert zone point ok")
 
 
@@ -88,7 +94,7 @@ _now = dt.datetime.now(dt.timezone.utc)
 def _sps(i, expires):
     return {"properties": {"id": f"urn:oid:test.{i}", "event": "Special Weather Statement", "status": "Actual", "messageType": "Alert", "severity": "Minor",
             "effective": (_now - dt.timedelta(hours=1)).isoformat(), "ends": None, "expires": expires, "headline": "Special Weather Statement issued by NWS Spokane WA",
-            "web": "http://www.weather.gov", "affectedZones": ["https://api.weather.gov/zones/forecast/IDZ001"], "severity": "Minor",
+            "web": "http://www.weather.gov", "affectedZones": ["https://api.weather.gov/zones/forecast/IDZ001"], "geocode": {"SAME": ["016021"]}, "severity": "Minor",
             "parameters": {"NWSheadline": ["A WINTRY MIX WILL IMPACT SOUTHERN BOUNDARY AND CENTRAL BONNER COUNTIES UNTIL 630 AM PST"]},
             "description": "At 538 AM PST, a trained spotter reported a wintry mix.\n\nIcy conditions possible on untreated surfaces."}}
 _nws.get = lambda url, *a, **k: {"features": [_sps(1, (_now + dt.timedelta(minutes=50)).isoformat()), _sps(2, (_now - dt.timedelta(minutes=5)).isoformat())]}
@@ -96,7 +102,11 @@ _zm = {"IDZ001": {"shares": {"Panhandle": 1.0}, "primary": "Panhandle"}}
 _out = _nws.alerts(_zm)
 _pan = _out.get("panhandle", [])
 assert len(_pan) == 1 and _pan[0]["id"] == "urn:oid:test.1", _pan   # the expired statement is gone, the live one stays
-assert "MapClick" not in _pan[0]["url"] and _pan[0]["url"].startswith("https://alerts.weather.gov"), _pan[0]["url"]
+assert _pan[0]["url"] == "https://forecast.weather.gov/showsigwx.php?warnzone=IDZ001&warncounty=IDC021", _pan[0]["url"]
+# a zone that only touches a region (16% of Eastern Lemhi is in Upper Snake) does not put its alert on that region's page; its primary region still gets it
+_zm2 = {"IDZ001": {"shares": {"Salmon": 0.84, "Upper Snake": 0.16}, "primary": "Salmon"}}
+_o2 = _nws.alerts(_zm2)
+assert "salmon" in _o2 and "upper-snake" not in _o2, list(_o2)
 assert _pan[0]["summary"].startswith("At 538 AM PST") and _pan[0]["gist"], _pan[0]
 print("nws alert link and expiry tests ok")
 

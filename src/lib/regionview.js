@@ -77,6 +77,30 @@ export function projectPoint(lon, lat) {
   return [pad + (lon - lon0) * k * s, pad + (lat1 - lat) * s];
 }
 
+// Extra facts the NIFC record carries, as short phrases: cause, who protects it, discovery date, and (only when true) that it is long-running with no news.
+// Nothing here is a guess about strategy: it is the feed's own fields and two date comparisons.
+export function fireFacts(f, tz = 'America/Boise') {
+  const day = (iso) => new Date(iso).toLocaleDateString('en-US', { timeZone: tz, month: 'short', day: 'numeric' });
+  const age = (iso) => (Date.now() - Date.parse(iso)) / 86400000;
+  const unit = fireData.units?.[f.unit];
+  const out = [];
+  if (f.cause === 'Natural' || f.cause === 'Human') out.push(`${f.cause} cause`);
+  if (unit) out.push(unit.name);
+  if (f.discoveredAt) out.push(`discovered ${day(f.discoveredAt)}`);
+  if (f.oldRecord) out.push(`possibly an old record: no containment figure ${Math.round(age(f.discoveredAt) / 30)} months after discovery, so it may no longer be active. Check with the forest`);
+  else if (f.containmentPct == null) out.push('no containment reported');
+  if (f.modifiedAt) out.push(`updated ${day(f.modifiedAt)}`);
+  return out.join(' · ');
+}
+// Links for one fire: the managing forest's fire page (by protecting-unit code) and a map pin.
+export function fireLinksFor(f, skip = []) {  // skip: links the card already shows elsewhere (the region's standing forest link), so none appears twice
+  const unit = fireData.units?.[f.unit];
+  return [unit && !skip.some((l) => l.href === unit.href) ? { label: `${unit.name} fire info`, href: unit.href } : null, f.lat != null && f.lon != null ? { label: 'Map', href: `https://www.google.com/maps?q=${f.lat},${f.lon}` } : null].filter(Boolean);
+}
+
+// One named fire: "Swamp fire, 45 acres" plus containment when NIFC gives it.
+export const fireLine = (f) => `${f.name} fire${f.oldRecord ? ' (possibly an old record)' : ''}${f.acres != null ? `, ${Math.round(f.acres).toLocaleString('en-US')} acres` : ''}${f.containmentPct != null ? `, ${f.containmentPct}% contained` : ''}`;
+
 export function statusStrip(id) {
   const r = conditions.regions[id];
   const tz = r.tz;
@@ -95,10 +119,14 @@ export function statusStrip(id) {
   };
   const road = roadInfo(r);
   const nRoads = new Set(road.winter.map((w) => w.name)).size;
+  // An unplanned closure leads. A planned one (a parade, a long construction closure) never outranks current snow or ice: it moves to the second line.
+  const unplanned = road.hwy.filter((c) => c.unplanned);
+  const planned = road.hwy.length - unplanned.length;
+  const plannedNote = planned ? `${planned} planned closure${planned === 1 ? '' : 's'}${unplanned.length ? '' : ' (not an emergency)'}` : '';
   const roads = {
     title: 'Roads',
-    lead: !road.live ? 'Not connected yet' : road.hwy[0] ? `${road.hwy[0].name} ${road.hwy[0].unplanned ? 'closed' : 'closure'}` : nRoads ? `${nRoads} road${nRoads === 1 ? '' : 's'} with snow or ice` : 'No closures reported',
-    sub: !road.live ? 'Road conditions arrive with the Idaho 511 connection.' : road.hwy.length > 1 ? `+${road.hwy.length - 1} more highway closure${road.hwy.length > 2 ? 's' : ''}.` : road.stale ? 'Road data is out of date.' : '',
+    lead: !road.live ? 'Not connected yet' : unplanned[0] ? `${unplanned[0].name} closed` : nRoads ? `${nRoads} road${nRoads === 1 ? '' : 's'} with snow or ice` : planned ? 'No unplanned closures' : 'No closures reported',
+    sub: !road.live ? 'Road conditions arrive with the Idaho 511 connection.' : [unplanned.length > 1 ? `+${unplanned.length - 1} more highway closure${unplanned.length > 2 ? 's' : ''}` : '', plannedNote, road.stale ? 'Road data is out of date' : ''].filter(Boolean).join('. ') + (unplanned.length > 1 || plannedNote || road.stale ? '.' : ''),
     links: [{ href: '#roads', label: 'Details' }, { href: IDAHO511, label: 'Idaho 511' }],
     note: NOTES.roads,
     src: `Idaho 511${road.asOf ? ` · ${fmtTime(road.asOf, tz)}` : ''}`,
@@ -106,15 +134,18 @@ export function statusStrip(id) {
   // Every monitored city in the region with a fresh reading, worst first. The card leads with the worst one and lists the rest below it.
   const aqAll = r.air.points.filter((p) => p.aqi?.value != null && p.aqi?.status === 'fresh').sort((a, b) => b.aqi.value - a.aqi.value);
   const aqLine = (p) => `${p.name} AQI ${p.aqi.value}${p.category ? ` ${p.category}` : ''}`;
-  const fires = r.fire.wildfires.filter((f) => f.status !== 'stale').length;
+  const aqNew = aqAll.map((p) => p.aqi.observedAt).filter(Boolean).sort().at(-1);
+  const fireList = r.fire.wildfires.filter((f) => f.status !== 'stale').sort((a, b) => (b.acres ?? 0) - (a.acres ?? 0));
+  const fires = fireList.length;
   const burns = r.fire.prescribed.filter((f) => f.status !== 'stale').length;
   const fire = {
     title: 'Air, fire & smoke',
     lead: aqAll.length ? aqLine(aqAll[0]) : 'No current air reading',
-    sub: `${aqAll.length > 1 ? aqAll.slice(1).map(aqLine).join('. ') + '. ' : ''}${fires ? `${fires} wildfire${fires === 1 ? '' : 's'} reported` : 'No wildfires reported'}${burns ? `, ${burns} prescribed burn${burns === 1 ? '' : 's'}` : ''}.`,
+    detail: aqAll.length ? airDetail(aqAll[0]) : '',
+    sub: `${aqAll.length > 1 ? aqAll.slice(1).map(aqLine).join('. ') + '. ' : ''}${fires ? `${fireList.slice(0, 2).map(fireLine).join('. ')}${fires > 2 ? ` (+${fires - 2} more)` : ''}` : 'No wildfires reported'}${burns ? `, ${burns} prescribed burn${burns === 1 ? '' : 's'}` : ''}.`,
     links: [{ href: '#air-quality', label: 'Air quality' }, { href: '#wildfires', label: 'Wildfires and burns' }],
     note: NOTES.fire,
-    src: 'AirNow · NIFC',
+    src: `AirNow${aqNew ? ` · ${fmtTime(aqNew, tz)}` : ''} · NIFC${conditions.sources?.nifc?.fetchedAt ? ` · ${fmtTime(conditions.sources.nifc.fetchedAt, tz)}` : ''}`,
   };
   const sn = r.snow.filter((s) => s.depth?.status === 'fresh' && s.depth.value !== null).sort((a, b) => b.depth.value - a.depth.value)[0];
   const snow = {
@@ -122,14 +153,14 @@ export function statusStrip(id) {
     lead: sn ? `${sn.name} ${sn.depth.value} in` : 'No fresh snow reading',
     sub: sn?.pctOfMedian?.value != null ? `Water content ${sn.pctOfMedian.value}% of median.` : 'SNOTEL stations in this region.',
     note: NOTES.avalanche,
-    src: 'NRCS SNOTEL',
+    src: `NRCS SNOTEL${sn?.depth?.observedAt ? ` · ${fmtTime(sn.depth.observedAt, tz)}` : ''}`,
     links: [id === 'southwest' ? { href: 'https://payetteavalanche.org/', label: 'Payette Avalanche Center' } : null, { href: 'https://avalanche.org/', label: 'avalanche.org' }].filter(Boolean),
   };
   return [weather, roads, fire, snow];
 }
 
 // The public NWS alerts page for Idaho. Never a point-forecast (MapClick) page: those often show no Special Weather Statement and never show an expired one.
-export const ALERTS_PAGE = 'https://alerts.weather.gov/?area=ID';
+export const ALERTS_PAGE = 'https://www.weather.gov/alerts';
 // One plain line on what the alert says, so a generic outbound link is not the only copy: the first sentence of NWS's description, else its (all-caps) headline in sentence case.
 export function alertGist(a, n = 150) {
   let t = String(a?.summary ?? '').replace(/\s+/g, ' ').trim();
