@@ -1924,6 +1924,7 @@ details.data-detail > summary { cursor: pointer; font-weight: 650; font-size: 14
 .map-legend i.t { background: #b9b3a4; }
 .spot-row:target { background: #fbf3d9; }
 .spot-row { scroll-margin-top: 90px; }
+.spot-row > * { min-width: 0; }
 .state-card .alert-items li { display: block; }
 .list-card.cols-activity.no-metric .list-head, .list-card.cols-activity.no-metric .spot-row { grid-template-columns: 1.6fr 0.8fr 1.7fr 1.3fr; }
 .list-card.cols-statewide.no-metric .list-head, .list-card.cols-statewide.no-metric .spot-row { grid-template-columns: 1.7fr 0.8fr 1.8fr 1.1fr; }
@@ -1934,7 +1935,7 @@ details.data-detail > summary { cursor: pointer; font-weight: 650; font-size: 14
 .list-card.cols-activity.no-status.no-metric .list-head, .list-card.cols-activity.no-status.no-metric .spot-row { grid-template-columns: 1.3fr 1.5fr 1fr; }
 .list-card.cols-statewide.no-status.no-metric .list-head, .list-card.cols-statewide.no-status.no-metric .spot-row { grid-template-columns: 1.3fr 1.5fr 1fr; }
 @media (max-width: 720px) {
-  .list-card.no-status .list-head, .list-card.no-status .spot-row { grid-template-columns: 1fr !important; }
+  .list-card.no-status .list-head, .list-card.no-status .spot-row { grid-template-columns: minmax(0, 1fr) !important; }
 }
 @media (max-width: 720px) {
   .list-card.no-metric .list-head, .list-card.no-metric .spot-row,
@@ -1972,6 +1973,8 @@ details.data-detail > summary { cursor: pointer; font-weight: 650; font-size: 14
 .spot-verdict details.more p { margin: 6px 0 0; font-size: 13px; color: var(--ink-soft); }
 
 /* Golf forecast block: a full-width line under the row (toggles sit under the course description; opened content gets the whole row). Built in lib/catalog.js forecastBlock */
+/* min-width: 0 on the grid item and its children: the hourly grid (auto-fill) would otherwise size the whole row to all its columns in one line, widen the page on phones, and make iOS enlarge the text */
+.spot-fx, .spot-fx details, .fx-hr, .fx-wk, .spot-fx p { min-width: 0; max-width: 100%; }
 .spot-fx { grid-column: 1 / -1; margin-top: -6px; display: flex; flex-wrap: wrap; gap: 4px 22px; align-items: flex-start; }
 .spot-fx details { flex: 0 0 auto; }
 .spot-fx details[open] { flex: 1 1 100%; }
@@ -2191,3 +2194,6 @@ details.fc7-detail + details.data-detail { margin-top: 0; border-top: 0; padding
 @media (max-width: 700px) {
   [id="activities"], [id="alerts"], [id="regions"], [id="forecast"], [id="readings"], [id="brief"], .alert-card[id], .local-detail[id] { scroll-margin-top: 112px; }
 }
+
+/* Stop iOS from enlarging text when it thinks a block is wider than the screen */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
