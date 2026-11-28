@@ -68,8 +68,8 @@ def fetch():
     find = region_finder()
     entries = [x for x in load_json("data/selected_stations.json")["snow"] if x.get("snotel")]
     peaks = load_json("data/peaks.json").get("peaks", [])  # nearby stations for each backcountry peak (not on the region Snow card)
-    skis = load_json("data/ski_areas.json").get("areas", [])  # nearby stations for each ski area (not resort data)
-    ids = sorted({x["snotel"]["id"] for x in entries} | {st["id"] for pk in peaks for st in pk["stations"]} | {st["id"] for a in skis for st in a["stations"]})
+    areas_ = load_json("data/snow_areas.json").get("areas", [])  # nearby stations for each ski and Nordic area (not resort or trail data)
+    ids = sorted({x["snotel"]["id"] for x in entries} | {st["id"] for pk in peaks for st in pk["stations"]} | {st["id"] for a in areas_ for st in a["stations"]})
     end = dt.date.today()
     rows = http_json(q(AWDB + "/data", stationTriplets=",".join(ids), elements="SNWD,WTEQ", duration="DAILY",
                        beginDate=(end - dt.timedelta(days=5)).isoformat(), endDate=end.isoformat(), returnFlags="false"))
@@ -125,8 +125,8 @@ def fetch():
                         "swe": reading(swe, "in", wobs, "NRCS SNOTEL", prov),
                         "depthChange24h": {**reading(change, "in", obs, "NRCS SNOTEL", prov), **({"suspect": True} if suspect else {})}})
         out.setdefault(pk["region"], {}).setdefault("peaks", {})[pk["id"]] = lst
-    # per-ski-area nearby stations: out[region]["skiStations"][spot id]; distance and feet vs the mid-mountain map point travel with each one
-    for a in skis:
+    # per-area (ski, Nordic) nearby stations: out[region]["areaStations"][spot id]; distance and feet vs the mid-mountain map point travel with each one
+    for a in areas_:
         if not a["stations"]:
             continue
         lst = []
@@ -139,7 +139,7 @@ def fetch():
                         "depth": reading(depth, "in", obs, "NRCS SNOTEL", prov),
                         "swe": reading(swe, "in", wobs, "NRCS SNOTEL", prov),
                         "depthChange24h": {**reading(change, "in", obs, "NRCS SNOTEL", prov), **({"suspect": True} if suspect else {})}})
-        out.setdefault(a["region"], {}).setdefault("skiStations", {})[a["id"]] = lst
+        out.setdefault(a["region"], {}).setdefault("areaStations", {})[a["id"]] = lst
     return out
 
 

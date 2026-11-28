@@ -93,15 +93,21 @@ function peakView(spot, fl, o) {
   return { metric, text, pill: { text: parts.length ? 'Nearby station' : 'Forecast only', cls: 'muted' } };
 }
 
-// data/ski_areas.json: ski areas. Snow figures come from nearby SNOTEL stations (conditions.regions[r].skiStations[spot id]), never from the resort.
-const skiFacts = Object.fromEntries((readJson('ski_areas.json', { areas: [] }).areas ?? []).map((a) => [a.id, a]));
-function skiView(spot, fl, o) {
-  const a = skiFacts[spot.id];
-  if (!a) return null;
-  const sts = conditions.regions[spot.region]?.skiStations?.[spot.id] ?? [];
+// data/snow_areas.json: ski and Nordic areas. Snow figures come from nearby SNOTEL stations (conditions.regions[r].areaStations[spot id]), never from the resort or trail system.
+const areaFacts = Object.fromEntries((readJson('snow_areas.json', { areas: [] }).areas ?? []).map((a) => [a.id, a]));
+const AREA_WORDS = {
+  ski: { who: 'resort data', ref: 'mid-mountain', near: 'of mid-mountain', where: 'at the resort', tail: "Lifts, trails and opening dates: see the resort's own page." },
+  nordic: { who: 'trail data', ref: 'this trail area', near: 'of this trail area', where: 'on the trails', tail: 'Grooming and trail status: see the trail system\'s own page.' },
+};
+function areaView(spot, fl, o) {
+  const a = areaFacts[spot.id], w = AREA_WORDS[spot.activity];
+  if (!a || !w) return null;
+  const sts = conditions.regions[spot.region]?.areaStations?.[spot.id] ?? [];
+  const about = spot.activity === 'ski' ? '' : 'about ';
   const parts = sts.map((s) => {
-    const g = s.feetVsMid, rel = Math.abs(g) < 100 ? 'about the same elevation as mid-mountain' : g > 0 ? `${nf(Math.round(g / 10) * 10)} ft above mid-mountain` : `${nf(Math.round(-g / 10) * 10)} ft below mid-mountain`;
-    const where = `${s.name} SNOTEL station, ${s.distanceMi} mi ${s.bearing} of mid-mountain, ${rel}`;
+    const g = s.feetVsMid, r10 = (n) => nf(Math.round(n / 10) * 10);
+    const rel = Math.abs(g) < 100 ? `about the same elevation as ${w.ref}` : g > 0 ? `${about}${r10(g)} ft above ${w.ref}` : `${about}${r10(-g)} ft below ${w.ref}`;
+    const where = `${s.name} SNOTEL station, ${s.distanceMi} mi ${s.bearing} ${w.near}, ${rel}`;
     const d = s.depth;
     if (!d || d.value === null || d.status === 'missing') return `${where}: no current reading.`;
     const ch = s.depthChange24h;
@@ -111,10 +117,10 @@ function skiView(spot, fl, o) {
   const first = sts[0]?.depth;
   const metric = first && first.value !== null && first.status !== 'missing'
     ? { text: `${first.value} ${first.unit}`, trend: `${sts[0].name}, ${sts[0].distanceMi} mi ${sts[0].bearing}`, observedAt: first.observedAt, stale: first.status === 'stale' } : null;
-  const snow = parts.length ? `Nearby station, not resort data. ${parts.join(' ')} It is not a reading at the resort, and snow can differ a lot with distance and elevation.` : 'No SNOTEL station close enough to represent this area.';
+  const snow = parts.length ? `Nearby station, not ${w.who}. ${parts.join(' ')} It is not a reading ${w.where}, and snow can differ a lot with distance and elevation.` : 'No SNOTEL station close enough to represent this area.';
   let tail = '';
-  if (o?.elev) { const gap = a.midFt - o.elev; tail = ` The NWS forecast is for a point at about ${nf(o.elev)} ft${Math.abs(gap) > 300 ? `, ${nf(Math.abs(gap))} ft ${gap > 0 ? 'below' : 'above'} mid-mountain` : ', near mid-mountain'}.`; }
-  const text = `${snow}${o?.mountain && fl ? ` ${fl}` : ''}${tail} Lifts, trails and opening dates: see the resort's own page.`;
+  if (o?.elev) { const gap = a.midFt - o.elev; tail = ` The NWS forecast is for a point at about ${nf(o.elev)} ft${Math.abs(gap) > 300 ? `, ${nf(Math.abs(gap))} ft ${gap > 0 ? 'below' : 'above'} ${w.ref}` : `, near ${w.ref}`}.`; }
+  const text = `${snow}${o?.mountain && fl ? ` ${fl}` : ''}${tail} ${w.tail}`;
   return { metric, text, pill: { text: parts.length ? 'Nearby station' : 'Forecast only', cls: 'muted' } };
 }
 
@@ -177,8 +183,8 @@ export function spotView(spot, tz) {
     const pv = peakView(spot, fl, o);
     if (pv) { metric = pv.metric; verdict = pv.text; pill = pv.pill; }
   }
-  if (spot.activity === 'ski') {
-    const sv = skiView(spot, fl, o);
+  if (spot.activity === 'ski' || spot.activity === 'nordic') {
+    const sv = areaView(spot, fl, o);
     if (sv) { metric = sv.metric; verdict = sv.text; pill = sv.pill; }
   }
   const aw = sources[spot.id]?.confirmed === true && sources[spot.id].aw;
