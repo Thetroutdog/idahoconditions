@@ -250,3 +250,38 @@ _hs = _sn.snow_hourly(_h([14] * 30, skip=range(0, 8)))   # the hour a day earlie
 assert _hs["change"] is None, _hs
 assert _sn.snow_hourly({}) is None
 print("hourly snow tests ok")
+
+
+# golf: hourly rows (local start time, temperature, top wind speed, rain chance) and a full week of days with the text kept for the first four
+_hp = [{"startTime": "2026-11-28T11:00:00-07:00", "temperature": 41, "windSpeed": "6 mph", "probabilityOfPrecipitation": {"value": 5}},
+       {"startTime": "2026-11-28T12:00:00-07:00", "temperature": 44, "windSpeed": "5 to 10 mph", "probabilityOfPrecipitation": {"value": None}},
+       {"startTime": "2026-11-28T13:00:00-07:00", "temperature": 46, "windSpeed": "", "probabilityOfPrecipitation": None}]
+_hr = _nws.hourly_rows(_hp)
+assert _hr == [["2026-11-28T11:00", 41, 6, 5], ["2026-11-28T12:00", 44, 10, None], ["2026-11-28T13:00", 46, None, None]], _hr
+assert len(_nws.hourly_rows([_hp[0]] * 80)) == _nws.HOURLY_KEEP
+_pd = [{"startTime": f"2026-11-{28 + i // 2}T{'06' if i % 2 == 0 else '18'}:00:00-07:00", "isDaytime": i % 2 == 0, "name": f"P{i}", "temperature": 40 - i, "shortForecast": "Sunny", "windSpeed": "5 mph",
+        "detailedForecast": "text", "probabilityOfPrecipitation": {"value": 10}} for i in range(14)]
+_wd = _nws.spot_days(_pd, True)
+assert len(_wd) == 7 and _wd[3].get("detail") == "text" and "detail" not in _wd[4] and len(_nws.spot_days(_pd, False)) == 2
+assert "golf" in _nws.WEEK_ACTS and "golf" in _nws.HOURLY_ACTS
+print("golf forecast tests ok")
+
+
+# get_retry: one transient failure is retried, a second one is raised
+_calls = []
+def _flaky(url, fail=1):
+    _calls.append(url)
+    if len(_calls) <= fail:
+        raise OSError("503")
+    return {"ok": True}
+_g0, _s0 = _nws.get, _nws.time.sleep
+_nws.time.sleep = lambda s: None
+_nws.get = lambda url: _flaky(url, 1)
+assert _nws.get_retry("u") == {"ok": True} and len(_calls) == 2
+_calls.clear(); _nws.get = lambda url: _flaky(url, 5)
+try:
+    _nws.get_retry("u"); raise AssertionError("should raise")
+except OSError:
+    assert len(_calls) == 2
+_nws.get, _nws.time.sleep = _g0, _s0
+print("retry tests ok")

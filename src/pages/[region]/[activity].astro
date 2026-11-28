@@ -34,7 +34,7 @@ const noun = activity === 'ski' ? 'areas' : 'spots';
       <p class="verdict">{rollup(list, activity)}</p>
       <LocalSection id={region} activity={activity} open />
       <p class="legal-line">{NOTES.general} <a href="/terms/">Terms</a></p>
-      <SpotTable rows={rows} variant="activity" label={activity === 'ski' ? 'Area' : 'Spot'} />
+      <SpotTable rows={rows} variant="activity" label={activity === 'ski' ? 'Area' : 'Spot'} hideStatus={activity === 'golf'} />
       <p style="margin:16px 0 0"><a href={`/${activity}/`} data-astro-prefetch>See all Idaho {activityTitle(activity)} →</a></p>
     </div>
   </main>

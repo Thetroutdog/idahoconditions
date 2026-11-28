@@ -1,7 +1,7 @@
 // Spot catalog (data/spots.json, from Grok) plus season rules from docs/Idaho_Conditions_Build_Spec §4.
 import fs from 'node:fs';
 import path from 'node:path';
-import { conditions } from './conditions.js';
+import { conditions, fmtTime } from './conditions.js';
 import { chipsFor, outlook, forecastLine } from './chips.js';
 
 const readJson = (f, fallback) => { try { return JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'data', f), 'utf8')); } catch { return fallback; } };
@@ -153,6 +153,46 @@ export function flowWord(src, cfs) {
   return null;
 }
 
+// ---- Forecast block for spot rows (golf): today's hourly rows, a 7-day strip and a link to the NWS point forecast. All of it is the NWS forecast for the course's own point. ----
+const FX_ACTS = new Set(['golf']);
+const spotPoints = (() => { const a = readJson('spot_coords.json', { spots: {} }).spots ?? {}; return { ...a, ...readJson('spot_coords_manual.json', {}) }; })();
+const wkday = new Intl.DateTimeFormat('en-US', { weekday: 'short', timeZone: 'UTC' }), mday = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', timeZone: 'UTC' });
+const dayOf = (iso) => new Date(`${iso}T12:00:00Z`);
+const mphOf = (t) => { const n = String(t ?? '').match(/\d+/g); return n ? Math.max(...n.map(Number)) : null; };
+const hourLabel = (h) => `${h % 12 || 12}${h < 12 ? 'a' : 'p'}`;
+function localNow(tz) {
+  const p = Object.fromEntries(new Intl.DateTimeFormat('en-CA', { timeZone: tz, hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit' }).formatToParts(new Date()).map((x) => [x.type, x.value]));
+  const d = new Date(Date.UTC(+p.year, +p.month - 1, +p.day + 1));
+  return { date: `${p.year}-${p.month}-${p.day}`, hour: +p.hour % 24, tomorrow: d.toISOString().slice(0, 10) };
+}
+function forecastBlock(spot, tz) {
+  const gk = conditions.spotForecast?.bySpot?.[spot.id], g = gk && conditions.spotForecast.grids?.[gk];
+  const pt = spotPoints[spot.id];
+  if (!g || !pt || pt.lat == null) return null;
+  const now = localNow(tz);
+  const days = (g.days ?? []).filter((d) => !d.date || d.date >= now.date).slice(0, 7);
+  if (!days.length) return null;
+  // today's hourly rows: the rest of today (8 am to 8 pm); once fewer than 3 are left, tomorrow's 7 am to 8 pm
+  const rows = (g.hourly ?? []).map(([t, temp, wind, pop]) => ({ date: t.slice(0, 10), h: +t.slice(11, 13), temp, wind, pop }));
+  let pick = rows.filter((r) => r.date === now.date && r.h >= Math.max(now.hour, 7) && r.h <= 20), which = 'Today';
+  if (pick.length < 3) { const tm = rows.filter((r) => r.date === now.tomorrow && r.h >= 7 && r.h <= 20); if (tm.length >= 3) { pick = tm; which = 'Tomorrow'; } else if (!pick.length) { pick = []; } } // no hourly rows at all (fetch failed or not run yet): keep "Today" with the text only
+  const first = days[0];
+  const week = days.map((d, i) => { const dt = d.date ? dayOf(d.date) : null; return { name: i === 0 && d.date === now.date ? 'Today' : dt ? `${wkday.format(dt)} ${dt.getUTCDate()}` : d.name, hi: d.hi, lo: d.lo, short: d.short, rain: d.precipChance, wind: mphOf(d.wind), weekend: dt ? [0, 6].includes(dt.getUTCDay()) : false }; });
+  const labels = [];
+  const best = (key, cmp, text) => { const v = week.filter((d) => d[key] != null); if (v.length < 4) return; const m = v.reduce((a, b) => (cmp(b[key], a[key]) ? b : a)); if (v.some((d) => d[key] !== m[key])) labels.push(text(m)); };
+  best('rain', (a, b) => a < b, (d) => `Driest: ${d.name.split(' ')[0]}, ${d.rain}%`);
+  best('hi', (a, b) => a > b, (d) => `Warmest: ${d.name.split(' ')[0]}, ${d.hi}°`);
+  best('wind', (a, b) => a > b, (d) => `Windiest: ${d.name.split(' ')[0]}, ${d.wind} mph`);
+  const last = week.length ? days[days.length - 1].date : null;
+  return {
+    which, hours: pick.map((r) => ({ label: hourLabel(r.h), temp: r.temp, wind: r.wind, pop: r.pop })), hoursAt: pick.length && g.fetchedAt ? fmtTime(g.fetchedAt, tz) : null,
+    todayText: first.date === now.date || !first.date ? [first.detail, first.hi != null && first.nightDetail ? `Tonight: ${first.nightDetail}` : null].filter(Boolean) : [],
+    week, labels, reaches: last ? `${wkday.format(dayOf(last))} ${mday.format(dayOf(last))}` : null,
+    nws: `https://forecast.weather.gov/MapClick.php?lat=${pt.lat.toFixed(4)}&lon=${pt.lon.toFixed(4)}`,
+    outlook: 'https://www.cpc.ncep.noaa.gov/products/predictions/814day/',
+  };
+}
+
 // ---- Templated verdicts: only readings, catalog facts and the calendar. No thresholds are guessed. ----
 export function spotView(spot, tz) {
   const state = seasonState(spot.activity);
@@ -192,8 +232,10 @@ export function spotView(spot, tz) {
   if (!rd && sources[spot.id]?.confirmed === true && sources[spot.id].note && state !== 'low') verdict = `${verdict} ${sources[spot.id].note}`;
   // Golf lists many courses per town, so the full forecast sits behind a "Full forecast" toggle under a one-line summary.
   let more = null;
-  if (spot.activity === 'golf' && fl) { more = fl; verdict = forecastLine(o, false); }
-  return { ...spot, sources: links, pill, metric, verdict, more, chips: chipsFor(spot, state, rd) };
+  let fx = null;
+  if (FX_ACTS.has(spot.activity)) fx = forecastBlock(spot, tz);
+  if (spot.activity === 'golf' && fl) { more = fx ? null : fl; verdict = forecastLine(o, false); } // with the forecast block, "Today's forecast" replaces the old "Full forecast" toggle
+  return { ...spot, sources: links, pill, metric, verdict, more, fx, chips: chipsFor(spot, state, rd) };
 }
 
 const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;

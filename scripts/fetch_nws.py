@@ -2,7 +2,7 @@
 """Fetch NWS forecasts (per region point) and active alerts (statewide, mapped to regions by zone) -> data/parts/nws.json.
 Needs data/region_points.json and data/zone_region.json. Set IC_USER_AGENT (NWS requires a contact). Standard library only.
 On failure the previous part is kept and marked ok=false so the build shows last-known data as stale."""
-import json, os, sys, time, urllib.request, urllib.parse, datetime as dt
+import json, os, re, sys, time, urllib.request, urllib.parse, datetime as dt
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 PART = os.path.join(ROOT, "data", "parts", "nws.json")
@@ -19,6 +19,17 @@ def get(url):
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/geo+json"})
     with urllib.request.urlopen(req, timeout=40) as r:
         return json.loads(r.read())
+
+
+def get_retry(url, tries=2, pause=2.0):
+    """get() with one retry after a short pause: api.weather.gov answers the odd request with a 5xx or times out, and a spot forecast should survive that."""
+    for i in range(tries):
+        try:
+            return get(url)
+        except Exception:
+            if i == tries - 1:
+                raise
+            time.sleep(pause)
 
 
 def alert_level(props):
@@ -209,6 +220,22 @@ def spot_days(raw, full):
     return days[:4] + [{k: v for k, v in d.items() if k not in ("detail", "nightDetail")} for d in days[4:BRIEF_DAYS]]
 
 
+WEEK_ACTS = {"golf"}    # activities whose spot rows show the 7-day forecast (their grids keep a week of days)
+HOURLY_ACTS = {"golf"}  # activities whose spot rows show today's hourly forecast (one extra request per grid cell)
+HOURLY_KEEP = 36        # hours kept (enough for today, or tomorrow once today is nearly over)
+HOURLY_MAX_AGE_MIN = 55  # hourly rows are reused for less than this long, so a run every 30 minutes refetches them about every other run
+
+
+def hourly_rows(periods, n=HOURLY_KEEP):
+    """[local start 'YYYY-MM-DDTHH:MM', temperature F, wind mph, rain chance %] for the next n hours of an NWS hourly forecast.
+    The start time is the grid point's own local time (the offset is dropped), so the page can pick today's hours without time zone math."""
+    out = []
+    for p in periods[:n]:
+        w = re.findall(r"\d+", p.get("windSpeed") or "")
+        out.append([(p.get("startTime") or "")[:16], p.get("temperature"), max(map(int, w)) if w else None, (p.get("probabilityOfPrecipitation") or {}).get("value")])
+    return out
+
+
 SPOT_MAX_AGE_MIN = 120  # a cell fetched less than this long ago is reused, which keeps a run to a few requests; NWS updates grid forecasts about hourly
 
 
@@ -248,24 +275,27 @@ def spot_forecasts():
     gpath = os.path.join(ROOT, "data", "grid_cache.json")
     gcache = json.load(open(gpath)) if os.path.exists(gpath) else {}
     by_spot, grids, names = {}, {}, {}
+    hourly_ok, hourly_fails, hourly_tried = True, 0, set()  # hourly is switched off for the run after 3 failures in a row (a changed endpoint then costs 3 requests, not one per cell)
     for sp in spots:
         c = coords[sp["id"]]
         key = f"{c['lat']:.3f},{c['lon']:.3f}"
+        gk = None
         try:
             if key not in gcache:
-                m = get(f"https://api.weather.gov/points/{c['lat']:.4f},{c['lon']:.4f}")["properties"]
+                m = get_retry(f"https://api.weather.gov/points/{c['lat']:.4f},{c['lon']:.4f}")["properties"]
                 gcache[key] = {"office": m["gridId"], "x": m["gridX"], "y": m["gridY"], "forecast": m["forecast"]}
                 time.sleep(0.7)
             g = gcache[key]
             gk = f"{g['office']}/{g['x']},{g['y']}"
-            full = sp["id"] in brief
-            enough = lambda x: not full or len(x.get("days", [])) >= BRIEF_DAYS  # a Brief spot needs the week, so a short cached or shared cell is refetched
-            if gk not in grids and gk in prev and prev[gk].get("fetchedAt") and enough(prev[gk]) and (now_dt - dt.datetime.fromisoformat(prev[gk]["fetchedAt"])).total_seconds() < SPOT_MAX_AGE_MIN * 60:
+            full = sp["id"] in brief or sp["activity"] in WEEK_ACTS
+            hourly = sp["activity"] in HOURLY_ACTS and hourly_ok and gk not in hourly_tried  # a cell whose hourly request already failed this run is not refetched for the next course in it
+            enough = lambda x: (not full or len(x.get("days", [])) >= BRIEF_DAYS) and (not hourly or bool(x.get("hourly")))  # a Brief or golf spot needs the week (golf also the hourly rows), so a short cached or shared cell is refetched
+            if gk not in grids and gk in prev and prev[gk].get("fetchedAt") and enough(prev[gk]) and (now_dt - dt.datetime.fromisoformat(prev[gk]["fetchedAt"])).total_seconds() < (HOURLY_MAX_AGE_MIN if hourly else SPOT_MAX_AGE_MIN) * 60:
                 grids[gk] = prev[gk]
             if gk in grids and not enough(grids[gk]):
                 del grids[gk]
             if gk not in grids:
-                fc = get(g["forecast"])["properties"]
+                fc = get_retry(g["forecast"])["properties"]
                 el = (fc.get("elevation") or {}).get("value")  # meters
                 raw = fc["periods"]
                 grids[gk] = {"office": g["office"], "elevationFt": round(el * 3.28084 / 10) * 10 if el is not None else None, "updated": fc.get("updateTime") or fc.get("generatedAt"), "fetchedAt": now_dt.isoformat(timespec="seconds"),
@@ -273,10 +303,26 @@ def spot_forecasts():
                                           "precipChance": (p.get("probabilityOfPrecipitation") or {}).get("value")} for p in raw[:4]],
                              "days": spot_days(raw, full), "discussion": afd_url(g["office"])}  # site rows use today and tomorrow; the Brief's grids keep a week
                 time.sleep(0.5)
+            if hourly and not grids[gk].get("hourly"):
+                hourly_tried.add(gk)
+                try:  # same grid cell, /hourly: documented NWS sibling of the forecast URL. A failure only hides the hourly row
+                    grids[gk]["hourly"] = hourly_rows(get_retry(g["forecast"].rstrip("/") + "/hourly")["properties"]["periods"])
+                    hourly_fails = 0
+                    time.sleep(0.5)
+                except Exception as e:
+                    hourly_fails += 1
+                    hourly_ok = hourly_fails < 3
+                    print(f"hourly forecast failed for {sp['id']}{'' if hourly_ok else ' (3 in a row: hourly skipped for the rest of this run)'}:", e)
             by_spot[sp["id"]] = gk
             names.setdefault(gk, []).append(sp["name"])
         except Exception as e:
-            print("spot forecast failed:", sp["id"], e)
+            if gk and gk in prev and gk not in grids:  # keep the last good forecast for this cell (the page drops days already past) instead of losing the spot
+                grids[gk] = prev[gk]
+                by_spot[sp["id"]] = gk
+                names.setdefault(gk, []).append(sp["name"])
+                print("spot forecast failed, kept the previous one:", sp["id"], e)
+            else:
+                print("spot forecast failed:", sp["id"], e)
     json.dump(gcache, open(gpath, "w"))
     for gk, g in sorted(grids.items()):  # elevation per cell is printed so a wrong coordinate (a valley point for a ski area) stands out
         print(f"  {gk}: {g['elevationFt']} ft  <- {', '.join(names[gk][:3])}{' ...' if len(names[gk]) > 3 else ''}")

@@ -1927,6 +1927,15 @@ details.data-detail > summary { cursor: pointer; font-weight: 650; font-size: 14
 .state-card .alert-items li { display: block; }
 .list-card.cols-activity.no-metric .list-head, .list-card.cols-activity.no-metric .spot-row { grid-template-columns: 1.6fr 0.8fr 1.7fr 1.3fr; }
 .list-card.cols-statewide.no-metric .list-head, .list-card.cols-statewide.no-metric .spot-row { grid-template-columns: 1.7fr 0.8fr 1.8fr 1.1fr; }
+/* Golf: no Status column (spot, verdict, links; with a reading column: spot, reading, verdict, links). The verdict sits toward the middle with a wide gap after the description. */
+.list-card.no-status .list-head, .list-card.no-status .spot-row { column-gap: 40px; }
+.list-card.cols-activity.no-status .list-head, .list-card.cols-activity.no-status .spot-row { grid-template-columns: 1.4fr 0.8fr 1.4fr 1.1fr; }
+.list-card.cols-statewide.no-status .list-head, .list-card.cols-statewide.no-status .spot-row { grid-template-columns: 1.4fr 0.8fr 1.4fr 1fr; }
+.list-card.cols-activity.no-status.no-metric .list-head, .list-card.cols-activity.no-status.no-metric .spot-row { grid-template-columns: 1.3fr 1.5fr 1fr; }
+.list-card.cols-statewide.no-status.no-metric .list-head, .list-card.cols-statewide.no-status.no-metric .spot-row { grid-template-columns: 1.3fr 1.5fr 1fr; }
+@media (max-width: 720px) {
+  .list-card.no-status .list-head, .list-card.no-status .spot-row { grid-template-columns: 1fr !important; }
+}
 @media (max-width: 720px) {
   .list-card.no-metric .list-head, .list-card.no-metric .spot-row,
   .list-card.cols-activity.no-metric .list-head, .list-card.cols-activity.no-metric .spot-row,
@@ -1961,6 +1970,37 @@ details.data-detail > summary { cursor: pointer; font-weight: 650; font-size: 14
 .spot-verdict details.more { margin-top: 4px; }
 .spot-verdict details.more summary { cursor: pointer; font-size: 12px; color: var(--alpine); font-weight: 600; }
 .spot-verdict details.more p { margin: 6px 0 0; font-size: 13px; color: var(--ink-soft); }
+
+/* Golf forecast block: a full-width line under the row (toggles sit under the course description; opened content gets the whole row). Built in lib/catalog.js forecastBlock */
+.spot-fx { grid-column: 1 / -1; margin-top: -6px; display: flex; flex-wrap: wrap; gap: 4px 22px; align-items: flex-start; }
+.spot-fx details { flex: 0 0 auto; }
+.spot-fx details[open] { flex: 1 1 100%; }
+.spot-fx summary { cursor: pointer; font-size: 12px; color: var(--alpine); font-weight: 600; }
+.spot-fx p { margin: 6px 0 0; font-size: 13px; color: var(--ink-soft); }
+.spot-fx .fx-note { font-size: 12px; color: var(--muted); }
+.fx-hr { display: grid; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 4px; margin: 8px 0 0; max-width: 760px; }
+.fx-h { text-align: center; font-size: 12px; line-height: 1.4; border-top: 1px solid var(--line); padding-top: 4px; color: var(--ink-soft); }
+.fx-h b { display: block; font-weight: 600; color: var(--ink); }
+.fx-wk { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 8px; margin: 8px 0 0; }
+.fx-d { display: flex; flex-direction: column; gap: 2px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 6px; text-align: center; font-size: 12px; color: var(--ink-soft); }
+.fx-d.we { background: var(--surface-2); border-color: var(--alpine); }
+.fx-d b { font-weight: 600; color: var(--ink); }
+.fx-d .hi { font-size: 15px; font-weight: 600; color: var(--ink); }
+.fx-d .hi small { font-size: 12px; font-weight: 400; color: var(--ink-soft); }
+.fx-d .sh { flex: 1; font-size: 12px; line-height: 1.3; min-height: 32px; }
+.fx-d .rn { display: block; margin-top: 4px; }
+.fx-d .rn i { display: block; height: 4px; margin-top: 3px; border-radius: 2px; background: var(--alpine); max-width: 100%; }
+.fx-labels { display: flex; flex-wrap: wrap; gap: 6px; }
+.fx-pill { font-size: 12px; padding: 2px 8px; border-radius: 6px; background: var(--surface-2); color: var(--ink-soft); }
+@media (max-width: 720px) {
+  .fx-wk { grid-template-columns: 1fr; gap: 4px; }
+  .fx-d { flex-direction: row; align-items: baseline; gap: 8px; text-align: left; padding: 6px 8px; }
+  .fx-d b { min-width: 52px; }
+  .fx-d .hi { min-width: 64px; }
+  .fx-d .sh { min-height: 0; }
+  .fx-d .rn { min-width: 44px; margin-top: 0; text-align: right; }
+  .fx-d .rn i { display: none; }
+}
 
 /* ——— Static region map: activity chips, spot pins, index list ——— */
 .rmap-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }

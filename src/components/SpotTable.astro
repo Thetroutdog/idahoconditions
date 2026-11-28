@@ -1,21 +1,34 @@
 ---
 // One table for activity-in-region and statewide pages. rows come from spotView() in lib/catalog.js.
 import { conditions, fmtTime } from '../lib/conditions.js';
-const { rows, variant = 'activity', label = 'Spot' } = Astro.props;
+const { rows, variant = 'activity', label = 'Spot', hideStatus = false } = Astro.props; // hideStatus: golf (its status was always "Forecast only"); an off-season or preseason state still shows beside the name
 // The reading column only appears once at least one row in the table has a live reading.
 const hasMetric = rows.some((r) => r.metric);
 ---
-<div class={`list-card cols-${variant}${hasMetric ? '' : ' no-metric'}`}>
-  <div class="list-head"><div>{label}</div><div>Status</div>{hasMetric && <div>Reading / trend</div>}<div>Verdict</div><div>Links</div></div>
+<div class={`list-card cols-${variant}${hasMetric ? '' : ' no-metric'}${hideStatus ? ' no-status' : ''}`}>
+  <div class="list-head"><div>{label}</div>{!hideStatus && <div>Status</div>}{hasMetric && <div>Reading / trend</div>}<div>Verdict</div><div>Links</div></div>
   {rows.map((s) => (
     <div class="spot-row" id={`spot-${s.id}`}>
-      <div><span class="spot-name">{s.name}</span><span class="spot-desc">{s.desc}{s.town ? ` · ${s.town}` : ''}</span></div>
-      <div><span class={`pill ${s.pill.cls}`}>{s.pill.text}</span></div>
+      <div><span class="spot-name">{s.name}</span>{hideStatus && /^(Off season|Preseason)$/.test(s.pill.text) && <span class={`pill ${s.pill.cls}`} style="margin-left:8px">{s.pill.text}</span>}<span class="spot-desc">{s.desc}{s.town ? ` · ${s.town}` : ''}</span></div>
+      {!hideStatus && <div><span class={`pill ${s.pill.cls}`}>{s.pill.text}</span></div>}
       {hasMetric && <div class="metric-cell">{s.metric ? <>{s.metric.text}<span class="tr">{s.metric.trend}{s.metric.stale ? ' · ' + fmtTime(s.metric.observedAt, conditions.regions[s.region].tz) : ''}</span></> : <>—</>}</div>}
       <div class="spot-verdict">{s.chips?.length > 0 && <div class="spot-chips">{s.chips.map((c) => <span class={`pill ${c.cls}`} title={c.why}>{c.text}</span>)}</div>}{s.verdict}{s.more && <details class="more"><summary>Full forecast</summary><p>{s.more}</p></details>}</div>
       <div class="spot-actions">
         <div class="spot-links">{s.sources.map((l) => <a href={l.url} target="_blank" rel="noopener noreferrer">{l.label}<span class="vh"> (opens in a new tab)</span></a>)}</div>
       </div>
+      {s.fx && <div class="spot-fx">
+          <details class="fx"><summary>{s.fx.which === 'Today' ? "Today's forecast" : "Tomorrow's forecast"}</summary>
+            {s.fx.todayText.map((t) => <p>{t}</p>)}
+            {s.fx.hours.length > 0 && <><div class="fx-hr" aria-label="Hourly forecast">{s.fx.hours.map((h) => <div class="fx-h"><b>{h.label}</b>{h.temp}°<br />{h.wind != null ? `${h.wind} mph` : '—'}<br />{h.pop != null ? `${h.pop}%` : '—'}</div>)}</div>
+            <p class="fx-note">Hourly: temperature, wind, chance of rain. {s.fx.which === 'Tomorrow' ? 'Today is nearly over. ' : ''}NWS forecast for this course's location{s.fx.hoursAt ? `, fetched ${s.fx.hoursAt}` : ''}.</p></>}
+            <p class="fx-note"><a href={s.fx.nws} target="_blank" rel="noopener noreferrer">Full forecast (NWS)<span class="vh"> (opens in a new tab)</span></a></p>
+          </details>
+          <details class="fx"><summary>7-day forecast</summary>
+            <div class="fx-wk">{s.fx.week.map((d) => <div class={`fx-d${d.weekend ? ' we' : ''}`}><b>{d.name}</b><span class="hi">{d.hi != null ? `${d.hi}°` : '—'}{d.lo != null && <small> / {d.lo}°</small>}</span><span class="sh">{d.short}</span><span class="rn">{d.rain != null ? `${d.rain}%` : ''}<i style={`width:${d.rain ?? 0}%`}></i></span></div>)}</div>
+            {s.fx.labels.length > 0 && <p class="fx-labels">{s.fx.labels.map((l) => <span class="fx-pill">{l}</span>)}</p>}
+            <p class="fx-note">{s.fx.reaches ? `This forecast reaches ${s.fx.reaches}. ` : ''}Weekend days are highlighted. Planning further out? See the <a href={s.fx.outlook} target="_blank" rel="noopener noreferrer">NWS 8 to 14 day outlook<span class="vh"> (opens in a new tab)</span></a>.</p>
+          </details>
+        </div>}
     </div>
   ))}
 </div>

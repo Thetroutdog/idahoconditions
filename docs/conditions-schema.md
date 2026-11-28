@@ -96,3 +96,10 @@ An Action Day is information only: it never changes `level`, the status chips or
 - Freshness is decided at build time (`build_conditions.apply_air_forecast_freshness`), not by a stale flag: days before today (region time zone) are dropped; an area is removed when no day remains or it was issued more than 3 days ago. Idaho DEQ mostly forecasts on weekdays, so a Friday forecast still serves the weekend.
 - `sources.airnow_forecast.{fetchedAt,ok,error}` follow the usual rules (on failure the last data is kept, then ages out by the rule above).
 - Fetcher: `scripts/fetch_airnow_forecast.py`, one keyless download of AirNow's reporting-area file. It does not use `AIRNOW_API_KEY`.
+
+## Spot forecasts (`spotForecast`, part `nws`)
+
+- `bySpot` maps a spot id to a grid key (`office/x,y`); `grids[key]` holds the NWS forecast for that 2.5 km cell: `office`, `elevationFt`, `updated`, `fetchedAt`, `periods` (first four 12-hour periods), `days`, `discussion`.
+- `days` keeps two days for most cells (the site rows use today and tomorrow). Cells used by a Thursday Brief spot or a golf course keep a week (`WEEK_ACTS`, `BRIEF_DAYS` in `scripts/fetch_nws.py`), with the long text for the first four days only.
+- `hourly` (golf cells only, `HOURLY_ACTS`): the next 36 hours as `[local start "YYYY-MM-DDTHH:MM", temperature F, wind mph, rain chance %]`. It comes from the same cell's `/hourly` forecast (one extra request per cell, reused for 55 minutes). If that request fails the rows are left out for the run and the page hides the hourly part.
+- The golf rows on the site read this through `forecastBlock()` in `src/lib/catalog.js`: "Today's forecast" (hourly rows), "7-day forecast" and a link to the NWS point forecast.

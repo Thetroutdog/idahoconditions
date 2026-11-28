@@ -27,7 +27,7 @@ const noun = slug === 'ski' ? 'areas' : 'spots';
       {groups.map((g) => (
         <section class="region-group" data-region={g.region.id}>
           <div class="group-h">{g.region.name} <a href={`/${g.region.id}/${slug}/`}>View in {g.region.name} →</a></div>
-          <SpotTable rows={g.rows} variant="statewide" label={act.name === 'Ski' ? 'Area' : 'Spot'} />
+          <SpotTable rows={g.rows} variant="statewide" label={act.name === 'Ski' ? 'Area' : 'Spot'} hideStatus={act.name === 'Golf'} />
         </section>
       ))}
     </div>
