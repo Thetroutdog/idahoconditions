@@ -65,6 +65,12 @@ for name, mod in (("snotel", fetch_snotel), ("usgs", fetch_usgs), ("airnow", fet
 snow = [e for r in parts["snotel"]["regions"].values() for e in r["snow"]]
 assert snow and snow[0]["basis"] == "hourly" and snow[0]["depth"]["value"] == 9 and snow[0]["depthChange24h"]["value"] == 4 and snow[0]["pctOfMedian"]["value"] == 120, snow[0]   # hourly: depth, change and water content from the same hour
 assert snow[0]["depth"]["provisional"] and not snow[0]["depthChange24h"].get("suspect"), snow[0]
+_ska = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "ski_areas.json")))["areas"]
+_ski = {k: v for r in parts["snotel"]["regions"].values() for k, v in r.get("skiStations", {}).items()}
+assert all(a["id"] in _ski for a in _ska if a["stations"]) and not any(a["id"] in _ski for a in _ska if not a["stations"]), _ski.keys()
+assert all(len(a["stations"]) <= 2 and all(st["distanceMi"] <= 12 and abs(st["feetVsMid"]) <= 1500 for st in a["stations"]) for a in _ska)
+_b = _ski["southwest-brundage-mountain"][0]
+assert _b["feetVsMid"] == -210 and _b["distanceMi"] == 2.9 and "depth" in _b, _b   # distance and feet vs mid-mountain travel with the station
 riv = [e for r in parts["usgs"]["regions"].values() for e in r["rivers"]]
 assert len(riv) == len(sel["rivers"]) and riv[0]["flow"]["value"] == 255.0 and riv[0]["use"], riv[0]
 air = parts["airnow"]["regions"]

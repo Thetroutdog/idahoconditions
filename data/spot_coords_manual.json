@@ -238,5 +238,50 @@
   "lat": 44.1011403,
   "lon": -114.9762176,
   "note": "backcountry peak summit (checked on a map by hand, Nov 26)"
+ },
+ "clearwater-snowhaven": {
+  "lat": 45.8676,
+  "lon": -116.09319,
+  "note": "mid point picked so the NWS forecast cell reads about 5,740 ft (mid-mountain map point is about 5,460 ft; checked Nov 28); the geocoded point sat at the base"
+ },
+ "southwest-bogus-basin": {
+  "lat": 43.75654,
+  "lon": -116.09641,
+  "note": "mid point picked so the NWS forecast cell reads about 6,540 ft (mid-mountain map point is about 6,910 ft; checked Nov 28); the geocoded point sat at the base"
+ },
+ "southwest-little-ski-hill": {
+  "lat": 44.92793,
+  "lon": -116.1611,
+  "note": "mid point picked so the NWS forecast cell reads about 5,200 ft (mid-mountain map point is about 5,400 ft; checked Nov 28); the geocoded point sat at the base"
+ },
+ "magic-valley-sun-valley-bald-mountain-dollar": {
+  "lat": 43.66551,
+  "lon": -114.39065,
+  "note": "mid point picked so the NWS forecast cell reads about 7,560 ft (mid-mountain map point is about 7,680 ft; checked Nov 28); the geocoded point sat at the base"
+ },
+ "magic-valley-pomerelle": {
+  "lat": 42.31331,
+  "lon": -113.61107,
+  "note": "mid point picked so the NWS forecast cell reads about 8,200 ft (mid-mountain map point is about 8,000 ft; checked Nov 28); the geocoded point sat at the base"
+ },
+ "magic-valley-magic-mountain": {
+  "lat": 42.19016,
+  "lon": -114.28002,
+  "note": "mid point picked so the NWS forecast cell reads about 7,000 ft (mid-mountain map point is about 7,010 ft; checked Nov 28); the geocoded point sat at the base"
+ },
+ "magic-valley-rotarun": {
+  "lat": 43.49555,
+  "lon": -114.36509,
+  "note": "mid point picked so the NWS forecast cell reads about 5,410 ft (mid-mountain map point is about 5,570 ft; checked Nov 28); the geocoded point sat at the base"
+ },
+ "southeast-pebble-creek": {
+  "lat": 42.77391,
+  "lon": -112.15159,
+  "note": "mid point picked so the NWS forecast cell reads about 7,460 ft (mid-mountain map point is about 7,620 ft; checked Nov 28); the geocoded point sat at the base"
+ },
+ "upper-snake-kelly-canyon": {
+  "lat": 43.64045,
+  "lon": -111.62561,
+  "note": "mid point picked so the NWS forecast cell reads about 6,100 ft (mid-mountain map point is about 6,300 ft; checked Nov 28); the geocoded point sat at the base"
  }
 }

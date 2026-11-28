@@ -93,6 +93,31 @@ function peakView(spot, fl, o) {
   return { metric, text, pill: { text: parts.length ? 'Nearby station' : 'Forecast only', cls: 'muted' } };
 }
 
+// data/ski_areas.json: ski areas. Snow figures come from nearby SNOTEL stations (conditions.regions[r].skiStations[spot id]), never from the resort.
+const skiFacts = Object.fromEntries((readJson('ski_areas.json', { areas: [] }).areas ?? []).map((a) => [a.id, a]));
+function skiView(spot, fl, o) {
+  const a = skiFacts[spot.id];
+  if (!a) return null;
+  const sts = conditions.regions[spot.region]?.skiStations?.[spot.id] ?? [];
+  const parts = sts.map((s) => {
+    const g = s.feetVsMid, rel = Math.abs(g) < 100 ? 'about the same elevation as mid-mountain' : g > 0 ? `${nf(Math.round(g / 10) * 10)} ft above mid-mountain` : `${nf(Math.round(-g / 10) * 10)} ft below mid-mountain`;
+    const where = `${s.name} SNOTEL station, ${s.distanceMi} mi ${s.bearing} of mid-mountain, ${rel}`;
+    const d = s.depth;
+    if (!d || d.value === null || d.status === 'missing') return `${where}: no current reading.`;
+    const ch = s.depthChange24h;
+    const chg = ch && ch.value !== null && ch.status !== 'missing' && !ch.suspect && ch.value !== 0 ? `, ${ch.value > 0 ? '+' : ''}${ch.value} in in 24 h` : '';
+    return `${where}: ${d.value} in snow depth${chg}${d.status === 'stale' ? ' (reading delayed)' : ''}.`;
+  });
+  const first = sts[0]?.depth;
+  const metric = first && first.value !== null && first.status !== 'missing'
+    ? { text: `${first.value} ${first.unit}`, trend: `${sts[0].name}, ${sts[0].distanceMi} mi ${sts[0].bearing}`, observedAt: first.observedAt, stale: first.status === 'stale' } : null;
+  const snow = parts.length ? `Nearby station, not resort data. ${parts.join(' ')} It is not a reading at the resort, and snow can differ a lot with distance and elevation.` : 'No SNOTEL station close enough to represent this area.';
+  let tail = '';
+  if (o?.elev) { const gap = a.midFt - o.elev; tail = ` The NWS forecast is for a point at about ${nf(o.elev)} ft${Math.abs(gap) > 300 ? `, ${nf(Math.abs(gap))} ft ${gap > 0 ? 'below' : 'above'} mid-mountain` : ', near mid-mountain'}.`; }
+  const text = `${snow}${o?.mountain && fl ? ` ${fl}` : ''}${tail} Lifts, trails and opening dates: see the resort's own page.`;
+  return { metric, text, pill: { text: parts.length ? 'Nearby station' : 'Forecast only', cls: 'muted' } };
+}
+
 let sources = {};
 try { sources = JSON.parse(fs.readFileSync(path.resolve(process.cwd(), 'data', 'spot_sources.json'), 'utf8')); } catch { /* optional */ }
 
@@ -151,6 +176,10 @@ export function spotView(spot, tz) {
   if (spot.peak) {
     const pv = peakView(spot, fl, o);
     if (pv) { metric = pv.metric; verdict = pv.text; pill = pv.pill; }
+  }
+  if (spot.activity === 'ski') {
+    const sv = skiView(spot, fl, o);
+    if (sv) { metric = sv.metric; verdict = sv.text; pill = sv.pill; }
   }
   const aw = sources[spot.id]?.confirmed === true && sources[spot.id].aw;
   const links = aw && !spot.sources.some((l) => l.url === aw) ? [...spot.sources, { label: 'AW river page', url: aw }] : spot.sources;

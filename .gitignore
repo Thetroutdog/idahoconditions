@@ -1,7 +1,6 @@
 # ---- Never commit keys or local secrets ----
 secrets/*
 !secrets/.env.example
-!secrets/README.md
 .env
 .env.*
 !.env.example

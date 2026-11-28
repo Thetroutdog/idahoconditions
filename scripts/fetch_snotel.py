@@ -68,7 +68,8 @@ def fetch():
     find = region_finder()
     entries = [x for x in load_json("data/selected_stations.json")["snow"] if x.get("snotel")]
     peaks = load_json("data/peaks.json").get("peaks", [])  # nearby stations for each backcountry peak (not on the region Snow card)
-    ids = sorted({x["snotel"]["id"] for x in entries} | {st["id"] for pk in peaks for st in pk["stations"]})
+    skis = load_json("data/ski_areas.json").get("areas", [])  # nearby stations for each ski area (not resort data)
+    ids = sorted({x["snotel"]["id"] for x in entries} | {st["id"] for pk in peaks for st in pk["stations"]} | {st["id"] for a in skis for st in a["stations"]})
     end = dt.date.today()
     rows = http_json(q(AWDB + "/data", stationTriplets=",".join(ids), elements="SNWD,WTEQ", duration="DAILY",
                        beginDate=(end - dt.timedelta(days=5)).isoformat(), endDate=end.isoformat(), returnFlags="false"))
@@ -124,6 +125,21 @@ def fetch():
                         "swe": reading(swe, "in", wobs, "NRCS SNOTEL", prov),
                         "depthChange24h": {**reading(change, "in", obs, "NRCS SNOTEL", prov), **({"suspect": True} if suspect else {})}})
         out.setdefault(pk["region"], {}).setdefault("peaks", {})[pk["id"]] = lst
+    # per-ski-area nearby stations: out[region]["skiStations"][spot id]; distance and feet vs the mid-mountain map point travel with each one
+    for a in skis:
+        if not a["stations"]:
+            continue
+        lst = []
+        for st in a["stations"]:
+            it = by.get(st["id"], {})
+            depth, swe, change, obs, wobs, suspect, basis = snow_values(hby.get(st["id"], {}), it)
+            prov = basis == "hourly"
+            lst.append({"id": st["id"], "name": st["name"], "elevationFt": elev.get(st["id"]) or st.get("elevationFt"),
+                        "distanceMi": st["distanceMi"], "bearing": st["bearing"], "feetVsMid": st["feetVsMid"], "basis": basis,
+                        "depth": reading(depth, "in", obs, "NRCS SNOTEL", prov),
+                        "swe": reading(swe, "in", wobs, "NRCS SNOTEL", prov),
+                        "depthChange24h": {**reading(change, "in", obs, "NRCS SNOTEL", prov), **({"suspect": True} if suspect else {})}})
+        out.setdefault(a["region"], {}).setdefault("skiStations", {})[a["id"]] = lst
     return out
 
 

@@ -1,0 +1,463 @@
+{
+ "_note": "Ski areas: nearby SNOTEL stations and the forecast point. Not resort data. midFt is the elevation at a hand-picked mid-mountain map point (research/ski_point_check). Stations are within 12 mi and 1,500 ft of that point (up to 2). The forecast point is whichever of base, mid or summit has the NWS cell elevation closest to midFt (existing manual forecast points in spot_coords_manual.json win).",
+ "areas": [
+  {
+   "id": "panhandle-schweitzer",
+   "name": "Schweitzer",
+   "region": "panhandle",
+   "midFt": 5530,
+   "midLat": 48.37499,
+   "midLon": -116.62945,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 48.37499,
+    "lon": -116.62945,
+    "cellFt": 5470
+   },
+   "stations": [
+    {
+     "id": "738:ID:SNTL",
+     "name": "Schweitzer Basin",
+     "elevationFt": 6090,
+     "distanceMi": 0.4,
+     "bearing": "W",
+     "feetVsMid": 560
+    }
+   ]
+  },
+  {
+   "id": "panhandle-silver-mountain",
+   "name": "Silver Mountain",
+   "region": "panhandle",
+   "midFt": 5080,
+   "midLat": 47.49817,
+   "midLon": -116.13643,
+   "forecastPoint": {
+    "which": "summit",
+    "lat": 47.48812,
+    "lon": -116.12855,
+    "cellFt": 5910
+   },
+   "stations": []
+  },
+  {
+   "id": "panhandle-lookout-pass",
+   "name": "Lookout Pass",
+   "region": "panhandle",
+   "midFt": 5080,
+   "midLat": 47.45501,
+   "midLon": -115.70216,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 47.45501,
+    "lon": -115.70216,
+    "cellFt": 4740
+   },
+   "stations": [
+    {
+     "id": "594:ID:SNTL",
+     "name": "Lookout",
+     "elevationFt": 5180,
+     "distanceMi": 0.2,
+     "bearing": "NNW",
+     "feetVsMid": 100
+    },
+    {
+     "id": "535:ID:SNTL",
+     "name": "Humboldt Gulch",
+     "elevationFt": 4260,
+     "distanceMi": 6.3,
+     "bearing": "NNW",
+     "feetVsMid": -820
+    }
+   ]
+  },
+  {
+   "id": "clearwater-bald-mountain",
+   "name": "Bald Mountain (Pierce)",
+   "region": "clearwater",
+   "midFt": 4010,
+   "midLat": 46.57094,
+   "midLon": -115.87162,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 46.57094,
+    "lon": -115.87162,
+    "cellFt": 3510
+   },
+   "stations": [
+    {
+     "id": "747:ID:SNTL",
+     "name": "Shanghi Summit",
+     "elevationFt": 4590,
+     "distanceMi": 6.2,
+     "bearing": "E",
+     "feetVsMid": 580
+    },
+    {
+     "id": "1142:ID:SNTL",
+     "name": "Pierce R.S.",
+     "elevationFt": 3080,
+     "distanceMi": 6.3,
+     "bearing": "SE",
+     "feetVsMid": -930
+    }
+   ]
+  },
+  {
+   "id": "clearwater-cottonwood-butte",
+   "name": "Cottonwood Butte",
+   "region": "clearwater",
+   "midFt": 5100,
+   "midLat": 46.07354,
+   "midLon": -116.45634,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 46.07354,
+    "lon": -116.45634,
+    "cellFt": 5210
+   },
+   "stations": []
+  },
+  {
+   "id": "clearwater-snowhaven",
+   "name": "Snowhaven",
+   "region": "clearwater",
+   "midFt": 5460,
+   "midLat": 45.8676,
+   "midLon": -116.09319,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 45.8676,
+    "lon": -116.09319,
+    "cellFt": 5740
+   },
+   "stations": []
+  },
+  {
+   "id": "southwest-bogus-basin",
+   "name": "Bogus Basin",
+   "region": "southwest",
+   "midFt": 6910,
+   "midLat": 43.75654,
+   "midLon": -116.09641,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 43.75654,
+    "lon": -116.09641,
+    "cellFt": 6540
+   },
+   "stations": [
+    {
+     "id": "978:ID:SNTL",
+     "name": "Bogus Basin",
+     "elevationFt": 6370,
+     "distanceMi": 0.5,
+     "bearing": "N",
+     "feetVsMid": -540
+    }
+   ]
+  },
+  {
+   "id": "southwest-brundage-mountain",
+   "name": "Brundage Mountain",
+   "region": "southwest",
+   "midFt": 6490,
+   "midLat": 45.00225,
+   "midLon": -116.14826,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 45.00225,
+    "lon": -116.14826,
+    "cellFt": 6200
+   },
+   "stations": [
+    {
+     "id": "370:ID:SNTL",
+     "name": "Brundage Reservoir",
+     "elevationFt": 6280,
+     "distanceMi": 2.9,
+     "bearing": "NNE",
+     "feetVsMid": -210
+    },
+    {
+     "id": "319:ID:SNTL",
+     "name": "Bear Basin",
+     "elevationFt": 5350,
+     "distanceMi": 3.5,
+     "bearing": "S",
+     "feetVsMid": -1140
+    }
+   ]
+  },
+  {
+   "id": "southwest-tamarack-resort",
+   "name": "Tamarack Resort",
+   "region": "southwest",
+   "midFt": 6440,
+   "midLat": 44.68107,
+   "midLon": -116.14528,
+   "forecastPoint": {
+    "which": "summit",
+    "lat": 44.68022,
+    "lon": -116.16308,
+    "cellFt": 6570
+   },
+   "stations": [
+    {
+     "id": "782:ID:SNTL",
+     "name": "Puhi Flat",
+     "elevationFt": 6240,
+     "distanceMi": 8.0,
+     "bearing": "NW",
+     "feetVsMid": -200
+    }
+   ]
+  },
+  {
+   "id": "southwest-little-ski-hill",
+   "name": "Little Ski Hill",
+   "region": "southwest",
+   "midFt": 5400,
+   "midLat": 44.92793,
+   "midLon": -116.1611,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 44.92793,
+    "lon": -116.1611,
+    "cellFt": 5200
+   },
+   "stations": [
+    {
+     "id": "319:ID:SNTL",
+     "name": "Bear Basin",
+     "elevationFt": 5350,
+     "distanceMi": 1.9,
+     "bearing": "NNE",
+     "feetVsMid": -50
+    },
+    {
+     "id": "370:ID:SNTL",
+     "name": "Brundage Reservoir",
+     "elevationFt": 6280,
+     "distanceMi": 8.1,
+     "bearing": "N",
+     "feetVsMid": 880
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-sun-valley-bald-mountain-dollar",
+   "name": "Sun Valley (Bald Mountain)",
+   "region": "magic-valley",
+   "midFt": 7680,
+   "midLat": 43.66551,
+   "midLon": -114.39065,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 43.66551,
+    "lon": -114.39065,
+    "cellFt": 7560
+   },
+   "stations": [
+    {
+     "id": "895:ID:SNTL",
+     "name": "Chocolate Gulch",
+     "elevationFt": 6310,
+     "distanceMi": 7.2,
+     "bearing": "N",
+     "feetVsMid": -1370
+    },
+    {
+     "id": "537:ID:SNTL",
+     "name": "Hyndman",
+     "elevationFt": 7590,
+     "distanceMi": 12.0,
+     "bearing": "ENE",
+     "feetVsMid": -90
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-pomerelle",
+   "name": "Pomerelle",
+   "region": "magic-valley",
+   "midFt": 8000,
+   "midLat": 42.31331,
+   "midLon": -113.61107,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 42.31331,
+    "lon": -113.61107,
+    "cellFt": 8200
+   },
+   "stations": [
+    {
+     "id": "534:ID:SNTL",
+     "name": "Howell Canyon",
+     "elevationFt": 8010,
+     "distanceMi": 0.5,
+     "bearing": "NNW",
+     "feetVsMid": 10
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-soldier-mountain",
+   "name": "Soldier Mountain",
+   "region": "magic-valley",
+   "midFt": 6600,
+   "midLat": 43.48382,
+   "midLon": -114.84204,
+   "forecastPoint": {
+    "which": "summit",
+    "lat": 43.48733,
+    "lon": -114.85363,
+    "cellFt": 6950
+   },
+   "stations": [
+    {
+     "id": "769:ID:SNTL",
+     "name": "Soldier R.S.",
+     "elevationFt": 5780,
+     "distanceMi": 0.8,
+     "bearing": "E",
+     "feetVsMid": -820
+    },
+    {
+     "id": "1306:ID:SNTL",
+     "name": "Couch Summit",
+     "elevationFt": 6780,
+     "distanceMi": 3.1,
+     "bearing": "NE",
+     "feetVsMid": 180
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-magic-mountain",
+   "name": "Magic Mountain",
+   "region": "magic-valley",
+   "midFt": 7010,
+   "midLat": 42.19016,
+   "midLon": -114.28002,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 42.19016,
+    "lon": -114.28002,
+    "cellFt": 7000
+   },
+   "stations": [
+    {
+     "id": "610:ID:SNTL",
+     "name": "Magic Mountain",
+     "elevationFt": 6940,
+     "distanceMi": 0.7,
+     "bearing": "SSW",
+     "feetVsMid": -70
+    },
+    {
+     "id": "359:ID:SNTL",
+     "name": "Bostetter R.S.",
+     "elevationFt": 7530,
+     "distanceMi": 4.8,
+     "bearing": "ESE",
+     "feetVsMid": 520
+    }
+   ]
+  },
+  {
+   "id": "magic-valley-rotarun",
+   "name": "Rotarun",
+   "region": "magic-valley",
+   "midFt": 5570,
+   "midLat": 43.49555,
+   "midLon": -114.36509,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 43.49555,
+    "lon": -114.36509,
+    "cellFt": 5410
+   },
+   "stations": []
+  },
+  {
+   "id": "southeast-pebble-creek",
+   "name": "Pebble Creek",
+   "region": "southeast",
+   "midFt": 7620,
+   "midLat": 42.77391,
+   "midLon": -112.15159,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 42.77391,
+    "lon": -112.15159,
+    "cellFt": 7460
+   },
+   "stations": [
+    {
+     "id": "1299:ID:SNTL",
+     "name": "Pebble Creek",
+     "elevationFt": 6520,
+     "distanceMi": 2.3,
+     "bearing": "E",
+     "feetVsMid": -1100
+    }
+   ]
+  },
+  {
+   "id": "upper-snake-kelly-canyon",
+   "name": "Kelly Canyon",
+   "region": "upper-snake",
+   "midFt": 6300,
+   "midLat": 43.64045,
+   "midLon": -111.62561,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 43.64045,
+    "lon": -111.62561,
+    "cellFt": 6100
+   },
+   "stations": []
+  },
+  {
+   "id": "upper-snake-grand-targhee-wy-idaho-access",
+   "name": "Grand Targhee (WY, Idaho access)",
+   "region": "upper-snake",
+   "midFt": 8700,
+   "midLat": 43.78735,
+   "midLon": -110.94683,
+   "forecastPoint": {
+    "which": "summit",
+    "lat": 43.78611,
+    "lon": -110.93341,
+    "cellFt": 8560
+   },
+   "stations": []
+  },
+  {
+   "id": "salmon-lost-trail-powder-mountain",
+   "name": "Lost Trail Powder Mountain",
+   "region": "salmon",
+   "midFt": 6940,
+   "midLat": 45.69998,
+   "midLon": -113.95163,
+   "forecastPoint": {
+    "which": "mid",
+    "lat": 45.69998,
+    "lon": -113.95163,
+    "cellFt": 6600
+   },
+   "stations": [
+    {
+     "id": "638:ID:SNTL",
+     "name": "Moose Creek",
+     "elevationFt": 6170,
+     "distanceMi": 2.1,
+     "bearing": "S",
+     "feetVsMid": -770
+    }
+   ]
+  }
+ ]
+}

@@ -78,7 +78,7 @@ def avalanche_links():
 def skeleton(name, tz):
     return {"name": name, "tz": tz, "level": "gray", "levelReasons": [], "summary": "", "alerts": [],
             "forecast": {"points": [], "updated": None}, "roads": {"status": "missing", "passes": [], "closures": [], "restrictions": []},
-            "snow": [], "peaks": {}, "rivers": [], "air": {"points": [], "note": None}, "fire": {"wildfires": [], "prescribed": []}, "ski": [], "avalanche": [], "local": {}, "airForecast": None}
+            "snow": [], "peaks": {}, "skiStations": {}, "rivers": [], "air": {"points": [], "note": None}, "fire": {"wildfires": [], "prescribed": []}, "ski": [], "avalanche": [], "local": {}, "airForecast": None}
 
 
 def fmt_end(iso, tz):
@@ -270,7 +270,7 @@ def apply_freshness(region, now):
         for item in region.get(sec, []):
             for k in key_list:
                 restatus(item.get(k), *CUT[sec], now)
-    for stations in region.get("peaks", {}).values():  # nearby stations for backcountry peaks
+    for stations in [*region.get("peaks", {}).values(), *region.get("skiStations", {}).values()]:  # nearby stations for backcountry peaks and ski areas
         for item in stations:
             for k in ("depth", "swe", "depthChange24h"):
                 restatus(item.get(k), *CUT["snow"], now)
