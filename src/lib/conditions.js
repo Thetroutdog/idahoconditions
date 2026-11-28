@@ -8,7 +8,7 @@ const file = fs.existsSync(real) ? real : path.join(dir, 'conditions.sample.json
 export const conditions = JSON.parse(fs.readFileSync(file, 'utf8'));
 export const regionIds = Object.keys(conditions.regions);
 
-const LEVEL_LABEL = { green: 'Clear', amber: 'Use caution', red: 'Hazards', gray: 'No current data' };
+const LEVEL_LABEL = { green: 'No major alerts', amber: 'Use caution', red: 'Hazards', gray: 'No current data' };
 // Pass the region too: gray because only roads are missing reads "No alerts, roads not checked", not "No current data".
 export const levelLabel = (l, r) => (l === 'gray' && r?.levelReasons?.[0]?.kind === 'roads-pending' ? 'No alerts, roads not checked' : LEVEL_LABEL[l] ?? 'No current data');
 

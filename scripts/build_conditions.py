@@ -2,7 +2,7 @@
 """Merge fetcher parts (data/parts/*.json) into data/conditions.json per docs/conditions-schema.md.
 Computes each region's level/summary and the statewide alert bar. Sections with no fetcher yet stay empty/missing.
     python3 scripts/build_conditions.py [--parts DIR] [--out FILE]      python3 scripts/build_conditions.py selftest"""
-import json, os, re, sys, glob, datetime as dt
+import json, math, os, re, sys, glob, datetime as dt
 from zoneinfo import ZoneInfo
 
 ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
@@ -13,7 +13,7 @@ NWS_STALE_MIN = 60   # was 30 (rules-proposal.md). Runs are every 30 min; 60 lea
 ROADS_STALE_MIN = 120
 CLOSURE_FRESH_MIN = 48 * 60    # an unplanned closure not updated for 2 days is probably a forgotten record
 WINTER_FRESH_MIN = 36 * 60
-ICY = ("ice", "icy", "slick")                 # any icy highway segment makes the region amber
+ICY = ("ice", "icy", "slick")                 # icy patches alone no longer color a region (routine on winter roads); they are named in the summary and on the Roads card instead
 SNOWY = ("snow", "packed", "covered")         # snow-covered counts toward the share rule; slush alone never colors a region
 SNOW_SHARE = 0.5                              # amber when at least half the reporting highway segments are snow-covered...
 SNOW_MIN_SEGMENTS = 3                         # ...and at least this many are  # rules-proposal.md: Idaho 511 data older than 2 h is stale
@@ -218,10 +218,20 @@ def _cond_severity(c):
     return 0 if re.search(r"closed|impass", c) else 1 if any(w in c for w in ICY) else 2 if any(w in c for w in SNOWY) else 3
 
 
+PASS_NEAR_MI = 10  # no name match: a fresh segment on the SAME highway whose reference point is within this many miles of the pass
+
+
+def _miles(lat1, lon1, lat2, lon2):
+    p = math.radians
+    a = math.sin(p(lat2 - lat1) / 2) ** 2 + math.cos(p(lat1)) * math.cos(p(lat2)) * math.sin(p(lon2 - lon1) / 2) ** 2
+    return 3958.8 * 2 * math.asin(math.sqrt(a))
+
+
 def attach_pass_conditions(rd, now):
     """Idaho 511's mountain-pass feed has no condition field (only name, highway, elevation, grade, location). A pass gets the condition of
     the winter-road segment that is on the same highway AND whose description names the pass ("Banner Creek Summit/Stanley from MP 105...").
-    Nearest-segment guessing is not used: it can borrow a stretch of road tens of miles away. No match, or a stale segment, gives None
+    Failing a name match, a fresh segment on the same highway whose point is within PASS_NEAR_MI miles of the pass is used (nearest first, marked
+    "nearby"). Anything farther is never borrowed: it can be a stretch of road tens of miles away. No match, or a stale segment, gives None
     (the page then says "see Idaho 511"). The worst condition wins when several segments name the pass."""
     winter = rd.get("winter") or []
     for p in rd.get("passes") or []:
@@ -237,9 +247,20 @@ def attach_pass_conditions(rd, now):
                 a = age_min(w.get("updated"), now)
                 if _hwy(w.get("name")) == _hwy(p["highway"]) and key in _plain(w.get("where")) and w.get("condition") and a is not None and a <= WINTER_FRESH_MIN:
                     hits.append(w)
+        near = False
+        if not hits and p["highway"] and p.get("lat") is not None and p.get("lon") is not None:
+            cand = []
+            for w in winter:
+                a = age_min(w.get("updated"), now)
+                if _hwy(w.get("name")) == _hwy(p["highway"]) and w.get("condition") and a is not None and a <= WINTER_FRESH_MIN and w.get("lat") is not None and w.get("lon") is not None:
+                    d = _miles(p["lat"], p["lon"], w["lat"], w["lon"])
+                    if d <= PASS_NEAR_MI:
+                        cand.append((d, w))
+            if cand:
+                hits, near = [min(cand, key=lambda x: x[0])[1]], True
         if hits:
             w = min(hits, key=lambda x: _cond_severity(x["condition"]))
-            p["roadCondition"] = {"condition": w["condition"], "where": " ".join((w.get("where") or "").split()), "updated": w.get("updated"), "segments": len(hits)}
+            p["roadCondition"] = {"condition": w["condition"], "where": " ".join((w.get("where") or "").split()), "updated": w.get("updated"), "segments": len(hits), **({"nearby": True} if near else {})}
         else:
             p["roadCondition"] = None
 
@@ -316,6 +337,7 @@ def build(parts, now, ski_status=None):
         apply_local_freshness(r, parts, now)
         apply_air_forecast_freshness(r, now)
         cand = []  # (rank, priority, reason, summary)
+        winter_hwys = set()
         for x in [x for x in r["alerts"] if x.get("level") and x.get("countsTowardLevel", True)] if nws_fresh else []:
             text = f"{x['event']} until {fmt_end(x['ends'], r['tz'])}"
             cand.append((RANK[x["level"]], 3 if x["level"] == "red" else 1, ("nws-alert", text), text + "."))
@@ -342,15 +364,19 @@ def build(parts, now, ski_status=None):
                     continue
                 groups.setdefault((w.get("name") or w.get("where") or "Road", str(w.get("condition", ""))), []).append(w)
             snowy = 0
+            winter_hwys = set()  # highways with any snow, ice or slush: named in a green region's summary so "no major alerts" never reads as "dry roads"
             for (nm, cond_raw), ws in groups.items():
                 cond = cond_raw.lower()
                 t = f"{nm}: {cond_raw}" + (f" ({len(ws)} segments)" if len(ws) > 1 else "")
                 if "closed" in cond or "impassable" in cond:
                     cand.append((2, 2, ("road-closure", f"{nm} closed"), f"{nm} closed."))
                 elif any(w in cond for w in ICY):
-                    cand.append((1, 0, ("road-winter", t), t + "."))
+                    winter_hwys.add(_hwy(nm))
                 elif any(w in cond for w in SNOWY):
                     snowy += len(ws)
+                    winter_hwys.add(_hwy(nm))
+                elif "slush" in cond:
+                    winter_hwys.add(_hwy(nm))
             rep = (r["roads"].get("counts") or {}).get("winterReporting")
             if rep and snowy >= SNOW_MIN_SEGMENTS and snowy / rep >= SNOW_SHARE:
                 t = f"Snow-covered roads on {snowy} of {rep} reporting highway segments"
@@ -368,7 +394,9 @@ def build(parts, now, ski_status=None):
             if alert_cands:
                 bar_items.append((max(c[0] for c in alert_cands), alert_cands[0][2][1].split(" until")[0], rid))
         elif nws_fresh and roads_ok:
-            r["level"], r["levelReasons"], r["summary"] = "green", [], "No alerts. Roads clear."
+            n_w = len(winter_hwys)
+            r["level"], r["levelReasons"] = "green", []
+            r["summary"] = f"No major alerts. Snow, ice or slush on {n_w} highway{'' if n_w == 1 else 's'}. See Roads." if n_w else "No alerts. Roads clear."
         else:
             r["level"] = "gray"
             why = "Weather alerts are out of date" if not nws_fresh else "Road data not connected yet, so we can't confirm clear"
@@ -425,7 +453,7 @@ def selftest():
     p511["fetchedAt"] = "2026-11-15T16:00:00+00:00"   # 4 h old -> stale -> not green
     c6 = build({"nws": {**part, "fetchedAt": "2026-11-15T19:50:00+00:00", "alerts": {}}, "idaho511": p511}, now)
     assert c6["regions"]["southwest"]["level"] == "gray"
-    # amber threshold: ice always; snow only when it covers at least half of the reporting segments
+    # amber threshold: icy patches alone never; snow only when it covers at least half of the reporting segments
     fresh = "2026-11-15T19:50:00+00:00"
     seg = lambda n, c: [{"name": "SH-21", "condition": c, "updated": fresh} for _ in range(n)]
     mk = lambda w, rep: {**p511, "fetchedAt": fresh, "regions": {"southwest": {"roads": {"winter": w, "closures": [], "passes": [], "restrictions": [], "alerts": [],
@@ -436,7 +464,10 @@ def selftest():
     cb = build({"nws": nws_ok, "idaho511": mk(seg(4, "Snow Covered"), 10)}, now)
     assert cb["regions"]["southwest"]["level"] == "green", "40% snow-covered must stay green"
     cc = build({"nws": nws_ok, "idaho511": mk(seg(1, "Icy Patches"), 10)}, now)
-    assert cc["regions"]["southwest"]["level"] == "amber"
+    assert cc["regions"]["southwest"]["level"] == "green" and cc["regions"]["southwest"]["summary"] == "No major alerts. Snow, ice or slush on 1 highway. See Roads.", cc["regions"]["southwest"]["summary"]  # icy patches alone: not amber, but named
+    ce2 = build({"nws": nws_ok, "idaho511": mk(seg(1, "Icy Patches") + [{"name": "US-95", "condition": "Snow Covered", "updated": fresh}], 10)}, now)
+    assert ce2["regions"]["southwest"]["level"] == "green" and "2 highways" in ce2["regions"]["southwest"]["summary"], ce2["regions"]["southwest"]["summary"]
+    assert cb["regions"]["southwest"]["summary"].startswith("No major alerts. Snow, ice or slush on 1 highway"), cb["regions"]["southwest"]["summary"]  # 40% snow-covered: green, still named
     cd = build({"nws": nws_ok, "idaho511": mk(seg(6, "Slush"), 6)}, now)
     assert cd["regions"]["southwest"]["level"] == "green", "slush alone must not color a region"
     # an alert past its end time is dropped; one with no end time reads "until further notice", never "until ."
@@ -472,6 +503,17 @@ def selftest():
     assert ps["Mores Creek"]["roadCondition"] is None and ps["Mores Creek"]["elevationFt"] is None, "no segment names Mores Creek"
     assert ps["Beaver Creek"]["roadCondition"] is None, "a segment on a different highway must not match"
     assert ps["Pine Creek Pass"]["roadCondition"] is None, "a segment older than 36 h must not give a condition"
+    # no name match: a same-highway segment within PASS_NEAR_MI miles of the pass is used (marked nearby); farther, another highway, or a stale one is not
+    pn = {**p511, "fetchedAt": fresh, "regions": {"salmon": {"roads": {"winter": [
+        {"name": "SH-75", "condition": "Icy Patches", "where": "Ketchum/Sawtooth City from MP 128 to MP 165", "updated": fresh, "lat": 43.896, "lon": -114.682},
+        {"name": "SH-75", "condition": "Snow Covered", "where": "Stanley/Clayton from MP 189", "updated": fresh, "lat": 44.27, "lon": -114.73}],
+        "closures": [], "restrictions": [], "alerts": [], "counts": {"winter": 2, "closures": 0, "passes": 3, "alerts": 0, "winterReporting": 2},
+        "passes": [{"id": "1", "name": "Galena", "condition": "", "lat": 43.87, "lon": -114.7126, "fields": {"Roadway": "SH 75"}},
+                   {"id": "2", "name": "Far Pass", "condition": "", "lat": 44.6, "lon": -114.9, "fields": {"Roadway": "SH 75"}},
+                   {"id": "3", "name": "Other Hwy", "condition": "", "lat": 43.87, "lon": -114.7126, "fields": {"Roadway": "US 93"}}]}}}}
+    pn_ps = {x["name"]: x for x in build({"nws": nws_ok, "idaho511": pn}, now)["regions"]["salmon"]["roads"]["passes"]}
+    assert pn_ps["Galena"]["roadCondition"]["condition"] == "Icy Patches" and pn_ps["Galena"]["roadCondition"]["nearby"], pn_ps["Galena"]
+    assert pn_ps["Far Pass"]["roadCondition"] is None and pn_ps["Other Hwy"]["roadCondition"] is None, pn_ps
     # avalanche links come from data/avalanche_centers.json
     cv = build({"nws": nws_ok}, now)
     assert [c["id"] for c in cv["regions"]["upper-snake"]["avalanche"]] == ["gnfac", "btac"], cv["regions"]["upper-snake"]["avalanche"]

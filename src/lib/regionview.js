@@ -57,7 +57,7 @@ export function roadInfo(r) {
   const winter = [...groups.values()].map((g) => ({ ...g, weather: [...g.weather], special: [...g.special] }))
     .sort((a, b) => sev(a.condition) - sev(b.condition) || a.name.localeCompare(b.name));
   // Mountain passes: Idaho 511 gives name, highway and elevation only. `cond` is the condition of the highway segment that names the pass (matched in build_conditions.py); null when there is no match.
-  const passes = (rd.passes ?? []).map((p) => ({ name: p.name, highway: p.highway, elevationFt: p.elevationFt, cond: p.roadCondition?.condition ?? null }))
+  const passes = (rd.passes ?? []).map((p) => ({ name: p.name, highway: p.highway, elevationFt: p.elevationFt, cond: p.roadCondition?.condition ?? null, near: !!p.roadCondition?.nearby }))
     .sort((a, b) => (a.cond ? sev(a.cond) : 9) - (b.cond ? sev(b.cond) : 9) || a.name.localeCompare(b.name));
   return { live, stale: rd.status === 'stale', hwy, local: all.length - hwy.length, winter, passes, asOf: rd.asOf };
 }
@@ -201,7 +201,7 @@ export function alertHref(a, _regionId) {
 // Region alert bar: very short items from the region's own level reasons ("Winter Weather Advisory", "US-95 closed").
 // Green regions get a calm "No active alerts" bar; gray (stale or missing data) says so instead of implying all clear.
 // Same four words as the map legend. Every page has a bar: region pages show their region, all other pages show the statewide one.
-export const BAR_LABEL = { red: 'Hazards', amber: 'Caution', green: 'Clear', gray: 'No current data' };
+export const BAR_LABEL = { red: 'Hazards', amber: 'Caution', green: 'No major alerts', gray: 'No current data' };
 // One short phrase per reason: drop the "until <time>" tail and the "(N segments)" count.
 export const shortReason = (t) => String(t).split(/ until /)[0].replace(/\s*\(\d+ segments?\)/, '').replace(/\s+/g, ' ').trim();
 
@@ -219,7 +219,7 @@ export function statewideBar() {
   const gray = by('gray');
   if (!regs.length || gray.length === regs.length) return { level: 'gray', kicker: BAR_LABEL.gray, text: 'Some conditions data is out of date. Check weather.gov and 511.idaho.gov.', moreCount: 0, href: '/#snapshot' };
   const note = gray.length ? `; no current data for ${gray.length <= 2 ? gray.map((r) => r.name).join(' and ') : `${gray.length} regions`}` : '';
-  return { level: 'green', kicker: BAR_LABEL.green, text: gray.length ? `Clear in ${regs.length - gray.length} regions${note}` : 'No active alerts in any region', moreCount: 0, href: null };
+  return { level: 'green', kicker: BAR_LABEL.green, text: gray.length ? `No major alerts in ${regs.length - gray.length} regions${note}` : 'No active alerts in any region', moreCount: 0, href: null };
 }
 
 export function regionBar(id) {

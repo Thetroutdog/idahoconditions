@@ -108,7 +108,8 @@ const bigFire = activeFires.some((f) => (f.acres ?? 1000) >= 100);  // under 100
         <div>
           <div class="section-head sub-lead"><h2>Idaho by region</h2><p>Seven Fish and Game regions. Colored by current alert level.</p></div>
           <div class="map-panel">
-            <div class="map-legend" aria-hidden="true"><span><i class="g"></i> Clear</span><span><i class="a"></i> Caution</span><span><i class="r"></i> Hazards</span><span><i class="n"></i> No current data</span></div>
+            <div class="map-legend" aria-hidden="true"><span><i class="g"></i> No major alerts</span><span><i class="a"></i> Caution</span><span><i class="r"></i> Hazards</span><span><i class="n"></i> No current data</span></div>
+            <p class="quiet" style="font-size:12px;margin:6px 0 0">No major alerts means no closures or warnings. Winter roads can still have ice and snow, so check Roads before you drive.</p>
             <svg class="idaho-map" viewBox={`0 0 ${map.width} ${map.height}`} role="img" aria-label="Idaho Fish and Game regions colored by current alert level">
               {regionIds.map((id) => map.regions[id] && (
                 <a href={`/${id}/`} aria-label={`${regs[id].name} Region: ${levelLabel(regs[id].level, regs[id])}`}><path class={`region level-${regs[id].level}`} d={map.regions[id].d} /></a>
