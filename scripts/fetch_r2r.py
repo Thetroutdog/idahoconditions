@@ -8,7 +8,9 @@ import datetime as dt, re
 from ic_common import *
 
 URL = "https://services1.arcgis.com/WHM6qC35aMtyAAlN/ArcGIS/rest/services/Ridge_to_Rivers_Trails_Assessment_Map_WFL1/FeatureServer/2/query"
-FIELDS = "TrailName,Name,TrailSubSystem,Condition,ConditionNotes,ConditionDate,AllWeather,R2R_Use"  # no editor/user fields
+FIELDS = "TrailName,Name,TrailSubSystem,Condition,ConditionNotes,ConditionDate,last_edited_date,AllWeather,R2R_Use"  # no editor/user fields
+# ConditionDate is the staff-entered time stored as if it were UTC (wall clock; it reads 6-7 h early, and once flipped by 7 h between two runs),
+# so "as of" uses last_edited_date, which ArcGIS stamps in real UTC. ConditionDate is only the fallback.
 PAGE = 2000
 STALE_H = 72
 REGION = "southwest"
@@ -82,7 +84,7 @@ def summarize(rs, now=None):
         s = subs.setdefault(sub, {"name": sub, **{k: 0 for k in CODES}, "n": 0})
         s[c] += 1
         s["n"] += 1
-        newest = max(newest, a.get("ConditionDate") or 0)
+        newest = max(newest, a.get("last_edited_date") or a.get("ConditionDate") or 0)
         if c == "closed":
             g = closed.setdefault(plain(a.get("ConditionNotes")), {"note": plain(a.get("ConditionNotes")), "trails": [], "areas": []})
             g["trails"].append(name)

@@ -141,6 +141,11 @@ assert [a["name"] for a in _d["closedAreas"]] == ["Bogus Basin Area"] and _d["cl
 assert [a["name"] for a in _d["muddiest"]] == ["Table Rock"], _d["muddiest"]
 assert _d["verdict"] == "Mostly dry" and not _d["suggestAllWeather"] and _d["allWeather"]["count"] == 2 and _d["allWeather"]["areas"] == [{"name": "Hulls Gulch", "count": 2}]
 assert all(set(a) >= {"name", "n", "dry", "muddy", "frozen", "closed", "unknown"} for a in _d["driest"] + _d["subsystems"])
+# "as of" comes from last_edited_date (real UTC), not ConditionDate (wall clock stored as UTC, 7 h early in winter)
+_wall = dict(_row("w", "Table Rock", _DRY), ConditionDate=_ms(2 + 7), last_edited_date=_ms(2))
+_aw = r2r.summarize([_wall], _n)
+assert _aw["asOf"] == r2r.iso(_ms(2)) and not _aw["stale"], _aw["asOf"]
+assert r2r.summarize([_row("w", "Table Rock", _DRY)], _n)["asOf"] == r2r.iso(_ms(2)), "falls back to ConditionDate when last_edited_date is missing"
 _old = r2r.summarize([_row("a", "Table Rock", _DRY, h=24 * 5)], _n)
 assert _old["stale"] and _old["asOf"], _old  # over 72 h old: stale, not a failure
 for bad in ([], ):
