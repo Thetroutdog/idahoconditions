@@ -15,6 +15,13 @@ sn = sel["snow"][0]["snotel"]
 rv = sel["rivers"][0]
 
 def fake(url, headers=None, timeout=60):
+    if "awdbRestApi" in url and "/data" in url and "duration=HOURLY" in url:
+        base = dt.datetime.now().replace(minute=0, second=0, microsecond=0)
+        hv = lambda vals: [{"date": (base - dt.timedelta(hours=len(vals) - 1 - i)).strftime("%Y-%m-%d %H:%M"), "value": x} for i, x in enumerate(vals)]
+        depth = [5] * 24 + [7] * 6 + [9] * 6   # 36 hours: +4 in over the last 24 h
+        return [{"stationTriplet": s, "data": [
+            {"stationElement": {"elementCode": "SNWD"}, "values": hv(depth)},
+            {"stationElement": {"elementCode": "WTEQ"}, "values": hv([1.5] * 30 + [2.4] * 6)}]} for s in url.split("stationTriplets=")[1].split("&")[0].replace("%3A", ":").replace("%2C", ",").split(",")]
     if "awdbRestApi" in url and "/data" in url:
         med = "centralTendencyType" in url
         v = lambda d, val: {"date": (today - dt.timedelta(days=d)).isoformat(), "value": val, **({"median": 2.0} if med else {})}
@@ -56,7 +63,8 @@ for name, mod in (("snotel", fetch_snotel), ("usgs", fetch_usgs), ("airnow", fet
     assert parts[name]["ok"], parts[name]["error"]
 
 snow = [e for r in parts["snotel"]["regions"].values() for e in r["snow"]]
-assert snow and snow[0]["depth"]["value"] == 9 and snow[0]["depthChange24h"]["value"] == 3 and snow[0]["pctOfMedian"]["value"] == 125, snow[0]
+assert snow and snow[0]["basis"] == "hourly" and snow[0]["depth"]["value"] == 9 and snow[0]["depthChange24h"]["value"] == 4 and snow[0]["pctOfMedian"]["value"] == 120, snow[0]   # hourly: depth, change and water content from the same hour
+assert snow[0]["depth"]["provisional"] and not snow[0]["depthChange24h"].get("suspect"), snow[0]
 riv = [e for r in parts["usgs"]["regions"].values() for e in r["rivers"]]
 assert len(riv) == len(sel["rivers"]) and riv[0]["flow"]["value"] == 255.0 and riv[0]["use"], riv[0]
 air = parts["airnow"]["regions"]
@@ -222,3 +230,17 @@ _pf = c.run_part("airnow_forecast", af.fetch)
 assert not _pf["ok"] and "southwest" in _pf["regions"], "a failed fetch keeps the last forecast"
 assert bc.build({}, _n)["regions"]["southwest"]["airForecast"] is None, "the build works with the part missing"
 print("air forecast tests ok")
+
+
+# hourly snow: a one-hour jump of 10 in (a sensor glitch, like Bogus Basin Nov 27: 21 -> 12) flags the 24 h change instead of trusting it; a gap in the series gives no change
+import fetch_snotel as _sn
+_base = dt.datetime(2026, 11, 27, 0, 0)
+_h = lambda vals, skip=(): {"data": [{"stationElement": {"elementCode": "SNWD"}, "values": [{"date": (_base + dt.timedelta(hours=i)).strftime("%Y-%m-%d %H:%M"), "value": v} for i, v in enumerate(vals) if i not in skip]}]}
+_hs = _sn.snow_hourly(_h([21] * 20 + [20, 12, 12, 11]))
+assert _hs["depth"] == 11 and _hs["change"] == -10 and _hs["suspect"], _hs
+_hs = _sn.snow_hourly(_h([14] * 12 + [15, 16, 17, 18] * 3 + [18] * 3, skip=()))
+assert _hs["change"] is not None and not _hs["suspect"], _hs
+_hs = _sn.snow_hourly(_h([14] * 30, skip=range(0, 8)))   # the hour a day earlier is missing
+assert _hs["change"] is None, _hs
+assert _sn.snow_hourly({}) is None
+print("hourly snow tests ok")

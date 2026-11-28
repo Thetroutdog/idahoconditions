@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """SNOTEL snow depth, water equivalent, 24h depth change and % of median for the stations in data/selected_stations.json -> data/parts/snotel.json.
-Source: NRCS AWDB REST (no key). Daily values lag about a day. Percent of median is left empty when the median is under 1 in (early season)."""
+Source: NRCS AWDB REST (no key). Daily values lag about a day, so depth, water content and the 24 h change come from the HOURLY series when it is there (provisional, a few hours old),
+all three from the same hour. Daily values are the fallback. Percent of median is left empty when the median is under 1 in (early season)."""
 import datetime as dt
 from ic_common import *
 
@@ -14,6 +15,55 @@ def daily(item, code):
     return [], None
 
 
+JUMP_IN = 6  # a one-hour step this big is a sensor jump (snow does not vanish or arrive in an hour); the 24 h change is then flagged, not trusted
+PST = "-08:00"  # SNOTEL timestamps are station standard time (PST) with no zone in the text
+
+
+def hourly(item, code):
+    """[(naive datetime in PST, value)] oldest first, nulls dropped."""
+    for el in item.get("data", []):
+        if el["stationElement"]["elementCode"] == code:
+            out = []
+            for v in el.get("values", []):
+                if v.get("value") is None:
+                    continue
+                try:
+                    out.append((dt.datetime.strptime(v["date"], "%Y-%m-%d %H:%M"), v["value"]))
+                except ValueError:
+                    pass
+            return sorted(out)
+    return []
+
+
+def snow_hourly(it):
+    """Depth, water content and 24 h depth change from the latest hourly SNWD reading. None when this station has no hourly depth."""
+    h = hourly(it, "SNWD")
+    if not h:
+        return None
+    t, depth = h[-1]
+    byt = dict(h)
+    prev = next((byt[t - dt.timedelta(hours=k)] for k in (24, 23, 25) if t - dt.timedelta(hours=k) in byt), None)  # the hour a day earlier (or an hour either side)
+    last24 = [(a, b) for a, b in zip(h, h[1:]) if b[0] - a[0] == dt.timedelta(hours=1) and b[0] > t - dt.timedelta(hours=24)]
+    suspect = any(abs(b[1] - a[1]) > JUMP_IN for a, b in last24)
+    w = hourly(it, "WTEQ")
+    return {"t": t, "depth": depth, "change": (depth - prev) if prev is not None else None, "suspect": suspect, "swe": w[-1][1] if w else None, "swe_t": w[-1][0] if w else None}
+
+
+def snow_values(hit, dit):
+    """(depth, swe, change, obs, wobs, suspect, basis) for one station: the hourly series (hit) if it has depth, else the daily series (dit)."""
+    hs = snow_hourly(hit)
+    iso = lambda t: t.strftime("%Y-%m-%dT%H:%M:00") + PST
+    w, _ = daily(dit, "WTEQ")
+    if hs:
+        swe, wobs = (hs["swe"], iso(hs["swe_t"])) if hs["swe"] is not None else ((w[-1]["value"], f"{w[-1]['date']}T23:59:00{PST}") if w else (None, None))
+        return hs["depth"], swe, hs["change"], iso(hs["t"]), wobs, hs["suspect"], "hourly"
+    d, _ = daily(dit, "SNWD")
+    obs = f"{d[-1]['date']}T23:59:00{PST}" if d else None
+    wobs = f"{w[-1]['date']}T23:59:00{PST}" if w else None
+    change = (d[-1]["value"] - d[-2]["value"]) if len(d) >= 2 and d[-1]["date"] > d[-2]["date"] else None
+    return (d[-1]["value"] if d else None), (w[-1]["value"] if w else None), change, obs, wobs, False, "daily"
+
+
 def fetch():
     find = region_finder()
     entries = [x for x in load_json("data/selected_stations.json")["snow"] if x.get("snotel")]
@@ -22,6 +72,13 @@ def fetch():
     end = dt.date.today()
     rows = http_json(q(AWDB + "/data", stationTriplets=",".join(ids), elements="SNWD,WTEQ", duration="DAILY",
                        beginDate=(end - dt.timedelta(days=5)).isoformat(), endDate=end.isoformat(), returnFlags="false"))
+    hrows = []
+    try:  # hourly depth and water content for the last 3 days; if this fails, daily values still work
+        hrows = http_json(q(AWDB + "/data", stationTriplets=",".join(ids), elements="SNWD,WTEQ", duration="HOURLY",
+                            beginDate=(end - dt.timedelta(days=3)).isoformat(), endDate=end.isoformat(), returnFlags="false"))
+    except Exception as e:
+        print("hourly lookup failed, using daily values:", e)
+    hby = {it["stationTriplet"]: it for it in hrows if isinstance(it, dict)}
     med = {}
     try:
         for it in http_json(q(AWDB + "/data", stationTriplets=",".join(ids), elements="WTEQ", duration="DAILY",
@@ -42,19 +99,15 @@ def fetch():
     for x in entries:
         sn = x["snotel"]
         it = by.get(sn["id"], {})
-        d, _ = daily(it, "SNWD")
-        w, _ = daily(it, "WTEQ")
-        # daily values are stamped for station standard time (PST, UTC-8); use the end of that day as the observation time
-        obs = (lambda v: f"{v['date']}T23:59:00-08:00")(d[-1]) if d else None
-        wobs = (lambda v: f"{v['date']}T23:59:00-08:00")(w[-1]) if w else None
-        change = (d[-1]["value"] - d[-2]["value"]) if len(d) >= 2 and d[-1]["date"] > d[-2]["date"] else None
+        depth, swe, change, obs, wobs, suspect, basis = snow_values(hby.get(sn["id"], {}), it)
         m = med.get(sn["id"])
-        pct = round(100 * w[-1]["value"] / m) if w and m and m >= 1.0 else None
-        entry = {"id": sn["id"], "name": sn["name"], "area": x["area"], "elevationFt": elev.get(sn["id"]),
-                 "depth": reading(d[-1]["value"] if d else None, "in", obs, "NRCS SNOTEL"),
-                 "swe": reading(w[-1]["value"] if w else None, "in", wobs, "NRCS SNOTEL"),
-                 "depthChange24h": reading(change, "in", obs, "NRCS SNOTEL"),
-                 "pctOfMedian": reading(pct, "%", wobs, "NRCS SNOTEL")}
+        pct = round(100 * swe / m) if swe is not None and m and m >= 1.0 else None
+        prov = basis == "hourly"  # hourly readings are provisional until NRCS reviews them
+        entry = {"id": sn["id"], "name": sn["name"], "area": x["area"], "elevationFt": elev.get(sn["id"]), "basis": basis,
+                 "depth": reading(depth, "in", obs, "NRCS SNOTEL", prov),
+                 "swe": reading(swe, "in", wobs, "NRCS SNOTEL", prov),
+                 "depthChange24h": {**reading(change, "in", obs, "NRCS SNOTEL", prov), **({"suspect": True} if suspect else {})},
+                 "pctOfMedian": reading(pct, "%", wobs, "NRCS SNOTEL", prov)}
         rid = find(sn["lon"], sn["lat"])
         if rid:
             out.setdefault(rid, {}).setdefault("snow", []).append(entry)
@@ -63,16 +116,13 @@ def fetch():
         lst = []
         for st in pk["stations"]:
             it = by.get(st["id"], {})
-            d, _ = daily(it, "SNWD")
-            w, _ = daily(it, "WTEQ")
-            obs = (lambda v: f"{v['date']}T23:59:00-08:00")(d[-1]) if d else None
-            wobs = (lambda v: f"{v['date']}T23:59:00-08:00")(w[-1]) if w else None
-            change = (d[-1]["value"] - d[-2]["value"]) if len(d) >= 2 and d[-1]["date"] > d[-2]["date"] else None
+            depth, swe, change, obs, wobs, suspect, basis = snow_values(hby.get(st["id"], {}), it)
+            prov = basis == "hourly"
             lst.append({"id": st["id"], "name": st["name"], "elevationFt": elev.get(st["id"]) or st.get("elevationFt"),
-                        "distanceMi": st["distanceMi"], "bearing": st["bearing"], "feetBelowSummit": st["feetBelowSummit"],
-                        "depth": reading(d[-1]["value"] if d else None, "in", obs, "NRCS SNOTEL"),
-                        "swe": reading(w[-1]["value"] if w else None, "in", wobs, "NRCS SNOTEL"),
-                        "depthChange24h": reading(change, "in", obs, "NRCS SNOTEL")})
+                        "distanceMi": st["distanceMi"], "bearing": st["bearing"], "feetBelowSummit": st["feetBelowSummit"], "basis": basis,
+                        "depth": reading(depth, "in", obs, "NRCS SNOTEL", prov),
+                        "swe": reading(swe, "in", wobs, "NRCS SNOTEL", prov),
+                        "depthChange24h": {**reading(change, "in", obs, "NRCS SNOTEL", prov), **({"suspect": True} if suspect else {})}})
         out.setdefault(pk["region"], {}).setdefault("peaks", {})[pk["id"]] = lst
     return out
 

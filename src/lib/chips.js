@@ -2,6 +2,7 @@
 // threshold below (my first judgment calls, meant to be edited) and carries its data in `why` (shown on hover). They are forecast-based:
 // they are NOT a report from the resort, course or trail. At most 3 per row, most important first. Nothing is shown off season, except NWS alerts.
 import { conditions } from './conditions.js';
+import { snowGain } from './regionview.js';
 
 export const T = {
   rainChance: 40,       // % chance of precipitation (today + tonight) for "Rain possible"
@@ -77,12 +78,16 @@ export function forecastLine(o, full = false) {
 }
 export const isWinter = (a) => SNOW_ACTS.has(a);
 
+// "New snow!" uses a SNOTEL station AT the area itself (matched by its area name), never another station in the region: a station in a different range says
+// nothing about this one. No matching station means no chip. The change must be recent and free of a sensor jump (snowGain).
 function newSnow(spot, r) {
-  const first = (spot.name ?? '').toLowerCase().split(/[\s/(]/)[0];
-  const sts = (r.snow ?? []).filter((s) => s.depth?.status === 'fresh' && s.depthChange24h?.status === 'fresh' && s.depthChange24h.value !== null);
-  const own = sts.filter((s) => first.length > 3 && (s.area ?? '').toLowerCase().includes(first));
-  const pool = own.length ? own : sts;  // a station at the area itself first, else any station in the region
-  return pool.filter((s) => s.depthChange24h.value >= T.newSnowIn).sort((a, b) => b.depthChange24h.value - a.depthChange24h.value)[0] ?? null;
+  const nm = (spot.name ?? '').toLowerCase();
+  const first = nm.split(/[\s/(]/)[0];
+  const own = (r.snow ?? []).filter((s) => {
+    const ar = (s.area ?? '').toLowerCase().replace(/\(.*\)/, '').trim();
+    return s.depth?.status === 'fresh' && snowGain(s) !== null && ar && ar !== '' && !ar.startsWith('(') && (nm.includes(ar) || (first.length > 3 && ar.includes(first)));
+  });
+  return own.filter((s) => snowGain(s) >= T.newSnowIn).sort((a, b) => snowGain(b) - snowGain(a))[0] ?? null;
 }
 
 export function chipsFor(spot, state, rd) {
@@ -116,7 +121,7 @@ export function chipsFor(spot, state, rd) {
   }
   if (snowAct) {
     const ns = newSnow(spot, r);
-    if (ns) add(3, 'New snow!', 'green', `+${ns.depthChange24h.value} in over 24 h at the ${ns.name} SNOTEL station (${ns.area})`);
+    if (ns) add(3, 'New snow!', 'green', `${ns.depth.value} in deep, +${snowGain(ns)} in over 24 h at the ${ns.name} SNOTEL station (${ns.area}). Depth change includes settling.`);
   }
   if (RIVER_ACTS.has(a) && rd?.kind === 'flow' && rd.reading.status === 'fresh' && ['rising', 'falling'].includes(rd.trend)) add(3, rd.trend === 'rising' ? 'Rising' : 'Falling', 'muted', `${rd.label} is ${rd.trend} over the last few hours`);
   if (a === 'backcountry') add(5, 'Check avalanche forecast', 'amber', 'Backcountry travel: read the avalanche center forecast before you go');

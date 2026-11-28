@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { conditions, regionIds, levelLabel, fmtTime } from '../lib/conditions.js';
-import { regionTemp, dotClass, IDAHO511, fireLine } from '../lib/regionview.js';
+import { regionTemp, dotClass, IDAHO511, fireLine, signedIn } from '../lib/regionview.js';
 import { statewide } from '../lib/statewide.js';
 import { activities, spotsFor } from '../lib/catalog.js';
 import map from '../data/idaho-map.json';
@@ -64,12 +64,29 @@ const bigFire = activeFires.some((f) => (f.acres ?? 1000) >= 100);  // under 100
             <div class="src">Idaho 511{sw.times.roads ? ` · ${fmtTime(sw.times.roads, 'America/Boise')}` : ''}{sw.roads.stale ? ' · out of date' : ''}</div>
           </article>
           <article class="state-card">
-            <h3>Air quality &amp; smoke {sw.aqs.length ? <span class={`chip ${sw.aqs[0].v > 100 ? 'amber' : 'green'}`}>{sw.aqs[0].v > 100 ? 'Unhealthy pockets' : 'No unhealthy air'}</span> : <span class="chip gray">No readings</span>}</h3>
+            <h3>{sw.snowSeason ? 'Air & fire' : 'Air quality & smoke'} {sw.aqs.length ? <span class={`chip ${sw.aqs[0].v > 100 ? 'amber' : 'green'}`}>{sw.aqs[0].v > 100 ? 'Unhealthy pockets' : 'No unhealthy air'}</span> : <span class="chip gray">No readings</span>}</h3>
             <p class="state-lead">{sw.aqs.length ? (<>Highest reading: {sw.aqs[0].name}, <AqiValue value={sw.aqs[0].v} />{sw.aqs[0].cat ? ` (${sw.aqs[0].cat})` : ''}{sw.aqs[0].detail ? `. ${sw.aqs[0].detail}` : ''}.</>) : 'No fresh air-quality readings.'}</p>
             <UnplacedItems items={sw.unplaced.air} />
+            {sw.snowSeason && (<>
+              <p class="state-more"><strong>Fire:</strong> {!sw.fires.length ? 'no current wildfires reported.' : activeFires.length ? `${activeFires.slice(0, 2).map(fireLine).join('; ')}${activeFires.length > 2 ? ` (+${activeFires.length - 2} more)` : ''}.` : `${sw.fires.length} old record${sw.fires.length === 1 ? '' : 's'} that may no longer be active.`} <a href="/fire/">All fire activity →</a></p>
+              {sw.burns.length > 0 && <p class="state-more">{sw.burns.length} prescribed burn{sw.burns.length === 1 ? '' : 's'} reported.</p>}
+              <UnplacedItems items={sw.unplaced.fire} />
+            </>)}
             <p class="state-more"><a href="/air/">See all air quality readings →</a></p>
-            <div class="src">AirNow (preliminary){sw.times.air ? ` · ${fmtTime(sw.times.air, 'America/Boise')}` : ''}</div>
+            <div class="src">AirNow (preliminary){sw.times.air ? ` · ${fmtTime(sw.times.air, 'America/Boise')}` : ''}{sw.snowSeason ? ` · NIFC${sw.times.fire ? ` · ${fmtTime(sw.times.fire, 'America/Boise')}` : ''}` : ''}</div>
           </article>
+          {sw.snowSeason ? (
+          <article class="state-card">
+            <h3>Snow <span class={`chip ${sw.snowView.gainers.length ? 'green' : 'gray'}`}>{sw.snowView.gainers.length ? 'Gains overnight' : sw.snowView.any ? 'No big gains' : 'No readings'}</span></h3>
+            {sw.snowView.gainers.length ? <ul class="alert-items">{sw.snowView.gainers.map((g) => <li><a href={`/${g.regionId}/`}>{g.name} {signedIn(g.gain)} in</a><small>{g.regionName}. {g.depth} in deep</small></li>)}</ul>
+              : <p class="state-lead">{sw.snowView.any ? 'No SNOTEL station gained 1 in or more in the last 24 hours.' : 'No fresh SNOTEL readings.'}</p>}
+            {sw.snowView.deepest && <p class="state-more">Deepest: {sw.snowView.deepest.name} ({sw.snowView.deepest.regionName}), {sw.snowView.deepest.depth} in.</p>}
+            <p class="state-more">A depth change includes settling, so it is not a snowfall total.{sw.snowView.provisional ? ' Hourly readings are provisional.' : ''}</p>
+            <p class="state-more">{NOTES.avalanche} <a href="https://avalanche.org/" target="_blank" rel="noopener noreferrer">avalanche.org</a></p>
+            <p class="state-more"><a href="/ski/">Ski area conditions →</a></p>
+            <div class="src">NRCS SNOTEL{sw.snowView.at ? ` · ${fmtTime(sw.snowView.at, 'America/Boise')}` : ''}</div>
+          </article>
+          ) : (
           <article class="state-card">
             <h3>Fire activity <span class={`chip ${!sw.fires.length ? 'green' : !activeFires.length ? 'gray' : bigFire ? 'amber' : 'green'}`}>{!sw.fires.length ? 'None reported' : !activeFires.length ? `${sw.fires.length} old record${sw.fires.length === 1 ? '' : 's'}` : bigFire ? `${activeFires.length} reported` : `${activeFires.length} small fire${activeFires.length === 1 ? '' : 's'}`}</span></h3>
             {sw.fires.length ? <ul class="alert-items">{sw.fires.slice(0, 3).map((f) => <li><a href="/fire/">{fireLine(f)}</a></li>)}</ul> : <p class="state-lead">No current wildfires reported in Idaho.</p>}
@@ -80,6 +97,7 @@ const bigFire = activeFires.some((f) => (f.acres ?? 1000) >= 100);  // under 100
             <p class="state-more"><a href="/fire/">See all fire activity →</a></p>
             <div class="src">NIFC{sw.times.fire ? ` · ${fmtTime(sw.times.fire, 'America/Boise')}` : ''}</div>
           </article>
+          )}
         </div>
         <p class="legal-line">{NOTES.general} <a href="/terms/">Terms</a></p>
       </div>

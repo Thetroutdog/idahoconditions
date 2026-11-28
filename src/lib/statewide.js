@@ -1,6 +1,6 @@
 // Statewide rollups for the landing page. Counts come straight from live region data.
 import { conditions, regionIds, fmtTime } from './conditions.js';
-import { alertHref, alertGist, roadInfo, airDetail } from './regionview.js';
+import { alertHref, alertGist, roadInfo, airDetail, snowGain, snowFresh } from './regionview.js';
 const R = () => regionIds.map((id) => conditions.regions[id]);
 
 export function statewide() {
@@ -21,6 +21,12 @@ export function statewide() {
   const times = { air: newest(aqs.map((a) => a.at)), fire: conditions.sources?.nifc?.fetchedAt ?? null, roads: newest(regs.map((r) => r.roads?.asOf)) };
   const fires = regs.flatMap((r) => r.fire.wildfires.filter((f) => f.status !== 'stale')).sort((a, b) => (b.acres ?? 0) - (a.acres ?? 0));
   const snow = regs.flatMap((r) => r.snow.filter((s) => s.depth?.status === 'fresh' && s.depth.value !== null).map((s) => ({ name: s.name, d: s.depth.value }))).sort((a, b) => b.d - a.d);
+  // Snow card: stations that gained at least 1 in over the last 24 h (recent hourly data, no sensor jump), biggest first; plus the deepest station.
+  const snowSt = regionIds.flatMap((id) => conditions.regions[id].snow.filter(snowFresh).map((s) => ({ name: s.name, regionId: id, regionName: conditions.regions[id].name, depth: s.depth.value, gain: snowGain(s), at: s.depth.observedAt, provisional: !!s.depth.provisional })));
+  const snowView = { gainers: snowSt.filter((x) => x.gain !== null && x.gain >= 1).sort((a, b) => b.gain - a.gain).slice(0, 3), deepest: [...snowSt].sort((a, b) => b.depth - a.depth)[0] ?? null, any: snowSt.length, provisional: snowSt.some((x) => x.provisional), at: newest(snowSt.map((x) => x.at)) };
+  // Winter layout (Nov to Apr, or deep snow outside those months): Snow takes the fourth slot and Fire folds into the Air card. Summer keeps Fire.
+  const month = Number(new Date().toLocaleString('en-US', { timeZone: 'America/Boise', month: 'numeric' }));
+  const snowSeason = month >= 11 || month <= 4 || snowSt.some((x) => x.depth >= 12);
   const rivers = regs.flatMap((r) => r.rivers);
   const rivFresh = rivers.filter((g) => g.flow?.status === 'fresh' && g.flow.value !== null).length;
   const burns = regs.flatMap((r) => r.fire.prescribed.filter((f) => f.status !== 'stale'));
@@ -39,5 +45,5 @@ export function statewide() {
     air: (up.air ?? []).map((x) => ({ title: x.title, desc: x.desc ?? '', href: x.url })),
     fire: (up.fire ?? []).map((x) => ({ title: x.title, desc: x.desc ?? '', href: x.url })),
   };
-  return { times, unplaced, alerts, aqs, fires, burns, snow, rivers: { total: rivers.length, fresh: rivFresh }, roads, nws };
+  return { snowSeason, snowView, times, unplaced, alerts, aqs, fires, burns, snow, rivers: { total: rivers.length, fresh: rivFresh }, roads, nws };
 }

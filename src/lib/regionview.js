@@ -98,6 +98,17 @@ export function fireLinksFor(f, skip = []) {  // skip: links the card already sh
   return [unit && !skip.some((l) => l.href === unit.href) ? { label: `${unit.name} fire info`, href: unit.href } : null, f.lat != null && f.lon != null ? { label: 'Map', href: `https://www.google.com/maps?q=${f.lat},${f.lon}` } : null].filter(Boolean);
 }
 
+// Snow facts shared by the region card, the homepage card and the chips. A 24 h change is only shown when it is recent (hourly data, a few hours old) and the
+// station did not jump (a one-hour step over 6 in is a sensor glitch, flagged at fetch time). It is a depth change, which includes settling: never call it snowfall.
+export const SNOW_RECENT_HOURS = 12;
+export function snowGain(s) {
+  const c = s?.depthChange24h;
+  if (!c || c.status !== 'fresh' || c.value == null || c.suspect) return null;
+  return (Date.now() - Date.parse(c.observedAt)) / 3600000 <= SNOW_RECENT_HOURS ? c.value : null;
+}
+export const signedIn = (n) => `${n > 0 ? '+' : n < 0 ? '\u2212' : ''}${Math.abs(n)}`;
+export const snowFresh = (s) => s.depth?.status === 'fresh' && s.depth.value !== null;
+
 // One named fire: "Swamp fire, 45 acres" plus containment when NIFC gives it.
 export const fireLine = (f) => `${f.name} fire${f.oldRecord ? ' (possibly an old record)' : ''}${f.acres != null ? `, ${Math.round(f.acres).toLocaleString('en-US')} acres` : ''}${f.containmentPct != null ? `, ${f.containmentPct}% contained` : ''}`;
 
@@ -147,13 +158,23 @@ export function statusStrip(id) {
     note: NOTES.fire,
     src: `AirNow${aqNew ? ` · ${fmtTime(aqNew, tz)}` : ''} · NIFC${conditions.sources?.nifc?.fetchedAt ? ` · ${fmtTime(conditions.sources.nifc.fetchedAt, tz)}` : ''}`,
   };
-  const sn = r.snow.filter((s) => s.depth?.status === 'fresh' && s.depth.value !== null).sort((a, b) => b.depth.value - a.depth.value)[0];
+  const sts = r.snow.filter(snowFresh);
+  const deep = [...sts].sort((a, b) => b.depth.value - a.depth.value)[0];
+  const gains = sts.map((s) => ({ s, g: snowGain(s) })).filter((x) => x.g !== null).sort((a, b) => b.g - a.g);
+  const top = gains[0] && gains[0].g >= 1 ? gains[0] : null;
+  const lead1 = top ? top.s : deep;  // the station the card is about
+  const sn = lead1;
   const snow = {
     title: 'Snow & avalanche',
-    lead: sn ? `${sn.name} ${sn.depth.value} in` : 'No fresh snow reading',
-    sub: sn?.pctOfMedian?.value != null ? `Water content ${sn.pctOfMedian.value}% of median.` : 'SNOTEL stations in this region.',
+    lead: top ? `${top.s.name} ${signedIn(top.g)} in in 24 h` : deep ? `${deep.name} ${deep.depth.value} in deep` : 'No fresh snow reading',
+    sub: !deep ? 'SNOTEL stations in this region.' : [
+      top ? `${top.s.depth.value} in deep` : gains.length ? 'No station gained 1 in or more in 24 h' : 'No recent 24 h change available',
+      top && deep !== top.s ? `Deepest: ${deep.name} ${deep.depth.value} in` : '',
+      lead1.pctOfMedian?.value != null ? `Water content ${lead1.pctOfMedian.value}% of median` : '',
+      deep.depthChange24h?.suspect ? `${deep.name} jumped sharply, so its change is not shown` : '',
+    ].filter(Boolean).join('. ') + '.',
     note: NOTES.avalanche,
-    src: `NRCS SNOTEL${sn?.depth?.observedAt ? ` · ${fmtTime(sn.depth.observedAt, tz)}` : ''}`,
+    src: `NRCS SNOTEL${sn?.depth?.observedAt ? ` · ${fmtTime(sn.depth.observedAt, tz)}` : ''}${sn?.depth?.provisional ? ' · hourly, provisional' : ''}`,
     links: [id === 'southwest' ? { href: 'https://payetteavalanche.org/', label: 'Payette Avalanche Center' } : null, { href: 'https://avalanche.org/', label: 'avalanche.org' }].filter(Boolean),
   };
   return [weather, roads, fire, snow];

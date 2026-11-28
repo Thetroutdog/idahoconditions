@@ -50,7 +50,7 @@ Region ids: `panhandle`, `clearwater`, `southwest`, `magic-valley`, `southeast`,
 }
 ```
 Notes:
-- `depthChange24h` is the change in SNOTEL snow depth since the previous day (can be negative as snow settles); it is not a snowfall total.
+- `depthChange24h` is the change in SNOTEL snow depth over the last 24 hours (can be negative as snow settles); it is not a snowfall total. When `basis` is `hourly` the depth, water content and change come from the same hourly reading (provisional); `daily` is the fallback and lags about a day. `depthChange24h.suspect: true` means a one-hour step over 6 in was seen (a sensor jump): do not trust or rank that change.
 - `peaks` is `{spot id: [station, ...]}` for the backcountry peaks in `data/peaks.json`, written by `scripts/fetch_snotel.py`. Each station has `id`, `name`, `elevationFt`, `distanceMi`, `bearing`, `feetBelowSummit` and `depth`, `swe`, `depthChange24h` readings. These are nearby SNOTEL sites, not readings on the peak, and are kept off the region Snow card.
 - `snow`, `rivers` and `air.points` list only items chosen in `data/selected_stations.json` and `data/region_points.json`.
 - `fire.wildfires` and `fire.prescribed` are separate lists (design decision: show prescribed burns as their own line).

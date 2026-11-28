@@ -26,8 +26,8 @@ const tz = r.tz;
     <h3>Snow (SNOTEL)</h3>
     <table class="data-table">
       <thead><tr><th>Station</th><th class="num">Depth</th><th class="num">24h</th><th class="num">Water</th><th class="num">% median</th></tr></thead>
-      <tbody>{r.snow.map((s) => { const d = show(s.depth, tz), c = show(s.depthChange24h, tz), w = show(s.swe, tz), m = show(s.pctOfMedian, tz);
-        return <tr><td>{s.name}<small>{s.area}</small></td><td class={`num ${d.cls}`}>{d.text}<small>{d.note}</small></td><td class={`num ${c.cls}`}>{c.text}</td><td class={`num ${w.cls}`}>{w.text}</td><td class={`num ${m.cls}`}>{m.text}</td></tr>; })}</tbody>
+      <tbody>{r.snow.map((s) => { const d = show(s.depth, tz), c = s.depthChange24h?.suspect ? { text: '—', cls: 'missing', note: 'sensor jump' } : show(s.depthChange24h, tz), w = show(s.swe, tz), m = show(s.pctOfMedian, tz);
+        return <tr><td>{s.name}<small>{s.area}</small></td><td class={`num ${d.cls}`}>{d.text}<small>{d.note}</small></td><td class={`num ${c.cls}`}>{c.text}{c.cls === 'missing' && c.note === 'sensor jump' && <small>{c.note}</small>}</td><td class={`num ${w.cls}`}>{w.text}</td><td class={`num ${m.cls}`}>{m.text}</td></tr>; })}</tbody>
     </table>
   </>)}
   {r.rivers.length > 0 && (<>
