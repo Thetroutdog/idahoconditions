@@ -165,7 +165,8 @@ function localNow(tz) {
   const d = new Date(Date.UTC(+p.year, +p.month - 1, +p.day + 1));
   return { date: `${p.year}-${p.month}-${p.day}`, hour: +p.hour % 24, tomorrow: d.toISOString().slice(0, 10) };
 }
-function forecastBlock(spot, tz) {
+function forecastBlock(spot, tzArg) {
+  const tz = conditions.regions[spot.region]?.tz ?? tzArg ?? 'America/Boise'; // always the region's own zone: some callers pass none, and the build server runs on UTC
   const gk = conditions.spotForecast?.bySpot?.[spot.id], g = gk && conditions.spotForecast.grids?.[gk];
   const pt = spotPoints[spot.id];
   if (!g || !pt || pt.lat == null) return null;
@@ -189,7 +190,6 @@ function forecastBlock(spot, tz) {
     todayText: first.date === now.date || !first.date ? [first.detail, first.hi != null && first.nightDetail ? `Tonight: ${first.nightDetail}` : null].filter(Boolean) : [],
     week, labels, reaches: last ? `${wkday.format(dayOf(last))} ${mday.format(dayOf(last))}` : null,
     nws: `https://forecast.weather.gov/MapClick.php?lat=${pt.lat.toFixed(4)}&lon=${pt.lon.toFixed(4)}`,
-    outlook: 'https://www.cpc.ncep.noaa.gov/products/predictions/814day/',
   };
 }
 

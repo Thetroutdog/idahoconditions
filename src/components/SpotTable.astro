@@ -26,7 +26,7 @@ const hasMetric = rows.some((r) => r.metric);
           <details class="fx"><summary>7-day forecast</summary>
             <div class="fx-wk">{s.fx.week.map((d) => <div class={`fx-d${d.weekend ? ' we' : ''}`}><b>{d.name}</b><span class="hi">{d.hi != null ? `${d.hi}°` : '—'}{d.lo != null && <small> / {d.lo}°</small>}</span><span class="sh">{d.short}</span><span class="rn">{d.rain != null ? `${d.rain}%` : ''}<i style={`width:${d.rain ?? 0}%`}></i></span></div>)}</div>
             {s.fx.labels.length > 0 && <p class="fx-labels">{s.fx.labels.map((l) => <span class="fx-pill">{l}</span>)}</p>}
-            <p class="fx-note">{s.fx.reaches ? `This forecast reaches ${s.fx.reaches}. ` : ''}Weekend days are highlighted. Planning further out? See the <a href={s.fx.outlook} target="_blank" rel="noopener noreferrer">NWS 8 to 14 day outlook<span class="vh"> (opens in a new tab)</span></a>.</p>
+            <p class="fx-note">{s.fx.reaches ? `This forecast reaches ${s.fx.reaches}. ` : ''}Weekend days are highlighted.</p>
           </details>
         </div>}
     </div>
